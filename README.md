@@ -2,7 +2,7 @@
 
 Welcome to my website! I'll add pages whenever I feel like it. Everything is coded in lightweight Javascript. I apologize about the light theme LOL, the other pages have a dark theme.
 
-# Websites
+# Pages
 
 [Height Converter](https://mcnole25.github.io/height-converter.html)
 
