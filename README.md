@@ -15,3 +15,7 @@ Simple character counter supporting up to 256 characters.
 [Clothing Suggester](https://mcnole25.github.io/clothing-suggester.html)
 
 Find out what clothes you should wear in the cold/heat.
+
+[Feels Like Temperature](https://mcnole25.github.io/clothing-suggester.html)
+
+Find out how hot or cold it feels outside. Formula not 100% accurate.
