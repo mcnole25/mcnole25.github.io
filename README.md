@@ -14,4 +14,4 @@ Simple character counter supporting up to 256 characters.
 
 [Clothing Suggester](https://mcnole25.github.io/clothing-suggester.html)
 
-What should I wear? Find out what clothes you should wear in the cold or heat.
+Find out what clothes you should wear in the cold/heat.
