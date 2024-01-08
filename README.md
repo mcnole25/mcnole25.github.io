@@ -11,3 +11,7 @@ Convert feet and inches to centimeters.
 [Character Counter](https://mcnole25.github.io/char-counter.html)
 
 Simple character counter supporting up to 256 characters.
+
+[Clothing Suggester](https://mcnole25.github.io/clothing-suggester.html)
+
+What should I wear? Find out what clothes you should wear in the cold or heat.
