@@ -21,4 +21,5 @@ Find out what clothes you should wear in the cold/heat.
 Find out how hot or cold it feels outside. Formula not 100% accurate.
 
 [Browser Info](https://mcnole25.github.io/browser-info.html)
+
 Find the mouse position, the browser, size, and the computer time.
