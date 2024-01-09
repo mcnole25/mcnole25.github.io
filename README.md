@@ -27,3 +27,9 @@ Find the mouse position, the browser, size, and the computer time.
 [Weather Generator](https://mcnole25.github.io/weather-generator.html)
 
 Simple weather generator with temperature.
+
+# Github
+
+[My Profile](https://github.com/mcnole25)
+
+[Repository](https://github.com/mcnole25/mcnole25.github.io)
