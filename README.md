@@ -30,7 +30,7 @@ Simple weather generator with temperature.
 
 [JS Stuff Turbowarp Extension](https://turbowarp.org/editor?extension=https://mcnole25.github.io/jsstuff.js)
 
-A sandboxed extension for Turbowarp (a Scratch mod by GarboMuffin) that works well with certain others.
+A sandboxed extension for Turbowarp that works well with certain others.
 
 Be warned: The extension is SANDBOXED, so it has limitations.
 
