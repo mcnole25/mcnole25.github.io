@@ -10,7 +10,7 @@ Convert feet and inches to centimeters.
 
 [Character Counter](https://mcnole25.github.io/char-counter.html)
 
-Simple character counter supporting up to 256 characters.
+Simple character counter supporting up to 65536 characters.
 
 [Clothing Suggester](https://mcnole25.github.io/clothing-suggester.html)
 
