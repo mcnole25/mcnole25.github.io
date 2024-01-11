@@ -2,7 +2,7 @@
 
 Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme LOL, the other pages have a dark theme. This website was made on 08/01/2024. (that's January, alright?)
 
-# Pages
+## Pages
 
 [Height Converter](https://mcnole25.github.io/height-converter.html)
 
@@ -31,9 +31,3 @@ Simple weather generator with temperature.
 [JS Stuff Turbowarp Extension](https://turbowarp.org/editor?extension=https://mcnole25.github.io/jsstuff.js)
 
 A sandboxed extension for Turbowarp that works well with certain other ones.
-
-# Github
-
-[My Profile](https://github.com/mcnole25)
-
-[Repository](https://github.com/mcnole25/mcnole25.github.io)
