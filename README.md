@@ -1,7 +1,3 @@
-# mcnole25.github.io
-
-Test
-
 # Introduction
 
 Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme LOL, the other pages have a dark theme. This website was made on 08/01/2024. (that's January, alright?)
@@ -36,8 +32,6 @@ Simple weather generator with temperature.
 
 A sandboxed extension for Turbowarp that works well with certain other ones.
 
-# Other Links
+# Miscellaneous
 
-[Github Repository](https://github.com/mcnole25/mcnole25.github.io)
-
-[Github Profile](https://github.com/mcnole25)
+[View Repository](https://github.com/mcnole25/mcnole25.github.io)
