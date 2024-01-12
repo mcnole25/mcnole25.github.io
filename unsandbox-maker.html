@@ -32,10 +32,11 @@
 <script>
 setInterval (function() {
     var extName = document.getElementById("extName").value
+    var idName = extName.replaceAll(" ", "").toLowerCase()
     var blockShape = document.getElementById("blockShape").value
     var blockText = document.getElementById("blockText").value
     var blockArg = document.getElementById("blockArg").value
-    document.getElementById("code").innerHTML = "(function(Scratch) {\n'use strict';\nclass UnSandbox {\ngetInfo() {\nreturn {\nid: 'unsandbox',\nname: '" + extName + "',\nblocks: [\n{\nopcode: 'customBlock',\nblockType: Scratch.BlockType." + blockShape + ",\ntext: '" + blockText + "',\narguments: {\nA: {\ntype: Scratch.ArgumentType.STRING\n},\nB: {\ntype: Scratch.ArgumentType.STRING\n}\n}\n}\n]\n};\n}\ncustomBlock(args) {\nreturn " + blockArg + "\n}\n}\nScratch.extensions.register(new UnSandbox());\n})(Scratch);"
+    document.getElementById("code").innerHTML = "(function(Scratch) {\n'use strict';\nclass " + idName + " {\ngetInfo() {\nreturn {\nid: '" + idName + "',\nname: '" + extName + "',\nblocks: [\n{\nopcode: '" + idName + "',\nblockType: Scratch.BlockType." + blockShape + ",\ntext: '" + blockText + "',\narguments: {\nA: {\ntype: Scratch.ArgumentType.STRING\n},\nB: {\ntype: Scratch.ArgumentType.STRING\n},\nC: {\ntype: Scratch.ArgumentType.STRING\n},\nD: {\ntype: Scratch.ArgumentType.BOOLEAN\n},\nE: {\ntype: Scratch.ArgumentType.BOOLEAN\n}\n}\n}\n]\n};\n}\n" + idName + "(args) {\nreturn " + blockArg + "\n}\n}\nScratch.extensions.register(new " + idName + "());\n})(Scratch);"
 }, 10)
 </script>
 <p class=small-text>Made by JC</p>
