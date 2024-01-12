@@ -4,13 +4,13 @@
         <title>UnSandbox Block Maker</title>
         <style>
             h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
-            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            p, a {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
             body {background-color: #404040;}
             button {margin: 0px auto; display: block; font-size: 200%}
             label {color: #ffffff; font-family: trebuchet ms;}
             textarea {width: 720px; height: 480px; margin: 0px auto; display: block; font-size:100%; resize: none}
             .options {position: relative; left: 460px; margin: 8px 2px}
-            .small-text {font-size: 100%}
+            .small-text {font-size: 100%; display: block; margin: 0 auto;}
         </style>
     </head>
     <body>
@@ -39,6 +39,7 @@ setInterval (function() {
     document.getElementById("code").innerHTML = "(function(Scratch) {\n'use strict';\nclass " + idName + " {\ngetInfo() {\nreturn {\nid: '" + idName + "',\nname: '" + extName + "',\nblocks: [\n{\nopcode: '" + idName + "',\nblockType: Scratch.BlockType." + blockShape + ",\ntext: '" + blockText + "',\narguments: {\nA: {\ntype: Scratch.ArgumentType.STRING\n},\nB: {\ntype: Scratch.ArgumentType.STRING\n},\nC: {\ntype: Scratch.ArgumentType.STRING\n},\nD: {\ntype: Scratch.ArgumentType.BOOLEAN\n},\nE: {\ntype: Scratch.ArgumentType.BOOLEAN\n}\n}\n}\n]\n};\n}\n" + idName + "(args) {\nreturn " + blockArg + "\n}\n}\nScratch.extensions.register(new " + idName + "());\n})(Scratch);"
 }, 10)
 </script>
+<a class=small-text href=https://overapi.com/javascript target="_blank">Javascript cheat sheet</a>
 <p class=small-text>Made by JC</p>
     </body>
 </html>
