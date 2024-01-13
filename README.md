@@ -32,6 +32,10 @@ Simple weather generator with temperature.
 
 Create an unsandboxed Turbowarp extension easily.
 
+[First Name Generator](https://mcnole25.github.io/name-generator.html)
+
+Generate a random common first name.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
