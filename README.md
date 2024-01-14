@@ -34,7 +34,7 @@ Create an unsandboxed Turbowarp extension easily.
 
 [08. First Name Generator](https://mcnole25.github.io/name-generator.html)
 
-Generate a random common first name.
+Generate a random name of 500 first names.
 
 # Miscellaneous
 
