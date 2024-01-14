@@ -23,11 +23,12 @@
 <select class="options" id="blockShape">
   <option value="BOOLEAN">Boolean</option>
   <option value="REPORTER">Reporter</option>
+  <option value="COMMAND">Stack</option>
 </select>
         <label for="extName" class="options">Block text:</label>
         <input id="blockText" class="options" value="[A] is strictly [B] ?">
         <label for="blockArg" class="options">JS argument:</label>
-        <input id="blockArg" class="options" value="args.A === args.B">
+        <input id="blockArg" class="options" value="return args.A === args.B">
         <textarea id="code" readonly="readonly"></textarea>
 <script>
 setInterval (function() {
@@ -36,7 +37,7 @@ setInterval (function() {
     var blockShape = document.getElementById("blockShape").value
     var blockText = document.getElementById("blockText").value
     var blockArg = document.getElementById("blockArg").value
-    document.getElementById("code").innerHTML = "(function(Scratch) {\n'use strict';\nclass " + idName + " {\ngetInfo() {\nreturn {\nid: '" + idName + "',\nname: '" + extName + "',\nblocks: [\n{\nopcode: '" + idName + "',\nblockType: Scratch.BlockType." + blockShape + ",\ntext: '" + blockText + "',\narguments: {\nA: {\ntype: Scratch.ArgumentType.STRING\n},\nB: {\ntype: Scratch.ArgumentType.STRING\n},\nC: {\ntype: Scratch.ArgumentType.STRING\n},\nD: {\ntype: Scratch.ArgumentType.BOOLEAN\n},\nE: {\ntype: Scratch.ArgumentType.BOOLEAN\n}\n}\n}\n]\n};\n}\n" + idName + "(args) {\nreturn " + blockArg + "\n}\n}\nScratch.extensions.register(new " + idName + "());\n})(Scratch);"
+    document.getElementById("code").innerHTML = "(function(Scratch) {\n'use strict';\nconst vm = Scratch.vm;\nclass " + idName + " {\ngetInfo() {\nreturn {\nid: '" + idName + "',\nname: '" + extName + "',\nblocks: [\n{\nopcode: '" + idName + "',\nblockType: Scratch.BlockType." + blockShape + ",\ntext: '" + blockText + "',\narguments: {\nA: {\ntype: Scratch.ArgumentType.STRING\n},\nB: {\ntype: Scratch.ArgumentType.STRING\n},\nC: {\ntype: Scratch.ArgumentType.STRING\n},\nD: {\ntype: Scratch.ArgumentType.BOOLEAN\n},\nE: {\ntype: Scratch.ArgumentType.BOOLEAN\n}\n}\n}\n]\n};\n}\n" + idName + "(args, util) {\n" + blockArg + "\n}\n}\nScratch.extensions.register(new " + idName + "());\n})(Scratch);"
 }, 10)
 </script>
 <a class=small-text href=https://htmlcheatsheet.com/js/ target="_blank">Javascript Cheat Sheet</a>
