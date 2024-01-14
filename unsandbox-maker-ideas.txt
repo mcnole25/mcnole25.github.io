@@ -1,32 +1,38 @@
+// INTRODUCTION //
+
 Need a few ideas to create your custom block? Here's some cheat sheet arguments to help, and (hopefully) inspire you.
 This list will probably be updated later.
 
-If Else Reporter (AKA: Ternary Operator)
-args.D ? args.A : args.B
+// REPORTER BLOCK IDEAS //
+
+If Else (AKA: Ternary Operator)
+return args.D ? args.A : args.B
 
 Letters A to B of String
-String(args.C).substring(args.A - 1, args.B)
+return String(args.C).substring(args.A - 1, args.B)
 
 Clamp Value
-args.A <= args.B ? args.B : args.A >= args.C ? args.C : args.A
+return args.A <= args.B ? args.B : args.A >= args.C ? args.C : args.A
 
 Replace Substrings
-args.C.toString().replace(new RegExp(args.A, "gi"), args.B)
+return args.C.toString().replace(new RegExp(args.A, "gi"), args.B)
 
 Repeat String
-String(args.A).repeat(args.B)
+return String(args.A).repeat(args.B)
 
 Number to Unicode
-String.fromCharCode(args.A)
-
-Strictly Contains
-String(args.A).includes(String(args.B))
+return String.fromCharCode(args.A)
 
 Reverse Text
-String(args.A).split("").reverse().join("")
+return String(args.A).split("").reverse().join("")
 
 Triple Join
-String(args.A).concat(String(args.B).concat(String(args.C)))
+return String(args.A).concat(String(args.B).concat(String(args.C)))
+
+// BOOLEAN BLOCK IDEAS //
+
+Strictly Contains
+return String(args.A).includes(String(args.B))
 
 Percent Chance
-Math.random() < args.A / 100
+return Math.random() < args.A / 100
