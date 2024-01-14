@@ -1,7 +1,19 @@
 // INTRODUCTION //
 
 Need a few ideas to create your custom block? Here's some cheat sheet arguments to help, and (hopefully) inspire you.
-This list will probably be updated later.
+New update: Blocks now support Scratch VM internals. This list will probably be updated on occasion.
+
+
+
+// BOOLEAN BLOCK IDEAS //
+
+Strictly Contains
+return String(args.A).includes(String(args.B))
+
+Percent Chance
+return Math.random() < args.A / 100
+
+
 
 // REPORTER BLOCK IDEAS //
 
@@ -29,10 +41,12 @@ return String(args.A).split("").reverse().join("")
 Triple Join
 return String(args.A).concat(String(args.B).concat(String(args.C)))
 
-// BOOLEAN BLOCK IDEAS //
 
-Strictly Contains
-return String(args.A).includes(String(args.B))
 
-Percent Chance
-return Math.random() < args.A / 100
+// STACK BLOCK IDEAS //
+
+Change By XY
+util.target.setXY(util.target.x + args.A, util.target.y + args.B)
+
+Sprite Times Bigger
+util.target.setSize(util.target.size * Math.sqrt(args.A))
