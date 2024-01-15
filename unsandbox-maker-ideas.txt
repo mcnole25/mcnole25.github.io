@@ -41,6 +41,9 @@ return String(args.A).split("").reverse().join("")
 Triple Join
 return String(args.A).concat(String(args.B).concat(String(args.C)))
 
+Costume Amount
+return util.target.sprite.costumes.length
+
 
 
 // STACK BLOCK IDEAS //
@@ -50,3 +53,6 @@ util.target.setXY(util.target.x + args.A, util.target.y + args.B)
 
 Sprite Times Bigger
 util.target.setSize(util.target.size * Math.sqrt(args.A))
+
+Previous Costume
+util.target.setCostume(util.target.currentCostume - 1)
