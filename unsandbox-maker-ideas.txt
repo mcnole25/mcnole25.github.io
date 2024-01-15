@@ -13,6 +13,9 @@ return String(args.A).includes(String(args.B))
 Percent Chance
 return Math.random() < args.A / 100
 
+Is Integer
+return Math.floor(args.A) === args.A
+
 
 
 // REPORTER BLOCK IDEAS //
