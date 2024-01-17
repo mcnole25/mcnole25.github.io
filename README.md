@@ -36,10 +36,6 @@ Create an unsandboxed Turbowarp extension easily.
 
 Generate a random name of 500 first names.
 
-[09. Sugar Physics](https://mcnole25.github.io/sugar-physics.html)
-
-Satisfying sugar physics from a Turbowarp extension.
-
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
