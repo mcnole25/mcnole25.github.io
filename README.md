@@ -36,6 +36,10 @@ Create an unsandboxed Turbowarp extension easily.
 
 Generate a random name of 500 first names.
 
+[09. Quora Question Generator](https://mcnole25.github.io/qq-generator.html)
+
+Generate a ridiculous Quora question.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
