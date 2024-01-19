@@ -40,6 +40,10 @@ Generate a random name of 500 first names.
 
 Generate a ridiculous Quora question.
 
+[10. Word Finder](https://mcnole25.github.io/word-finder.html)
+
+Easily find any (common) word with its substring.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
