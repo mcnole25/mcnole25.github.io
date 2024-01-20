@@ -40,6 +40,10 @@ Generate a random name of 500 first names.
 
 Generate a ridiculous Quora question.
 
+[10. Ascii Message Generator](https://mcnole25.github.io/ascii-generator.html)
+
+Create an ASCII speech bubble message.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
