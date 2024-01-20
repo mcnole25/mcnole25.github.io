@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ASCII Message Generator</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040; overflow: hidden;}
+            .bubble, .sign {margin: 0px auto; display: block; font-size: 100%; width: 280px; position:relative; right: 325px; bottom: 10px}
+            .desktop {margin: 0px auto; display: block; font-size: 100%; width: 560px; position:relative; left: 175px; bottom: 400px}
+            .sign {bottom: 710px}
+            textarea {margin: 16px auto; display: block; font-size:150%; resize: none; font-family: consolas; text-align: center}
+            #bubbletext, #signtext {width: 280px; height: 200px; position:relative; right: 325px; bottom: 10px}
+            #desktoptext {width: 560px; height: 400px; position: relative; left: 175px; bottom: 400px}
+            #signtext {height: 175px; bottom: 710px}
+            .small-text {font-size: 100%; position: relative; left: 175px; bottom: 750px;}
+        </style>
+    </head>
+    <body>
+        <h1>ASCII Message Generator</h1>
+        <p>Generate an ASCII art message quickly using simple Javascript</p>
+        <p style="position:relative; right:325px">Speech Bubble</p>
+        <input type="text" class="bubble" id="bubble1" maxlength="16" value="Bringing back">
+        <input type="text" class="bubble" id="bubble2" maxlength="16" value="memories!">
+        <input type="text" class="bubble" id="bubble3" maxlength="16">
+        <input type="text" class="bubble" id="bubble4" maxlength="16">
+        <textarea type="text" id="bubbletext"></textarea>
+        <p style="position:relative; left:175px; bottom: 390px">Desktop Monitor</p>
+        <input type="text" class="desktop" id="desktop1" maxlength="32" value="<h1>This is a heading</h1>">
+        <input type="text" class="desktop" id="desktop2" maxlength="32" value="<p>This is a paragraph</p>">
+        <input type="text" class="desktop" id="desktop3" maxlength="32">
+        <input type="text" class="desktop" id="desktop4" maxlength="32">
+        <input type="text" class="desktop" id="desktop5" maxlength="32">
+        <input type="text" class="desktop" id="desktop6" maxlength="32">
+        <input type="text" class="desktop" id="desktop7" maxlength="32">
+        <input type="text" class="desktop" id="desktop8" maxlength="32">
+        <textarea type="text" id="desktoptext"></textarea>
+        <p style="position:relative; right:325px; bottom:700px">Hanging Sign</p>
+        <input type="text" class="sign" id="sign1" maxlength="16" value="Open Hours">
+        <input type="text" class="sign" id="sign2" maxlength="16" value="07:00-21:00">
+        <input type="text" class="sign" id="sign3" maxlength="16">
+        <input type="text" class="sign" id="sign4" maxlength="16">
+        <textarea type="text" id="signtext"></textarea>
+    <script>
+    setInterval(function() {
+        var l11 = document.getElementById("bubble1").value
+        var l12 = document.getElementById("bubble2").value
+        var l13 = document.getElementById("bubble3").value
+        var l14 = document.getElementById("bubble4").value
+        var l21 = document.getElementById("desktop1").value
+        var l22 = document.getElementById("desktop2").value
+        var l23 = document.getElementById("desktop3").value
+        var l24 = document.getElementById("desktop4").value
+        var l25 = document.getElementById("desktop5").value
+        var l26 = document.getElementById("desktop6").value
+        var l27 = document.getElementById("desktop7").value
+        var l28 = document.getElementById("desktop8").value
+        var l31 = document.getElementById("sign1").value
+        var l32 = document.getElementById("sign2").value
+        var l33 = document.getElementById("sign3").value
+        var l34 = document.getElementById("sign4").value
+document.getElementById("bubbletext").value = " ________________ \n|" + l11 + " ".repeat(16 - l11.length) + "|\n|" + l12 + " ".repeat(16 - l12.length) + "|\n|" + l13 + " ".repeat(16 - l13.length) + "|\n|" + l14 + " ".repeat(16 - l14.length) + "|\n|_______  _______|\n        \\/        "
+document.getElementById("desktoptext").value = " ____________________________________ \n|  ________________________________  |\n| |" + l21 + " ".repeat(32 - l21.length) + "| |\n| |" + l22 + " ".repeat(32 - l22.length) + "| |\n| |" + l23 + " ".repeat(32 - l23.length) + "| |\n| |" + l24 + " ".repeat(32 - l24.length) + "| |\n| |" + l25 + " ".repeat(32 - l25.length) + "| |\n| |" + l26 + " ".repeat(32 - l26.length) + "| |\n| |" + l27 + " ".repeat(32 - l27.length) + "| |\n| |" + l28 + " ".repeat(32 - l28.length) + "| |\n| |________________________________| |\n|____________________________________|\n                 |  |                 \n                /____\\                "
+document.getElementById("signtext").value = "#________________#\n|" + l31 + " ".repeat(16 - l31.length) + "|\n|" + l32 + " ".repeat(16 - l32.length) + "|\n|" + l33 + " ".repeat(16 - l33.length) + "|\n|" + l34 + " ".repeat(16 - l34.length) + "|\n#----------------#"
+     })
+    </script>
+<p class=small-text>Made by JC</p>
+    </body>
+</html>
