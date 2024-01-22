@@ -20,7 +20,7 @@
         <script>
 setInterval(function() {
   var a = document.getElementById("slider").value;
-  var unicode = "";
+  var unicode = "\u0020";
   var line = 0;
   while (line < 8) {
   var i = 0;
@@ -28,7 +28,7 @@ setInterval(function() {
   unicode = unicode.concat(" ", String.fromCharCode(a * 256 + line * 32 + i))
   i = i + 1;
   }
-  unicode = unicode.trim().concat("\n")
+  unicode = unicode.replace(/^\s+|\s+$/gm,"").concat("\n")
   line = line + 1;
   }
   unicode = unicode.replace(/^\s+|\s+$/g, "");
