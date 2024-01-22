@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Unicode Characters</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p, #page {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040;}
+            button {margin: 0px auto; display: block; font-size: 200%}
+            #slider {width: 1024px; margin-left: auto; margin-right: auto; display: block;}
+            #chars {font-family: arial; text-align: center; font-size: 225%; display: block; margin: 0 auto; width: 90%; height: 625px; resize: none;}
+            .small-text {font-size: 100%}
+        </style>
+    </head>
+    <body>
+        <h1>All Unicode Characters</h1>
+        <p>Get a gallery of Unicode characters quickly using simple Javascript</p>
+        <input type="range" min="0" max="255" value="0" step="1" id="slider">
+        <div id="page" style="font-size: 300%; margin: 10px;"></div>
+        <textarea id="chars"></textarea>
+        <script>
+setInterval(function() {
+  var a = document.getElementById("slider").value;
+  var unicode = "";
+  var line = 0;
+  while (line < 8) {
+  var i = 0;
+  while (i < 32) {
+  unicode = unicode.concat(" ", String.fromCharCode(a * 256 + line * 32 + i))
+  i = i + 1;
+  }
+  unicode = unicode.trim().concat("\n")
+  line = line + 1;
+  }
+  unicode = unicode.replace(/^\s+|\s+$/g, "");
+  var hexpage = ((a < 16) ? "0" : "") + Number(a).toString(16)
+  document.getElementById("page").innerHTML = "Page " + (a - -1) + "/256 (\\u" + hexpage + "00 - \\u" + hexpage + "ff)";
+  document.getElementById("chars").innerHTML = unicode;
+});
+</script>
+<p class=small-text>Made by JC</p>
+    </body>
+</html>
