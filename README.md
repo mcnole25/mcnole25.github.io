@@ -44,6 +44,10 @@ Generate a ridiculous Quora question.
 
 Create an ASCII speech bubble message.
 
+[11. The Unicode Gallery](https://mcnole25.github.io/unicode-gallery.html)
+
+A gallery of all 65536 Unicode characters.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
