@@ -26,9 +26,6 @@ setInterval(function() {
         exponent = exponent - 256;
     }
     float = (-1) ** sign * fraction * 2 ** exponent;
-    if (sign === 1) {
-        float = -float;
-    }
     if (document.getElementById("float").value.length === 32) {
     document.getElementById("return").innerHTML = "Returned Value<br>" + float;
     } else {
