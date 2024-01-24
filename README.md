@@ -48,6 +48,10 @@ Create an ASCII speech bubble message.
 
 A gallery of all 65536 Unicode characters.
 
+[12. 32 Bit Floating Point](https://mcnole25.github.io/floating-point.html)
+
+Generate a value using 32 bits of binary.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
