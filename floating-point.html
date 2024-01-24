@@ -25,7 +25,7 @@ setInterval(function() {
     if (exponent >= 128) {
         exponent = exponent - 256;
     }
-    float = fraction * 2 ** exponent;
+    float = (-1) ** sign * fraction * 2 ** exponent;
     if (sign === 1) {
         float = -float;
     }
