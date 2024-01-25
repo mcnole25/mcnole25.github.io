@@ -1,6 +1,7 @@
 # Introduction
+Current Version: v1.0
 
-Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme LOL, the other pages have a dark theme. This website was made on 08/01/2024. (that's January, alright?)
+Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme. This website was made on 08/01/2024. (or 01/08/2024 in american.)
 
 # Pages
 
