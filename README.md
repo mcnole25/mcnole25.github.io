@@ -1,7 +1,7 @@
 # Introduction
 Current Version: v1.0
 
-Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme. This website was made on 08/01/2024. (or 01/08/2024 in american.)
+Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme.
 
 # Pages
 
@@ -58,3 +58,9 @@ Generate a value using 32 bits of binary.
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
 
 [Send Feedback](https://scratch.mit.edu/users/horizontal_shading/#comments)
+
+# History
+
+8 January 2024 (v???) - Initial website creation.
+
+25 January 2024 (v1.0) - Added many new pages and officially marking versions.
