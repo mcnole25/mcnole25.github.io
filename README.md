@@ -1,5 +1,5 @@
 # Introduction
-Current Version: v1.0
+Current Version: v1.0.1
 
 Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme.
 
