@@ -23,7 +23,7 @@ Find out how hot or cold it feels outside. Formula not 100% accurate.
 
 [05. Browser Info](https://mcnole25.github.io/browser-info.html)
 
-Find the mouse position, the browser, size, and the computer time.
+Find the mouse position, the browser size, and the computer time.
 
 [06. Weather Generator](https://mcnole25.github.io/weather-generator.html)
 
@@ -64,3 +64,5 @@ Generate a value using 32 bits of binary.
 8 January 2024 (v???) - Initial website creation.
 
 25 January 2024 (v1.0) - Added many new pages and officially marking versions.
+
+26 January 2024 (v1.0.1) - Fixed grammar error in homepage.
