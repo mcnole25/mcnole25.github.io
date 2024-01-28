@@ -55,4 +55,4 @@ Generate a value using 32 bits of binary.
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
 
-[Send Feedback](https://scratch.mit.edu/users/horizontal_shading/#comments)
+[Send Feedback](https://github.com/mcnole25/mcnole25.github.io/issues/1)
