@@ -51,6 +51,10 @@ A gallery of all 65536 Unicode characters.
 
 Generate a value using 32 bits of binary.
 
+[13. Extra Symbols](https://mcnole25.github.io/extra-symbols.html)
+
+Type extra symbols using backslashes.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
