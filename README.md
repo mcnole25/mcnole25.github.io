@@ -57,7 +57,9 @@ Type extra symbols using backslashes.
 
 [14. Dhar Mann Thumbnail Maker](https://mcnole25.github.io/dm-thumbnail-maker.html)
 
-Generate a Dhar Mann thumbnail using emojis.
+[15. Binary Converter](https://mcnole25.github.io/binary-converter.html)
+
+Things are 1010 times more fun in binary!
 
 # Miscellaneous
 
