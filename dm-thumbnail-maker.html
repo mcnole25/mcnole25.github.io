@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dhar Mann Thumbnail Maker</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p, div, span {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040; overflow: hidden;}
+            .text {width: 480px; height: 40px; margin: 8px auto; display: block; font-size:150%; text-align: center}
+            #base {width: 640px; height: 360px; background: linear-gradient(#80ffff, #008000); display: block; margin: 0 auto;}
+            .displayText {width: 360px; height: 80px; background: #000000; display: block; margin: 0 auto; position: relative; right: 140px; bottom: 336px; font-family: impact; font-size:60px;}
+            #logo {color: #ffffff; position: relative; left: 634px; bottom: 362px; font-family: trebuchet ms; font-size:40px; text-align: left;}
+            #face {color: #ffffff; position: relative; left: 992px; bottom: 680px; font-family: consolas; font-size:200px; text-align: left;}
+            #dispText2 {color: #0080ff}
+            #logoBase {width: 270px; height: 60px; background: #000000; display: block; margin: 0 auto; position: relative; right: 185px; bottom: 306px;}
+            .small-text {font-size: 100%; position: relative; bottom: 600px;}
+        </style>
+    </head>
+    <body>
+        <h1>Dhar Mann Thumbnail Maker</h1>
+        <p>Build a Dhar Mann thumbnail quickly using simple Javascript</p>
+        <input type="text" id="text1" class="text" value="Kid Fakes">
+        <input type="text" id="text2" class="text" value="Broken Arm">
+        <input type="text" id="text3" class="text" value="To Skip Test">
+        <input type="text" id="logoText" class="text" value="👦🏻 Dhar Mann">
+        <p>Emoji used</p>
+        <input type="text" id="faceText" class="text" maxlength="2" value="😲">
+        <div id="base"></div>
+        <div class="displayText" id="dispText1"></div>
+        <div class="displayText" id="dispText2"></div>
+        <div class="displayText" id="dispText3"></div>
+        <div id="logoBase"></div>
+        <div id="logo"></div>
+        <div id="face"></div>
+                <script>
+                setInterval(function() {
+                var text1 = document.getElementById("text1").value;
+                var text2 = document.getElementById("text2").value;
+                var text3 = document.getElementById("text3").value;
+                var logo = document.getElementById("logoText").value;
+                var face = document.getElementById("faceText").value;
+                document.getElementById("dispText1").innerHTML = text1.toUpperCase();
+                document.getElementById("dispText2").innerHTML = text2.toUpperCase();
+                document.getElementById("dispText3").innerHTML = text3.toUpperCase();
+                document.getElementById("logo").innerHTML = logo;
+                document.getElementById("face").innerHTML = face;
+                });
+                </script>
+<p class=small-text>Made by JC</p>
+    </body>
+</html>
