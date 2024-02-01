@@ -55,6 +55,10 @@ Generate a value using 32 bits of binary.
 
 Type extra symbols using backslashes.
 
+[14. Dhar Mann Thumbnail Maker](https://mcnole25.github.io/dm-thumbnail-maker.html)
+
+Generate a Dhar Mann thumbnail using emojis.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
