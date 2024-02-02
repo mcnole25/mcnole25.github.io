@@ -17,7 +17,7 @@
         <h1>Binary Converter</h1>
         <p>Convert between binary and decimal quickly using simple Javascript</p>
         <p>Tip: Compare your number between 128, 64, 32, 16, 8, 4, 2, 1 and subtract</p>
-        <input type="number" id="decimal" value=0 min=0 max=4294967295>
+        <input type="number" id="decimal" value=0 min=0>
         <div id="binary"></div>
         <div id="spacing"></div>
         <p>Tip: Split the byte into two 16's and add</p>
@@ -27,10 +27,10 @@
 setInterval(function() {
     dec = decimal.value;
     log = Math.log2(dec)
-    base = (2 ** (log % 1)).toString(2).slice(0, 6) * 1
-    if ((Math.floor(dec) === Number(dec)) && (dec >= 0) && (dec < 2 ** 32)) {
+    base = (2 ** (log % 1) * 32) / 32 + 2 ** -50
+    if ((Math.floor(dec) === Number(dec)) && (dec >= 0) && (dec < 2 ** 256)) {
         if (dec >= 256) {
-            binary.innerHTML = "<b>" + base + "e" + Math.floor(log).toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</b>";
+            binary.innerHTML = "<b>" + base.toString(2).slice(0, 9) * 1 + "e" + Math.floor(log).toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</b>";
         } else {
         binary.innerHTML = "<b>" +  Number(dec).toString(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")  + "</b>";
         }
