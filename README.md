@@ -63,6 +63,10 @@ Generate a Dhar Mann thumbnail using emojis.
 
 Things are 1010 times more fun in binary!
 
+[16. Platformer Test](https://mcnole25.github.io/platformer.html)
+
+A minigame test within a Javascript canvas.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
