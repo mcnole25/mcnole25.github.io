@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Character Counter</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040;}
+            #demo {font-size: 300%; position: relative; top: 30px}
+            #myText {width: 1080px; height: 480px; margin: 0px auto; display: block; font-size:200%; resize: none}
+            #myCanvas {display: block; margin: 0 auto;}
+            .small-text {font-size: 100%}
+        </style>
+    </head>
+    <body>
+        <h1>Lava Flood</h1>
+        <p>Play a lava flood game quickly using simple Javascript</p>
+        <p>Use left/right keys to move, and up to jump.</p>
+                 <canvas id=myCanvas width=640 height=480 style="background-color: #808080">
+            </canvas>
+            <script>
+               var ctx = myCanvas.getContext("2d");
+               var lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
+               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 460));
+               x = 320;
+               y = 460;
+               xv = 0;
+               yv = 0;
+               falling = 0;
+               var lavaHeight = -150;
+               var lost = 0;
+               ctx.fillStyle = "#404040";
+               setInterval (function() {
+               ctx.clearRect(0, 0, 640, 480);
+               // Level
+               ctx.fillStyle = "#000000";
+               for (var i = 0; i < lvlx.length; i = i + 1) {
+               ctx.fillRect(lvlx[i], lvly[i], 40, 20);
+               }
+               // Lava
+               // Player
+               ctx.fillStyle = "#ff0000";
+               ctx.fillRect(x, y, 20, 20);
+               yv = yv + 1;
+               falling = falling + 1;
+               function MoveSteps(steps) {
+                   for (var i = 0; i < steps; i = i + 1) {
+                      lastValue = x;
+                      x = x + xv / steps
+                      for (var j = 0; j < lvlx.length; j = j + 1) {
+                      if (x > lvlx[j] - 20 && x < lvlx[j] + 40 && y > lvly[j] - 20 && y < lvly[j] + 20) {
+                      x = lastValue;
+                      xv = 0;
+                      }
+                      }
+                      lastValue = y;
+                      y = y + yv / steps
+                      for (var j = 0; j < lvlx.length; j = j + 1) {
+                      if (x > lvlx[j] - 20 && x < lvlx[j] + 40 && y > lvly[j] - 20 && y < lvly[j] + 20) {
+                      y = lastValue;
+                      yv = 0;
+                      falling = 0;
+                      }
+                      }
+                    }
+               }
+               MoveSteps(Math.abs(xv) + Math.abs(yv));
+               // Stage Collision
+               if (x < 0) {while (x < 0) {x = x + 1;} xv = 0;}
+               if (x > 620) {while (x > 620) {x = x - 1;} xv = 0;}
+               if (y < 0) {while (y < 0) {y = y + 1;} yv = 0;}
+               if (y > 460) {while (y > 460) {y = y - 1;} yv = 0; falling = 0;}
+               // Lava
+               ctx.fillStyle = "#ff8000";
+               ctx.fillRect(0, 480 - lavaHeight, 640, lavaHeight);
+               if (lavaHeight < 400) {
+               lavaHeight = lavaHeight + (1 - lost);
+               }
+               if (y > 462 - lavaHeight) {lost = 1;}
+               // Game Log
+               if (lost === 0) {
+               if (lavaHeight < 0) {
+               document.getElementById("gameLog").innerHTML = "The lava will rise in " + -lavaHeight + " ticks.";
+               } else if (lavaHeight < 400) {
+               document.getElementById("gameLog").innerHTML = "Lava height: " + lavaHeight + " centimeters (" + Math.floor(lavaHeight / 4) + "%)";
+               } else {
+               document.getElementById("gameLog").innerHTML = "You win! Press Space for a new level.";
+               }
+               } else {
+               document.getElementById("gameLog").innerHTML = "You died! Press Space for a new level.";
+               }
+               }, 25)
+               function KeyUpHandler(event) { 
+               if (event.keyCode == 37 || event.keyCode == 39) {xv = 0;}
+               }
+               function KeyDownHandler(event) {
+               if (lost === 0) {
+               if (event.keyCode == 37) {xv = -6;} // Left
+               if (event.keyCode == 38 && falling < 1) {yv = -16;} // Up (Jump)
+               if (event.keyCode == 39) {xv = 6;} // Right
+               }
+               // Space to Reset
+               if (event.keyCode == 32) {
+               lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
+               lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 460));
+               x = 320;
+               y = 460;
+               xv = 0;
+               yv = 0;
+               falling = 0;
+               lavaHeight = -150;
+               lost = 0;
+               }
+               event.preventDefault();
+               }
+               addEventListener("keydown", KeyDownHandler);
+               addEventListener("keyup", KeyUpHandler);
+            </script>
+            <p id=gameLog></p>
+<p class=small-text>Made by JC</p>
+    </body>
+</html>
