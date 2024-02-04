@@ -63,6 +63,10 @@ Generate a Dhar Mann thumbnail using emojis.
 
 Things are 1010 times more fun in binary!
 
+[16. Lava Flood](https://mcnole25.github.io/lava-flood.html)
+
+The floor is lava! Get to the highest platform!
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
