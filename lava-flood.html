@@ -21,7 +21,7 @@
             <script>
                var ctx = myCanvas.getContext("2d");
                var lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
-               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 458));
+               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 440));
                x = 320;
                y = 460;
                xv = 0;
@@ -89,7 +89,7 @@
                document.getElementById("gameLog").innerHTML = "You died! Press Space for a new level.";
                }
                }, 25)
-               function KeyUpHandler(event) { 
+               function KeyUpHandler(event) {
                if (event.keyCode == 37 || event.keyCode == 39) {xv = 0;}
                }
                function KeyDownHandler(event) {
@@ -100,8 +100,8 @@
                } else {
                // Space to Reset
                if (event.keyCode == 32) {
-               lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
-               lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 458));
+               var lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
+               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 440));
                x = 320;
                y = 460;
                xv = 0;
