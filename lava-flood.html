@@ -21,7 +21,7 @@
             <script>
                var ctx = myCanvas.getContext("2d");
                var lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
-               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 460));
+               var lvly = Array.from({length: 20}, () => Math.floor(Math.random() * 458));
                x = 320;
                y = 460;
                xv = 0;
@@ -98,7 +98,7 @@
                if (event.keyCode == 37) {xv = -6;} // Left
                if (event.keyCode == 38 && falling < 1) {yv = -16;} // Up (Jump)
                if (event.keyCode == 39) {xv = 6;} // Right
-               }
+               } else {
                // Space to Reset
                if (event.keyCode == 32) {
                lvlx = Array.from({length: 20}, () => Math.floor(Math.random() * 640));
@@ -110,6 +110,7 @@
                falling = 0;
                lavaHeight = -150;
                lost = 0;
+               }
                }
                event.preventDefault();
                }
