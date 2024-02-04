@@ -39,7 +39,7 @@
                }
                // Lava
                // Player
-               ctx.fillStyle = "#ff0000";
+               ctx.fillStyle = "#0000ff";
                ctx.fillRect(x, y, 20, 20);
                yv = yv + 1;
                falling = falling + 1;
@@ -71,7 +71,7 @@
                if (y < 0) {while (y < 0) {y = y + 1;} yv = 0;}
                if (y > 460) {while (y > 460) {y = y - 1;} yv = 0; falling = 0;}
                // Lava
-               ctx.fillStyle = "#ff8000";
+               ctx.fillStyle = "#ff0000";
                ctx.fillRect(0, 480 - lavaHeight, 640, lavaHeight);
                if (lavaHeight < 400) {
                lavaHeight = lavaHeight + (1 - lost);
