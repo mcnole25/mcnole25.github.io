@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Platformer Test</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040;}
+            #myCanvas {display: block; margin: 0 auto;}
+            .small-text {font-size: 100%}
+        </style>
+    </head>
+    <body>
+        <h1>Platformer Test</h1>
+        <p>Simulate a platformer quickly using simple Javascript</p>
+        <canvas id=myCanvas width=512 height=512 style="background-color: #bfbfbf">
+        </canvas>
+        <script>
+              var ctx = myCanvas.getContext("2d");
+              lvlX = Array.from({length: 64}, () => Math.floor(Math.random() * 16) * 32);
+              lvlY = Array.from({length: 64}, () => Math.floor(Math.random() * 16) * 32);
+              ctx.fillStyle = "#ff0000";
+              x = 244;
+              y = 488;
+              xv = 0;
+              yv = 0;
+              falling = 0;
+              setInterval(function() {
+                  ctx.clearRect(0, 0, 512, 512);
+                  ctx.fillStyle = "#000000";
+                  for (i = 0; i < lvlX.length; i = i + 1) {
+                      ctx.fillRect(lvlX[i], lvlY[i], 32, 32);
+                  }
+                  ctx.fillStyle = "#ff0000";
+                  ctx.fillRect(x, y, 24, 24);
+                  yv = yv + 1;
+                  falling = falling + 1;
+                  function MoveSteps(steps) {
+                      for (i = 0; i < steps; i = i + 1) {
+                          lastValue = x;
+                          x = x + xv / steps;
+                          for (j = 0; j < lvlX.length; j = j + 1) {
+                              if (x > lvlX[j] - 24 && x < lvlX[j] + 32 && y > lvlY[j] - 24 && y < lvlY[j] + 32) {
+                                  x = lastValue;
+                                  xv = 0;
+                              }
+                          }
+                          lastValue = y;
+                          y = y + yv / steps;
+                          for (j = 0; j < lvlY.length; j = j + 1) {
+                              if (x > lvlX[j] - 24 && x < lvlX[j] + 32 && y > lvlY[j] - 24 && y < lvlY[j] + 32) {
+                                  y = lastValue;
+                                  yv = 0;
+                                  falling = 0;
+                              }
+                          }
+                      }
+                  }
+                  MoveSteps(Math.abs(xv) + Math.abs(yv))
+                  if (x < 0) {while (x < 0) {x = x + 1;}}
+                  if (x > 488) {while (x > 488) {x = x - 1;}}
+                  if (y < 0) {while (y < 0) {y = y + 1; yv = 0;}}
+                  if (y > 488) {while (y > 488) {y = y - 1; falling = 0;}}
+                  function KeysUp(event) { 
+                      if (event.keyCode == 37 || event.keyCode == 39) {xv = 0}
+                  }
+                  function Controls(event) { 
+                      if (event.keyCode == 37) {xv = -6}
+                      if (event.keyCode == 38 && falling <= 1) {yv = -15}
+                      if (event.keyCode == 39) {xv = 6}
+                  }
+                  addEventListener("keyup", KeysUp);
+                  addEventListener("keydown", Controls);
+              }, 25);
+        </script>
+        <p class="small-text">Use the left/right keys to move and the up key to jump.</p>
+        <p class="small-text">Made by JC</p>
+    </body>
+</html>
