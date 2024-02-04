@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Character Counter</title>
+        <title>Lava Flood</title>
         <style>
             h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
             p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
@@ -94,7 +94,7 @@
                if (event.keyCode == 37 || event.keyCode == 39) {xv = 0;}
                }
                function KeyDownHandler(event) {
-               if (lost === 0) {
+               if (lavaHeight < 400 && lost === 0) {
                if (event.keyCode == 37) {xv = -6;} // Left
                if (event.keyCode == 38 && falling < 1) {yv = -16;} // Up (Jump)
                if (event.keyCode == 39) {xv = 6;} // Right
