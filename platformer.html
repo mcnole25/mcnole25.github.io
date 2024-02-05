@@ -27,9 +27,10 @@
               yv = 0;
               falling = 0;
               scroll = 0;
+              towerHeight = 0;
               setInterval(function() {
                   ctx.clearRect(0, 0, 512, 512);
-                  ctx.fillStyle = "hsl(" + (180 - scroll / 10728 * -30) + ", 100%, " + (75 - scroll / 10728 * 50) + "%)";
+                  ctx.fillStyle = "hsl(" + (180 + (Math.floor(488 - y) / towerHeight) * 30) + ", 100%, " + (75 - (Math.floor(488 - y) / towerHeight) * 50) + "%)";
                   ctx.fillRect(0, 0, 512, 512)
                   ctx.fillStyle = "#000000";
                   for (i = 0; i < lvlX.length; i = i + 1) {
@@ -97,9 +98,10 @@ let keys = {
       if (!(keys.left) && !(keys.right)) {xv = 0}
     });
                   scroll = scroll - (y + scroll - 244) / 40;
+                  towerHeight = lvlHeight - 64;
                   if (scroll < 0) {scroll = 0}
                   if (scroll > lvlHeight - 536) {scroll = lvlHeight - 536}
-                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + " / 112m";
+                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + " / " + towerHeight / 100 + "m";
               }, 25);
         </script>
         <p id="height"></p>
