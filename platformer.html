@@ -13,7 +13,7 @@
     <body>
         <h1>Platformer Minigame</h1>
         <p>Simulate a platformer quickly using simple Javascript</p>
-        <canvas id=myCanvas width=512 height=512 style="background-color: #bfbfbf">
+        <canvas id=myCanvas width=512 height=512 style="background-color: #ffffff">
         </canvas>
         <script>
               var ctx = myCanvas.getContext("2d");
@@ -30,7 +30,7 @@
               percent = 0;
               setInterval(function() {
                   ctx.clearRect(0, 0, 512, 512);
-                  ctx.fillStyle = "hsl(" + (180 - percent * -30) + ", 100%, " + (75 - percent * 50) + "%)";
+                  ctx.fillStyle = "hsl(" + (180 - scroll / 10728 * -30) + ", 100%, " + (75 - scroll / 10728 * 50) + "%)";
                   ctx.fillRect(0, 0, 512, 512)
                   ctx.fillStyle = "#000000";
                   for (i = 0; i < lvlX.length; i = i + 1) {
