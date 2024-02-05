@@ -80,7 +80,7 @@
                   percent = (scroll + 4.88) / (lvlHeight - 536)
                   if (scroll < 0) {scroll = 0}
                   if (scroll > lvlHeight - 536) {scroll = lvlHeight - 536}
-                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + "m (" + percent * 100 + "%)";
+                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + "m (" + Math.round(percent * 100) + "%)";
               }, 25);
         </script>
         <p id="height"></p>
