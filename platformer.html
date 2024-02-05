@@ -17,7 +17,7 @@
         </canvas>
         <script>
               var ctx = myCanvas.getContext("2d");
-              lvlHeight = 4096;
+              lvlHeight = 11264;
               lvlX = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * 16) * 32);
               lvlY = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * (lvlHeight / 32 - 3)) * 32 - (lvlHeight - 576));
               ctx.fillStyle = "#ff0000";
