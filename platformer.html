@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Platformer Test</title>
+        <title>Platformer Minigame</title>
         <style>
             h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
             p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
@@ -11,28 +11,33 @@
         </style>
     </head>
     <body>
-        <h1>Platformer Test</h1>
+        <h1>Platformer Minigame</h1>
         <p>Simulate a platformer quickly using simple Javascript</p>
         <canvas id=myCanvas width=512 height=512 style="background-color: #bfbfbf">
         </canvas>
         <script>
               var ctx = myCanvas.getContext("2d");
-              lvlX = Array.from({length: 64}, () => Math.floor(Math.random() * 16) * 32);
-              lvlY = Array.from({length: 64}, () => Math.floor(Math.random() * 16) * 32);
+              lvlHeight = 4096;
+              lvlX = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * 16) * 32);
+              lvlY = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * (lvlHeight / 32 - 3)) * 32 - (lvlHeight - 576));
               ctx.fillStyle = "#ff0000";
               x = 244;
               y = 488;
               xv = 0;
               yv = 0;
               falling = 0;
+              scroll = 0;
+              percent = 0;
               setInterval(function() {
                   ctx.clearRect(0, 0, 512, 512);
+                  ctx.fillStyle = "hsl(" + (180 - percent * -30) + ", 100%, " + (75 - percent * 50) + "%)";
+                  ctx.fillRect(0, 0, 512, 512)
                   ctx.fillStyle = "#000000";
                   for (i = 0; i < lvlX.length; i = i + 1) {
-                      ctx.fillRect(lvlX[i], lvlY[i], 32, 32);
+                      ctx.fillRect(lvlX[i], lvlY[i] + scroll, 32, 32);
                   }
                   ctx.fillStyle = "#ff0000";
-                  ctx.fillRect(x, y, 24, 24);
+                  ctx.fillRect(x, y + scroll, 24, 24);
                   yv = yv + 1;
                   falling = falling + 1;
                   function MoveSteps(steps) {
@@ -59,20 +64,26 @@
                   MoveSteps(Math.abs(xv) + Math.abs(yv))
                   if (x < 0) {while (x < 0) {x = x + 1;}}
                   if (x > 488) {while (x > 488) {x = x - 1;}}
-                  if (y < 0) {while (y < 0) {y = y + 1; yv = 0;}}
+                  if (y < 536 - lvlHeight) {while (y < 536 - lvlHeight) {y = y + 1; yv = 0;}}
                   if (y > 488) {while (y > 488) {y = y - 1; falling = 0;}}
                   function KeysUp(event) { 
                       if (event.keyCode == 37 || event.keyCode == 39) {xv = 0}
                   }
                   function Controls(event) { 
-                      if (event.keyCode == 37) {xv = -6}
-                      if (event.keyCode == 38 && falling <= 1) {yv = -15}
-                      if (event.keyCode == 39) {xv = 6}
+                      if (event.keyCode == 37) {xv = -8}
+                      if (event.keyCode == 38 && falling <= 1) {yv = -20}
+                      if (event.keyCode == 39) {xv = 8}
                   }
                   addEventListener("keyup", KeysUp);
                   addEventListener("keydown", Controls);
+                  scroll = scroll - (y + scroll - 244) / 50;
+                  percent = (scroll + 4.88) / (lvlHeight - 536)
+                  if (scroll < 0) {scroll = 0}
+                  if (scroll > lvlHeight - 536) {scroll = lvlHeight - 536}
+                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + "m (" + percent * 100 + "%)";
               }, 25);
         </script>
+        <p id="height"></p>
         <p class="small-text">Use the left/right keys to move and the up key to jump.</p>
         <p class="small-text">Made by JC</p>
     </body>
