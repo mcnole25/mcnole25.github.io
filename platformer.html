@@ -66,21 +66,41 @@
                   if (x > 488) {while (x > 488) {x = x - 1;}}
                   if (y < 536 - lvlHeight) {while (y < 536 - lvlHeight) {y = y + 1; yv = 0;}}
                   if (y > 488) {while (y > 488) {y = y - 1; falling = 0;}}
-                  function KeysUp(event) { 
-                      if (event.keyCode == 37 || event.keyCode == 39) {xv = 0}
-                  }
-                  function Controls(event) { 
-                      if (event.keyCode == 37) {xv = -8}
-                      if (event.keyCode == 38 && falling <= 1) {yv = -20}
-                      if (event.keyCode == 39) {xv = 8}
-                  }
-                  addEventListener("keyup", KeysUp);
-                  addEventListener("keydown", Controls);
-                  scroll = scroll - (y + scroll - 244) / 50;
-                  percent = (scroll + 4.88) / (lvlHeight - 536)
+let keys = {
+      left: false,
+      up: false,
+      right: false
+    };
+    addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        keys.left = true;
+      }
+      if (event.key === "ArrowUp") {
+        keys.up = true;
+      }
+      if (event.key === "ArrowRight") {
+        keys.right = true;
+      }
+    if (keys.left) {xv = -8}
+    if (keys.up && falling <= 1) {yv = -18}
+    if (keys.right) {xv = 8}
+    });
+    addEventListener("keyup", (event) => {
+      if (event.key === "ArrowLeft") {
+        keys.left = false;
+      }
+      if (event.key === "ArrowUp") {
+        keys.up = false;
+      }
+      if (event.key === "ArrowRight") {
+        keys.right = false;
+      }
+      if (!(keys.left) && !(keys.right)) {xv = 0}
+    });
+                  scroll = scroll - (y + scroll - 244) / 40;
                   if (scroll < 0) {scroll = 0}
                   if (scroll > lvlHeight - 536) {scroll = lvlHeight - 536}
-                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + "m (" + Math.round(percent * 100) + "%)";
+                  document.getElementById("height").innerHTML = "Height: " + Math.floor(488 - y) / 100 + " / 112m";
               }, 25);
         </script>
         <p id="height"></p>
