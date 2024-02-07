@@ -6,46 +6,77 @@
             h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
             p, div, span {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
             body {background-color: #404040; overflow: hidden;}
-            .text {width: 480px; height: 40px; margin: 8px auto; display: block; font-size:150%; text-align: center}
-            #base {width: 640px; height: 360px; background: linear-gradient(#80ffff, #008000); display: block; margin: 0 auto;}
-            .displayText {width: 360px; height: 80px; background: #000000; display: block; margin: 0 auto; position: relative; right: 140px; bottom: 336px; font-family: impact; font-size:60px;}
-            #logo {color: #ffffff; position: relative; left: 634px; bottom: 362px; font-family: trebuchet ms; font-size:40px; text-align: left;}
-            #face {color: #ffffff; position: relative; left: 992px; bottom: 680px; font-family: consolas; font-size:200px; text-align: left;}
-            #dispText2 {color: #0080ff}
-            #logoBase {width: 270px; height: 60px; background: #000000; display: block; margin: 0 auto; position: relative; right: 185px; bottom: 306px;}
-            .small-text {font-size: 100%; position: relative; bottom: 600px;}
+            #myCanvas {background-color: #ffffff; display: block; margin: 8px auto;}
+            .small-text {font-size: 100%;}
+            span {font-size: 100%; position: relative; top: 2px;}
         </style>
     </head>
     <body>
         <h1>Dhar Mann Thumbnail Maker</h1>
         <p>Build a Dhar Mann thumbnail quickly using simple Javascript</p>
-        <input type="text" id="text1" class="text" value="Kid Fakes">
-        <input type="text" id="text2" class="text" value="Broken Arm">
-        <input type="text" id="text3" class="text" value="To Skip Test">
-        <input type="text" id="logoText" class="text" value="👦🏻 Dhar Mann">
-        <p>Emoji used</p>
-        <input type="text" id="faceText" class="text" maxlength="2" value="😲">
-        <div id="base"></div>
-        <div class="displayText" id="dispText1"></div>
-        <div class="displayText" id="dispText2"></div>
-        <div class="displayText" id="dispText3"></div>
-        <div id="logoBase"></div>
-        <div id="logo"></div>
-        <div id="face"></div>
-                <script>
-                setInterval(function() {
-                var text1 = document.getElementById("text1").value;
-                var text2 = document.getElementById("text2").value;
-                var text3 = document.getElementById("text3").value;
-                var logo = document.getElementById("logoText").value;
-                var face = document.getElementById("faceText").value;
-                document.getElementById("dispText1").innerHTML = text1.toUpperCase();
-                document.getElementById("dispText2").innerHTML = text2.toUpperCase();
-                document.getElementById("dispText3").innerHTML = text3.toUpperCase();
-                document.getElementById("logo").innerHTML = logo;
-                document.getElementById("face").innerHTML = face;
-                });
-                </script>
+        <div class="colours">
+        <span>Gradients:</span>
+        <input id="colour1" type="text" maxlength=7 value="#80ffff" style="width: 60px;">
+        <input id="colour2" type="text" maxlength=7 value="#008000" style="width: 60px;">
+        </div>
+        <div>
+        <span>Text:</span>
+        <input id="text1" type="text" maxlength=16 value="KID FLATTENS" style="width: 120px;">
+        <input id="text2" type="text" maxlength=16 value="MOM'S TIRE" style="width: 120px;">
+        <input id="text3" type="text" maxlength=16 value="TO SKIP TEST" style="width: 120px;">
+        </div>
+        <div>
+        <span>Azure Text:</span>
+        <select id="azure">
+  <option value="1">First Line</option>
+  <option value="2">Second Line</option>
+  <option value="3" selected="true">Third Line</option>
+</select>
+<span>Emoji:</span>
+        <input id="emoji" type="text" value="😠" style="width: 40px;">
+        </div>
+        <canvas id="myCanvas" width=640 height=360></canvas>
+        <script>
+          var ctx = myCanvas.getContext("2d");
+          setInterval(function() {
+          textLength = [text1.value.length, text2.value.length, text3.value.length]
+          textHeight = 2500 / ((Math.max(...textLength) < 9) ? 9 : Math.max(...textLength));
+          textOffset = -20000 / textHeight + 90;
+          ctx.clearRect(0, 0, 640, 360)
+          gradient = ctx.createLinearGradient(0, 0, 0, 360)
+          colour1 = document.getElementById("colour1").value
+          colour2 = document.getElementById("colour2").value
+          gradient.addColorStop(0, colour1);
+          gradient.addColorStop(1, colour2);
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, 640, 360);
+          ctx.fillStyle = "#000000";
+          ctx.fillRect(0, 240 - textHeight + textOffset, 360, textHeight + 27);
+          ctx.fillRect(0, 294, 300, 60);
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "45px Trebuchet MS";
+          ctx.textAlign = "left";
+          ctx.fillText("👦🏻 Dhar Mann", 5, 340);
+          ctx.textAlign = "center";
+          ctx.font = textHeight / 3.5 + "px Impact";
+          ctx.textAlign = "center";
+          ctx.fillStyle = "#ffffff";
+          if (azure.value === "1") {ctx.fillStyle = "#00bfff"}
+          ctx.fillText(text1.value, 180, 225 - textHeight / 1.75 + textOffset);
+          ctx.font = textHeight / 3.5 + "px Impact";
+          ctx.fillStyle = "#ffffff";
+          if (azure.value === "2") {ctx.fillStyle = "#00bfff"}
+          ctx.fillText(text2.value, 180, 242.5 - textHeight / 3 + textOffset);
+          ctx.font = textHeight / 3.5 + "px Impact";
+          ctx.fillStyle = "#ffffff";
+          if (azure.value === "3") {ctx.fillStyle = "#00bfff"}
+          ctx.fillText(text3.value, 180, 260 - textHeight / 12 + textOffset);
+          ctx.font = "180px Consolas";
+          ctx.textAlign = "center";
+          ctx.fillText(emoji.value, 500, 240);
+          });
+        </script>
+<p class="small-text">Note: I  rewrote this page using an HTML Canvas to support new screen sizes and variable colours.</p>
 <p class=small-text>Made by JC</p>
     </body>
 </html>
