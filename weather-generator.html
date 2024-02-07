@@ -4,22 +4,21 @@
         <title>Weather Generator</title>
         <style>
             h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
-            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            p, span {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            span {font-size: 100%}
             body {background-color: #404040;}
             button {margin: 0px auto; display: block; font-size: 200%}
             label {color: #ffffff; font-family: trebuchet ms;}
-            #temp {margin: 10px auto; position: relative; left: 37%; bottom: 20px;}
-            #tempLabel {position: relative; left: 37%; bottom: 20px;}
-            #rain {margin: 10px auto; position: relative; left: 40%; bottom: 20px;}
-            #rainLabel {position: relative; left: 40%; bottom: 20px;}
             #weather {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size: 200%;}
+            .options {text-align: center; display: block; margin: 8px auto;}
             .small-text {font-size: 100%}
         </style>
     </head>
     <body>
         <h1>Weather Generator</h1>
         <p>Generate a weather and temp quickly using simple Javascript</p>
- <label for="temp" id="tempLabel">Temperature:</label>
+        <div class="options">
+ <span>Temperature:</span>
   <select id="temp">
     <option value="-30">EXTREMELY COLD!</option>
     <option value="-20">Freezing Cold</option>
@@ -31,13 +30,14 @@
     <option value="40">Very Hot</option>
     <option value="50">EXTREMELY HOT!</option>
   </select>
- <label for="rain" id="rainLabel">Precipitation:</label>
+ <span>Precipitation:</span>
   <select id="rain">
     <option value="0">Dry</option>
     <option value="0.1" selected>Normal</option>
     <option value="0.25">Wet</option>
     <option value="1">Daily Rain</option>
   </select>
+  </div>
 <button onclick="generateWeather()">Generate</button>
 <div id="weather"></div>
 <script>
