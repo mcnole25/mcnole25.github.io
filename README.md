@@ -1,6 +1,8 @@
 # Introduction
 Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme. This website was created on 8 January 2024.
 
+I've been getting reports about certain pages only supporting 1080p sizes. That's because of the way I write the CSS. I'll be rewriting some CSS, so don't worry.
+
 # Pages
 
 [01. Height Converter](https://mcnole25.github.io/height-converter.html)
