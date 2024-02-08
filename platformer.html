@@ -17,7 +17,7 @@
         </canvas>
         <script>
               var ctx = myCanvas.getContext("2d");
-              lvlHeight = 11264;
+              lvlHeight = 20064;
               lvlX = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * 16) * 32);
               lvlY = Array.from({length: lvlHeight / 16}, () => Math.floor(Math.random() * (lvlHeight / 32 - 3)) * 32 - (lvlHeight - 576));
               ctx.fillStyle = "#80ffff";
@@ -30,13 +30,24 @@
               towerHeight = 0;
               setInterval(function() {
                   ctx.clearRect(0, 0, 512, 512);
-                  ctx.fillStyle = "hsl(" + (180 + (Math.floor(488 - y) / towerHeight) * 30) + ", 100%, " + (75 - (Math.floor(488 - y) / towerHeight) * 50) + "%)";
+                  // New feature: "Dynamic Colours"
+                  percent = (Math.floor(488 - y) / towerHeight)
+                  firstPercent = percent * 2
+                  secondPercent = (percent - 0.5) * 4
+                  thirdPercent = (percent - 0.75) * 4
+                  if (percent < 0.5) {
+                      ctx.fillStyle = "rgb(" + (127.5 + firstPercent * 127.5) + ", 255, " + (255 - firstPercent * 191.25) + ")"
+                  } else if (percent < 0.75) {
+                      ctx.fillStyle = "rgb(" + (255 - secondPercent * 63.75) + ", " + (255 - secondPercent * 255) + ", " + (63.75 - secondPercent * 63.75) + ")"
+                  } else {
+                      ctx.fillStyle = "rgb(" + (191.25 - thirdPercent * 191.25) + ", 0, " + (thirdPercent * 127.5) + ")"
+                  }
                   ctx.fillRect(0, 0, 512, 512)
                   ctx.fillStyle = "#000000";
                   for (i = 0; i < lvlX.length; i = i + 1) {
                       ctx.fillRect(lvlX[i], lvlY[i] + scroll, 32, 32);
                   }
-                  ctx.fillStyle = "#ff0000";
+                  ctx.fillStyle = "#808080";
                   ctx.fillRect(x, y + scroll, 24, 24);
                   yv = yv + 1;
                   falling = falling + 1;
