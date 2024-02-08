@@ -32,10 +32,12 @@
                   ctx.clearRect(0, 0, 512, 512);
                   // New feature: "Dynamic Colours"
                   percent = (Math.floor(488 - y) / towerHeight)
-                  firstPercent = percent * 2
+                  firstPercent = (percent - 0.25) * 4
                   secondPercent = (percent - 0.5) * 4
                   thirdPercent = (percent - 0.75) * 4
-                  if (percent < 0.5) {
+                  if (percent < 0.25) {
+                      ctx.fillStyle = "rgb(127.5, 255, 255)"
+                  } else if (percent < 0.5) {
                       ctx.fillStyle = "rgb(" + (127.5 + firstPercent * 127.5) + ", 255, " + (255 - firstPercent * 191.25) + ")"
                   } else if (percent < 0.75) {
                       ctx.fillStyle = "rgb(" + (255 - secondPercent * 63.75) + ", " + (255 - secondPercent * 255) + ", " + (63.75 - secondPercent * 63.75) + ")"
