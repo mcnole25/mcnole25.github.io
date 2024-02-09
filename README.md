@@ -67,6 +67,10 @@ Things are 1010 times more fun in binary!
 
 A minigame test within a Javascript canvas.
 
+[17. Number Grid Generator](https://mcnole25.github.io/grid-generator.html)
+
+Generate a printable grid of numbers.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
