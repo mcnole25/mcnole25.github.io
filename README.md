@@ -71,7 +71,7 @@ A minigame test within a Javascript canvas.
 
 Generate a printable grid of numbers.
 
-[18. IQ Rarity Generator](https://mcnole25.github.io/iq-calculator.html)
+[18. IQ Rarity Calculator](https://mcnole25.github.io/iq-calculator.html)
 
 Find out roughly how rare an IQ score is.
 
