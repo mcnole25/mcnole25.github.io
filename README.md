@@ -75,6 +75,10 @@ Generate a printable grid of numbers.
 
 Find out roughly how rare an IQ score is.
 
+[19. Projectile Calculator](https://mcnole25.github.io/projectile-calculator.html)
+
+Calculate details of launching a projectile upward.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
