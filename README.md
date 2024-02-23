@@ -79,6 +79,10 @@ Find out roughly how rare an IQ score is.
 
 Calculate details of launching a projectile upward.
 
+[20. Level Generator](https://mcnole25.github.io/level-generator.html)
+
+Generate a tile-based level using numbers.
+
 # Miscellaneous
 
 [View Repository](https://github.com/mcnole25/mcnole25.github.io)
