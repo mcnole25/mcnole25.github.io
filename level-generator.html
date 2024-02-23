@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Level Generator</title>
+        <style>
+            h1 {color: #ffff00; font-family: trebuchet ms; text-align: center; font-size:300%}
+            p {color: #ffffff; font-family: trebuchet ms; text-align: center; font-size:150%}
+            body {background-color: #404040;}
+            #code {text-align: center; font-size: 125%; font-family: consolas; display: block; margin: 16px auto; width: 720px;}
+            #myCanvas {display: block; margin: 0 auto;}
+            .small-text {font-size: 100%}
+        </style>
+    </head>
+    <body>
+        <h1>Level Generator</h1>
+        <p>Generate a binary level quickly using simple Javascript</p>
+        <p>Level Code</p>
+        <input type="text" id="code" maxlength=64 value="0000000000000000000000200000011102000000111000001110033311111111">
+        <canvas id=myCanvas width=512 height=512 style="background-color: #ffffff">
+        </canvas>
+        <script>
+              var ctx = myCanvas.getContext("2d");
+              setInterval(function () {
+              ctx.clearRect(0, 0, 512, 512);
+              ctx.fillStyle = "#80ffff"
+              ctx.fillRect(0, 0, 512, 512);
+if (code.value.length === 64) {
+              for (i = 0; i < 64; i = i + 1) {
+                  ctx.fillStyle = "#40bf00"
+                  if (code.value.charAt(i) === "1") {
+                      ctx.fillRect((64 * i) % 512, Math.floor(i / 8) * 64, 64, 64);
+                  }
+                  ctx.fillStyle = "#ffff00"
+                  if (code.value.charAt(i) === "2") {
+ctx.beginPath();
+ctx.arc((64 * i) % 512 + 32, Math.floor(i / 8) * 64 + 32, 24, 0, 2 * Math.PI);
+ctx.fill();
+}
+if (code.value.charAt(i) === "3") {
+ctx.fillStyle = "#808080"
+ctx.beginPath();
+ctx.moveTo(32 + (64 * i) % 512, Math.floor(i / 8) * 64);
+ctx.lineTo((64 * i) % 512, 64 + Math.floor(i / 8) * 64);
+ctx.lineTo(64 + (64 * i) % 512, 64 + Math.floor(i / 8) * 64);
+ctx.closePath();
+ctx.fill()
+}
+}
+              }
+              })
+        </script>
+        <p class="small-text">0: Empty, 1: Tile, 2: Coin, 3: Spike</p>
+        <p class="small-text">Made by JC</p>
+    </body>
+</html>
