@@ -1,5 +1,5 @@
 # Introduction
-Welcome to my website! I'll add pages whenever I feel like it. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme. This website was created on 8 January 2024.
+This is my site. All pages are lightweight with some Javascript. I apologize about the light theme, other pages have a dark theme. This website was created on 8 January 2024. Note: I'll stop updating this site (for now.)
 
 # Pages
 
