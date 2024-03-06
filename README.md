@@ -35,53 +35,37 @@ Create an unsandboxed Turbowarp extension easily.
 
 Generate a random name of 500 first names.
 
-[09. Quora Question Generator](https://mcnole25.github.io/qq-generator.html)
-
-Generate a ridiculous Quora question.
-
-[10. ASCII Message Generator](https://mcnole25.github.io/ascii-generator.html)
+[09. ASCII Message Generator](https://mcnole25.github.io/ascii-generator.html)
 
 Create an ASCII speech bubble message.
 
-[11. The Unicode Gallery](https://mcnole25.github.io/unicode-gallery.html)
+[10. The Unicode Gallery](https://mcnole25.github.io/unicode-gallery.html)
 
 A gallery of all 65536 Unicode characters.
 
-[12. 32 Bit Floating Point](https://mcnole25.github.io/floating-point.html)
+[11. 32 Bit Floating Point](https://mcnole25.github.io/floating-point.html)
 
 Generate a value using 32 bits of binary.
 
-[13. Extra Symbols](https://mcnole25.github.io/extra-symbols.html)
+[12. Extra Symbols](https://mcnole25.github.io/extra-symbols.html)
 
 Type extra symbols using backslashes.
 
-[14. Dhar Mann Thumbnail Maker](https://mcnole25.github.io/dm-thumbnail-maker.html)
+[13. Binary Converter](https://mcnole25.github.io/binary-converter.html)
 
-Generate a Dhar Mann thumbnail using emojis.
+Convert between binary and decimal.
 
-[15. Binary Converter](https://mcnole25.github.io/binary-converter.html)
-
-Things are 1010 times more fun in binary!
-
-[16. Platformer Minigame](https://mcnole25.github.io/platformer.html)
-
-A minigame test within a Javascript canvas.
-
-[17. Number Grid Generator](https://mcnole25.github.io/grid-generator.html)
+[14. Number Grid Generator](https://mcnole25.github.io/grid-generator.html)
 
 Generate a printable grid of numbers.
 
-[18. IQ Rarity Calculator](https://mcnole25.github.io/iq-calculator.html)
+[15. IQ Rarity Calculator](https://mcnole25.github.io/iq-calculator.html)
 
 Find out roughly how rare an IQ score is.
 
-[19. Projectile Calculator](https://mcnole25.github.io/projectile-calculator.html)
+[16. Projectile Calculator](https://mcnole25.github.io/projectile-calculator.html)
 
 Calculate details of launching a projectile upward.
-
-[20. Level Generator](https://mcnole25.github.io/level-generator.html)
-
-Generate a tile-based level using numbers.
 
 # Miscellaneous
 
