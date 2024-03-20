@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        input {margin: 4px 0px;}
+    </style>
+  </head>
+  <body>
+        <h1>Unit Converter</h1>
+        <p>Need to convert a value ASAP? Convert common US units to metric fast.<br><br></p>
+        <input type="number" id="inches" value="0"><span> inches<br></span>
+        <input readonly="true" id="centimeters"><span> centimeters<br><br></span>
+        <input type="number" id="feet" value="0"><span> feet<br></span>
+        <input readonly="true" id="meters"><span> meters<br><br></span>
+        <input type="number" id="miles" value="0"><span> miles<br></span>
+        <input readonly="true" id="kilometers"><span> kilometers<br><br></span>
+        <input type="number" id="ounces" value="0"><span> ounces<br></span>
+        <input readonly="true" id="milliliters"><span> milliliters<br><br></span>
+        <input type="number" id="gallons" value="0"><span> gallons<br></span>
+        <input readonly="true" id="liters"><span> liters<br><br></span>
+        <input type="number" id="pounds" value="0"><span> pounds<br></span>
+        <input readonly="true" id="kilograms"><span> kilograms<br><br></span>
+        <input type="number" id="mph" value="0"><span> mph<br></span>
+        <input readonly="true" id="meterspersecond"><span> m/s<br><br></span>
+        <input type="number" id="psi" value="0"><span> psi<br></span>
+        <input readonly="true" id="bars"><span> bars</span>
+        <script>
+            setInterval(function() {
+                centimeters.value = inches.value * 2.54
+                meters.value = feet.value * 0.3048
+                kilometers.value = miles.value * 1.609344
+                milliliters.value = ounces.value * 29.5735295625
+                liters.value = gallons.value * 3.785411784
+                kilograms.value = pounds.value * 0.45359237
+                meterspersecond.value = mph.value * 0.44704
+                bars.value = psi.value * 0.06894757293
+            });
+        </script>
+  </body>
+</html>
