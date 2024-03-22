@@ -59,9 +59,6 @@
                 }
                 if (feelsLike.innerHTML.includes("Feels Like")) {
                 message = "✅ There is no risk.";
-                } else {
-                message = "";
-                }
                 if (final < 10) {message = "🆗 Shivering is possible.";}
                 if (final < -20) {message = "❗ Frostbite is possible.";}
                 if (final < -40) {message = "🆘 Frostbite is likely!";}
@@ -69,7 +66,9 @@
                 if (final > 30) {message = "❗ Heat exaustion is possible.";}
                 if (final > 40) {message = "❕ Heat stroke is possible.";}
                 if (final > 50) {message = "🆘 Heat stroke is likely!";}
-                if (final === undefined) {message = "";}
+                } else {
+                message = "";
+                }
                 feelsLike.innerHTML = feelsLike.innerHTML + "<br>" + message;
             });
         </script>
