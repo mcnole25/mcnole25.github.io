@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fraction Circle</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, h1, p, span {color: #fff; font-family: verdana;}
+        #myCanvas {margin: 8px 0px;}
+        #slider {width: 400px;}
+    </style>
+  </head>
+  <body>
+        <h1>Fraction Circle</h1>
+        <p>Create a circle based on fractional powers of 2. Adjust the slider for some fun.</p>
+        <canvas id="myCanvas" width="400" height="400"></canvas>
+        <br>
+<input type="range" id="slider" min=0 max=1 value=1>
+<script>
+const c = document.getElementById("myCanvas");
+const ctx = c.getContext("2d");
+slider.step = 2 ** -6;
+setInterval(function() {
+function drawPiece(type, frac, colour) {
+    let position = (2 ** -type) * Math.PI * (frac - 1);
+    ctx.beginPath();
+    ctx.moveTo(200, 200);
+    ctx.arc(200, 200, 200, 1.5 * Math.PI + position, (2 ** -type - 0.5) * Math.PI + position);
+    ctx.fillStyle = colour;
+    ctx.fill();
+}
+
+ctx.clearRect(0, 0, 400, 400)
+let fraction = Number(document.getElementById("slider").value);
+number.innerHTML = "Value: " + fraction;
+if (fraction === 1) {
+    ctx.fillStyle = "#ff0000";
+    ctx.arc(200, 200, 200, 0, 2 * Math.PI);
+    ctx.fill();
+}
+function drawAvailablePiece(power, colour2) {
+    if (Math.floor(fraction * 2 ** power) % 2 === 1) {
+        drawPiece(power - 1, Math.floor(fraction * 2 ** power), colour2);
+    }
+}
+drawAvailablePiece(1, "#ff8000");
+drawAvailablePiece(2, "#ffdf00");
+drawAvailablePiece(3, "#00bf00");
+drawAvailablePiece(4, "#00dfff");
+drawAvailablePiece(5, "#0020ff");
+drawAvailablePiece(6, "#9f00ff");
+});
+</script>
+<h1 id="number"></h1>
+  </body>
+</html>
