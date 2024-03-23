@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, h1, p, span {color: #fff; font-family: verdana;}
+        canvas {border: 1px solid #000000;}
+        #slider {width: 720px};
+        .page {margin: 4px 0px; display: block;}
+    </style>
+  </head>
+  <body>
+        <h1>Sunrise and Sunset</h1>
+        <p>Sunrise and sunset with the HTML Canvas. Adjust the slider for different times.</p>
+        <canvas id="myCanvas" width="720" height="480"></canvas>
+        <br>
+        <input type="range" id="slider" min=0 max=1440>
+        <script>
+            let c = document.getElementById("myCanvas");
+            let ctx = c.getContext("2d");
+            setInterval(function() {
+                ctx.clearRect(0, 0, c.width, c.height);
+                let time = Number(slider.value);
+                let sunCycle = time * Math.PI / -720;
+                let brightness = 1 / (1 + 10000 ** Math.cos(sunCycle));
+                ctx.fillStyle = "hsl(" + (250 - brightness * 60) + ", 80%, " + (10 + brightness * 60) + "%)";
+                ctx.fillRect(0, 0, 720, 480);
+                ctx.beginPath();
+                ctx.arc(360 + Math.sin(sunCycle) * 200, 300 + Math.cos(sunCycle) * 200, 40, 0, 2 * Math.PI);
+                ctx.fillStyle = "hsl(" + (brightness * 60) + ", 100%, 50%)";
+                ctx.fill();
+                ctx.fillStyle = "hsl(120, 60%," + (10 + brightness * 30) + "%)"
+                ctx.fillRect(0, 300, 720, 180);
+                let hours = Math.floor(time / 60) % 24;
+                if (hours < 10) {hours = "0" + hours}
+                let minutes = Math.floor(time) % 60;
+                if (minutes < 10) {minutes = "0" + minutes}
+                let displayText = hours + ":" + minutes;
+                ctx.strokeStyle = "#000000";
+                ctx.lineWidth = 2;
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "80px Consolas";
+                ctx.textAlign = "center";
+                ctx.fillText(displayText, 360, 440);
+                ctx.strokeText(displayText, 360, 440);
+            });
+        </script>
+  </body>
+</html>
