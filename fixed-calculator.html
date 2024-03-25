@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fixed Calculator</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        .page {margin: 4px 0px; display: block;}
+        #math {font-size: 25px; font-family: verdana; width: 1000px}
+        #regex {position: relative; top: 10px;}
+    </style>
+  </head>
+  <body>
+        <h1>Fixed Calculator</h1>
+        <p>A basic Javascript calculator with fixed decimals (like 0.1 + 0.2) and added functions.<br>Note: This program is in early development and may have bugs.</p>
+        <input id="math">
+        <div id="regex"></div>
+        <h1 id="result"></h1>
+        <script>
+            setInterval(function() {
+                result.innerHTML = "";
+                let x = math.value;
+                function saveFunction(syntax, char) {
+                re = RegExp(syntax, "g");
+                x = x.replace(re, char);
+                }
+                saveFunction("sindeg", "\u0087");
+                saveFunction("cosdeg", "\u0088");
+                saveFunction("tandeg", "\u0089");
+                saveFunction("sqrt", "\u0081");
+                saveFunction("cbrt", "\u0082");
+                saveFunction("ln", "\u0083");
+                saveFunction("sin", "\u0084");
+                saveFunction("cos", "\u0085");
+                saveFunction("tan", "\u0086");
+                saveFunction("floor", "\u008a");
+                saveFunction("round", "\u008b");
+                saveFunction("ceil", "\u008c");
+                saveFunction("phi", "\u008d");
+                saveFunction("pi", "\u007f");
+                saveFunction("e", "\u0080");
+                re = RegExp("[a-z `~!@#$&_=\\\\|\[\\]\{};:'\",<>?]", "gi");
+                x = x.replace(re, "");
+                re = RegExp("\\^", "g");
+                x = x.replace(re, "**");
+                function loadCharacter(c, js) {
+                re = RegExp(c, "g");
+                x = x.replace(re, js);
+                }
+                loadCharacter("\u0087\\(", "Math.sin\(\(Math.PI/180\)\*");
+                loadCharacter("\u0088\\(", "Math.cos\(\(Math.PI/180\)\*");
+                loadCharacter("\u0089\\(", "Math.tan\(\(Math.PI/180\)\*");
+                loadCharacter("\u0081", "Math.sqrt");
+                loadCharacter("\u0082", "Math.cbrt");
+                loadCharacter("\u0083", "Math.log");
+                loadCharacter("\u0084", "Math.sin");
+                loadCharacter("\u0085", "Math.cos");
+                loadCharacter("\u0086", "Math.tan");
+                loadCharacter("\u008a", "Math.floor");
+                loadCharacter("\u008b", "Math.round");
+                loadCharacter("\u008c", "Math.ceil");
+                loadCharacter("\u008d", "(Math.sqrt(1.25) + 0.5)");
+                loadCharacter("\u007f", "(Math.PI)");
+                loadCharacter("\u0080", "(Math.E)");
+                re = RegExp("\\)\\(", "g");
+                x = x.replace(re, ")*(");
+                regex.innerHTML = x;
+                final = eval(x).toPrecision(15) / 1;
+                if (Math.abs(final) >= 10 ** 15) {
+                result.innerHTML = final.toExponential();
+                } else {
+                result.innerHTML = final;
+                }
+            });
+        </script>
+        <p>Accepted functions:<br><br>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br>( ) > Parentheses<br><br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Log<br><br>sin > Sine (radians)<br>cos > Cosine (radians)<br>tan > Tangent (radians)<br>sindeg > Sine (degrees)<br>cosdeg > Cosine (degrees)<br>tandeg > Tangent (degrees)<br><br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio</p>
+  </body>
+</html>
