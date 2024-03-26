@@ -21,6 +21,8 @@
             setInterval(function() {
                 result.innerHTML = "";
                 let x = math.value;
+                x = x.replace("(", "((");
+                x = x.replace(")", "))");
                 function saveFunction(syntax, char) {
                 re = RegExp(syntax, "g");
                 x = x.replace(re, char);
@@ -38,6 +40,8 @@
                 saveFunction("round", "\u008b");
                 saveFunction("ceil", "\u008c");
                 saveFunction("phi", "\u008d");
+                saveFunction("abs", "\u008e");
+                saveFunction("sign", "\u008f");
                 saveFunction("pi", "\u007f");
                 saveFunction("e", "\u0080");
                 re = RegExp("[a-z `~!@#$&_=\\\\|\[\\]\{};:'\",<>?]", "gi");
@@ -61,11 +65,13 @@
                 loadCharacter("\u008b", "Math.round");
                 loadCharacter("\u008c", "Math.ceil");
                 loadCharacter("\u008d", "(Math.sqrt(1.25) + 0.5)");
+                loadCharacter("\u008e", "Math.abs");
+                loadCharacter("\u008f", "Math.sign");
                 loadCharacter("\u007f", "(Math.PI)");
                 loadCharacter("\u0080", "(Math.E)");
                 re = RegExp("\\)\\(", "g");
                 x = x.replace(re, ")*(");
-                regex.innerHTML = x;
+                // for the creator // regex.innerHTML = x;
                 final = eval(x).toPrecision(15) / 1;
                 if (Math.abs(final) >= 10 ** 15) {
                 result.innerHTML = final.toExponential();
@@ -74,6 +80,6 @@
                 }
             });
         </script>
-        <p>Accepted functions:<br><br>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br>( ) > Parentheses<br><br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Log<br><br>sin > Sine (radians)<br>cos > Cosine (radians)<br>tan > Tangent (radians)<br>sindeg > Sine (degrees)<br>cosdeg > Cosine (degrees)<br>tandeg > Tangent (degrees)<br><br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio</p>
+        <p>Accepted functions:<br><br>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br><br>( ) > Parentheses<br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Log<br><br>sin > Sine (radians)<br>cos > Cosine (radians)<br>tan > Tangent (radians)<br>sindeg > Sine (degrees)<br>cosdeg > Cosine (degrees)<br>tandeg > Tangent (degrees)<br><br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio<br>abs > Absolute value<br>sign > Sign value</p>
   </body>
 </html>
