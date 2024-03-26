@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unicode Browser</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        #unicode {font-family: consolas; margin: 4px 0px;}
+    </style>
+  </head>
+  <body onload=loadUnicode(0)>
+        <h1>Unicode Browser</h1>
+        <p>Browse 65536 various characters from Unicode to copy and paste. There are 32 pages to explore.</p>
+        <span>Page: </span>
+        <input type="number" id="page" min=0 max=31 value=0>
+        <button onclick=gotoPage()>Go</button>
+        <span id="showing"></span>
+        <div id="unicode"></div>
+        <script>
+            function loadUnicode(block) {
+                unicode.innerHTML = "";
+                if (block >= 0 && block <= 31) {
+                    for (i = 0; i < 2048; i++) {
+                        unicode.innerHTML = unicode.innerHTML + "&#" + (i + block * 2048) + "; ";
+                    }
+                }
+                showing.innerHTML = "Showing characters " + (block * 2048) + "-" + (block * 2048 + 2047);
+            }
+            function gotoPage() {
+                loadUnicode(page.value);
+            }
+        </script>
+  </body>
+</html>
