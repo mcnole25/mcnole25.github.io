@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Unicode Browser</title>
+    <title>Unicode Table</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <style>
         body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
         a, div, h1, p, span {color: #fff; font-family: verdana;}
-        #unicode {font-family: consolas; margin: 4px 0px;}
+        span {width: 24px; line-height: 24px; display: inline-block; border: solid; border-width: 1px; font-size: 100%; font-family: consolas; text-align: center; vertical-align: top; position: relative; right: 6px;}
+        .row {width: 48px; border: none}
     </style>
   </head>
   <body onload=loadUnicode(0)>
-        <h1>Unicode Browser</h1>
-        <p>Browse 65536 various characters from Unicode to copy and paste. There are 32 pages to explore.</p>
-        <span>Page: </span>
-        <input type="number" id="page" min=0 max=31 value=0>
-        <button onclick=gotoPage()>Go</button>
-        <span id="showing"></span>
-        <div id="unicode"></div>
-        <script>
-            function loadUnicode(block) {
-                unicode.innerHTML = "";
-                if (block >= 0 && block <= 31) {
-                    for (i = 0; i < 2048; i++) {
-                        unicode.innerHTML = unicode.innerHTML + "&#" + (i + block * 2048) + "; ";
-                    }
-                }
-                showing.innerHTML = "Showing characters " + (block * 2048) + "-" + (block * 2048 + 2047);
-            }
-            function gotoPage() {
-                loadUnicode(page.value);
-            }
-        </script>
+        <h1>Unicode Table</h1>
+        <p>Browse 65536 various Unicode characters to copy and paste. Please note: This table may be very laggy for some users.</p>
+<script>
+for (j = 0; j < 1024; j++) {
+para = document.createElement("span");
+para.className = "row";
+hex = (j * 64).toString(16);
+para.innerText = "0".repeat(4 - hex.length) + hex;
+document.body.appendChild(para);
+for (i = 0; i < 64; i++) {
+para = document.createElement("span");
+para.innerText = String.fromCodePoint(i + j * 64);
+document.body.appendChild(para);
+}
+para = document.createElement("br");
+document.body.appendChild(para);
+}
+</script>
   </body>
 </html>
