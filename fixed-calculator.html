@@ -7,13 +7,17 @@
         body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
         a, div, h1, p, span {color: #fff; font-family: verdana;}
         .page {margin: 4px 0px; display: block;}
-        #math {font-size: 25px; font-family: verdana; width: 1000px}
+        #math {font-size: 25px; width: 1000px}
+        #result {font-family: consolas}
         #regex {position: relative; top: 10px;}
     </style>
   </head>
   <body>
         <h1>Fixed Calculator</h1>
-        <p>A basic Javascript calculator with fixed decimals (like 0.1 + 0.2) and added functions.<br>Note: This program is in early development and may have bugs.</p>
+        <span>A basic Javascript calculator with fixed decimals (like 0.1 + 0.2) and added functions.<br></span>
+        <span>Enable Short Thirds</span>
+        <input type="checkbox" id="check" checked>
+        <br><br>
         <input id="math">
         <div id="regex"></div>
         <h1 id="result"></h1>
@@ -76,6 +80,14 @@
                 if (Math.abs(final) >= 10 ** 15) {
                 result.innerHTML = final.toExponential();
                 } else {
+                final = String(final);
+                digit = final.charAt(final.length - 2);
+                if (final.slice(final.length - 11, final.length - 1) === final.charAt(final.length - 2).repeat(10) && !(Number.isInteger(Number(final))) && !String(90).includes(digit) && check.checked) {
+                while (final.charAt(final.length - 3) === digit && final.length > 0) {
+                final = final.slice(0, final.length - 1);
+                }
+                final = final.slice(0, final.length - 2) + "\u0305" + digit;
+                }
                 result.innerHTML = final;
                 }
             });
