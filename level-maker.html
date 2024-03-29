@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Level Maker</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, h1, p, span {color: #fff; font-family: verdana;}
+        input {width: 1355px; font-size: 120%; font-family: consolas;}
+        canvas {display: block; margin: 8px 0px;}
+    </style>
+  </head>
+  <body>
+        <h1>Level Maker</h1>
+        <p>Create a platformer level from text.<br>_ empty, # tile, \ l slope, / r slope, ^ spike, v ceil spike</p>
+        <input id="level" value="______________________####____________vvvv______________________________________###\__^^^^__/###################################" maxlength="128">
+         <canvas id="myCanvas" width="768" height="384"></canvas>
+         <script>
+             let c = document.getElementById("myCanvas");
+             let ctx = c.getContext("2d");
+             setInterval(function() {
+                 ctx.clearRect(0, 0, c.width, c.height);
+                 ctx.fillStyle = "#8ff";
+                 ctx.fillRect(0, 0, 768, 384);
+                 for (i = 0; i < 128; i++) {
+                if (level.value.charAt(i) === "#") {
+                ctx.fillStyle = "#4b0";
+                ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48, 48, 48);
+                } else {
+                if (level.value.charAt(i) === "\\") {
+                ctx.fillStyle = "#4b0";
+                ctx.beginPath();
+                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48);
+                ctx.fill();
+                } else {
+                if (level.value.charAt(i) === "/") {
+                ctx.fillStyle = "#4b0";
+                ctx.beginPath();
+                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768 + 48, Math.floor(i / 16) * 48);
+                ctx.fill();
+                } else {
+                if (level.value.charAt(i) === "^") {
+                ctx.fillStyle = "#888";
+                ctx.beginPath();
+                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
+                ctx.lineTo(i * 48 % 768 + 24, Math.floor(i / 16) * 48);
+                ctx.fill();
+                } else {
+                if (level.value.charAt(i) === "v") {
+                ctx.fillStyle = "#888";
+                ctx.beginPath();
+                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48);
+                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48);
+                ctx.lineTo(i * 48 % 768 + 24, Math.floor(i / 16) * 48 + 48);
+                ctx.fill();
+                } else {
+                if (level.value.charAt(i) !== "_") {
+                 ctx.fillStyle = "#f0f"
+                 ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48, 24, 24);
+                 ctx.fillRect(i * 48 % 768 + 24, Math.floor(i / 16) * 48 + 24, 24, 24);
+                 ctx.fillStyle = "#000"
+                 ctx.fillRect(i * 48 % 768 + 24, Math.floor(i / 16) * 48, 24, 24);
+                 ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48 + 24, 24, 24);
+                 }
+                 }
+                 }
+                 }
+                 }
+                 }
+                 }
+             });
+         </script>
+  </body>
+</html>
