@@ -12,11 +12,10 @@
   </head>
   <body onload=loadUnicode(0)>
         <h1>Unicode Table</h1>
-        <p>Browse 65536 (actually 17728) various Unicode characters to copy and paste. For best results, install GNU Unifont. Note: CJK, Hangul, Surrogate, and Private Use characters are hidden for performance.</p>
+        <p>Browse 65536 (actually 16384) various Unicode characters to copy and paste. For best results, install GNU Unifont. Note: CJK, Hangul, Surrogate, and Private Use characters are hidden for performance.</p>
 <script>
 for (j = 0; j < 1024; j++) {
-if (j === 208) {j = 311}
-if (j === 312) {j = 640}
+if (j === 208) {j = 660}
 if (j === 688) {j = 1004}
 para = document.createElement("span");
 para.className = "row";
