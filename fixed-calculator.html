@@ -16,7 +16,7 @@
         <h1>Fixed Calculator</h1>
         <span>A basic Javascript calculator with fixed decimals (like 0.1 + 0.2) and added functions.<br></span>
         <span>Enable Short Thirds</span>
-        <input type="checkbox" id="check" checked>
+        <input type="checkbox" id="check" checked="true">
         <br><br>
         <input id="math">
         <div id="regex"></div>
@@ -48,7 +48,8 @@
                 saveFunction("sign", "\u008f");
                 saveFunction("pi", "\u007f");
                 saveFunction("e", "\u0080");
-                re = RegExp("[a-z `~!@#$&_=\\\\|\[\\]\{};:'\",<>?]", "gi");
+                saveFunction("tau", "\u0090");
+                re = RegExp("[a-z `~@#$&_=\\\\|\[\\]\{};:'\",<>?]", "gi");
                 x = x.replace(re, "");
                 re = RegExp("\\^", "g");
                 x = x.replace(re, "**");
@@ -73,6 +74,17 @@
                 loadCharacter("\u008f", "Math.sign");
                 loadCharacter("\u007f", "(Math.PI)");
                 loadCharacter("\u0080", "(Math.E)");
+                loadCharacter("\u0090", "(Math.PI * 2)");
+                let fact = 1*2*3*4*5*6*7*8*9;
+                for (i = 10; i <= 100; i++) {
+                fact = fact * i;
+                x = x.replaceAll(String(i) + "!", "(" + fact + ")")
+                }
+                fact = 1;
+                for (i = 1; i <= 10; i++) {
+                fact = fact * i;
+                x = x.replaceAll(String(i) + "!", "(" + fact + ")")
+                }
                 re = RegExp("\\)\\(", "g");
                 x = x.replace(re, ")*(");
                 // for the creator // regex.innerHTML = x;
@@ -92,6 +104,6 @@
                 }
             });
         </script>
-        <p>Accepted functions:<br><br>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br><br>( ) > Parentheses<br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Log<br><br>sin > Sine (radians)<br>cos > Cosine (radians)<br>tan > Tangent (radians)<br>sindeg > Sine (degrees)<br>cosdeg > Cosine (degrees)<br>tandeg > Tangent (degrees)<br><br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio<br>abs > Absolute value<br>sign > Sign value</p>
+        <p>Accepted functions:<br><br>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br><br>( ) > Parentheses<br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Log<br><br>sin > Sine (radians)<br>cos > Cosine (radians)<br>tan > Tangent (radians)<br>sindeg > Sine (degrees)<br>cosdeg > Cosine (degrees)<br>tandeg > Tangent (degrees)<br><br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio<br>abs > Distance To 0<br>sign > Negative/Positive<br><br>tau > Pi * 2<br>! > Factorial (up to 100)</p>
   </body>
 </html>
