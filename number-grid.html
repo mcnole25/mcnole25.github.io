@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span, strong {color: #fff; font-family: verdana;}
+        .offset {position: relative; bottom: 6px;}
+        .space {padding: 10px;}
+        .space2 {padding: 6px;}
+    </style>
+  </head>
+  <body>
+        <h1>Number Grid Generator</h1>
+        <p>A number grid generator. Grid size goes up to 64x64.</p>
+        <span class="offset">Width: </span><input type=range id="width" min=1 max=64 value=16><span class="offset" id="widthDisplay"></span>
+        <span class="space"></span>
+        <span class="offset">Height: </span><input type=range id="height" min=1 max=64 value=16><span class="offset" id="heightDisplay"></span>
+        <br>
+        <span>Start at 1? </span><input type=checkbox id="startAt1" checked=true>
+        <span class="space2"></span>
+        <span>Coloured Grid? </span><input type=checkbox id="coloured" checked=true>
+        <br><br>
+         <canvas id="myCanvas"></canvas>
+        <script>
+            let c = document.getElementById("myCanvas");
+            let ctx = c.getContext("2d");
+            setInterval(function() {
+                let w = width.value;
+                let h = height.value;
+                widthDisplay.innerHTML = " " + w;
+                heightDisplay.innerHTML = " " + h;
+                c.width = 32 * w;
+                c.height = 32 * h;
+                ctx.fillStyle = "#fff";
+                ctx.fillRect(0, 0, c.width, c.height);
+                for (i = 0; i < w * h; i++) {
+                    if (coloured.checked) {
+                    ctx.fillStyle = "rgb(" + Math.floor(i / 256) % 16 * 17 + ", " + Math.floor(i / 16) % 16 * 17 + ", " + i % 16 * 17 + ")";
+                    ctx.fillRect(32 * (i % w), Math.floor(i / w) * 32, 32, 32);
+                    }
+                    ctx.strokeStyle = "#000";
+                    ctx.lineWidth = 0.5;
+                    ctx.font = "12px Arial";
+                    ctx.textAlign = "center";
+                    if (coloured.checked) {
+                    ctx.fillStyle = "#fff";
+                    ctx.strokeText(i + startAt1.checked, 32 * (i % w) + 16, Math.floor(i / w) * 32 + 20);
+                    } else {
+                    ctx.fillStyle = "#000";
+                    }
+                    ctx.fillText(i + startAt1.checked, 32 * (i % w) + 16, Math.floor(i / w) * 32 + 20);
+                    if (!coloured.checked) {
+                    ctx.strokeRect(32 * (i % w), Math.floor(i / w) * 32, 32, 32);
+                    }
+                }
+            });
+        </script>
+  </body>
+</html>
