@@ -19,6 +19,7 @@
              let c = document.getElementById("myCanvas");
              let ctx = c.getContext("2d");
              let base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+             shade = 17;
              setInterval(function() {
                  ctx.clearRect(0, 0, c.width, c.height);
                  ctx.fillStyle = "#ddd";
@@ -30,12 +31,14 @@
                      if (!(colour === 64)) {
                      ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
                      ctx.fillRect(16 + x, 16 + y, 80, 80);
+                     ctx.fillStyle = "rgb(" + (r - shade) + ", " + (g - shade) + ", " + (b + shade) + ")";
                      ctx.beginPath();
                      ctx.moveTo(x, y);
                      ctx.lineTo(16 + x, 16 + y);
                      ctx.lineTo(16 + x, 96 + y);
                      ctx.lineTo(x, 80 + y);
                      ctx.fill();
+                     ctx.fillStyle = "rgb(" + (r + shade) + ", " + (g + shade) + ", " + (b + shade) + ")";
                      ctx.beginPath();
                      ctx.moveTo(x, y);
                      ctx.lineTo(80 + x, y);
