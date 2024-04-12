@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Block Maker</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, h1, p, span {color: #fff; font-family: verdana;}
+        input {width: 680px; font-size: 120%; font-family: consolas;}
+        canvas {display: block; margin: 8px 0px;}
+    </style>
+  </head>
+  <body>
+        <h1>Block Maker</h1>
+        <p>A Minecraft-like block maker with 64 colours and 64 pixels. Pixels are bottom-to-top.<br>Base64 for colours, = symbol for empty pixel.</p>
+        <input id="blockData" value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" maxlength="64">
+         <canvas id="myCanvas" width="512" height="512"></canvas>
+         <script>
+             let c = document.getElementById("myCanvas");
+             let ctx = c.getContext("2d");
+             let base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+             setInterval(function() {
+                 ctx.clearRect(0, 0, c.width, c.height);
+                 ctx.fillStyle = "#ddd";
+                 ctx.fillRect(0, 0, 512, 512);
+                 function drawPixel(x, y, colour) {
+                     r = Math.floor(colour / 16) * 85;
+                     g = Math.floor(colour / 4) % 4 * 85;
+                     b = colour % 4 * 85;
+                     if (!(colour === 64)) {
+                     ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+                     ctx.fillRect(16 + x, 16 + y, 80, 80);
+                     ctx.beginPath();
+                     ctx.moveTo(x, y);
+                     ctx.lineTo(16 + x, 16 + y);
+                     ctx.lineTo(16 + x, 96 + y);
+                     ctx.lineTo(x, 80 + y);
+                     ctx.fill();
+                     ctx.beginPath();
+                     ctx.moveTo(x, y);
+                     ctx.lineTo(80 + x, y);
+                     ctx.lineTo(96 + x, 16 + y);
+                     ctx.lineTo(16 + x, 16 + y);
+                     ctx.fill();
+                     }
+                 }
+                 for (i = 0; i < 64; i++) {
+                 if (!(blockData.value.charAt(i) === "")) {
+                 drawPixel(304 - (i % 4 * 80) + (Math.floor(i / 4) % 4 * 16), 304 + (Math.floor(i / 4) % 4 * 16) - (Math.floor(i / 16) % 4 * 80), base64.indexOf(blockData.value.charAt(i)));
+                 }
+                 }
+             });
+         </script>
+  </body>
+</html>
