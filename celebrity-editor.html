@@ -4,14 +4,14 @@
     <title>Celebrity Face Editor</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <style>
-        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh; overflow: hidden;}
         a, h1, p, span {color: #fff; font-family: verdana;}
         input {width: 1355px; font-size: 120%; font-family: consolas;}
         canvas {display: block; margin: 8px 0px;}
         .pca {width: 150px;}
         span {padding: 0px 54px; display: inline-block; position: relative; left: 1px;}
         button {font-size: 150%; padding: 0px 15px; margin: 8px 0px;}
-        #myCanvas {position: relative; left: 340px; bottom: 365px;}
+        #myCanvas {position: relative; left: 340px; bottom: 470px;}
         .dd {left: -3px;}
         .dd2 {left: -13px;}
     </style>
@@ -50,6 +50,16 @@
         <input type="range" id="pca11" class="pca">
         <input type="range" id="pca12" class="pca">
         <br>
+        <span class="dd">PCA 13</span><span class="dd2">PCA 14</span>
+        <br>
+        <input type="range" id="pca13" class="pca">
+        <input type="range" id="pca14" class="pca">
+        <br>
+        <span class="dd">PCA 15</span><span class="dd2">PCA 16</span>
+        <br>
+        <input type="range" id="pca15" class="pca">
+        <input type="range" id="pca16" class="pca">
+        <br>
         <button onclick=randomize()>Randomize</button>
         <button onclick=gotomean()>Go to Mean</button>
          <canvas id="myCanvas" width="512" height="512"></canvas>
@@ -59,19 +69,20 @@
              setInterval(function() {
                  let brightness = 50 - Number(pca1.value);
                  let skin = Number(pca2.value) - 50;
-                 let horizontal = (Number(pca3.value) - 50) - (Number(pca4.value) - 50) + (Number(pca7.value) - 50) / 1.5 + (Number(pca11.value) - 50) / 3;
-                 let vertical = 50 - Number(pca5.value);
+                 let horizontal = (Number(pca3.value) - 50) - (Number(pca4.value) - 50) + (Number(pca7.value) - 50) / 1.5 + (Number(pca11.value) - 50) / 3 - (Number(pca13.value) - 50) / 3;
+                 let vertical = 50 - Number(pca5.value) + (50 - Number(pca16.value)) / 2;
                  let temperature = Number(pca6.value) - 50;
                  let occlusion = Number(pca8.value) - 50;
                  let perimeter = Number(pca9.value) - 50;
                  let browHeight = Number(pca10.value) - 50;
                  let makeup = 50 - Number(pca12.value);
+                 let headWidth = Number(pca14.value) - 50;
                  ctx.clearRect(0, 0, c.width, c.height);
                  ctx.fillStyle = "hsl(" + (temperature > 0 ? 20 : 200) + ", " + Math.abs(temperature) + "%, " + (50 + brightness - skin / 2 + (Number(pca3.value) - 50) / 2.5 + (Number(pca4.value) - 50) / 2 - perimeter / 8) + "%)";
                  ctx.fillRect(0, 0, 512, 512);
                  ctx.fillStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (50 + brightness / 4 + skin / 2) + "%)";
                  ctx.beginPath();
-                 ctx.arc(256, 256, 224, 0, 2 * Math.PI);
+                 ctx.arc(256, 256, 224 + headWidth / 4, 0, 2 * Math.PI);
                  ctx.fill();
                  ctx.fillRect(160 - horizontal / 3, 256, 192, 256);
                  ctx.fillStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (45 + occlusion / 10 + brightness / 4 + skin / 2) + "%)";
@@ -97,7 +108,7 @@
                  ctx.beginPath();
                  ctx.arc(352 + horizontal / 3 - perimeter / 8, 200 + vertical / 3 - browHeight / 4, 64, 1.25 * Math.PI, 1.75 * Math.PI);
                  ctx.stroke();
-                 let smileHorizontal = (50 - Number(pca3.value)) / 8 + (50 - Number(pca4.value)) / 6;
+                 let smileHorizontal = (50 - Number(pca3.value)) / 8 + (50 - Number(pca4.value)) / 6 + (50 - Number(pca15.value)) / 3;
                  ctx.strokeStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (45 + occlusion / 10 + brightness / 4 + skin / 2) + "%)";
                  ctx.beginPath();
                  ctx.moveTo(192 + horizontal / 3, 358 - smileHorizontal / 2 + vertical / 3 + makeup / 20);
@@ -110,13 +121,13 @@
                  ctx.stroke();
              });
              function randomize() {
-             for (i = 1; i <= 12; i++) {
+             for (i = 1; i <= 16; i++) {
              random = ((Math.random() - 0.5) * Math.cbrt(400)) ** 3 + 50;
              document.getElementById("pca" + i).value = random;
              }
              }
              function gotomean() {
-             for (i = 1; i <= 12; i++) {
+             for (i = 1; i <= 16; i++) {
              document.getElementById("pca" + i).value = 50;
              }
              }
