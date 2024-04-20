@@ -10,10 +10,11 @@
         canvas {display: block; margin: 8px 0px;}
         .pca {width: 150px;}
         span {padding: 0px 54px; display: inline-block; position: relative; left: 1px;}
-        button {font-size: 150%; padding: 0px 15px; margin: 8px 0px;}
-        #myCanvas {position: relative; left: 340px; bottom: 470px;}
+        button {font-size: 150%; padding: 0px 15px; margin: 8px 0px; position: relative; top: 8px;}
+        #myCanvas {position: relative; left: 340px; bottom: 520px;}
         .dd {left: -3px;}
         .dd2 {left: -13px;}
+        #invert {padding: 0px 123px;}
     </style>
   </head>
   <body>
@@ -22,46 +23,48 @@
         <p>Why did I make this? It's too difficult to download the real thing, so I made my own version.</p>
         <span>PCA 1</span><span>PCA 2</span>
         <br>
-        <input type="range" id="pca1" class="pca">
-        <input type="range" id="pca2" class="pca">
+        <input type="range" id="pca1" class="pca" title="Lighting">
+        <input type="range" id="pca2" class="pca" title="Skin tone">
         <br>
         <span>PCA 3</span><span>PCA 4</span>
         <br>
-        <input type="range" id="pca3" class="pca">
-        <input type="range" id="pca4" class="pca">
+        <input type="range" id="pca3" class="pca" title="Horizontal shading">
+        <input type="range" id="pca4" class="pca" title="Horiz shading again">
         <br>
         <span>PCA 5</span><span>PCA 6</span>
         <br>
-        <input type="range" id="pca5" class="pca">
-        <input type="range" id="pca6" class="pca">
+        <input type="range" id="pca5" class="pca" title="Vertical shading">
+        <input type="range" id="pca6" class="pca" title="Temperature">
         <br>
         <span>PCA 7</span><span>PCA 8</span>
         <br>
-        <input type="range" id="pca7" class="pca">
-        <input type="range" id="pca8" class="pca">
+        <input type="range" id="pca7" class="pca" title="Horiz shading again">
+        <input type="range" id="pca8" class="pca" title="Ambient occlusion">
         <br>
         <span>PCA 9</span><span class="dd">PCA 10</span>
         <br>
-        <input type="range" id="pca9" class="pca">
-        <input type="range" id="pca10" class="pca">
+        <input type="range" id="pca9" class="pca" title="Perimeter shading">
+        <input type="range" id="pca10" class="pca" title="Eyebrow height">
         <br>
         <span class="dd">PCA 11</span><span class="dd2">PCA 12</span>
         <br>
-        <input type="range" id="pca11" class="pca">
-        <input type="range" id="pca12" class="pca">
+        <input type="range" id="pca11" class="pca" title="Horiz shading again">
+        <input type="range" id="pca12" class="pca" title="Makeup">
         <br>
         <span class="dd">PCA 13</span><span class="dd2">PCA 14</span>
         <br>
-        <input type="range" id="pca13" class="pca">
-        <input type="range" id="pca14" class="pca">
+        <input type="range" id="pca13" class="pca" title="Horiz shading again">
+        <input type="range" id="pca14" class="pca" title="Head width">
         <br>
         <span class="dd">PCA 15</span><span class="dd2">PCA 16</span>
         <br>
-        <input type="range" id="pca15" class="pca">
-        <input type="range" id="pca16" class="pca">
+        <input type="range" id="pca15" class="pca" title="Smile">
+        <input type="range" id="pca16" class="pca" title="Vertical rotation">
         <br>
         <button onclick=randomize()>Randomize</button>
-        <button onclick=gotomean()>Go to Mean</button>
+        <button onclick=gotomean()>Go To Mean</button>
+        <br>
+        <button id="invert" onclick="invert()">Invert</button>
          <canvas id="myCanvas" width="512" height="512"></canvas>
          <script>
              let c = document.getElementById("myCanvas");
@@ -129,6 +132,11 @@
              function gotomean() {
              for (i = 1; i <= 16; i++) {
              document.getElementById("pca" + i).value = 50;
+             }
+             }
+             function invert() {
+             for (i = 1; i <= 16; i++) {
+             document.getElementById("pca" + i).value = 100 - document.getElementById("pca" + i).value;
              }
              }
          </script>
