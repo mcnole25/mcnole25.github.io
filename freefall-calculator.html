@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Freefall Calculator</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        input {margin: 4px 0px;}
+    </style>
+  </head>
+  <body>
+        <h1>Freefall Calculator</h1>
+        <p>How many seconds does a 10 meter fall last? Find out with this calculator. (Note: Air resistance is not taken into account.)<br><br></p>
+        <span>Fall Height </span><input type="number" id="meters" value=0><span> meters<br></span>
+        <span>Time </span><input readonly=true id="seconds"><span> seconds<br></span>
+        <span>Velocity </span><input readonly=true id="ms"><span> m/s<br><br></span>
+        <script>
+        const g = 9.80665;
+            setInterval(function() {
+                seconds.value = Math.sqrt(meters.value / g * 2);
+                ms.value = seconds.value * g;
+            });
+        </script>
+  </body>
+</html>
