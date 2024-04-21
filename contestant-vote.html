@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contestant Vote</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh; overflow: hidden;}
+        a, div, h1, p, span, strong {color: #fff; font-family: verdana;}
+        textarea {resize: none; width: 400px; height: 600px;}
+        #stats {font-size: 150%; position: relative; left: 425px; bottom: 600px; width: 400px; height: 400px;}
+    </style>
+  </head>
+  <body>
+        <h1>Contestant Vote</h1>
+        <p>Vote [A] for contestant 1, [B] for contestant 2, etc. Paste your comment data to see vote stats.</p>
+        <textarea id="comments"></textarea>
+        <div id="stats"></div>
+        <script>
+        setInterval( function() {
+        a = (comments.value.match(/\[A\]/g) || []).length;
+        b = (comments.value.match(/\[B\]/g) || []).length;
+        c = (comments.value.match(/\[C\]/g) || []).length;
+        d = (comments.value.match(/\[D\]/g) || []).length;
+        e = (comments.value.match(/\[E\]/g) || []).length;
+        f = (comments.value.match(/\[F\]/g) || []).length;
+        g = (comments.value.match(/\[G\]/g) || []).length;
+        h = (comments.value.match(/\[H\]/g) || []).length;
+        stats.innerHTML = "<b>" + "[A] - " + a + " vote(s)<br>[B] - " + b + " vote(s)<br>[C] - " + c + " vote(s)<br>[D] - " + d + " vote(s)<br>[E] - " + e + " vote(s)<br>[F] - " + f + " vote(s)<br>[G] - " + g + " vote(s)<br>[H] - " + h + " vote(s)<br><br>Total vote(s)<br>" + (a + b + c + d + e + f + g + h) + "</b>";
+        });
+        </script>
+  </body>
+</html>
