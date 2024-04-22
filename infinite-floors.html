@@ -12,10 +12,11 @@
   </head>
   <body>
         <h1>(Practically) Infinite Floors</h1>
-        <p>Sorry if the title is misleading. This building has 1 quadrillion floors. At floor 25000, you enter space.</p>
-        <span>Floor </span><input type="number" id="floor" value=0 min=0 max=1e15>
+        <p>Sorry if the title is misleading. This building has 9007199254740991 floors. At floor 25000, you enter space.</p>
+        <span>Floor </span><input type="number" id="floor" value=0 min=0>
          <canvas id="myCanvas" width="512" height="512"></canvas>
          <script>
+             floor.max = Number.MAX_SAFE_INTEGER;
              let c = document.getElementById("myCanvas");
              let ctx = c.getContext("2d");
              let space = 25000;
