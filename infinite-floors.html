@@ -12,21 +12,23 @@
   </head>
   <body>
         <h1>(Practically) Infinite Floors</h1>
-        <p>Sorry if the title is misleading. This building has 9007199254740991 floors. At floor 25000, you enter space.</p>
-        <span>Floor </span><input type="number" id="floor" value=0 min=0>
+        <p>Sorry if the title is misleading. This building has 18007199254740991 floors. At floor 25000, you enter space.</p>
+        <span>Floor </span><input type="number" id="floor" value=-9000000000000000>
          <canvas id="myCanvas" width="512" height="512"></canvas>
          <script>
+             floor.min = -9 * 10 ** 15;
              floor.max = Number.MAX_SAFE_INTEGER;
              let c = document.getElementById("myCanvas");
              let ctx = c.getContext("2d");
              let space = 25000;
              setInterval(function() {
+                 let f = Number(floor.value) + 9 * 10 ** 15;
                  ctx.clearRect(0, 0, c.width, c.height);
-                 ctx.fillStyle = "hsl(" + (180 + Number(floor.value) / space * 60) + ", 100%, " + (75 - Number(floor.value) / space * 75) + "%)";
+                 ctx.fillStyle = "hsl(" + (180 + f / space * 60) + ", 100%, " + (75 - f / space * 75) + "%)";
                  ctx.fillRect(0, 0, 512, 512);
-                 ctx.font = "25px Arial";
+                 ctx.font = "20px Bahnschrift";
                  ctx.textAlign = "center";
-                 if (floor.value == 0) {
+                 if (f == 0) {
                  ctx.fillStyle = "#4b0";
                  ctx.fillRect(0, 384, 512, 128);
                  }
@@ -36,9 +38,18 @@
                  ctx.fillStyle = "#888";
                  ctx.fillRect(128, 384 - i * 128, 256, 128);
                  ctx.strokeRect(128, 384 - i * 128, 256, 128);
+                 let displayFloor = currentFloor + 9 * 10 ** 15;
+                 let leftover = String(Number(floor.value) + i).slice(1, floor.length)
+                 if (currentFloor >= 0) {
+                 if (currentFloor >= 10 ** 15) {
+                 displayFloor = (Number(String(Number(floor.value) + i).charAt(0)) + 9) + leftover;
+                 } else {
+                 displayFloor = "9" + "0".repeat(15 - String(Number(floor.value) + i).length) + String(Number(floor.value) + i)
+                 }
+                 }
                  ctx.fillStyle = "#fff";
                  ctx.fillText("Floor", 256, 440 - i * 128);
-                 ctx.fillText(currentFloor, 256, 480 - i * 128);
+                 ctx.fillText(String(displayFloor).replace(/\B(?=(\d{3})+(?!\d))/g, ","), 256, 480 - i * 128);
                  }
                  if (Number(floor.value) < floor.min || Number(floor.value) > floor.max) {ctx.clearRect(0, 0, c.width, c.height);}
                  }
