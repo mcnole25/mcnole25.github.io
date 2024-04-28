@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>16 Bit Precision</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        span {width: 105px; line-height: 24px; display: inline-block; border: solid; border-width: 1px; font-size: 75%; font-family: consolas, consolas; text-align: center; vertical-align: top; position: relative; right: 6px;}
+        .row {width: 48px; border: none}
+    </style>
+  </head>
+  <body>
+        <h1>16 Bit Precision</h1>
+        <p>A list of all possible 16 bit float values. (Warning: Lag!)<br>&lt;-- Sign and Exponent --&gt; ^ v Fraction</p>
+<script>
+for (j = 0; j < 1024; j++) {
+for (i = 0; i < 64; i++) {
+para = document.createElement("span");
+para.innerText = 2 ** (i % 32) * (0.5 - Number(i >= 32)) / 16384 * (1 + j / 1024);
+if (i === 0 || i === 32) {
+para.innerText = j / 8388608 * (0.5 - Number(i >= 32));
+}
+if (i === 31 || i === 63) {
+para.innerText = Number(para.innerText) * Infinity * Number(j === 0);
+}
+para.innerText = Number(para.innerText).toPrecision(5);
+if (Math.abs(Number(para.innerText)) > 0 && Math.abs(Number(para.innerText)) < 0.001) {
+para.innerText = Number(para.innerText).toExponential();
+}
+document.body.appendChild(para);
+}
+para = document.createElement("br");
+document.body.appendChild(para);
+}
+</script>
+  </body>
+</html>
