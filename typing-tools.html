@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Typing Tools</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+        a, div, h1, p, span {color: #fff; font-family: verdana;}
+        textarea {resize: none; width: 800px; height: 600px;}
+        #customString {width: 1612px;}
+    </style>
+  </head>
+  <body>
+        <h1>Typing Tools</h1>
+        <p>Helpful typing tools to type certain things a little faster.<br>Tags: %C% = Custom string, %I% = Line index, %L% = Lenny face, %T% = Current time</p>
+        <input id="customString" placeholder="Custom String">
+        <br>
+        <textarea id="input" placeholder="Input"></textarea>
+        <textarea id="output" placeholder="Output"></textarea>
+        <script>
+        setInterval(function() {
+        x = input.value;
+        x = input.value.split("\n");
+        date = new Date();
+        hr = date.getHours();
+        hr = String(hr < 10 ? "0" : "") + String(hr);
+        min = date.getMinutes();
+        min = String(min < 10 ? "0" : "") + String(min);
+        let custom = customString.value;
+        for (i = 0; i < x.length; i++) {
+        x[i] = x[i].replaceAll("\u002c", "\u007f");
+        x[i] = x[i].replaceAll("%C%", custom);
+        x[i] = x[i].replaceAll("%I%", i);
+        x[i] = x[i].replaceAll("%L%", "( " + "\u0361\u00b0 \u035c\u0296 \u0361\u00b0" + ")");
+        x[i] = x[i].replaceAll("%T%", hr + ":" + min);
+        }
+        x.toString();
+        x = String(x).replaceAll("\u002c", "\n");
+        x = String(x).replaceAll("\u007f", "\u002c");
+        output.value = x;
+        });
+        </script>
+  </body>
+</html>
