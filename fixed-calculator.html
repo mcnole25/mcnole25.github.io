@@ -1,109 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fixed Calculator</title>
+    <title>Fixed Calculator 2.0</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <style>
         body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
-        a, div, h1, p, span {color: #fff; font-family: verdana;}
-        .page {margin: 4px 0px; display: block;}
-        #math {font-size: 25px; width: 1000px}
-        #result {font-family: consolas}
-        #regex {position: relative; top: 10px;}
+        a, div, h1, p, span, th, td {color: #fff; font-family: verdana;}
+        #equation {font-size: 25px; width: 1000px; display: block; margin: 20px 0px;}
+        #result {font-size: 150%;}
+        table {position: relative; top: 50px;}
+        td {width: 200px;}
+        .func {border: 1px solid #fff; width: 100px; text-align: center}
     </style>
+    <script src="https://unpkg.com/mathjs@12.4.2/lib/browser/math.js"></script>
   </head>
   <body>
-        <h1>Fixed Calculator</h1>
-        <span>A basic Javascript calculator with fixed decimals (like 0.1 + 0.2) and added functions.<br></span>
-        <span>Enable Short Thirds</span>
-        <input type="checkbox" id="check" checked="true">
+        <h1>Fixed Calculator 2.0</h1>
+        <span>A Javascript calculator with fixed decimals and functions. I rewrote this calculator using <a href="https://mathjs.org">math.js</a>.<br></span>
+        <span>Big numbers up to 10^(9*10^15), complex numbers, and high precision (50 digits) is supported.</span>
+        <input id="equation">
+        <div id="result"></div>
         <br><br>
-        <input id="math">
-        <div id="regex"></div>
-        <h1 id="result"></h1>
+        <p><b>Supported Operators and Functions</b></p>
+        <p>+, -, *, /, ( ), ^, !, %, e, pi, tau, phi, i, deg, rad<br>
+        sqrt(x), cbrt(x), log(x), log10(x), log2(x), log(x, y)<br>
+        floor(x), round(x), ceil(x), abs(x), sign(x), exp(x)<br>
+        re(x), im(x), conj(x), lcm(x, y, z...), gcd(x, y, z...)<br>
+        <br>
+        sin(x), cos(x), tan(x), csc(x), sec(x), cot(x)<br>
+        asin(x), acos(x), atan(x), acsc(x), asec(x), acot(x)<br>
+        sinh(x), cosh(x), tanh(x), csch(x), sech(x), coth(x)<br>
+        asinh(x), acosh(x), atanh(x), acsch(x), asech(x), acoth(x)<br>
+        </p>
         <script>
+            math.config({number: "BigNumber", precision: 50})
             setInterval(function() {
-                result.innerHTML = "";
-                let x = math.value;
-                x = x.replace("(", "((");
-                x = x.replace(")", "))");
-                function saveFunction(syntax, char) {
-                re = RegExp(syntax, "g");
-                x = x.replace(re, char);
-                }
-                saveFunction("sindeg", "\u0087");
-                saveFunction("cosdeg", "\u0088");
-                saveFunction("tandeg", "\u0089");
-                saveFunction("sqrt", "\u0081");
-                saveFunction("cbrt", "\u0082");
-                saveFunction("ln", "\u0083");
-                saveFunction("sin", "\u0084");
-                saveFunction("cos", "\u0085");
-                saveFunction("tan", "\u0086");
-                saveFunction("floor", "\u008a");
-                saveFunction("round", "\u008b");
-                saveFunction("ceil", "\u008c");
-                saveFunction("phi", "\u008d");
-                saveFunction("abs", "\u008e");
-                saveFunction("sign", "\u008f");
-                saveFunction("pi", "\u007f");
-                saveFunction("e", "\u0080");
-                saveFunction("tau", "\u0090");
-                re = RegExp("[a-z `~@#$&_=\\\\|\[\\]\{};:'\",<>?]", "gi");
-                x = x.replace(re, "");
-                re = RegExp("\\^", "g");
-                x = x.replace(re, "**");
-                function loadCharacter(c, js) {
-                re = RegExp(c, "g");
-                x = x.replace(re, js);
-                }
-                loadCharacter("\u0087\\(", "Math.sin\(\(Math.PI/180\)\*");
-                loadCharacter("\u0088\\(", "Math.cos\(\(Math.PI/180\)\*");
-                loadCharacter("\u0089\\(", "Math.tan\(\(Math.PI/180\)\*");
-                loadCharacter("\u0081", "Math.sqrt");
-                loadCharacter("\u0082", "Math.cbrt");
-                loadCharacter("\u0083", "Math.log");
-                loadCharacter("\u0084", "Math.sin");
-                loadCharacter("\u0085", "Math.cos");
-                loadCharacter("\u0086", "Math.tan");
-                loadCharacter("\u008a", "Math.floor");
-                loadCharacter("\u008b", "Math.round");
-                loadCharacter("\u008c", "Math.ceil");
-                loadCharacter("\u008d", "(Math.sqrt(1.25) + 0.5)");
-                loadCharacter("\u008e", "Math.abs");
-                loadCharacter("\u008f", "Math.sign");
-                loadCharacter("\u007f", "(Math.PI)");
-                loadCharacter("\u0080", "(Math.E)");
-                loadCharacter("\u0090", "(Math.PI * 2)");
-                let fact = 1*2*3*4*5*6*7*8*9;
-                for (i = 10; i <= 100; i++) {
-                fact = fact * i;
-                x = x.replaceAll(String(i) + "!", "(" + fact + ")")
-                }
-                fact = 1;
-                for (i = 1; i <= 10; i++) {
-                fact = fact * i;
-                x = x.replaceAll(String(i) + "!", "(" + fact + ")")
-                }
-                re = RegExp("\\)\\(", "g");
-                x = x.replace(re, ")*(");
-                // for the creator // regex.innerHTML = x;
-                final = eval(x).toPrecision(15) / 1;
-                if (Math.abs(final) >= 10 ** 15) {
-                result.innerHTML = final.toExponential();
-                } else {
-                final = String(final);
-                digit = final.charAt(final.length - 2);
-                if (final.slice(final.length - 11, final.length - 1) === final.charAt(final.length - 2).repeat(10) && !(Number.isInteger(Number(final))) && !String(90).includes(digit) && check.checked) {
-                while (final.charAt(final.length - 3) === digit && final.length > 0) {
-                final = final.slice(0, final.length - 1);
-                }
-                final = final.slice(0, final.length - 2) + "\u0305" + digit;
-                }
-                result.innerHTML = final;
-                }
+            result.innerHTML = "<b> = " + math.evaluate(equation.value) + "</b>";
             });
         </script>
-        <p>+ > Addition<br>- > Subtraction<br>* > Multiplication<br>/ > Division<br>^ > Exponent<br>% > Modulo<br>( ) > Brackets<br>pi > Pi<br>e > Euler's Number<br>sqrt > Square Root<br>cbrt > Cube Root<br>ln > Natural Logarithm<br>sin > Sine (Radians)<br>cos > Cosine (Radians)<br>tan > Tangent (Radians)<br>sindeg > Sine (Degrees)<br>cosdeg > Cosine (Degrees)<br>tandeg > Tangent (Degrees)<br>floor > Round Down<br>round > Nearest Integer<br>ceil > Round Up<br>phi > Golden Ratio<br>abs > Distance To 0<br>sign > Negative/Positive<br>tau > Pi * 2<br>! > Factorial (1-100)</p>
   </body>
 </html>
