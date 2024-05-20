@@ -21,7 +21,7 @@
         <input id="equation">
         <div id="result"></div>
         <div id="security"></div>
-        <br><br>
+        <br>
         <p><b>Supported Operators and Functions</b></p>
         <p>+, -, *, /, ( ), ^, !, %, e, pi, tau, phi, i, deg, rad<br>
         sqrt(x), cbrt(x), log(x), log10(x), log2(x), log(x, y)<br>
@@ -37,7 +37,7 @@
             math.config({number: "BigNumber", precision: 50})
             const blacklist = ["import", "createunit", "evaluate", "parse", "simplify", "derivative"]
             setInterval(function() {
-            security.innerHTML = ""
+            security.innerHTML = "";
             myEquation = String(equation.value).toLowerCase();
             for (i = 0; i < blacklist.length; i++) {
             myEquation = myEquation.replaceAll(blacklist[i], "");
