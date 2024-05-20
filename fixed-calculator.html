@@ -20,6 +20,7 @@
         <span>Big numbers up to 10^(9*10^15), complex numbers, and high precision (50 digits) is supported.</span>
         <input id="equation">
         <div id="result"></div>
+        <div id="security"></div>
         <br><br>
         <p><b>Supported Operators and Functions</b></p>
         <p>+, -, *, /, ( ), ^, !, %, e, pi, tau, phi, i, deg, rad<br>
@@ -34,8 +35,17 @@
         </p>
         <script>
             math.config({number: "BigNumber", precision: 50})
+            const blacklist = ["import", "createunit", "evaluate", "parse", "simplify", "derivative"]
             setInterval(function() {
-            result.innerHTML = "<b> = " + math.evaluate(equation.value) + "</b>";
+            security.innerHTML = ""
+            myEquation = String(equation.value).toLowerCase();
+            for (i = 0; i < blacklist.length; i++) {
+            myEquation = myEquation.replaceAll(blacklist[i], "");
+            if (String(equation.value).toLowerCase().includes(blacklist[i])) {
+            security.innerHTML = "Certain functions like import() are disabled for security."
+            }
+            }
+            result.innerHTML = "<b> = " + math.evaluate(myEquation) + "</b>";
             });
         </script>
   </body>
