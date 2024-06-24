@@ -9,7 +9,7 @@ p {color: #fff; font-family: verdana; position: relative; left: 650px; bottom: 7
 textarea {width: 636px; height: 360px; resize: none; border: none;}
 </style>
 </head>
-<body>
+<body onmousemove="getMousePos()">
 <canvas id=canvas width=640 height=360></canvas><br><textarea id=code>Background|255|255|255</textarea>
 <p>
 Reference:
@@ -18,17 +18,25 @@ Background|red|green|blue
 <br>
 Fill|red|green|blue|alpha
 <br>
-Font|size|family|center?
+Font|size|family|centered?
 <br>
 Stroke|red|green|blue|alpha
 <br>
 Width|width
 <br><br>
+Arc|x|y|radius|degrees|value
+<br>
 Ellipse|x|y|radiusX|radiusY
 <br>
 Line|x1|y1|x2|y2
 <br>
+Polygon|x|y|sides|radius
+<br>
+Quadrilateral|x1|y1|x2|y2|x3|y3|x4|y4
+<br>
 Rectangle|x|y|width|height
+<br>
+Star|x|y|radius
 <br>
 Text|text|x|y
 <br>
@@ -40,13 +48,51 @@ To escape backslashes in text, type "\\".
 <br>
 New functions for drawing coming soon.
 </p>
+<p id=coords></p>
 <script>
 let c = canvas;
 let ctx = canvas.getContext("2d");
+function drawPolygon(x, y, safeSides, radius) {
+sides = safeSides;
+if (safeSides < 3) {sides = 3;}
+if (safeSides > 100) {sides = 100;}
+ctx.beginPath();
+ctx.moveTo(x, y - radius);
+for (i = 1; i <= sides; i++) {
+ctx.lineTo(x + radius * Math.cos(i * 2 * Math.PI / sides + 1.5 * Math.PI),
+y + radius * Math.sin(i * 2 * Math.PI / sides + 1.5 * Math.PI));
+}
+endPath();
+}
+function drawStar(cx, cy, outerRadius) {
+rot = Math.PI * 1.5;
+x = cx;
+y = cy;
+step = Math.PI / 5;
+ctx.beginPath();
+ctx.moveTo(cx, cy - outerRadius);
+for (i = 0; i < 5; i++) {
+x = cx + Math.cos(rot) * outerRadius;
+y = cy + Math.sin(rot) * outerRadius;
+ctx.lineTo(x, y);
+rot += step;
+x = cx + Math.cos(rot) * outerRadius / 2;
+y = cy + Math.sin(rot) * outerRadius / 2;
+ctx.lineTo(x, y);
+rot += step;
+}
+ctx.lineTo(cx, cy - outerRadius);
+endPath();
+}
 function endPath() {
 ctx.closePath();
 ctx.fill();
 ctx.stroke();
+}
+function getMousePos() {
+let mouseX = event.pageX;
+let mouseY = event.pageY;
+coords.innerHTML = "Mouse X: " + (Number(mouseX) - 18) + "<br>Mouse Y: " + (Number(mouseY) - 8);
 }
 setInterval(function() {
 ctx.clearRect(0, 0, c.width, c.height);
@@ -77,6 +123,13 @@ ctx.strokeStyle = "rgb(" + type[1] + " " + type[2] + " " + type[3] + " / " + typ
 if (type[0] === "Width") {
 ctx.lineWidth = type[1];
 }
+if (type[0] === "Arc") {
+ctx.beginPath();
+ctx.moveTo(type[1], type[2]);
+ctx.arc(type[1], type[2], type[3], (type[4] / 180 - 0.5) * Math.PI, type[5] * 2 * Math.PI + (type[4] / 180 - 0.5) * Math.PI);
+ctx.lineTo(type[1], type[2]);
+endPath();
+}
 if (type[0] === "Ellipse") {
 ctx.beginPath();
 ctx.ellipse(type[1], type[2], type[3], type[4], 0, 0, Math.PI * 2);
@@ -88,9 +141,23 @@ ctx.moveTo(type[1], type[2]);
 ctx.lineTo(type[3], type[4]);
 endPath();
 }
+if (type[0] === "Polygon") {
+drawPolygon(Number(type[1]), Number(type[2]), Number(type[3]), Number(type[4]));
+}
+if (type[0] === "Quadrilateral") {
+ctx.beginPath();
+ctx.moveTo(type[1], type[2]);
+ctx.lineTo(type[3], type[4]);
+ctx.lineTo(type[5], type[6]);
+ctx.lineTo(type[7], type[8]);
+endPath();
+}
 if (type[0] === "Rectangle") {
 ctx.fillRect(type[1], type[2], type[3], type[4]);
 ctx.strokeRect(type[1], type[2], type[3], type[4]);
+}
+if (type[0] === "Star") {
+drawStar(Number(type[1]), Number(type[2]), Number(type[3]));
 }
 if (type[0] === "Text") {
 ctx.fillText(type[1].replaceAll("\ufffe", "\\").replaceAll("\uffff", "|"), type[2], type[3]);
