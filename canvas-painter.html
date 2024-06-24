@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Canvas Painter</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh; overflow: hidden;}
+p {color: #fff; font-family: verdana; position: relative; left: 650px; bottom: 740px;}
+textarea {width: 636px; height: 360px; resize: none; border: none;}
+</style>
+</head>
+<body>
+<canvas id=canvas width=640 height=360></canvas><br><textarea id=code>Background|255|255|255</textarea>
+<p>
+Reference:
+<br><br>
+Background|red|green|blue
+<br>
+Fill|red|green|blue|alpha
+<br>
+Font|size|family
+<br>
+Stroke|red|green|blue|alpha
+<br>
+Width|width
+<br><br>
+Ellipse|x|y|radiusX|radiusY
+<br>
+Line|x1|y1|x2|y2
+<br>
+Rectangle|x|y|width|height
+<br>
+Text|text|x|y
+<br>
+Triangle|x1|y1|x2|y2|x3|y3
+<br><br>
+To escape pipes in text, type "\|".
+<br>
+To escape backslashes in text, type "\\".
+<br>
+New functions for drawing coming soon.
+</p>
+<script>
+let c = canvas;
+let ctx = canvas.getContext("2d");
+function endPath() {
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+}
+setInterval(function() {
+ctx.clearRect(0, 0, c.width, c.height);
+escaped = code.value.replaceAll("\\\\", "\ufffe").replaceAll("\\|", "\uffff");
+line = escaped.split("\n");
+for (i = 0; i < line.length; i++) {
+type = line[i].split("|");
+if (type[0] === "Background") {
+ctx.fillStyle = "rgb(" + type[1] + ", " + type[2] + ", " + type[3] + ")";
+ctx.fillRect(0, 0, c.width, c.height);
+}
+if (type[0] === "Fill") {
+ctx.fillStyle = "rgb(" + type[1] + " " + type[2] + " " + type[3] + " / " + type[4] + "%)";
+}
+if (type[0] === "Font") {
+ctx.font = type[1] + "px " + type[2];
+if (type[3] === "true") {
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+} else {
+ctx.textAlign = "start";
+ctx.textBaseline = "alphabetic";
+}
+}
+if (type[0] === "Stroke") {
+ctx.strokeStyle = "rgb(" + type[1] + " " + type[2] + " " + type[3] + " / " + type[4] + "%)";
+}
+if (type[0] === "Width") {
+ctx.lineWidth = type[1];
+}
+if (type[0] === "Ellipse") {
+ctx.beginPath();
+ctx.ellipse(type[1], type[2], type[3], type[4], 0, 0, Math.PI * 2);
+endPath();
+}
+if (type[0] === "Line") {
+ctx.beginPath();
+ctx.moveTo(type[1], type[2]);
+ctx.lineTo(type[3], type[4]);
+endPath();
+}
+if (type[0] === "Rectangle") {
+ctx.fillRect(type[1], type[2], type[3], type[4]);
+ctx.strokeRect(type[1], type[2], type[3], type[4]);
+}
+if (type[0] === "Text") {
+ctx.fillText(type[1].replaceAll("\ufffe", "\\").replaceAll("\uffff", "|"), type[2], type[3]);
+ctx.strokeText(type[1].replaceAll("\ufffe", "\\").replaceAll("\uffff", "|"), type[2], type[3]);
+}
+if (type[0] === "Triangle") {
+ctx.beginPath();
+ctx.moveTo(type[1], type[2]);
+ctx.lineTo(type[3], type[4]);
+ctx.lineTo(type[5], type[6]);
+endPath();
+}
+}
+});
+</script>
+</body>
+</html>
