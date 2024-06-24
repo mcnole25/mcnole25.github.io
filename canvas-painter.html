@@ -72,6 +72,12 @@ coords.innerHTML = "Mouse X: " + (Number(mouseX) - 18) + "<br>Mouse Y: " + (Numb
 }
 setInterval(function() {
 ctx.clearRect(0, 0, c.width, c.height);
+ctx.fillStyle = "#fff";
+ctx.strokeStyle = "#000";
+ctx.lineWidth = 1;
+ctx.font = "16px Arial";
+ctx.textAlign = "start";
+ctx.textBaseline = "alphabetic";
 escaped = code.value.replaceAll("\\\\", "\ufffe").replaceAll("\\|", "\uffff");
 line = escaped.split("\n");
 for (i = 0; i < line.length; i++) {
