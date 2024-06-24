@@ -28,11 +28,17 @@ Arc|x|y|radius|degrees|value
 <br>
 Ellipse|x|y|radiusX|radiusY
 <br>
+Hexagon|x|y|radius
+<br>
 Line|x1|y1|x2|y2
+<br>
+Octagon|x|y|radius
 <br>
 Quadrilateral|x1|y1|x2|y2|x3|y3|x4|y4
 <br>
 Rectangle|x|y|width|height
+<br>
+Star|x|y|radius
 <br>
 Text|text|x|y
 <br>
@@ -41,13 +47,19 @@ Triangle|x1|y1|x2|y2|x3|y3
 To escape pipes in text, type "\|".
 <br>
 To escape backslashes in text, type "\\".
-<br>
-New functions for drawing coming soon.
 </p>
 <p id=coords></p>
 <script>
 let c = canvas;
-let ctx = canvas.getContext("2d");
+let ctx = c.getContext("2d");
+function drawPolygon(x2, y2, size, sides, tilt) {
+ctx.beginPath();
+ctx.moveTo(x2 + Math.cos(tilt) * size, y2 + Math.sin(tilt) * size);
+for (z2 = 1; z2 <= sides; z2 += 1) {
+  ctx.lineTo (x2 + size * Math.cos(z2 * 2 * Math.PI / sides + tilt), y2 + size * Math.sin(z2 * 2 * Math.PI / sides + tilt));
+}
+endPath();
+}
 function endPath() {
 ctx.closePath();
 ctx.fill();
@@ -99,11 +111,17 @@ ctx.beginPath();
 ctx.ellipse(type[1], type[2], type[3], type[4], 0, 0, Math.PI * 2);
 endPath();
 }
+if (type[0] === "Hexagon") {
+drawPolygon(Number(type[1]), Number(type[2]), Number(type[3]), 6, 0);
+}
 if (type[0] === "Line") {
 ctx.beginPath();
 ctx.moveTo(type[1], type[2]);
 ctx.lineTo(type[3], type[4]);
 endPath();
+}
+if (type[0] === "Octagon") {
+drawPolygon(Number(type[1]), Number(type[2]), Number(type[3]), 8, -0.125 * Math.PI);
 }
 if (type[0] === "Quadrilateral") {
 ctx.beginPath();
@@ -116,6 +134,20 @@ endPath();
 if (type[0] === "Rectangle") {
 ctx.fillRect(type[1], type[2], type[3], type[4]);
 ctx.strokeRect(type[1], type[2], type[3], type[4]);
+}
+if (type[0] === "Star") {
+ctx.beginPath();
+for (z1 = 0; z1 < 10; z1++) {
+angle = z1 / 5 * Math.PI + 0.5 * Math.PI;
+dist = Number(type[3]) * (z1 % 2) + Number(type[3]);
+x1 = Number(type[1]) + Math.cos(angle) * dist;
+y1 = Number(type[2]) + Math.sin(angle) * dist;
+if (z1 === 0) {
+ctx.moveTo(x1, y1);
+}
+ctx.lineTo(x1, y1);
+}
+endPath();
 }
 if (type[0] === "Text") {
 ctx.fillText(type[1].replaceAll("\ufffe", "\\").replaceAll("\uffff", "|"), type[2], type[3]);
