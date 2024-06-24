@@ -30,13 +30,9 @@ Ellipse|x|y|radiusX|radiusY
 <br>
 Line|x1|y1|x2|y2
 <br>
-Polygon|x|y|sides|radius
-<br>
 Quadrilateral|x1|y1|x2|y2|x3|y3|x4|y4
 <br>
 Rectangle|x|y|width|height
-<br>
-Star|x|y|radius
 <br>
 Text|text|x|y
 <br>
@@ -52,35 +48,6 @@ New functions for drawing coming soon.
 <script>
 let c = canvas;
 let ctx = canvas.getContext("2d");
-function drawPolygon(x, y, safeSides, radius) {
-sides = safeSides;
-if (safeSides < 3) {sides = 3;}
-if (safeSides > 100) {sides = 100;}
-ctx.beginPath();
-ctx.moveTo(x, y - radius);
-for (i = 1; i <= sides; i++) {
-ctx.lineTo(x + radius * Math.cos(i * 2 * Math.PI / sides + 1.5 * Math.PI),
-y + radius * Math.sin(i * 2 * Math.PI / sides + 1.5 * Math.PI));
-}
-endPath();
-}
-function drawStar(cx, cy, outerRadius) {
-rot = Math.PI * 1.5;
-x = cx;
-y = cy;
-step = Math.PI / 5;
-ctx.beginPath();
-ctx.moveTo(cx, cy - outerRadius);
-for (i = 0; i < 5; i++) {
-x = cx + Math.cos(rot) * outerRadius;
-y = cy + Math.sin(rot) * outerRadius;
-ctx.lineTo(x, y);
-rot += step;
-x = cx + Math.cos(rot) * outerRadius / 2;
-y = cy + Math.sin(rot) * outerRadius / 2;
-ctx.lineTo(x, y);
-rot += step;
-}
 ctx.lineTo(cx, cy - outerRadius);
 endPath();
 }
@@ -141,9 +108,6 @@ ctx.moveTo(type[1], type[2]);
 ctx.lineTo(type[3], type[4]);
 endPath();
 }
-if (type[0] === "Polygon") {
-drawPolygon(Number(type[1]), Number(type[2]), Number(type[3]), Number(type[4]));
-}
 if (type[0] === "Quadrilateral") {
 ctx.beginPath();
 ctx.moveTo(type[1], type[2]);
@@ -155,9 +119,6 @@ endPath();
 if (type[0] === "Rectangle") {
 ctx.fillRect(type[1], type[2], type[3], type[4]);
 ctx.strokeRect(type[1], type[2], type[3], type[4]);
-}
-if (type[0] === "Star") {
-drawStar(Number(type[1]), Number(type[2]), Number(type[3]));
 }
 if (type[0] === "Text") {
 ctx.fillText(type[1].replaceAll("\ufffe", "\\").replaceAll("\uffff", "|"), type[2], type[3]);
