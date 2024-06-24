@@ -56,7 +56,7 @@ function drawPolygon(x2, y2, size, sides, tilt) {
 ctx.beginPath();
 ctx.moveTo(x2 + Math.cos(tilt) * size, y2 + Math.sin(tilt) * size);
 for (z2 = 1; z2 <= sides; z2 += 1) {
-  ctx.lineTo (x2 + size * Math.cos(z2 * 2 * Math.PI / sides + tilt), y2 + size * Math.sin(z2 * 2 * Math.PI / sides + tilt));
+ctx.lineTo (x2 + size * Math.cos(z2 * 2 * Math.PI / sides + tilt), y2 + size * Math.sin(z2 * 2 * Math.PI / sides + tilt));
 }
 endPath();
 }
