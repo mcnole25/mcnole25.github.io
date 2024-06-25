@@ -32,7 +32,7 @@
         asinh(x), acosh(x), atanh(x), acsch(x), asech(x), acoth(x)<br>
         </p>
         <script>
-            math.config({number: "BigNumber", precision: 500});
+            math.config({number: "BigNumber", precision: 200});
             setInterval(function() {
             result.innerHTML = "<b> = " + math.format(math.evaluate(equation.value), {lowerExp: -10, upperExp: 20, precision: 50}) + "</b>";
             });
