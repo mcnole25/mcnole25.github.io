@@ -13,7 +13,7 @@
   <body>
         <h1>Infinite Floors</h1>
         <p>Update: This building truly has infinite floors. Uses the built-in BigInt library.</p>
-        <span>Floor </span><input id="floor" value=0 maxlength=500>
+        <span>Floor </span><input id="floor" value=0 maxlength=1000>
          <canvas id="myCanvas" width="512" height="512"></canvas>
          <script>
              let c = document.getElementById("myCanvas");
@@ -32,7 +32,6 @@
                  ctx.fillStyle = "#fff";
                  ctx.font = "20px Trebuchet MS";
                  ctx.textAlign = "center";
-                 ctx.textBaseline = "middle";
                  ctx.fillText("Floor", 256, i * 128 + 32);
                  if (String(currentFloor).length > 16) {
                  ctx.font = "20px Trebuchet MS";
