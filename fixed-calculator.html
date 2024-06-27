@@ -12,7 +12,7 @@
         td {width: 200px;}
         .func {border: 1px solid #fff; width: 100px; text-align: center}
     </style>
-    <script src="https://unpkg.com/mathjs@12.4.2/lib/browser/math.js"></script>
+    <script src="https://unpkg.com/mathjs@13.0.0/lib/browser/math.js"></script>
   </head>
   <body>
         <h1>Fixed Calculator 2.0</h1>
@@ -32,9 +32,9 @@
         asinh(x), acosh(x), atanh(x), acsch(x), asech(x), acoth(x)<br>
         </p>
         <script>
-            math.config({number: "BigNumber", precision: 200});
+            math.config({number: "BigNumber", precision: 100});
             setInterval(function() {
-            result.innerHTML = "<b> = " + math.format(math.evaluate(equation.value), {lowerExp: -10, upperExp: 20, precision: 50}) + "</b>";
+            result.innerHTML = "<b> = " + math.format(math.evaluate(equation.value), {lowerExp: -10, upperExp: 25, precision: 50}) + "</b>";
             });
         </script>
   </body>
