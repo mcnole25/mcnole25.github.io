@@ -15,7 +15,7 @@ span {width: 105px; line-height: 20px; display: inline-block; font-size: 50%; fo
 <script>
 function text(txt) {
 let span = document.createElement("span");
-span.innerText = Number(txt).toFixed(50).replace(/^0+(?!\.)|(?:\.|(\..*?))0+$/gm, "$1$2");
+span.innerText = String(Number(txt).toFixed(50).replace(/^0+(?!\.)|(?:\.|(\..*?))0+$/gm, "$1")) + "\n";
 document.body.appendChild(span);
 }
 let sign = 1;
