@@ -6,74 +6,163 @@
     <style>
         body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
         a, h1, p, span {color: #fff; font-family: verdana;}
-        input {width: 1355px; font-size: 120%; font-family: consolas;}
         canvas {display: block; margin: 8px 0px;}
     </style>
   </head>
-  <body>
-        <h1>Level Maker</h1>
-        <p>Create a platformer level from text.<br>_ empty, # tile, \ l slope, / r slope, ^ spike, v ceil spike</p>
-        <input id="level" value="______________________####____________vvvv______________________________________###\__^^^^__/###################################" maxlength="128">
-         <canvas id="myCanvas" width="768" height="384"></canvas>
-         <script>
-             let c = document.getElementById("myCanvas");
-             let ctx = c.getContext("2d");
-             setInterval(function() {
-                 ctx.clearRect(0, 0, c.width, c.height);
-                 ctx.fillStyle = "#8ff";
-                 ctx.fillRect(0, 0, 768, 384);
-                 for (i = 0; i < 128; i++) {
-                if (level.value.charAt(i) === "#") {
-                ctx.fillStyle = "#4b0";
-                ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48, 48, 48);
-                } else {
-                if (level.value.charAt(i) === "\\") {
-                ctx.fillStyle = "#4b0";
-                ctx.beginPath();
-                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48);
-                ctx.fill();
-                } else {
-                if (level.value.charAt(i) === "/") {
-                ctx.fillStyle = "#4b0";
-                ctx.beginPath();
-                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768 + 48, Math.floor(i / 16) * 48);
-                ctx.fill();
-                } else {
-                if (level.value.charAt(i) === "^") {
-                ctx.fillStyle = "#888";
-                ctx.beginPath();
-                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48 + 48);
-                ctx.lineTo(i * 48 % 768 + 24, Math.floor(i / 16) * 48);
-                ctx.fill();
-                } else {
-                if (level.value.charAt(i) === "v") {
-                ctx.fillStyle = "#888";
-                ctx.beginPath();
-                ctx.lineTo(i * 48 % 768 + 48,Math.floor(i / 16) * 48);
-                ctx.lineTo(i * 48 % 768, Math.floor(i / 16) * 48);
-                ctx.lineTo(i * 48 % 768 + 24, Math.floor(i / 16) * 48 + 48);
-                ctx.fill();
-                } else {
-                if (level.value.charAt(i) !== "_") {
-                 ctx.fillStyle = "#f0f"
-                 ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48, 24, 24);
-                 ctx.fillRect(i * 48 % 768 + 24, Math.floor(i / 16) * 48 + 24, 24, 24);
-                 ctx.fillStyle = "#000"
-                 ctx.fillRect(i * 48 % 768 + 24, Math.floor(i / 16) * 48, 24, 24);
-                 ctx.fillRect(i * 48 % 768, Math.floor(i / 16) * 48 + 24, 24, 24);
-                 }
-                 }
-                 }
-                 }
-                 }
-                 }
-                 }
-             });
-         </script>
-  </body>
+<body>
+<h1>Level Maker</h1>
+<p>Create a platformer level from text.</p>
+<button onclick="loadExample()">Example Level</button>
+<button onclick="loadDefault()">Reset to Default</button>
+<p>
+_ Empty Tile # Grass Tile @ Box Tile * Light Tile
+<br>
+^ Floor Spike v Ceiling Spike > Right Spike < Left Spike
+<br>
+~ Bounce Pad ! Coin ( Left Conveyor ) Right Conveyor
+<br>
+- Horizontal Lift | Vertical Lift w Water x Exit Door
+</p>
+<textarea id="level" value="#" style="font-family: consolas; width: 290px; height: 340px; resize: none; word-break: break-all"></textarea>
+<canvas id="myCanvas" width=1024 height=512></canvas>
+<script>
+function loadDefault() {
+level.value = "_".repeat(448) + "#".repeat(64);
+}
+loadDefault();
+function loadExample() {
+level.value = "_".repeat(256) + "__________________________________@__*___!_______________________###_|___-____________________x_#######^^^^^##_#)))#__####(((#################_####v__v###################_____####>__<###################wwwww####_~~_#########################################";
+}
+let c = document.getElementById("myCanvas");
+let ctx = c.getContext("2d");
+const w = 32;
+setInterval(function() {
+ctx.clearRect(0, 0, c.width, c.height);
+ctx.fillStyle = "#000";
+ctx.fillRect(0, 0, c.width, c.height);
+for (i = 0; i < 512; i++) {
+let tile = String(level.value).charAt(i);
+function skyBlue() {
+ctx.fillStyle = "#9ff";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+}
+if (tile === "_") {
+skyBlue();
+}
+if (tile === "#") {
+ctx.fillStyle = "#3c0";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+}
+if (tile === "@") {
+ctx.fillStyle = "#963";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#c96";
+ctx.fillRect((i * 32) % Number(c.width) + 4, Math.floor(i / w) * 32 + 4, 24, 24);
+}
+if (tile === "*") {
+ctx.fillStyle = "#c90";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#fc0";
+ctx.fillRect((i * 32) % Number(c.width) + 4, Math.floor(i / w) * 32 + 4, 24, 24);
+ctx.fillStyle = "#c90";
+ctx.fillRect((i * 32) % Number(c.width) + 4, Math.floor(i / w) * 32 + 14, 24, 4);
+ctx.fillRect((i * 32) % Number(c.width) + 14, Math.floor(i / w) * 32 + 4, 4, 24);
+}
+if (tile === "^") {
+skyBlue();
+ctx.fillStyle = "#333";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 32);
+ctx.lineTo((i * 32) % Number(c.width) + 16, Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32 + 32);
+ctx.fill();
+}
+if (tile === "v") {
+skyBlue();
+ctx.fillStyle = "#333";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width) + 16, Math.floor(i / w) * 32 + 32);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32);
+ctx.fill();
+}
+if (tile === ">") {
+skyBlue();
+ctx.fillStyle = "#333";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32 + 16);
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 32);
+ctx.fill();
+}
+if (tile === "<") {
+skyBlue();
+ctx.fillStyle = "#333";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 16);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32 + 32);
+ctx.fill();
+}
+if (tile === "~") {
+ctx.fillStyle = "#666";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#f0f";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 8);
+}
+if (tile === "!") {
+skyBlue();
+ctx.fillStyle = "#fc0";
+ctx.beginPath();
+ctx.arc((i * 32) % Number(c.width) + 16, Math.floor(i / w) * 32 + 16, 12, 0, 2 * Math.PI);
+ctx.fill();
+}
+if (tile === "(") {
+ctx.fillStyle = "#666";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#333";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 16);
+ctx.fillStyle = "#000";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 8);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32 + 16);
+ctx.fill();
+}
+if (tile === ")") {
+ctx.fillStyle = "#666";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#333";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 16);
+ctx.fillStyle = "#000";
+ctx.beginPath();
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32);
+ctx.lineTo((i * 32) % Number(c.width) + 32, Math.floor(i / w) * 32 + 8);
+ctx.lineTo((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 16);
+ctx.fill();
+}
+if (tile === "-") {
+skyBlue();
+ctx.fillStyle = "#ccc";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32 + 12, 32, 8);
+}
+if (tile === "|") {
+skyBlue();
+ctx.fillStyle = "#ccc";
+ctx.fillRect((i * 32) % Number(c.width) + 12, Math.floor(i / w) * 32, 8, 32);
+}
+if (tile === "w") {
+ctx.fillStyle = "#06f";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+}
+if (tile === "x") {
+ctx.fillStyle = "#666";
+ctx.fillRect((i * 32) % Number(c.width), Math.floor(i / w) * 32, 32, 32);
+ctx.fillStyle = "#0c0";
+ctx.fillRect((i * 32) % Number(c.width) + 8, Math.floor(i / w) * 32 + 8, 16, 16);
+}
+}
+});
+</script>
+</body>
 </html>
