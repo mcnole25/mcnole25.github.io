@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Polynomial Explorer</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+a, div, h1, p, span {color: #fff; font-family: verdana;}
+span {display: inline-block; width: 100px;}
+input {position: relative; top: 5px; width: 500px;}
+#result {font-size: 200%; display: block; margin: 10px 0px;}
+</style>
+<script src="https://unpkg.com/mathjs@13.0.0/lib/browser/math.js"></script>
+</head>
+<body>
+<h1>Polynomial Explorer</h1>
+<p>Everyone makes polynomial calculators. But no one makes polynomial explorers. This tool fixes that. Adjust the sliders to see various equations. Powered by math.js.</p>
+<span>a²</span><input type="range" id="aSquared" min=-1 value=0.063 max=1 step=0.001><br>
+<span>a*b</span><input type="range" id="aTimesb" min=-1 value=0.125 max=1 step=0.001><br>
+<span>b²</span><input type="range" id="bSquared" min=-1 value=0.063 max=1 step=0.001><br>
+<span>a</span><input type="range" id="aVariable" min=-1 value=0 max=1 step=0.001><br>
+<span>b</span><input type="range" id="bVariable" min=-1 value=0 max=1 step=0.001><br>
+<span>Constant</span><input type="range" id="constant" min=-1 value=0 max=1 step=0.001><br>
+<div id="result"></div>
+<script>
+function fix(value) {
+if (math.abs(value) == 1) {
+return math.evaluate(Number(value) + "/ 0")
+} else {
+return math.evaluate("round(tan(" + Number(value) + " * pi / 2) * 100) / 10");
+}
+}
+setInterval(function() {
+result.innerHTML = math.simplify("(" + fix(aSquared.value) + ")*a^2+(" + fix(aTimesb.value) + ")*a*b+(" + fix(bSquared.value) + ")*b^2+(" + fix(aVariable.value) + ")*a+(" + fix(bVariable.value) + ")*b+(" + fix(constant.value) + ")", {}, {exactFractions: false});
+result.innerHTML = result.innerHTML.replaceAll("Infinity", "∞");
+result.innerHTML = result.innerHTML.replaceAll(" ^ 2", "²");
+result.innerHTML = result.innerHTML.replaceAll(" * ", "");
+result.innerHTML = "<b>" + result.innerHTML + "</b>"
+});
+</script>
+</body>
+</html>
