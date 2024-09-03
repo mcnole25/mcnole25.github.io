@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Precise Exponent Calculator</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+a, div, h1, p, span, th, td {color: #fff; font-family: verdana;}
+input {width: 100px;}
+#number {display: block; margin: 10px 0px; word-wrap: break-word}
+</style>
+<script src="https://raw.githack.com/MikeMcl/decimal.js/master/decimal.js"></script>
+</head>
+<body>
+<h1>Precise Exponent Calculator</h1>
+<span>Type any integer or terminating decimal for the base and exponent, then press Calculate. Powered by decimal.js.</span><br>
+<input id="base" value=2>
+<span>Raised to the power of</span>
+<input id="exponent" value=100>
+<br>
+<span>Digits of precision:</span><input id="precision" value=1000>
+<button onclick="calculate()">Calculate</button>
+<div id=number></div>
+<script>
+Decimal.toExpNeg = -9e15;
+Decimal.toExpPos = 9e15;
+function calculate() {
+Decimal.precision = precision.value;
+x = new Decimal(base.value);
+x = x.pow(exponent.value);
+number.innerHTML = x;
+}
+</script>
+</body>
+</html>
