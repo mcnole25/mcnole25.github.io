@@ -21,6 +21,9 @@ powerOf.innerHTML = "2<sup>" + Number(exponent.value) * 16 + "</sup> (" + Math.f
 });
 function calculate() {
 let x = Number(exponent.value);
+if (x !== Math.round(x) || x <= 0) {
+result.innerHTML = "Error";
+} else {
 let power2 = [2 ** 16];
 for (i = 0; i < x - 1; i++) {
 for (j = 0; j < power2.length; j++) {
@@ -36,6 +39,7 @@ for (j = 0; j < power2.length; j++) {
 power2[j] = "0".repeat(5 - String(power2[j]).length) + String(power2[j]);
 }
 result.innerHTML = power2.toString().replaceAll(",", "").replace(/^0+/, "");
+}
 }
 </script>
 </body>
