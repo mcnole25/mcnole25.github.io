@@ -25,7 +25,6 @@ exponent.value = exponent.value.replaceAll(".", "")
 if (Number(exponent.value) < -100) {exponent.value = -100;}
 if (Number(exponent.value) > 100000) {exponent.value = 100000;}
 if (Number(exponent.value) <= 1000) {
-
 let x = Number(exponent.value);
 if (x < 0) {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + -x + " decimal place/s)";
