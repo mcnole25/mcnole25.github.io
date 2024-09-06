@@ -12,35 +12,16 @@ textarea {resize: none; width: 1200px; height: 600px;}
 </head>
 <body>
 <h1>Fast Powers of 2 Calculator</h1>
-<p>Calculate large powers of 2 within seconds. Does not use BigInt, and only supports whole number exponents.</p>
-<span>x = </span><input type="number" id="exponent" value=4>
+<p>Calculate large powers of 2 within seconds. Uses BigInt, and only supports whole number exponents.</p>
+<span>x = </span><input type="number" id="exponent" value=64>
 <span id="powerOf"></span><button onclick="calculate()">Calculate</button><br>
 <textarea id="result"></textarea>
 <script>
 setInterval(function() {
-powerOf.innerHTML = "2<sup>" + Number(exponent.value) * 16 + "</sup> (" + Math.floor(Number(exponent.value) * 16 * Math.log10(2) + 1) + " digits) ";
+powerOf.innerHTML = "2<sup>" + Number(exponent.value) + "</sup> (" + Math.floor(Number(exponent.value) * Math.log10(2) + 1) + " digits) ";
 });
 function calculate() {
-let x = Number(exponent.value);
-if (x !== Math.round(x) || x <= 0) {
-result.innerHTML = "Error";
-} else {
-let power2 = [2 ** 16];
-for (i = 0; i < x - 1; i++) {
-for (j = 0; j < power2.length; j++) {
-power2[j] = Number(power2[j]) * 2 ** 16;
-}
-power2.unshift(0);
-for (j = power2.length - 1; j >= 0; j--) {
-power2[j - 1] = Number(power2[j - 1]) + Math.floor(Number(power2[j]) / 100000);
-power2[j] = Number(power2[j]) % 100000;
-}
-}
-for (j = 0; j < power2.length; j++) {
-power2[j] = "0".repeat(5 - String(power2[j]).length) + String(power2[j]);
-}
-result.innerHTML = power2.toString().replaceAll(",", "").replace(/^0+/, "");
-}
+result.innerHTML = BigInt(2) ** BigInt(Number(exponent.value));
 }
 </script>
 </body>
