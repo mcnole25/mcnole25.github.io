@@ -18,14 +18,16 @@ textarea {resize: none; width: 1200px; height: 600px; font-size: 150%;}
 <textarea id="result"></textarea>
 <script>
 setInterval(function() {
+exponent.value = exponent.value.replaceAll(".", "")
+if (Number(exponent.value) < -100) {exponent.value = -100;}
+if (Number(exponent.value) > 332) {exponent.value = 332;}
 let x = Number(exponent.value);
 if (x < 0) {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + -x + " decimal place/s)";
-let y = String(5n ** BigInt(-x));
-result.innerHTML = "0." + "0".repeat(-x - y.length) + y;
+result.innerHTML = (2 ** x).toFixed(100).replace(/(\.0+|0+)$/, "");
 } else {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + Math.floor(Math.log10(2) * x + 1) + " digit/s)";
-result.innerHTML = 2n ** BigInt(x);
+result.innerHTML = (2 ** x).toPrecision(100).replace(/(\.0+|0+)$/, "");
 }});
 </script>
 </body>
