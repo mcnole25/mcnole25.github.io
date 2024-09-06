@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Fast Powers of 2 Calculator</title>
+<title>Powers of 2 Calculator</title>
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <style>
 body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
 a, div, h1, p, span {color: #fff; font-family: verdana;}
 input {width: 100px;}
-textarea {resize: none; width: 1200px; height: 600px;}
+textarea {resize: none; width: 1200px; height: 600px; font-size: 150%;}
 </style>
 </head>
 <body>
-<h1>Fast Powers of 2 Calculator</h1>
-<p>Calculate large powers of 2 within seconds. Uses BigInt, and only supports whole number exponents.</p>
-<span>x = </span><input type="number" id="exponent" value=64>
-<span id="powerOf"></span><button onclick="calculate()">Calculate</button><br>
+<h1>Powers of 2 Calculator</h1>
+<p>Calculate powers of 2 within seconds. Uses BigInt, and supports negative exponents.</p>
+<span>x = </span><input type="number" id="exponent" value=0>
+<span id="powerOf"></span>
 <textarea id="result"></textarea>
 <script>
 setInterval(function() {
 let x = Number(exponent.value);
-if (x < 0 || x > 1000000 || x !== Math.round(x)) {
-powerOf.innerHTML = "Error "
+if (x < 0) {
+powerOf.innerHTML = "2<sup>" + x + "</sup> (" + -x + " decimal place/s)";
+let y = String(5n ** BigInt(-x));
+result.innerHTML = "0." + "0".repeat(-x - y.length) + y;
 } else {
-powerOf.innerHTML = "2<sup>" + Number(exponent.value) + "</sup> (" + Math.floor(Number(exponent.value) * Math.log10(2) + 1) + " digits) ";
-}
-});
-function calculate() {
-let x = Number(exponent.value);
-if (!(x < 0 || x > 1000000 || x !== Math.round(x))) {
-result.innerHTML = BigInt(2) ** BigInt(x);
-}}
+powerOf.innerHTML = "2<sup>" + x + "</sup> (" + Math.floor(Math.log10(2) * x + 1) + " digit/s)";
+result.innerHTML = 2n ** BigInt(x);
+}});
 </script>
 </body>
 </html>
