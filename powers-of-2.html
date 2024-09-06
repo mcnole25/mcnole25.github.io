@@ -7,14 +7,15 @@
 body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
 a, div, h1, p, span {color: #fff; font-family: verdana;}
 input {width: 100px;}
+textarea {resize: none; width: 1200px; height: 600px;}
 </style>
 </head>
 <body>
 <h1>Fast Powers of 2 Calculator</h1>
 <p>Calculate large powers of 2 within seconds. Does not use BigInt, and only supports whole number exponents.</p>
 <span>x = </span><input type="number" id="exponent" value=4>
-<span id="powerOf"></span><button onclick="calculate()">Calculate</button>
-<textarea id="result" style="resize:none;width:1000px;height:500px"></textarea>
+<span id="powerOf"></span><button onclick="calculate()">Calculate</button><br>
+<textarea id="result"></textarea>
 <script>
 setInterval(function() {
 powerOf.innerHTML = "2<sup>" + Number(exponent.value) * 16 + "</sup> (" + Math.floor(Number(exponent.value) * 16 * Math.log10(2) + 1) + " digits) ";
