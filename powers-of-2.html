@@ -12,9 +12,9 @@ textarea {resize: none; width: 1200px; height: 600px; font-size: 150%;}
 </head>
 <body>
 <h1>Powers of 2 Calculator</h1>
-<p>Calculate powers of 2 within seconds. Uses BigInt, and supports negative exponents.</p>
+<p>Calculate powers of 2 within seconds. Uses BigInt, and supports negative exponents. Result updates every second to avoid lag.</p>
 <span>x = </span><input type="number" id="exponent" value=0>
-<span id="powerOf"></span>
+<span id="powerOf"></span><br>
 <textarea id="result"></textarea>
 <script>
 setInterval(function() {
@@ -26,7 +26,7 @@ result.innerHTML = "0." + "0".repeat(-x - y.length) + y;
 } else {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + Math.floor(Math.log10(2) * x + 1) + " digit/s)";
 result.innerHTML = 2n ** BigInt(x);
-}});
+}}, 1000);
 </script>
 </body>
 </html>
