@@ -18,11 +18,18 @@ textarea {resize: none; width: 1200px; height: 600px;}
 <textarea id="result"></textarea>
 <script>
 setInterval(function() {
+let x = Number(exponent.value);
+if (x < 0 || x > 1000000 || x !== Math.round(x)) {
+powerOf.innerHTML = "Error "
+} else {
 powerOf.innerHTML = "2<sup>" + Number(exponent.value) + "</sup> (" + Math.floor(Number(exponent.value) * Math.log10(2) + 1) + " digits) ";
+}
 });
 function calculate() {
-result.innerHTML = BigInt(2) ** BigInt(Number(exponent.value));
-}
+let x = Number(exponent.value);
+if (!(x < 0 || x > 1000000 || x !== Math.round(x))) {
+result.innerHTML = BigInt(2) ** BigInt(x);
+}}
 </script>
 </body>
 </html>
