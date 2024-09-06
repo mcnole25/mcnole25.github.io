@@ -27,11 +27,8 @@ powerOf.innerHTML = "2<sup>" + x + "</sup> (" + -x + " decimal place/s)";
 result.innerHTML = (2 ** x).toFixed(100).replace(/(\.0+|0+)$/, "");
 } else {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + Math.floor(Math.log10(2) * x + 1) + " digit/s)";
-if (x > 300) {
-result.innerHTML = BigInt(2 ** 300) * 2n ** BigInt(x - 300);
-} else {
 result.innerHTML = (2 ** x).toPrecision(100).replace(/(\.0+|0+)$/, "");
-}}});
+}});
 </script>
 </body>
 </html>
