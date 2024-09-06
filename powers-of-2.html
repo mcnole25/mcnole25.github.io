@@ -12,7 +12,7 @@ textarea {resize: none; width: 1200px; height: 600px; font-size: 150%;}
 </head>
 <body>
 <h1>Powers of 2 Calculator</h1>
-<p>Calculate powers of 2 within seconds. Supports negative exponents, uses floating point numbers and BigInt.</p>
+<p>Calculate powers of 2 within seconds. Supports negative exponents, uses floating point numbers, and BigInt.</p>
 <span>x = </span><input type="number" id="exponent" value=0>
 <span id="powerOf"></span><br>
 <textarea id="result"></textarea>
@@ -20,7 +20,7 @@ textarea {resize: none; width: 1200px; height: 600px; font-size: 150%;}
 setInterval(function() {
 exponent.value = exponent.value.replaceAll(".", "")
 if (Number(exponent.value) < -100) {exponent.value = -100;}
-if (Number(exponent.value) > 1024) {exponent.value = 1024;}
+if (Number(exponent.value) > 1500) {exponent.value = 1500;}
 let x = Number(exponent.value);
 if (x < 0) {
 powerOf.innerHTML = "2<sup>" + x + "</sup> (" + -x + " decimal place/s)";
