@@ -11,16 +11,17 @@ input, textarea {background-color: #444; color: #fff;}
 #equation, #answer {display: block; margin: 4px 0px; font-size: 150%; width: 98%;}
 #answer {height: 500px; resize: none;}
 </style>
-<script src="https://unpkg.com/mathjs@13.1.1/lib/browser/math.js"></script>
+<script src="https://unpkg.com/mathjs@13.2.0/lib/browser/math.js"></script>
 </head>
 <body>
 <h1>Fixed Calculator 3.0</h1>
-<p>An all-in-one calculator to support all your needs. Supports various functions, arbitrary precision, and complex numbers. Powered by math.js.</p>
+<p>An all-in-one online calculator to support most needs. Supports various functions, arbitrary precision, and complex numbers. Powered by <a href="https://mathjs.org">math.js</a>.</p>
 <span>Precision </span><input type="number" id="precision" value=100>
 <span>Supports functions like:</span>
 <span style="font-family: consolas"><b>+ - * / ^ % ! pi e sqrt() cbrt() log() sin() cos() tan() abs()</b></span>
 <input type="text" id="equation" value="1 + 1">
 <textarea id="answer"></textarea>
+<p>If you wish for offline, faster calculations, but with less functions, try the sister program, <a href="https://github.com/mcnole25/random-resources/blob/master/precise-calculator.html">Precise Calculator</a>.</p>
 <script>
 setInterval(function() {
 math.config({number: "BigNumber", precision: Number(precision.value)});
