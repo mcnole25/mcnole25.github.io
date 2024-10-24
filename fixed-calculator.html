@@ -24,8 +24,8 @@ input, textarea {background-color: #444; color: #fff;}
 <p>If you wish for offline, faster calculations, but with less functions, try the sister program, <a href="https://github.com/mcnole25/random-resources/blob/master/precise-calculator.html">Precise Calculator</a>.</p>
 <script>
 setInterval(function() {
-math.config({number: "BigNumber", precision: Number(precision.value)});
-answer.innerHTML = math.format(math.evaluate(equation.value), {lowerExp: -Number(precision.value), upperExp: Number(precision.value)});
+math.config({number: "BigNumber", precision: Number(precision.value) + 10});
+answer.innerHTML = math.format(math.evaluate(equation.value), {lowerExp: -Number(precision.value), upperExp: Number(precision.value), precision: Number(precision.value)});
 });
 </script>
 </body>
