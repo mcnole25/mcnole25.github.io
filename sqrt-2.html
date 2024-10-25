@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Digital Score</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+a, h1, p, span {color: #fff; font-family: verdana;}
+        input {margin: 4px 0px; display: block;}
+</style>
+</head>
+<body>
+<h1>√2 to 100000 decimal places</h1>
+<p id="sqrt" style="word-wrap: break-word"></p>
+<script>
+prec = 100000; z = 1n; step = 0n; temp = 0n;
+for (i = 0; i < 135000; i++) {
+temp = BigInt(z); z = BigInt(z) * 2n + BigInt(step); step = BigInt(temp);
+}
+sqrt2 = BigInt(z) * 10n ** BigInt(prec) / BigInt(temp);
+sqrt2 = "1." + String(sqrt2).slice(1, String(sqrt2).length);
+sqrt.innerHTML = String(sqrt2);
+</script>
+</body>
+</html>
