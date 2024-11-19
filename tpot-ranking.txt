@@ -1,0 +1,32 @@
+1st	Pin
+2nd	Tennis Ball
+3rd	Golf Ball
+4th	Book
+5th	Pencil
+6th	Coiny
+7th	Donut
+8th	Liy
+9th	Pen
+10th	Needle
+11th	Snowball
+12th	Fanny
+13th	Black Hole
+14th	Remote
+
+15-40th	(26 other TPOT characters)
+41-52nd	(12 other BFB characters)
+
+53rd	Dora
+54th	Spongy
+55th	Saw
+56th	Bracelety
+57th	Match
+58th	Rocky
+59th	Stapy
+60th	8 Ball
+61st	Eggy
+62nd	David
+63rd	Pie
+64th	Firey Jr
+65th	Roboty
+66th	Ruby
