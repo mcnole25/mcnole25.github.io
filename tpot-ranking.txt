@@ -14,7 +14,7 @@
 14th	Remote
 15th	Price Tag
 
-15-40th	(26 other TPOT characters)
+16-40th	(25 other TPOT characters)
 41-52nd	(12 other BFB characters)
 
 53rd	Dora
