@@ -12,6 +12,7 @@
 12th	Fanny
 13th	Black Hole
 14th	Remote
+15th	Price Tag
 
 15-40th	(26 other TPOT characters)
 41-52nd	(12 other BFB characters)
@@ -30,3 +31,4 @@
 64th	Firey Jr
 65th	Roboty
 66th	Ruby
+67th	Profily
