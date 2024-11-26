@@ -65,3 +65,5 @@ Pie
 Firey Jr
 Roboty
 Ruby
+
+Ranks: 1-5 Love, 6-20 Like, 21-47 OK, 48-67 Dislike
