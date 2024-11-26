@@ -1,56 +1,67 @@
-1st	Pin
-2nd	Tennis Ball
-3rd	Golf Ball
-4th	Book
-5th	Pencil
-6th	Coiny
-7th	Donut
-8th	Liy
-9th	Pen
-10th	Needle
-11th	Snowball
-12th	Fanny
-13th	Black Hole
-14th	Remote
-15th	Price Tag
-16th  Marker
-17th  Bomby
-18th  Bottle
-19th  Gaty
-20th  Pillow
-21st  Nickel
-22nd  Fries
-23rd  TV
-24th  Robot Flower
-25th  Winner
-26th  Tree
-27th  Teardrop
-28th  Eraser
-29th  Clock
-30th  Basketball
-
-43rd  Gelatin
-44th  Grassy
-45th  Taco
-46th  Firey
-47th  Balloony
-48th  Cake
-49th  Foldy
-50th  Yellow Face
-51st  Naily
-52nd  Bell
-53rd	Dora
-54th	Spongy
-55th	Saw
-56th	Bracelety
-57th	Match
-58th	Rocky
-59th	Stapy
-60th	8 Ball
-61st	Eggy
-62nd	David
-63rd	Pie
-64th	Firey Jr
-65th	Roboty
-66th	Ruby
-67th	Profily
+Pin
+Tennis Ball
+Golf Ball
+Book
+Pencil
+Coiny
+Donut
+Liy
+Pen
+Needle
+Snowball
+Fanny
+Black Hole
+Remote
+Price Tag
+Marker
+Bomby
+Bottle
+Gaty
+Pillow
+Nickel
+Fries
+TV
+Robot Flower
+Winner
+Tree
+Teardrop
+Eraser
+Clock
+Basketball
+Lightning
+Barf Bag
+Lollipop
+Woody
+Blocky
+Flower
+Leafy
+Loser
+Bubble
+Cloudy
+Puffball
+Gelatin
+Icy
+Grassy
+Taco
+Firey
+Balloony
+Cake
+Foldy
+Yellow Face
+Naily
+Bell
+Profily
+Dora
+Spongy
+Saw
+Bracelety
+Match
+Rocky
+Stapy
+8 Ball
+Eggy
+David
+Pie
+Firey Jr
+Roboty
+Ruby
