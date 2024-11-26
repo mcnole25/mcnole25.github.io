@@ -13,10 +13,32 @@
 13th	Black Hole
 14th	Remote
 15th	Price Tag
+16th  Marker
+17th  Bomby
+18th  Bottle
+19th  Gaty
+20th  Pillow
+21st  Nickel
+22nd  Fries
+23rd  TV
+24th  Robot Flower
+25th  Winner
+26th  Tree
+27th  Teardrop
+28th  Eraser
+29th  Clock
+30th  Basketball
 
-16-40th	(25 other TPOT characters)
-41-52nd	(12 other BFB characters)
-
+43rd  Gelatin
+44th  Grassy
+45th  Taco
+46th  Firey
+47th  Balloony
+48th  Cake
+49th  Foldy
+50th  Yellow Face
+51st  Naily
+52nd  Bell
 53rd	Dora
 54th	Spongy
 55th	Saw
