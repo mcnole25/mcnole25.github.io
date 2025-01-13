@@ -1,0 +1,86 @@
+<!DOCTYPE html><html>
+<head>
+<title>Sentence Maker</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+a, div, h1, p, span, strong {color: #fff; font-family: verdana;}
+strong {font-size: 125%}
+.page {margin: 6px 0px; display: block;}
+</style>
+</head>
+<body onmousemove="coordinate(event)">
+<h1>Sentence Maker</h1>
+<span>A random idea I had this week. Drag the paper slips below and make any type of sentence.<br></span>
+<canvas width=1250px height=750px id=game></canvas>
+<script>
+let ctx = game.getContext("2d");
+let papers = [];
+mouseX = null;
+mouseY = null;
+mouseDown = null;
+for (i = 0; i < 8; i++) {
+messages = ["I'm looking forward to","I hate it when people use","I like to use","On Sunday, I want","Today, I discovered","It's crazy when there's","My favorite thing is","It's nice when I have"];
+createPaper(messages[i % 8], "#d22", i, 0, 50 + i % 8 * 25);
+}
+for (i = 8; i < 16; i++) {
+messages = ["pepperoni pizza.","my Monday blues.","my bedroom window.","linear algebra.","chocolate cake.","people who use me.","the rain today.","your secret schedule."];
+createPaper(messages[i % 8], "#ff2", i, 250, 50 + i % 8 * 25);
+}
+for (i = 16; i < 24; i++) {
+messages = ["What would happen if","Can't you believe","I need something, or maybe","When I was sick,","Ugh, NOW","I'm losing money, now","When I was a kid,","I wonder when"];
+createPaper(messages[i % 8], "#0b0", i, 500, 50 + i % 8 * 25);
+}
+for (i = 24; i < 32; i++) {
+messages = ["they took my money?","my router was missing?","the hurricane happened?","my birthday was coming?","I had to do school?","I was autistic?","you ate cereal too?","my phone died?"];
+createPaper(messages[i % 8], "#0df", i, 750, 50 + i % 8 * 25);
+}
+for (i = 32; i < 40; i++) {
+messages = ["the groceries tommorow, and","cars, bikes, and","the letters A, B, C, D, and","ideas, stories, and","sleep, and","stress, and","food, and","my amazing ideas, and"];
+createPaper(messages[i % 8], "#24f", i, 1000, 50 + i % 8 * 25);
+}
+function createPaper(sent, color, id, x, y) {
+papers[papers.length] = [sent, color, id, x, y]
+}
+function fillPapers() {
+ctx.fillStyle = "#000";
+ctx.fillRect(0, 0, game.width, game.height);
+for (i = 0; i < papers.length; i++) {
+ctx.fillStyle = papers[i][1];
+ctx.fillRect(papers[i][3], papers[i][4], papers[i][0].length * 9 + 2, 25);
+ctx.fillStyle = "#000";
+ctx.font = "16px Consolas";
+ctx.fillText(papers[i][0], papers[i][3] + 2, papers[i][4] + 18)
+}}
+setInterval(function() {
+for (i = 0; i < papers.length; i++) {
+drag = 0;
+if (mouseDown && (mouseX - papers[i][3] > 0 && mouseX - papers[i][3] < (papers[i][0].length * 9)) && (mouseY - papers[i][4] > 0 && mouseY - papers[i][4] < 25)) {
+papers[i][3] = mouseX - (papers[i][0].length * 4.5);
+papers[i][4] = mouseY - 12.5;
+}
+}
+fillPapers();
+ctx.fillStyle = "#fff";
+ctx.font = "24px Arial";
+ctx.fillText("Announcements", 0, 30);
+ctx.fillText("Things", 250, 30);
+ctx.fillText("Questions 1", 500, 30);
+ctx.fillText("Questions 2", 750, 30);
+ctx.fillText("Lists", 1000, 30);
+ctx.fillText("Drag the paper slips to", 100, 500);
+ctx.fillText("make a cool sentence!", 101, 525);
+});
+function coordinate(event) {
+mouseX = event.offsetX;
+mouseY = event.offsetY;
+}
+game.onmousedown = function() {
+mouseDown = true;
+}
+game.onmouseup = function() {
+mouseDown = false;
+}
+</script>
+</body>
+</html>
