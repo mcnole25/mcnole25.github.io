@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Numbers Only Divisible By...</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<style>
+body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh;}
+a, div, h1, p, span {color: #fff; font-family: verdana;}
+</style>
+</head>
+<body>
+<h1>Numbers Only Divisible By...</h1>
+<p>Get a list of numbers that are only divisible by a selection of 3 factors below.</p>
+<input type=number min=1 id="factorA" value=2>
+<input type=number min=1 id="factorB" value=3>
+<input type=number min=1 id="factorC" value=5>
+<p id="seq"></p>
+<script>
+setInterval(function() {
+let factors = [];
+let length = 25;
+for (k = 0; k <= length; k++) {
+for (j = 0; j <= length; j++) {
+for (i = 0; i <= length; i++) {
+num = BigInt(factorA.value) ** BigInt(i) * BigInt(factorB.value) ** BigInt(j) * BigInt(factorC.value) ** BigInt(k);
+if (BigInt(num) <= BigInt(Math.min(factorA.value, factorB.value, factorC.value)) ** BigInt(length))
+factors.push(num);
+}}}
+function uniq(a) {
+    return a.sort().filter(function(item, pos, ary) {
+        return !pos || item != ary[pos - 1];
+    });
+}
+factors = uniq(factors);
+factors.sort(function(a, b) {
+  return Number(a) - Number(b);
+});
+seq.innerHTML = factors.toString().replaceAll(",", ", ");
+});
+</script>
+</body>
+</html>
