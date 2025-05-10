@@ -1,144 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Celebrity Face Editor</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <style>
-        body {background-color: #222; position: relative; left: 10px; width: 90vw; height: 90vh; overflow: hidden;}
-        a, h1, p, span {color: #fff; font-family: verdana;}
-        input {width: 1355px; font-size: 120%; font-family: consolas;}
-        canvas {display: block; margin: 8px 0px;}
-        .pca {width: 150px;}
-        span {padding: 0px 54px; display: inline-block; position: relative; left: 1px;}
-        button {font-size: 150%; padding: 0px 15px; margin: 8px 0px; position: relative; top: 8px;}
-        #myCanvas {position: relative; left: 340px; bottom: 520px;}
-        .dd {left: -3px;}
-        .dd2 {left: -13px;}
-        #invert {padding: 0px 123px;}
-    </style>
-  </head>
-  <body>
-        <h1>Celebrity Face Editor</h1>
-        <p>Based on carykh's celebrity face editor.</p>
-        <p>Why did I make this? It's too difficult to download the real thing, so I made my own version.</p>
-        <span>PCA 1</span><span>PCA 2</span>
-        <br>
-        <input type="range" id="pca1" class="pca" title="Lighting">
-        <input type="range" id="pca2" class="pca" title="Skin tone">
-        <br>
-        <span>PCA 3</span><span>PCA 4</span>
-        <br>
-        <input type="range" id="pca3" class="pca" title="Horizontal shading">
-        <input type="range" id="pca4" class="pca" title="Horiz shading again">
-        <br>
-        <span>PCA 5</span><span>PCA 6</span>
-        <br>
-        <input type="range" id="pca5" class="pca" title="Vertical shading">
-        <input type="range" id="pca6" class="pca" title="Temperature">
-        <br>
-        <span>PCA 7</span><span>PCA 8</span>
-        <br>
-        <input type="range" id="pca7" class="pca" title="Horiz shading again">
-        <input type="range" id="pca8" class="pca" title="Ambient occlusion">
-        <br>
-        <span>PCA 9</span><span class="dd">PCA 10</span>
-        <br>
-        <input type="range" id="pca9" class="pca" title="Perimeter shading">
-        <input type="range" id="pca10" class="pca" title="Eyebrow height">
-        <br>
-        <span class="dd">PCA 11</span><span class="dd2">PCA 12</span>
-        <br>
-        <input type="range" id="pca11" class="pca" title="Horiz shading again">
-        <input type="range" id="pca12" class="pca" title="Makeup">
-        <br>
-        <span class="dd">PCA 13</span><span class="dd2">PCA 14</span>
-        <br>
-        <input type="range" id="pca13" class="pca" title="Horiz shading again">
-        <input type="range" id="pca14" class="pca" title="Head width">
-        <br>
-        <span class="dd">PCA 15</span><span class="dd2">PCA 16</span>
-        <br>
-        <input type="range" id="pca15" class="pca" title="Smile">
-        <input type="range" id="pca16" class="pca" title="Vertical rotation">
-        <br>
-        <button onclick=randomize()>Randomize</button>
-        <button onclick=gotomean()>Go To Mean</button>
-        <br>
-        <button id="invert" onclick="invert()">Invert</button>
-         <canvas id="myCanvas" width="512" height="512"></canvas>
-         <script>
-             let c = document.getElementById("myCanvas");
-             let ctx = c.getContext("2d");
-             setInterval(function() {
-                 let brightness = 50 - Number(pca1.value);
-                 let skin = Number(pca2.value) - 50;
-                 let horizontal = (Number(pca3.value) - 50) - (Number(pca4.value) - 50) + (Number(pca7.value) - 50) / 1.5 + (Number(pca11.value) - 50) / 3 - (Number(pca13.value) - 50) / 3;
-                 let vertical = 50 - Number(pca5.value) + (50 - Number(pca16.value)) / 2;
-                 let temperature = Number(pca6.value) - 50;
-                 let occlusion = Number(pca8.value) - 50;
-                 let perimeter = Number(pca9.value) - 50;
-                 let browHeight = Number(pca10.value) - 50;
-                 let makeup = 50 - Number(pca12.value);
-                 let headWidth = Number(pca14.value) - 50;
-                 ctx.clearRect(0, 0, c.width, c.height);
-                 ctx.fillStyle = "hsl(" + (temperature > 0 ? 20 : 200) + ", " + Math.abs(temperature) + "%, " + (50 + brightness - skin / 2 + (Number(pca3.value) - 50) / 2.5 + (Number(pca4.value) - 50) / 2 - perimeter / 8) + "%)";
-                 ctx.fillRect(0, 0, 512, 512);
-                 ctx.fillStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (50 + brightness / 4 + skin / 2) + "%)";
-                 ctx.beginPath();
-                 ctx.arc(256, 256, 224 + headWidth / 4, 0, 2 * Math.PI);
-                 ctx.fill();
-                 ctx.fillRect(160 - horizontal / 3, 256, 192, 256);
-                 ctx.fillStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (45 + occlusion / 10 + brightness / 4 + skin / 2) + "%)";
-                 ctx.beginPath();
-                 ctx.arc(160 + horizontal / 3 + perimeter / 8, 240 + vertical / 3, 48, 0, 2 * Math.PI);
-                 ctx.arc(352 + horizontal / 3 - perimeter / 8, 240 + vertical / 3, 48, 0, 2 * Math.PI);
-                 ctx.fill();
-                 ctx.fillStyle = "#fff";
-                 ctx.beginPath();
-                 ctx.arc(160 + horizontal / 3 + perimeter / 8, 224 + vertical / 3, 48, 0, 2 * Math.PI);
-                 ctx.arc(352 + horizontal / 3 - perimeter / 8, 224 + vertical / 3, 48, 0, 2 * Math.PI);
-                 ctx.fill();
-                 ctx.fillStyle = "#000";
-                 ctx.beginPath();
-                 ctx.arc(160 + horizontal / 6 + perimeter / 8, 224 + vertical / 6, 8, 0, 2 * Math.PI);
-                 ctx.arc(352 + horizontal / 6 - perimeter / 8, 224 + vertical / 6, 8, 0, 2 * Math.PI);
-                 ctx.fill();
-                 ctx.strokeStyle = "#000";
-                 ctx.lineWidth = 6 + makeup / 20;
-                 ctx.beginPath();
-                 ctx.arc(160 + horizontal / 3 + perimeter / 8, 200 + vertical / 3 - browHeight / 4, 64, 1.25 * Math.PI, 1.75 * Math.PI);
-                 ctx.stroke();
-                 ctx.beginPath();
-                 ctx.arc(352 + horizontal / 3 - perimeter / 8, 200 + vertical / 3 - browHeight / 4, 64, 1.25 * Math.PI, 1.75 * Math.PI);
-                 ctx.stroke();
-                 let smileHorizontal = (50 - Number(pca3.value)) / 8 + (50 - Number(pca4.value)) / 6 + (50 - Number(pca15.value)) / 3;
-                 ctx.strokeStyle = "hsl(25, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (45 + occlusion / 10 + brightness / 4 + skin / 2) + "%)";
-                 ctx.beginPath();
-                 ctx.moveTo(192 + horizontal / 3, 358 - smileHorizontal / 2 + vertical / 3 + makeup / 20);
-                 ctx.quadraticCurveTo(256 + horizontal / 3, 390 + smileHorizontal + vertical / 3 + makeup / 20, 320 + horizontal / 3, 358 - smileHorizontal / 2 + vertical / 3 + makeup / 20);
-                 ctx.stroke();
-                 ctx.strokeStyle = "hsl(350, " + (50 + Math.abs(skin / 2) + temperature / 2) + "%, " + (45 + occlusion / 10 + brightness / 4 + skin / 2) + "%)";
-                 ctx.beginPath();
-                 ctx.moveTo(192 + horizontal / 3, 352 - smileHorizontal / 2 + vertical / 3);
-                 ctx.quadraticCurveTo(256 + horizontal / 3, 384 + smileHorizontal + vertical / 3, 320 + horizontal / 3, 352 - smileHorizontal / 2 + vertical / 3);
-                 ctx.stroke();
-             });
-             function randomize() {
-             for (i = 1; i <= 16; i++) {
-             random = ((Math.random() - 0.5) * Math.cbrt(400)) ** 3 + 50;
-             document.getElementById("pca" + i).value = random;
-             }
-             }
-             function gotomean() {
-             for (i = 1; i <= 16; i++) {
-             document.getElementById("pca" + i).value = 50;
-             }
-             }
-             function invert() {
-             for (i = 1; i <= 16; i++) {
-             document.getElementById("pca" + i).value = 100 - document.getElementById("pca" + i).value;
-             }
-             }
-         </script>
-  </body>
+<head>
+<title>Celebrity Editor (unfinished)</title>
+</head>
+<body>
+<p>An attempt to replicate carykh's face editor. Not very accurate as it relies on canvas effects.</p>
+<canvas id="face" width=256 height=256></canvas>
+<br><span>pca 1</span><input type="range" id="pca1" min=-100 max=100>
+<span>pca 2</span><input type="range" id="pca2" min=-100 max=100>
+<br><span>pca 3</span><input type="range" id="pca3" min=-100 max=100>
+<span>pca 4</span><input type="range" id="pca4" min=-100 max=100>
+<br><span>pca 5</span><input type="range" id="pca5" min=-100 max=100>
+<span>pca 6</span><input type="range" id="pca6" min=-100 max=100>
+<script>
+var ctx = face.getContext("2d");
+ctx.imageSmoothingEnabled = false;
+let img = new Image();
+img.src = "https://mcnole25.github.io/average-face.png";
+setInterval(function() {
+face.style.filter = "contrast(" + (1.01**pca1.value) + ") brightness(" + (1 - pca1.value/150) + ")";
+function render(x, y) {
+ctx.clearRect(x, y, face.width, face.height);
+ctx.drawImage(img, x, y, face.width, face.height);
+var d = pca2.value - pca3.value/3 - pca4.value/3;
+var o = d < 0 ? 255 : 0;
+ctx.strokeStyle = "rgba(" + o + ", " + o + ", " + o + ", " + Math.abs(d)/200 + ")";
+ctx.lineWidth = 200;
+ctx.beginPath();
+ctx.ellipse(x + face.width/2, y + face.height/2, 200, 250, 0, 0, 2 * Math.PI);
+ctx.stroke();
+var o = d < 0 ? 0 : 255;
+ctx.fillStyle = "rgba(" + o + ", " + o + ", " + o + ", " + Math.abs(d)/200 + ")";
+ctx.beginPath();
+ctx.ellipse(x + face.width/2, y + face.height/2, 100, 150, 0, 0, 2 * Math.PI);
+ctx.fill();
+var temp = pca6.value < 0 ? 255 : 0;
+ctx.fillStyle = "rgba(" + (255 - temp) + ", 64, " + temp + ", " + Math.abs(pca6.value)/400 + ")";
+ctx.fillRect(0, 0, face.width, face.height);
+}
+for (i = -5; i <= 5; i++) {
+render(i * (pca3.value - pca4.value)/20, i * pca5.value/-20);
+}
+})
+</script>
+</body>
 </html>
