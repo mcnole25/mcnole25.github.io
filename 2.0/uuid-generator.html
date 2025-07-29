@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+<title>Random UUID Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+text-align: center;
+}
+#container {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-gap: 50px 25px;
+}
+#spacing {
+display: block;
+margin: 50px 0px;
+}
+</style>
+</head><body>
+<div>Reload this page to generate more UUID's. There are 2^128 possibilities!</div>
+<div id="spacing"></div>
+<div id="container"></div>
+<script>
+for (i = 1; i <= 5000; i++) {
+d = document.createElement("div");
+d.innerText = randomuuid();
+s = document.createElement("div");
+s.innerText = "Generated UUID #" + i;
+s.style.fontSize = "12px";
+d.appendChild(s);
+container.appendChild(d);
+}
+function randomuuid() {
+u = "";
+for (n = 0; n < 8; n++) {u += Math.floor(16 * Math.random()).toString(16);}
+u += "-";
+for (m = 0; m < 3; m++) {
+for (n = 0; n < 4; n++) {u += Math.floor(16 * Math.random()).toString(16);}
+u += "-";
+}
+for (n = 0; n < 12; n++) {u += Math.floor(16 * Math.random()).toString(16);}
+return u;
+}
+</script>
+</body></html>

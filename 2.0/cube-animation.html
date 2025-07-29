@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head>
+<title>Spinning Cube Animation</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+.trig {
+display: inline-block;
+margin: 0px 25px;
+}
+#display {
+font-size: 24px;
+display: inline-block;
+width: 200px;
+text-align: right;
+}
+input[type=range] {
+background: #1a1a1a;
+width: 600px;
+position: relative;
+top: 4px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+</style>
+</head><body>
+<canvas id="cube" width=600 height=693></canvas>
+<br><input type="range" id="angle" min=0 max=90 value=45 step=0.25>
+<b><span id="display"></span></b><br><br><br>
+<span class="trig">Basic Trigonometric Values:</span>
+<span class="trig">sin(0&deg;) = 0</span>
+<span class="trig">sin(15&deg;) = (&radic;6 &minus; &radic;2)/4</span>
+<span class="trig">sin(30&deg;) = 0.5</span>
+<span class="trig">sin(45&deg;) = (&radic;2)/2</span>
+<span class="trig">sin(60&deg;) = (&radic;3)/2</span>
+<span class="trig">sin(75&deg;) = (&radic;6 + &radic;2)/4</span>
+<span class="trig">sin(90&deg;) = 1</span>
+<br><br>
+<button id="spinButton" onclick="spin = !spin;"></button>
+<script>
+ctx = cube.getContext("2d");
+w = cube.width; h = cube.height;
+spin = false;
+setInterval(function() {
+spinButton.innerHTML = spin ? "Auto Spin: ON" : "Auto Spin: OFF";
+ang = spin ? (90 - (performance.now()/8 % 90)) : (90 - angle.value);
+rad = ang * Math.PI/180;
+off = (ang - 45)/18;
+display.innerHTML = "Angle: " + (45 - ang) + "&deg;";
+ctx.fillStyle = "#222";
+ctx.strokeStyle = "#999";
+ctx.lineWidth = 2;
+ctx.fillRect(0, 0, w, h);
+ctx.fillStyle = "rgba(255, 255, 255, 20%)";
+ctx.beginPath();
+ctx.moveTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.25 + Math.cos(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.cos(rad) * w * 0.5, h * 0.25 - Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.sin(rad) * w * 0.5, h * 0.25 - Math.cos(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.cos(rad) * w * 0.5, h * 0.25 + Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.25 + Math.cos(rad) * h * 0.25);
+ctx.fill();
+ctx.stroke();
+light = Math.sin(rad + 0.25 * Math.PI);
+ctx.fillStyle = "rgba(255, 255, 255, " + (5 + light * 5 + off) + "%)";
+ctx.beginPath();
+ctx.lineTo(w * 0.5 - Math.cos(rad) * w * 0.5, h * 0.25 + Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.cos(rad) * w * 0.5, h * 0.75 + Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.75 + Math.cos(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.25 + Math.cos(rad) * h * 0.25);
+ctx.fill();
+ctx.stroke();
+if (ang > 45) {
+light = Math.sin(rad - 0.25 * Math.PI);
+ctx.fillStyle = "rgba(255, 255, 255, " + (5 + light * 5 - off) + "%)";
+ctx.beginPath();
+ctx.lineTo(w * 0.5 - Math.cos(rad) * w * 0.5, h * 0.25 + Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.cos(rad) * w * 0.5, h * 0.75 + Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.sin(rad) * w * 0.5, h * 0.75 - Math.cos(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 - Math.sin(rad) * w * 0.5, h * 0.25 - Math.cos(rad) * h * 0.25);
+ctx.fill();
+ctx.stroke();
+}
+if (ang < 45) {
+light = Math.sin(rad + 0.75 * Math.PI);
+ctx.fillStyle = "rgba(255, 255, 255, " + (5 + light * 5 - off) + "%)";
+ctx.beginPath();
+ctx.lineTo(w * 0.5 + Math.cos(rad) * w * 0.5, h * 0.25 - Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.cos(rad) * w * 0.5, h * 0.75 - Math.sin(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.75 + Math.cos(rad) * h * 0.25);
+ctx.lineTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.25 + Math.cos(rad) * h * 0.25);
+ctx.fill();
+ctx.stroke();
+}
+});
+</script>
+</body></html>

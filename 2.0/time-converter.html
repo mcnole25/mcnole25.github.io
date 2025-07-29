@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html><head>
+<title>Time Converter</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 24px;
+font-family: arial;
+text-align: center;
+}
+input[type=range] {
+background: #1a1a1a;
+width: calc(100% - 4px);
+position: relative;
+top: 4px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+#time0 {
+display: block;
+font-weight: bold;
+font-size: 60px;
+margin: 20px 0px;
+}
+#container {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+grid-gap: 15px 0px;
+}
+.times {
+border: 1px solid #fff;
+margin: 10px 10px;
+padding: 8px 0px;
+}
+</style>
+</head><body>
+<input type="range" id="timevalue" min=0 max=86400 step=1 value=57024>
+<div id="time0"></div>
+<div id="container">
+<div>
+<span>Decimal Hours</span>
+<div id="time1" class="times"></div>
+</div>
+<div>
+<span>Elapsed Minutes</span>
+<div id="time2" class="times"></div>
+</div>
+<div>
+<span>Decimal Minutes</span>
+<div id="time3" class="times"></div>
+</div>
+<div>
+<span>Elapsed Seconds</span>
+<div id="time4" class="times"></div>
+</div>
+<div>
+<span>Decimal Day</span>
+<div id="time5" class="times"></div>
+</div>
+<div>
+<span>24 Hour + Daylight</span>
+<div id="time6" class="times"></div>
+</div>
+<div>
+<span>12 Hour Time</span>
+<div id="time7" class="times"></div>
+</div>
+<div>
+<span>12 Hour + Daylight</span>
+<div id="time8" class="times"></div>
+</div>
+<div>
+<span>Time to Midnight</span>
+<div id="time9" class="times"></div>
+</div>
+<div>
+<span>Noon Relative</span>
+<div id="time10" class="times"></div>
+</div>
+<div>
+<span>Minutes Past/To</span>
+<div id="time11" class="times"></div>
+</div>
+<div>
+<span>Day Percentage</span>
+<div id="time12" class="times"></div>
+</div>
+<div>
+<span>Decimalised Time</span>
+<div id="time13" class="times"></div>
+</div>
+<div>
+<span>120 Unit</span>
+<div id="time14" class="times"></div>
+</div>
+<div>
+<span>30 Unit</span>
+<div id="time15" class="times"></div>
+</div>
+<div>
+<span>24 Unit</span>
+<div id="time16" class="times"></div>
+</div>
+<div>
+<span>40 Unit</span>
+<div id="time17" class="times"></div>
+</div>
+<div>
+<span>12 Hours, 120 Minutes</span>
+<div id="time18" class="times"></div>
+</div>
+<div>
+<span>48 Hours, 30 Minutes</span>
+<div id="time19" class="times"></div>
+</div>
+<div>
+<span>96 Hours, 15 Minutes</span>
+<div id="time20" class="times"></div>
+</div>
+<div>
+<span>Hours & Seconds</span>
+<div id="time21" class="times"></div>
+</div>
+<div>
+<span>60 Hours, 24 Minutes</span>
+<div id="time22" class="times"></div>
+</div>
+<div>
+<span>6 Hours, 240 Minutes</span>
+<div id="time23" class="times"></div>
+</div>
+<div>
+<span>8 Hours, 180 Minutes</span>
+<div id="time24" class="times"></div>
+</div>
+<div>
+<span>9 Hours, 160 Minutes</span>
+<div id="time25" class="times"></div>
+</div>
+<div>
+<span>10 Hours, 144 Minutes</span>
+<div id="time26" class="times"></div>
+</div>
+<div>
+<span>15 Hours, 96 Minutes</span>
+<div id="time27" class="times"></div>
+</div>
+<div>
+<span>16 Hours, 90 Minutes</span>
+<div id="time28" class="times"></div>
+</div>
+<div>
+<span>18 Hours, 80 Minutes</span>
+<div id="time29" class="times"></div>
+</div>
+<div>
+<span>20 Hours, 72 Minutes</span>
+<div id="time30" class="times"></div>
+</div>
+<div>
+<span>30 Hours, 48 Minutes</span>
+<div id="time31" class="times"></div>
+</div>
+<div>
+<span>32 Hours, 45 Minutes</span>
+<div id="time32" class="times"></div>
+</div>
+<div>
+<span>36 Hours, 40 Minutes</span>
+<div id="time33" class="times"></div>
+</div>
+<div>
+<span>40 Hours, 36 Minutes</span>
+<div id="time34" class="times"></div>
+</div>
+<div>
+<span>45 Hours, 32 Minutes</span>
+<div id="time35" class="times"></div>
+</div>
+<div>
+<span>72 Hours, 20 Minutes</span>
+<div id="time36" class="times"></div>
+</div>
+<div>
+<span>80 Hours, 18 Minutes</span>
+<div id="time37" class="times"></div>
+</div>
+<div>
+<span>90 Hours, 16 Minutes</span>
+<div id="time38" class="times"></div>
+</div>
+<div>
+<span>120 Hours, 12 Minutes</span>
+<div id="time39" class="times"></div>
+</div>
+<div>
+<span>144 Hours, 10 Minutes</span>
+<div id="time40" class="times"></div>
+</div>
+<div>
+<span>Time to Next Hour</span>
+<div id="time41" class="times"></div>
+</div>
+<div>
+<span>Sleep, Work, Leisure</span>
+<div id="time42" class="times"></div>
+</div>
+<div>
+<span>Split into Quarters</span>
+<div id="time43" class="times"></div>
+</div>
+<div>
+<span>Split into Sixths</span>
+<div id="time44" class="times"></div>
+</div>
+<div>
+<span>Everything 40 Even</span>
+<div id="time45" class="times"></div>
+</div>
+<div>
+<span>Everything 60 Even</span>
+<div id="time46" class="times"></div>
+</div>
+<div>
+<span>4 Units (12,18,20,20)</span>
+<div id="time47" class="times"></div>
+</div>
+<div>
+<span>5 Units (5,10,12,12,12)</span>
+<div id="time48" class="times"></div>
+</div>
+<div>
+<span>Binary Time</span>
+<div id="time49" class="times"></div>
+</div>
+</div>
+<script>
+setInterval(function() {
+t = Number(timevalue.value) % 86400;
+td = (t + 3600) % 86400;
+tm = Math.abs(((t + 1800) % 3600) - 1800);
+dt = Math.round(t/0.864);
+tforty = Math.round(t/(86400/40**3));
+tsixty = Math.round(t/(86400/60**3));
+tdeg = t * 15;
+time0.innerText = time(t);
+time1.innerText = (t/3600).toFixed(6);
+time2.innerText = z(Math.floor(t/60) % 1440, 4) + ":" + z(Math.floor(t) % 60);
+time3.innerText = (t/60).toFixed(6);
+time4.innerText = t;
+time5.innerText = (t/86400).toFixed(6);
+time6.innerText = time(td);
+time7.innerText = (((Math.floor(t/3600) + 11) % 12) + 1) + ":" + z(Math.floor(t/60) % 60) + ":" + z(Math.floor(t) % 60) + [" am", " pm"][Math.floor(t/43200)];
+time8.innerText = (((Math.floor(td/3600) + 11) % 12) + 1) + ":" + z(Math.floor(td/60) % 60) + ":" + z(Math.floor(td) % 60) + [" am", " pm"][Math.floor(td/43200)];
+time9.innerText = time(86400 - t);
+time10.innerText = (t < 43200 ? "-" : "+") + time(Math.abs(t - 43200) % 86400);
+time11.innerText = z(Math.floor(tm/60) % 60) + ":" + z(Math.floor(tm) % 60) + [" past ", " to "][Math.floor((t + 86399)/1800) % 2] + (((Math.ceil((t - 1800)/3600) + 11) % 12) + 1) + (t > 41400 && t <= 84600 ? " pm" : " am");
+time12.innerText = (t/864).toFixed(6) + "%";
+time13.innerText = (Math.floor(dt/10000) % 10) + ":" + z(Math.floor(dt/100) % 100) + ":" + z(Math.floor(dt) % 100);
+time14.innerText = (Math.floor(t/14400) % 6) + ":" + z(Math.floor(t/120) % 120, 3) + ":" + z(Math.floor(t) % 120, 3);
+time15.innerText = z(Math.floor(t/900) % 96) + ":" + z(Math.floor(t/30) % 30) + ":" + z(Math.floor(t) % 30);
+time16.innerText = z(Math.floor(t/576) % 150, 3) + ":" + z(Math.floor(t/24) % 24) + ":" + z(Math.floor(t) % 24);
+time17.innerText = z(Math.floor(t/1600) % 54) + ":" + z(Math.floor(t/40) % 40) + ":" + z(Math.floor(t) % 40);
+time18.innerText = althour(t, 12, 2, 3);
+time19.innerText = althour(t, 48);
+time20.innerText = althour(t, 96);
+time21.innerText = z(Math.floor(t/3600) % 24) + ":" + z(Math.floor(t) % 3600, 4);
+time22.innerText = althour(t, 60);
+time23.innerText = althour(t, 6, 1, 3);
+time24.innerText = althour(t, 8, 1, 3);
+time25.innerText = althour(t, 9, 1, 3);
+time26.innerText = althour(t, 10, 1, 3);
+time27.innerText = althour(t, 15);
+time28.innerText = althour(t, 16);
+time29.innerText = althour(t, 18);
+time30.innerText = althour(t, 20);
+time31.innerText = althour(t, 30);
+time32.innerText = althour(t, 32);
+time33.innerText = althour(t, 36);
+time34.innerText = althour(t, 40);
+time35.innerText = althour(t, 45);
+time36.innerText = althour(t, 72);
+time37.innerText = althour(t, 80);
+time38.innerText = althour(t, 90);
+time39.innerText = althour(t, 120, 3, 2);
+time40.innerText = althour(t, 144, 3, 1);
+time41.innerText = time((86400 - t) % 3600).slice(3, 8) + " to " + z(Math.ceil(t/3600) % 24) + ":00";
+time42.innerText = (((Math.floor(t/3600) + 7) % 8) + 1) + ":" + z(Math.floor(t/60) % 60) + ":" + z(Math.floor(t) % 60) + [" s", " w", " l"][Math.floor(t/28800)];
+time43.innerText = (((Math.floor(t/3600) + 5) % 6) + 1) + ":" + z(Math.floor(t/60) % 60) + ":" + z(Math.floor(t) % 60) + [" q1", " q2", " q3", " q4"][Math.floor(t/21600)];
+time44.innerText = (((Math.floor(t/3600) + 3) % 4) + 1) + ":" + z(Math.floor(t/60) % 60) + ":" + z(Math.floor(t) % 60) + [" s1", " s2", " s3", " s4", " s5", " s6"][Math.floor(t/14400)];
+time45.innerText = z(Math.floor(tforty/1600) % 40) + ":" + z(Math.floor(tforty/40) % 40) + ":" + z(Math.floor(tforty) % 40);
+time46.innerText = z(Math.floor(tsixty/3600) % 60) + ":" + z(Math.floor(tsixty/60) % 60) + ":" + z(Math.floor(tsixty) % 60);
+time47.innerText = z(Math.floor(t/7200) % 12) + ":" + z(Math.floor(t/400) % 18) + ":" + z(Math.floor(t/20) % 20) + ":" + z(Math.floor(t) % 20);
+time48.innerText = (Math.floor(t/17280) % 5) + ":" + (Math.floor(t/1728) % 10) + ":" + z(Math.floor(t/144) % 12) + ":" + z(Math.floor(t/12) % 12) + ":" + z(Math.floor(t) % 12);
+time49.innerText = z(Math.round(t * 2**16/86400).toString(2), 16);
+});
+function z(n, sp) {
+if (!sp) {sp = 2;}
+return "0".repeat(sp - String(n).length) + n;
+}
+function time(v) {
+return z(Math.floor(v/3600) % 24) + ":" + z(Math.floor(v/60) % 60) + ":" + z(Math.floor(v) % 60);
+}
+function althour(v, h, s1, s2) {
+return z(Math.floor(v/(86400/h)) % h, s1) + ":" + z(Math.floor(v/60) % (1440/h), s2) + ":" + z(Math.floor(v) % 60);
+}
+</script>
+</body></html>

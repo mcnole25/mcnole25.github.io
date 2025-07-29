@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html><head>
+<title>Sun Animation</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+accent-color: #fff;
+}
+input[type=range] {
+background: #1a1a1a;
+width: 1786px;
+position: relative;
+top: 7px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+.info {
+font-size: 32px;
+}
+.container {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+font-size: 16px;
+}
+</style>
+</head><body><b>
+<canvas id="frame" width=1786 height=760></canvas>
+<br><input type="range" id="timeSlider" step=1 min=0 max=10000 value=5000>
+<br><br>
+<div class="info">
+<span>Time - </span><span id="time"></span>
+<div style="display: inline-block; width: 50px;"></div>
+<span>Temperature - </span><span id="temp"></span><span>&deg;C</span>
+</div><br>
+<div class="container">
+<span>Dawn</span>
+<span>Sunrise</span>
+<span>Solar Noon</span>
+<span>Sunset</span>
+<span>Dusk</span>
+<span id="dawn"></span>
+<span id="sunrise"></span>
+<span id="solarNoon"></span>
+<span id="sunset"></span>
+<span id="dusk"></span>
+</div>
+<script>
+const ctx = frame.getContext("2d");
+setInterval(function() {
+t = 0;
+sun = [2224.60466, 2620.38933, 5200, 7779.61067, 8175.39534];
+function updateTime() {
+h = Math.floor(t * 24/10000) % 24;
+m = Math.floor(t * 1440/10000) % 60;
+s = Math.floor(t * 86400/10000) % 60;
+return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+}
+t = sun[0];
+dawn.innerText = updateTime();
+t = sun[1];
+sunrise.innerText = updateTime();
+t = sun[2];
+solarNoon.innerText = updateTime();
+t = sun[3];
+sunset.innerText = updateTime();
+t = sun[4];
+dusk.innerText = updateTime();
+t = timeSlider.value;
+n = Math.atan(Math.cos((t - 200)/10000 * Math.PI * 2) * 20 - 1)/3.042 + 0.5;
+time.innerText = updateTime();
+tmp = Math.round(2600 + Math.cos((t - 1000)/10000 * Math.PI * 2) * -150 * Math.PI)/100;
+temp.innerText = tmp;
+c1 = "hsl(" + (200 - n * 330) + ", " + (70 + n * 20) + "%, " + (70 - n * 60) + "%)";
+c2 = "hsl(" + (200 - n**2 * 330) + ", " + (70 + n**2 * 20) + "%, " + (70 - n**2 * 60) + "%)";
+grd = ctx.createLinearGradient(0, 0, 0, frame.height);
+grd.addColorStop(0, (t < 5000 ? c2 : c1));
+grd.addColorStop(1, (t < 5000 ? c1 : c2));
+ctx.fillStyle = grd;
+ctx.fillRect(0, 0, frame.width, frame.height);
+ctx.fillStyle = "rgba(255, 255, 255, " + 0.5 * n**3 + ")";
+for (i = 1; i <= 300; i++) {
+rand1 = (Math.sqrt(2) * i**2) % 1;
+rand2 = (Math.sqrt(3) * i**2) % 1;
+ctx.beginPath();
+ctx.arc(frame.width * rand1, frame.height * rand2, frame.height/300, 0, Math.PI * 2);
+ctx.fill();
+}
+ctx.fillStyle = "hsl(" + (60 - n * 80) + ", 100%, 50%)";
+ctx.beginPath();
+ctx.arc(frame.width/2, frame.height/2 + (t - 7500)/2, frame.height/12, 0, Math.PI * 2);
+ctx.fill();
+ctx.fillStyle = "hsl(0, 0%, " + (100 - n * 75) + "%)";
+for (i = 1; i <= 1000; i++) {
+rand1 = (Math.sqrt(5) * i**2) % 1;
+rand2 = (Math.sqrt(7) * i**2) % 1;
+rand3 = (Math.sqrt(11) * i**2) % 1;
+cloudx = frame.width * rand1 * 150 - 25 * t - 1000;
+if (cloudx > -500 && cloudx < 2000) {
+ctx.fillRect(cloudx, frame.height * rand2, 100 + 200 * rand3, 25 + 100 * rand3);
+}
+}
+grd = ctx.createLinearGradient(0, 0, 0, frame.height);
+grd.addColorStop(0, "hsl(120, 60%, " + (50 - n * 30) + "%)");
+grd.addColorStop(1, "hsl(120, 60%, " + (40 - n * 30) + "%)");
+ctx.fillStyle = grd;
+ctx.fillRect(0, frame.height * 2/3, frame.width, frame.height/3);
+ctx.fillStyle = "hsl(40, 40%, " + (40 - n * 30) + "%)";
+ctx.fillRect(frame.width * 9/40, frame.height/2, frame.width/20, frame.height/3);
+grd.addColorStop(0, "hsl(120, 60%, " + (40 - n * 20) + "%)");
+grd.addColorStop(1, "hsl(120, 60%, " + (30 - n * 20) + "%)");
+ctx.fillStyle = grd;
+ctx.beginPath();
+ctx.arc(frame.width/4, frame.height * 5/12, frame.height/6, 0, Math.PI * 2);
+ctx.fill();
+ctx.fillStyle = "hsl(40, 40%, " + (60 - n * 40) + "%)";
+ctx.fillRect(frame.width * 9/16, frame.height/2, frame.width/4, frame.height/3);
+ctx.fillStyle = "hsl(40, 40%, " + (50 - n * 40) + "%)";
+ctx.fillRect(frame.width * 9/16, frame.height/2, frame.width/4, frame.height/12);
+ctx.fillStyle = (n < 0.6 ? "hsl(40, 40%, " + (50 - n * 40) + "%)" : "hsl(60, 100%, 50%)");
+ctx.fillRect(frame.width * 5/8, frame.height * 2/3, frame.width/8, frame.height/12);
+ctx.fillStyle = "rgba(0, 0, 0, " + (n < 0.6 ? 0.5 : (0.5 - (n - 0.6) * 2.5)) + ")";
+shad = ((n > 0.8 || t < 5000) ? 0 : Math.tan(n * Math.PI * 3/5) * n**0.1 * 10);
+ctx.fillRect(frame.width * 9/40, frame.height * 5/6, frame.width/20, frame.height * shad);
+ctx.fillRect(frame.width * 9/16, frame.height * 5/6, frame.width/4, frame.height * shad);
+});
+</script>
+</b></body></html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html><head>
+<title>Factorial Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+textarea {
+width: calc(100% - 8px);
+height: 90vh;
+font-size: 16px;
+font-family: consolas;
+text-align: left;
+resize: none;
+}
+input {
+width: 100px;
+}
+</style>
+</head><body>
+<input id="input" type="number" min=0 value=100>
+<span>!</span>
+<div style="display: inline-block; width: 50px;"></div>
+<button onclick="calculate();">Calculate</button>
+<span id="resLength"></span>
+<textarea id="result" readonly=true></textarea>
+<span>This calculator uses BigInt arrays to compute factorials, bypassing the "too large to allocate" error. Large values may take a <i>lot</i> of computation time.</span>
+<script>
+function calculate() {
+lim = 10000; lim2 = 500; num = [1n]; factorial = input.value;
+function multiply(f) {
+num.unshift(0n);
+l = num.length;
+for (i = 1; i < l; i++) {
+num[i] = (BigInt(num[i]) * BigInt(f));
+num[i - 1] = BigInt(num[i - 1]) + BigInt(num[i]) / 10n**BigInt(lim);
+num[i] = BigInt(num[i]) % 10n**BigInt(lim);
+}
+if (num[0] == 0n) {
+num[0] = null;
+num = num.filter(a => a != null);
+}}
+function calculatelim2(n) {
+fact = 1n;
+for (ii = n; ii > n - lim2; ii--) {
+fact *= BigInt(ii);
+}
+return fact;
+}
+for (k = 1; k <= Math.floor(factorial/lim2); k++) {
+multiply(calculatelim2(k * lim2));
+}
+for (k = Math.floor(factorial/lim2) * lim2 + 1; k <= factorial; k++) {
+multiply(BigInt(k));
+}
+len = num.length;
+out = "";
+for (j = 0; j < len; j++) {
+out += "0".repeat(lim - String(num[j]).length) + String(num[j]);
+}
+out = out.replace(/^0+/g, "");
+result.value = out;
+resLength.innerText = "Length: " + out.length + " digit(s)";
+}
+</script>
+</body></html>

@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html><head>
+<title>Mini Console Tools</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+textarea {
+width: 18vw;
+height: 40vh;
+font-size: 12px;
+font-family: consolas;
+text-align: left;
+resize: none;
+}
+h1 {
+font-size: 20px;
+}
+p {
+width: 18vw;
+display: inline-block;
+}
+#container {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+}
+#desc {
+width: 80vw;
+}
+</style></head>
+<body>
+<h1>mcnole25's Mini Console Tools</h1>
+<h1>A big tool made of small quirky tools!</h1>
+<p id="desc">I made a collection of 45 Javascript functions to generate lists of data & numbers. Your built in browser's console is used to show the outputs.<br>All these functions were developed & tested by me. Copy & paste any of them, then open the console to try it out.<br>If you spot an overlooked error or performance issue, please notify me on Github right away, as I aim to provide information as accurate as possible.<br>I may not respond to all issues reported, as I'm not active on Github much, but when I'm around, I'll ensure to review & fix any issue.</p>
+<div id="container">
+<div>
+<h1>Prime Number Generator</h1>
+<textarea readonly=true>console.clear(); primes(10000);
+function primes(n) {
+ar = [2];
+for (i = 2; i <= n; i++) {
+p = true;
+for (f = 2; f <= Math.ceil(Math.sqrt(i)); f++) {
+p = p && (i % f != 0);
+}
+if (p) {ar.push(i);}}
+console.log(ar.join(", "));
+}</textarea><br>
+<p>The function takes an input, then generates a list of prime numbers by checking each number for factors.</p>
+</div>
+<div>
+<h1>Partition into K Parts Generator</h1>
+<textarea readonly=true>console.clear(); partition(60, 4);
+function partition(nn, kk) {
+ar = pn(nn, kk);
+console.log(ar.length);
+console.log(ar.join("\n"));
+}
+function pn(n, k) {
+function helper(n, k, max, current, result) {
+if (k === 0) {
+if (n === 0) result.push([...current].join(" + "));
+return;
+}
+for (let i = Math.min(max, n); i >= 1; i--) {
+current.push(i);
+helper(n - i, k - 1, i, current, result);
+current.pop();
+}}
+let result = [];
+helper(n, k, n, [], result);
+return result;
+}</textarea><br>
+<p>The function splits up n in all possible ways, into k unordered positive integers.</p>
+</div>
+<div>
+<h1>Math Table Generator</h1>
+<textarea readonly=true>console.clear(); mathtable(10, "*");
+function mathtable(n, op) {
+ar = []; row = ["  " + op + "  "];
+for (i = 1; i <= n; i++) {
+row.push(" ".repeat(5 - String(i).length) + i);
+}
+ar.push(row.join(""));
+ar.push("     " + "\u2013".repeat(row.join("").length - 5));
+for (j = 1; j <= n; j++) {
+row = [" ".repeat(3 - String(j).length) + j + " |"];
+for (i = 1; i <= n; i++) {
+val = 0;
+if (op == "+") {val = (i + j);}
+if (op == "*") {val = (i * j);}
+row.push(" ".repeat(5 - String(val).length) + val);
+}
+ar.push(row.join(""));
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function generates an n x n addition/multiplication table ("+" or "*") pretty printed with special characters.</p>
+</div>
+<div>
+<h1>1/N Digit Searcher</h1>
+<textarea readonly=true>console.clear(); searchfrac("", 100000);
+function searchfrac(q, n) {
+ar = [];
+for (i = 1; i <= n; i++) {
+val = 10n**100n/BigInt(i);
+if (i == 1) {
+d = "1";
+} else {
+d = "0." + "0".repeat(100 - String(val).length) + val;
+d = String(d).replace(/0+$/, "");
+}
+ar.push("1\u2044" + i + " = " + d);
+}
+ar = ar.filter(a => a.includes(q));
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function takes a search query for the 1st input, then generates reciprocals up to the 2nd input.</p>
+</div>
+<div>
+<h1>Decimal Period Searcher</h1>
+<textarea readonly=true>console.clear(); periodsearch(3, 100000);
+function periodsearch(q, n) {
+ar = [];
+for (i = 1; i <= n; i++) {
+val = 10n**100n/BigInt(i);
+if (i == 1) {
+d = "1";
+} else {
+d = "0." + "0".repeat(100 - String(val).length) + val;
+d = String(d).replace(/0+$/, "");
+}
+p = true;
+if (q > 1) {
+for (qq = 1; qq < q; qq++) {
+for (k = 0; k <= 50/q; k++) {
+d1 = String(d).slice(String(d).length - (k + 1) * q, String(d).length - k * q);
+d2 = String(d).slice(String(d).length - (k + 2) * q - qq, String(d).length - (k + 1) * q - qq);
+p = p && (d1 != d2);
+}}}
+for (k = 0; k <= 50/q; k++) {
+d1 = String(d).slice(String(d).length - (k + 1) * q, String(d).length - k * q);
+d2 = String(d).slice(String(d).length - (k + 2) * q, String(d).length - (k + 1) * q);
+p = p && (d1 == d2);
+}
+if (p) {ar.push("1\u2044" + i + " = " + d);}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function generates all possible integer reciprocals with a certain period length. Example: 0.09090909... is period 2.</p>
+</div>
+<div>
+<h1>Digit Error Generator</h1>
+<textarea readonly=true>console.clear(); digiterror(2763);
+function digiterror(n) {
+ar = [];
+for (j = 0; j < String(n).length; j++) {
+for (i = 0; i < 10; i++) {
+d = String(n).split("");
+d[j] = i;
+ar.push(Number(d.join("")));
+}}
+ar = [...new Set(ar)];
+ar = ar.filter(N => N != n && String(N).length == String(n).length);
+ar = ar.sort((a, b) => a - b);
+console.log(ar.join(", "));
+}</textarea><br>
+<p>The function reads the input number, then generates all possible numbers with exactly 1 digit changed. Works up to 9007199254740991.</p>
+</div>
+<div>
+<h1>Power Digit Race Simulator</h1>
+<textarea readonly=true>console.clear(); powerrace(2, 1000);
+function powerrace(n, k) {
+ar = ["0,1,2,3,4,5,6,7,8,9,,LEAD,COUNT".replace(/,/g, "\u0009"), "\u2013".repeat(73)];
+r = Array(10).fill(0);
+for (i = 1; i <= k; i++) {
+val = BigInt(n)**BigInt(i); s = 0; m = 0;
+for (d = 0; d < 10; d++) {
+r[d] += String(val).split(d).length - 1;
+s += r[d];
+if (r[d] > r[m]) {m = d;}
+}
+ar.push(r.join("\u0009") + "\u0009\u0009" + m + "\u0009" + s);
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function sets up a table with all 10 digits counted at 0, then counts up from n**1 to n**k. Which digit will win?</p>
+</div>
+<div>
+<h1>Expression Generator v1</h1>
+<textarea readonly=true>console.clear(); expressions(0, 12);
+function expressions(n, l) {
+ar = []; m = []; p = [];
+for (i = l; i > 1; i--) {
+for (j = i; j > 1; j--) {
+m.push(i + " * " + j);
+p.push(i * j);
+}}
+for (i = l; i >= -l; i--) {
+m.push(i); p.push(i);
+}
+for (i = 2; i <= l; i++) {
+for (j = 2; j <= i; j++) {
+m.push("-" + i + " * " + j);
+p.push(-i * j);
+}}
+for (i = 0; i < m.length; i++) {
+for (j = 0; j <= i; j++) {
+for (k = 0; k <= j; k++) {
+a = Number(p[i]) + Number(p[j]) + Number(p[k]);
+x = m[k] + " + " + m[j] + " + " + m[i];
+x = x.replace(/ \+ 0/g, "").replace(/^0 \+ /g, "").replace(/ \+ -/g, " - ");
+v = (x.charAt(0) != "-" && (x.includes("+") || x.includes("-") || x.includes("*")));
+if (v && a == n) {ar.push(x + " = " + a);}}}}
+ar = ar.sort();
+ar = ar.sort((a, b) => a.length - b.length);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function calculates all possible unordered add-subtract-multiply combos, with a maximum of 2 numbers per product & 3 products per expression.</p>
+</div>
+<div>
+<h1>Irrational Fraction Approximator</h1>
+<textarea readonly=true>console.clear(); approximate(Math.SQRT2, 25000000);
+function approximate(c, l) {
+ar = [];
+sign = Math.sign(c);
+c = Math.abs(c);
+r = 1;
+for (i = 1; i <= l; i++) {
+d = Math.abs(Math.round(c * i)/i - c);
+if (d < r) {
+ar.push((sign == -1 ? "-" : "") + Math.floor(Math.round(c * i) / i) + " " + Math.round(c * i) % i + "\u2044" + i + " = " + Math.round(c * i) / i * sign);
+r = d;
+}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function finds the closest fractions to a constant with the denominator increasing. If a fraction's distance beats the record, it gets added to the list.</p>
+</div>
+<div>
+<h1>Binary 1's Count Searcher</h1>
+<textarea readonly=true>console.clear(); binaries(3, 100000);
+function binaries(n, l) {
+ar = [];
+for (i = 0; i <= l; i++) {
+if (i.toString(2).split("1").length - 1 == n) {
+ar.push(i);
+}}
+console.log(ar.join(", "));
+}</textarea><br>
+<p>The function converts decimal numbers to binary, then counts the number of 1's for the 1st input. Inspired by the idea of odious/evil numbers.</p>
+</div>
+<div>
+<h1>Combinations Generator</h1>
+<textarea readonly=true>console.clear(); combine(["protein", "carbs", "fat", "sugar"], -1);
+function combine(keys, l) {
+var set = [];
+if (l == -1) {
+for (j = 0; j <= keys.length; j++) {
+recursive(j - 1, 0, []);
+}} else {
+recursive(l - 1, 0, []);
+}
+function recursive(cross, s, a) {
+for (var i = s; i < keys.length; i++) {
+if (!cross) {
+var b = a.slice(0);
+b.push(keys[i]);
+set.push("{" + b.join(", ") + "}");
+} else {
+a.push(keys[i]);
+recursive(cross - 1, i + 1, a);
+a.splice(-1, 1);
+}}
+if (cross == -1) {set = ["{}"];}
+}
+console.log(set.length);
+console.log(set.join("\n"));
+}</textarea><br>
+<p>The function goes through all nCr combinations of a given input list, or all possible subsets if the 2nd input is -1.</p>
+</div>
+<div>
+<h1>Modular Permutation Generator</h1>
+<textarea readonly=true>console.clear(); modperm(1000, 2);
+function modperm(m, k) {
+ar = [];
+for (n = 1; n <= m; n++) {
+row = []; val = 1;
+for (i = 0; i <= n; i++) {
+row.push(val);
+val *= k; val = val % (n + 1);
+}
+row = [...new Set(row)];
+if (row.length == n && !row.includes(0)) {
+ar.push(n + " (mod " + (n + 1) + ")\n" + row.join(", ") + "\n");
+}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function generates powers of the 2nd input, going from 1 to the 1st input, then checks if (mod n + 1) has every number up to n.</p>
+</div>
+<div>
+<h1>Year Fraction Generator</h1>
+<textarea readonly=true>console.clear(); yearfrac(10000);
+function yearfrac(n) {
+ar = []; d = 365.2425;
+for (i = 1; i <= n; i++) {
+y = Math.floor(1/i); mo = Math.floor(12/i) % 12;
+dy = (d/i) % (d/12); h = Math.floor((dy % 1) * 24 % 24);
+m = Math.floor((dy % 1) * 1440 % 60);
+s = Math.round(((dy % 1) * 86400 % 60) * 10**5)/10**5;
+t = "1\u2044" + i + " years = " + y + "y " + mo + "mo " + Math.floor(dy) + "d " + h + "h " + m + "m " + s + "s";
+t = t.replace(/ 0[ydhs]/g, "").replace(/ 0mo/g, "").replace(/ 0m/g, "");
+ar.push(t);
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function converts the length of the years: 1/1, 1/2, 1/3, 1/4, etc. precisely to the nearest 0.00001 seconds. Based on the Gregorian calendar.</p>
+</div>
+<div>
+<h1>Primes in Buckets Generator</h1>
+<textarea readonly=true>console.clear(); buckets([2, 5, 11], 4);
+function buckets(p, l) {
+ar = []; l++;
+for (i = 0; i < l**p.length; i++) {
+val = 1n; b = [];
+for (j = 0; j < p.length; j++) {
+x = (Math.floor(i/l**j) % l);
+val *= BigInt(p[j])**BigInt(x);
+b.push(Array(x).fill(p[j]));
+}
+ar.push(val + " --- " + JSON.stringify(b).replace(/,/g, ", "));
+}
+ar.sort((a, b) => a.split(" ")[0] - b.split(" ")[0]);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function generates all combinations of prime number "buckets", with each bucket having a maximum size. Good method for visualizing the FTA.</p>
+</div>
+<div>
+<h1>Dice Probability Generator</h1>
+<textarea readonly=true>console.clear(); rolldice(3, 6, "+");
+function rolldice(n, d, op) {
+ar = ["VALUE\u0009EVENTS\u0009P(VALUE)\u0009DISTRIBUTION"]; v = Array((op == "*") ? d**n : d * n).fill(0);
+for (i = 0; i < d**n; i++) {
+x = (op == "*") ? 1 : 0;
+for (j = 0; j < n; j++) {
+c = (Math.floor(i/d**j) % d) + 1;
+if (op == "*") {x *= c;} else {x += c;}
+}
+v[x - 1]++;
+}
+for (i = 0; i < v.length; i++) {
+p = v[i]/d**n * 100;
+if (v[i] > 0) {ar.push((i + 1) + "\u0009" + v[i] + "\u0009" + p.toFixed(5) + "%\u0009" + "#".repeat(Math.round(p)));}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function rolls all possible combinations of n d-sided dice, then adds/multiplies the results, then generates a probability distribution.</p>
+</div>
+<div>
+<h1>Custom Fibonacci Series Generator</h1>
+<textarea readonly=true>console.clear(); fibonacci(1000, 1, 2, 0);
+function fibonacci(n, f, l, o) {
+ar = Array(l).fill(0).concat([1, f]);
+for (i = l + 1; i < n + l - 1; i++) {
+v = BigInt(ar[i]) * BigInt(f); s = 0n;
+for (j = 1; j < l; j++) {s += BigInt(ar[i - j]);}
+v += s + BigInt(o); ar.push(v);
+}
+ar = ar.filter(n => n != 0n);
+func = [];
+for (i = 1; i <= l; i++) {func.push(((f != 1 && i == 1) ? f + " * " : "") + "F(n - " + i + ")");}
+if (o != 0) {func.push(o);}
+console.log("F(n) = " + func.join(" + ").replace(/\+ -/g, "- ") + "\n" + ar.join(", "));
+}</textarea><br>
+<p>The function creates a general Fibonacci sequence with a term limit, a last term factor, a number of last terms to add, & a final offset addition. Can generate Pell, Fibonacci order 3, Tribonacci, etc.</p>
+</div>
+<div>
+<h1>Factored Square Root Generator</h1>
+<textarea readonly=true>console.clear(); sqrttable(1000);
+function sqrttable(n) {
+ar = [];
+for (i = 1; i <= n; i++) {
+f = [1, i];
+for (j = 2; j < Math.ceil(Math.sqrt(i)); j++) {
+while (f[1] % j**2 == 0) {f[0] *= j; f[1] /= j**2;}}
+ar.push("\u221a" + i + " = " + f.join(" * \u221a") + " = " + Math.sqrt(i));
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function takes square roots of positive integers, then simplifies & factors them out until surds are reached.</p>
+</div>
+<div>
+<h1>Gregorian Day Index Generator</h1>
+<textarea readonly=true>console.clear(); gregorian(250000);
+function gregorian(d) {
+arr = [];
+for (ii = 0; ii <= Math.ceil(d/360) + 1; ii++) {
+leap = false;
+if ((1582 + ii) % 4 == 0) {leap = true;}
+if ((1582 + ii) % 100 == 0) {leap = false;}
+if ((1582 + ii) % 400 == 0) {leap = true;}
+arr.push(appendyear(1582 + ii, leap));
+}
+arr = arr.flat().slice(287, 287 + d);
+oldarr = [];
+for (ii = 0; ii < arr.length; ii++) {
+oldarr.push(arr[ii] + " - Day " + (ii + 1));
+}
+arr = oldarr;
+console.log(arr.join("\n"));
+}
+function appendyear(y, l) {
+ar = [];
+m = [31, (l ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+n = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+for (i = 0; i < 12; i++) {
+for (j = 1; j <= m[i]; j++) {
+ar.push(j + " " + n[i] + " " + y);}}
+return ar;
+}</textarea><br>
+<p>The function starts on 15 Oct 1582, when the Gregorian calendar was first established, then counts up the days ever since. Can you find your date of birth?</p>
+</div>
+<div>
+<h1>1/3 Binary Search Generator</h1>
+<textarea readonly=true>console.clear(); searchthird(1000);
+function searchthird(n) {
+ar = []; v = 0n;
+for (i = 1; i <= n; i++) {
+v -= (-5n)**BigInt(i);
+ar.push("0." + v);
+v *= 10n;
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function uses BigInt & string manipulation to start at 0.5, then repeatedly searches for the decimal 1/3 with infinite precision.</p>
+</div>
+<div>
+<h1>Hypothetical Election Simulator</h1>
+<textarea readonly=true>console.clear(); election(672, 2000);
+function election(s, v) {
+ar = []; ss = s; el = [0, 0, 0];
+for (i = 0; i <= v; i++) {
+s = (Math.sqrt(ss * i) * Math.E) % 1;
+obj = ["Yellow: " + el[0], "Cyan: " + el[1], "Magenta: " + el[2]];
+obj.sort((a, b) => Number(b.split(":")[1]) - Number(a.split(":")[1]));
+ar.push(obj.join(" \u0009 "));
+el[Math.floor(s * 3)]++;
+}
+console.log("Input seed: " + ss + "\n" + ar.join("\n"));
+}</textarea><br>
+<p>The function sets up 3 fictional candidates: "Yellow", "Cyan" & "Magenta", then randomly votes for the candidates based on a seed value. Which colour will win?</p>
+</div>
+<div>
+<h1>Tally Marks Generator</h1>
+<textarea readonly=true>console.clear(); tallymarks(1000);
+function tallymarks(n) {
+ar = [0]; t = ["|", "||", "|||", "||||", "\u0336|\u0336|\u0336|\u0336|"];
+for (i = 1; i <= n; i++) {
+tt = i > 5 ? Array(Math.ceil(i/5) - 1).fill(t[4]).join(" ") + " " : "";
+ar.push(i + "\n" + tt + t[(i - 1) % 5]);
+}
+console.log(ar.join("\n\n"));
+}</textarea><br>
+<p>The function visualizes tally marks from 0 to the given input. If you know how tally works, no further explanation is needed.</p>
+</div>
+<div>
+<h1>Views & Likes Table Generator</h1>
+<textarea readonly=true>console.clear(); viewlikes(1000, Math.E**4);
+function viewlikes(n, r) {
+ar = [];
+for (i = 0; i <= 7305; i++) {
+v = n * Math.cbrt(i);
+ar.push(Math.floor(v) + " views, " + Math.floor(v/r) + " likes - Day " + i);
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function sets up a formula for views & likes, then counts them day by day, with newer content growing fast, then view retention decays over time.</p>
+</div>
+<div>
+<h1>Permutations Generator</h1>
+<textarea readonly=true>console.clear(); permute(5);
+function permute(arr) {
+arr = Array.from({length: arr}, (_, i) => i + 1);
+let result = [];
+function g(arr, m = []) {
+if (arr.length === 0) {
+result.push(m);
+} else {
+for (let i = 0; i < arr.length; i++) {
+let curr = arr.slice();
+let next = curr.splice(i, 1);
+g(curr.slice(), m.concat(next));
+}}}
+g(arr);
+console.log(result.length);
+console.log(result.join("\n").replace(/,/g, ", "));
+}</textarea><br>
+<p>The function simply generates all possible ways to rearrange n items. (I don't really know how this code works tbh)</p>
+</div>
+<div>
+<h1>Pythagorean Triples Generator</h1>
+<textarea readonly=true>console.clear(); pythagorean(100);
+function pythagorean(n) {
+ar = [];
+for (i = 0; i <= n; i++) {
+for (j = 0; j <= i; j++) {
+if (Math.sqrt(i**2 + j**2) == Math.round(Math.sqrt(i**2 + j**2))) {
+ar.push(i + "² + " + j + "² = " + Math.sqrt(i**2 + j**2) + "²");}}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function iteratively checks: does i**2 + j**2 equal a perfect square? If it does, the equation is added to the list.</p>
+</div>
+<div>
+<h1>Special Relativity Table Generator</h1>
+<textarea readonly=true>console.clear(); relativity(100);
+function relativity(n) {
+ar = ["SPEED   \u0009DILATION \u0009x2 ENERGY"];
+c = 299792.458;
+for (i = 0; i <= n; i++) {
+ar.push(Math.round(i/n * c) + " km/s  \u0009" + Math.sqrt(1 - (i/n)**2).toFixed(6) + "s\u0009" + Math.round((2 * i/n/(1 + (i/n)**2)) * c) + " km/s");
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function takes the input value, then generates increments of 1/input * c up to light speed, with time dilation & double velocity. Only use if you understand special relativity.</p>
+</div>
+<div>
+<h1>Multiply/Add Combo Rearranger</h1>
+<textarea readonly=true>console.clear(); rearrangeop("*++**");
+function rearrangeop(op) {
+op = op.split("+").sort((a, b) => b.length - a.length);
+f = factorial(op.length);
+for (ii = 0; ii < op.length; ii++) {
+f *= factorial(op[ii].length + 1);
+}
+console.log(f);
+function factorial(n) {
+zz = 1;
+for (z = 1; z <= n; z++) {zz *= z;}
+return zz;
+}
+op = op.join("+");
+ar = [];
+while (ar.length < f) {
+x = "";
+for (i = 0; i <= op.length; i++) {
+x += String.fromCharCode(97 + i) + op.charAt(i);
+}
+x = x.split("+");
+for (j = 0; j < x.length; j++) {
+x[j] = x[j].split("*").sort((a, b) => Math.random() - 0.5).join("*");
+}
+x = x.sort((a, b) => Math.random() - 0.5).join("+");
+x = x.split("").join(" ");
+if (!ar.includes(x)) {ar.push(x);}}
+ar.sort(); if (ar.length == f) {console.log(ar.join("\n"));}}</textarea><br>
+<p>The function exhaustively produces all permutations of addition & multiplication, with algebraic variables as substitutes for numbers.</p>
+</div>
+<div>
+<h1>Lucky Number Series Generator</h1>
+<textarea readonly=true>console.clear(); lucky(1000);
+function lucky(n) {
+ar = Array.from({length: n}, (_, i) => i + 1);
+v = 1; lo = -1; ln = -2;
+while (lo != ln) {
+v = ar.filter(a => a > v)[0];
+lo = ar.length;
+ar = ar.filter(a => (ar.indexOf(a) + 1) % v != 0);
+ln = ar.length;
+}
+console.log(ar.join(", "));
+}</textarea><br>
+<p>The function sieves out a list of positive integers in a certain way, with "lucky" numbers meaning they survive all the eliminations.</p>
+</div>
+<div>
+<h1>2x2 Sudoku Generator</h1>
+<textarea readonly=true>console.clear(); sudoku2x2();
+function sudoku2x2() {
+ar = [];
+while (ar.length < 288) {
+s = [];
+for (i = 0; i < 4; i++) {
+s.push([1, 2, 3, 4].sort((a, b) => Math.random() - 0.5).join(" "));
+}
+v = true;
+for (i = 0; i < 4; i++) {
+c = [s[0].split(" ")[i], s[1].split(" ")[i], s[2].split(" ")[i], s[3].split(" ")[i]];
+v = v && (c.length == new Set(c).size);
+}
+for (i = 0; i < 4; i += 2) {
+for (j = 0; j < 4; j += 2) {
+c = [s[i].split(" ")[j], s[i].split(" ")[j + 1], s[i + 1].split(" ")[j], s[i + 1].split(" ")[j + 1]];
+v = v && (c.length == new Set(c).size);
+}}
+s = s.join("\n");
+if (v && !ar.includes(s)) {ar.push(s);}}
+console.log(ar.sort().join("\n\n"));
+}</textarea><br>
+<p>The function checks all possibilities & generates all possible 2x2 Sudoku solutions. Spoiler: There are 288 possibilities.</p>
+</div>
+<div>
+<h1>Impossible Square Sums Generator</h1>
+<textarea readonly=true>console.clear(); impossiblesquares(100);
+function impossiblesquares(n) {
+ar = [];
+for (i = 0; i <= n; i++) {
+for (j = 0; j <= i; j++) {
+ar.push(i**2 + j**2);
+}}
+inv = Array.from({length: n**2}, (_, i) => i + 1);
+inv = inv.filter(a => !ar.includes(a));
+ar = inv;
+console.log(ar.join(", "));
+}</textarea><br>
+<p>The function iteratively checks if i**2 + j**2 can never equal a value, then produces a sequence up to the given input. Based on squares on lattices.</p>
+</div>
+<div>
+<h1>Rock Paper Scissors Generator</h1>
+<textarea readonly=true>console.clear(); rps(4);
+function rps(n) {
+ar = [];
+for (j = 0; j <= n; j++) {
+for (i = 0; i <= j; i++) {
+ii = j - i; iii = n - j;
+mx = Math.max(iii, ii, i);
+mn = Math.min(iii, ii, i);
+md = n - mx - mn;
+if (md == mn) {
+w = "Tie";
+} else {
+w = (mn == i) ? "Paper" : w;
+w = (mn == ii) ? "Rock" : w;
+w = (mn == iii) ? "Scissors" : w;
+}
+ar.push("R".repeat(iii) + "P".repeat(ii) + "S".repeat(i) + " - Winner(s): " + w);
+}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function checks all unordered ways n people can play rock paper scissors, then generates all the rules for each situation. Hint: The top 2 most chosen groups match up.</p>
+</div>
+<div>
+<h1>Yellowstone Permutation Generator</h1>
+<textarea readonly=true>console.clear(); yellowstone(1000);
+function yellowstone(n) {
+ar = [1, 2, 3];
+for (i = 4; i <= n; i++) {
+j = 0; v = false;
+while (!v) {
+j++;
+v = (gcf(j, Number(ar[ar.length - 1])) == 1 && !ar.includes(j));
+v = v && (gcf(j, Number(ar[ar.length - 2])) != 1);
+}
+ar.push(j);
+}
+console.log(ar.join(", "));
+}
+function gcf(a, b) {
+while (b !== 0) {
+[a, b] = [b, a % b];
+}
+return a;
+}</textarea><br>
+<p>The function simply generates the Yellowstone permutation. Only use if you know what this sequence means, otherwise it's just jumbled numbers.</p>
+</div>
+<div>
+<h1>Every Second Converter</h1>
+<textarea readonly=true>console.clear(); everysecond();
+function everysecond() {
+ar = ["TIME    \u0009MINUTE  \u0009SECOND  \u0009120-UNIT\u000930-UNIT"];
+for (s = 0; s < 86400; s++) {
+h = Math.floor(s/3600);
+m = Math.floor(s/60);
+h120 = Math.floor(s/14400);
+m120 = Math.floor(s/120);
+h30 = Math.floor(s/900);
+m30 = Math.floor(s/30);
+ar.push([pad0(h % 24, 2), pad0(m % 60, 2), pad0(s % 60, 2)].join(":") + "\u0009" + [pad0(m, 4), pad0(s % 60, 2)].join(":") + " \u0009" + pad0(s, 5) + "   \u0009" + [pad0(h120 % 6, 1), pad0(m120 % 120, 3), pad0(s % 120, 3)].join(":") + "\u0009" + [pad0(h30 % 96, 2), pad0(m30 % 30, 2), pad0(s % 30, 2)].join(":"));
+}
+console.log(ar.join("\n"));
+}
+function pad0(str, l) {
+return "0".repeat(l - String(str).length) + String(str);
+}</textarea><br>
+<p>The function goes through every second of every day in 24 hour standard time, then shows you how it can be read in several different ways.</p>
+</div>
+<div>
+<h1>Palindrome Years Generator</h1>
+<textarea readonly=true>console.clear(); palindromeyears();
+function palindromeyears() {
+ar = [];
+m = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+n = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+for (i = 0; i < 12; i++) {
+for (j = 1; j <= m[i]; j++) {
+y = String((j < 10 ? 0 : "") + String(j) + ((i + 1) < 10 ? 0 : "") + String(i + 1));
+dm = y;
+y = y.split("").reverse().join("");
+ar.push(j + " " + n[i] + " " + y + " = " + String(dm) + String(y));}}
+ar = ar.filter(a => a.split(" ")[2] > 1582).sort((a, b) => a.split(" ")[2] > b.split(" ")[2]);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function checks through all years from 1583-9999, then generates palindromic dates, with reversed years corresponding to a (DD/MM/YYYY) date.</p>
+</div>
+<div>
+<h1>Arithmetic Combinations Generator</h1>
+<textarea readonly=true>console.clear(); allarithmetic(4);
+function allarithmetic(n) {
+ar = []; n--;
+for (ii = 0; ii < 4**n; ii++) {
+v = ii.toString(4);
+v = (n > 0) ? ("0".repeat(n - String(v).length) + String(v)) : "";
+v = v.replace(/0/g, "+").replace(/1/g, "-").replace(/2/g, "*").replace(/3/g, "/");
+v = mathop(v);
+if (!ar.includes(v)) {ar.push(v);}}
+if (n == -1) {ar = [];}
+console.log(ar.length);
+console.log(ar.join("\n"));
+}
+function mathop(op) {
+x = op.replace(/-/g, "+-").replace(/\//g, "*1/").split("+");
+for (i = 0; i < x.length; i++) {
+x[i] = x[i].split("*");
+x[i] = x[i].sort();
+x[i] = x[i].join("*");
+}
+x = x.sort();
+x = x.sort((a, b) => b.replace(/1\/|-/g, "").length - a.replace(/1\/|-/g, "").length + 10000 * (a.includes("-") - b.includes("-")));
+for (i = 0; i < x.length; i++) {
+x[i] = x[i].replace(/\*1\//g, "/");
+}
+ex = "";
+for (i = 0; i < x.length; i++) {
+if (x[i].includes("-")) {ex += "-"} else {ex += "+"}
+ex += x[i].replace(/-/g, "");
+}
+ex = ex.replace(/\+/, "");
+x = "";
+for (i = 0; i <= ex.length; i++) {
+x += String.fromCharCode(97 + i) + ex.charAt(i);
+}
+x = x.split("").join(" ");
+return x;
+}</textarea><br>
+<p>The function asks: How many ways can n numbers be arithmetized? (+, -, *, /), then smartly sorts & declutters using the BODMAS convention & the commutative laws.</p>
+</div>
+<div>
+<h1>Filter By Factor Count Searcher</h1>
+<textarea readonly=true>console.clear(); fbfc(4, 10000);
+function fbfc(n, l) {
+ar = Array.from({length: l}, (_, i) => i + 1);
+ar = ar.filter(a => factors(a) == n);
+console.log(ar.join(", "));
+}
+function factors(num) {
+count = 0;
+for (i = 1; i <= Math.sqrt(num); i++) {
+if (num % i == 0) {
+count++;
+if (i != num / i) {
+count++;
+}}}
+return count;
+}</textarea><br>
+<p>The function is self explanatory, it filters a list of positive integers by how many factors it has. Notice how the input 2 produces primes.</p>
+</div>
+<div>
+<h1>Average Digits Sorter</h1>
+<textarea readonly=true>console.clear(); avgdigits(10000);
+function avgdigits(n) {
+ar = Array.from({length: n}, (_, i) => i + 1);
+ar = ar.sort((a, b) => avg(a) - avg(b));
+console.log(ar.join(", "));
+}
+function avg(n) {
+c = 0;
+for (i = 0; i < String(n).length; i++) {
+c += Number(String(n).charAt(i));
+}
+return c/String(n).length;
+}</textarea><br>
+<p>The function sorts a list of numbers by the average digit of each number. Example: 3.5 is the average digit of 6215.</p>
+</div>
+<div>
+<h1>Final Digits of 2**N Generator</h1>
+<textarea readonly=true>console.clear(); final2ndigits(5);
+function final2ndigits(n) {
+ar = []; v = String(2**53);
+l = 4 * 5**(n - 1); v = v.slice(v.length - n, v.length);
+for (i = 0; i < l; i++) {
+ar.push(((i + 53) % l) + "\u0009..." + "0".repeat(n - String(v).length) + v);
+v *= 2; v = v % 10**n;
+}
+ar = ar.sort((a, b) => Number(a.split("\u0009")[0]) - Number(b.split("\u0009")[0]));
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function generates a table of powers of 2 with the final digit(s) having a certain period length. Convenient for large exponent calculation.</p>
+</div>
+<div>
+<h1>Collatz Conjecture Generator</h1>
+<textarea readonly=true>console.clear(); collatz(500);
+function collatz(n) {
+ar = [];
+for (i = 1; i <= n; i++) {
+v = BigInt(i); r = [i];
+while (v != 1n) {
+if (v % 2n == 0) {
+v = BigInt(v)/2n;
+} else {
+v = 3n * BigInt(v) + 1n;
+}
+r.push(v);
+}
+ar.push(i + "\u0009" + r.join(", "));
+}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function says if a number is odd, 3n + 1. If it's even, n/2. So far, we seem to always reach 1. But do we ALWAYS? This is a famous unsolved math puzzle.</p>
+</div>
+<div>
+<h1>Team Elimination Simulator</h1>
+<textarea readonly=true>console.clear(); elimination(4, 8, 37);
+function elimination(t, m, ss) {
+ar = [];
+c = generate2d(t, m);
+z = 0;
+while (c.flat().length > 0 && ss != 0) {
+s = (Math.sqrt(ss * z) * Math.E) % 1;
+str = JSON.stringify(c).replace(/\],\[/g, "}\n{").replace(/\[\[/g, "{").replace(/\]\]/g, "}").replace(/,/g, ", ");
+if (!ar.includes(str)) {ar.push(str);}
+c = c.map(row => row.filter(item => item !== Math.ceil(s * t * m)));
+z++;
+}
+console.log(ar.join("\n\n"));
+}
+function generate2d(rows, cols) {
+let array = [];
+let num = 1;
+for (let i = 0; i < rows; i++) {
+let row = [];
+for (let j = 0; j < cols; j++) {
+row.push(num++);
+}
+array.push(row);
+}
+return array;
+}</textarea><br>
+<p>The function sets up t teams of m, then randomly eliminates a player based on a seed value until 1 player is left. Will your favorite number win?</p>
+</div>
+<div>
+<h1>Balanced Ternary Sum Generator</h1>
+<textarea readonly=true>console.clear(); balancedaddsub(5);
+function balancedaddsub(n) {
+ar = []; t = [];
+for (i = 0; i < n; i++) {t.unshift(3**i); t.push(-(3**i));}
+for (i = 0; i < 2**t.length; i++) {
+ss = "0".repeat(t.length - i.toString(2).length) + i.toString(2);
+s = []; c = 0;
+for (j = 0; j < t.length; j++) {
+if (ss.charAt(j) == 1) {
+s.push(t[j]); c += Number(t[j]);
+}}
+for (j = 0; j < n; j++) {
+if (s.includes(3**j) && s.includes(-(3**j))) {
+s = ["#"];
+}}
+if (s.length == 0) {s = [0];}
+if (!s.includes("#")) {ar.push(c + " = " + s.join(" + ").replace(/ \+ -/g, " - "));}}
+ar.sort((a, b) => a.split(" = ")[0] - b.split(" = ")[0]);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function uses powers of 3 to generate a list of additions & subtractions corresponding to each integer. The input uses exponential space, so keep your values low.</p>
+</div>
+<div>
+<h1>Number Properties Lister</h1>
+<textarea readonly=true>console.clear(); numbers(100);
+function numbers(n) {
+ar = [];
+s0 = primes(n);
+s1 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (nn * (nn + 1))/2;
+s1.push(ii); nn++;
+}
+s2 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = nn**2;
+s2.push(ii); nn++;
+}
+s3 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (nn * (3 * nn - 1))/2;
+s3.push(ii); nn++;
+}
+s4 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = nn * (2 * nn - 1);
+s4.push(ii); nn++;
+}
+s5 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (3 * nn**2 + 3 * nn + 2)/2;
+s5.push(ii); nn++;
+}
+s6 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = nn**2 + (nn - 1)**2;
+s6.push(ii); nn++;
+}
+s7 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (5 * nn**2 - 5 * nn + 2)/2;
+s7.push(ii); nn++;
+}
+s8 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 1 + 3 * nn * (nn + 1);
+s8.push(ii); nn++;
+}
+s9 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = nn**3;
+s9.push(ii); nn++;
+}
+s10 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = nn**5;
+s10.push(ii); nn++;
+}
+s11 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 2**nn;
+s11.push(ii); nn++;
+}
+s12 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 3**nn;
+s12.push(ii); nn++;
+}
+s13 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 5**nn;
+s13.push(ii); nn++;
+}
+s14 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 60 * nn;
+s14.push(ii); nn++;
+}
+s15 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 24 * nn;
+s15.push(ii); nn++;
+}
+s16 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 7 * nn;
+s16.push(ii); nn++;
+}
+s17 = [0, 1]; nn = 0; ii = 0;
+while (ii <= n) {
+ii = Number(s17[s17.length - 1]) + Number(s17[s17.length - 2]);
+s17.push(ii);
+}
+s18 = [2, 1]; nn = 0; ii = 0;
+while (ii <= n) {
+ii = Number(s18[s18.length - 1]) + Number(s18[s18.length - 2]);
+s18.push(ii);
+}
+s19 = [0, 1]; nn = 0; ii = 0;
+while (ii <= n) {
+ii = Number(2 * s19[s19.length - 1]) + Number(s19[s19.length - 2]);
+s19.push(ii);
+}
+s20 = [0, 0, 1]; nn = 0; ii = 0;
+while (ii <= n) {
+ii = Number(s20[s20.length - 1]) + Number(s20[s20.length - 2]) + Number(s20[s20.length - 3]);
+s20.push(ii);
+}
+s21 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = 6 * nn * (nn - 1) + 1;
+s21.push(ii); nn++;
+}
+s22 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (nn * (nn + 1) * (nn + 2))/6;
+s22.push(ii); nn++;
+}
+s23 = []; nn = 0; ii = 0;
+while (ii <= n) {
+ii = (nn * (nn + 1) * (2 * nn + 1))/6;
+s23.push(ii); nn++;
+}
+s24 = []; nn = 1; ii = 1;
+while (ii <= n) {
+ii *= nn;
+s24.push(ii); nn++;
+}
+const checkSemiprime = num => {
+let cnt = 0;
+for (let it = 2; cnt < 2 && it * it <= num; ++it){
+while (num % it == 0) {
+num /= it, ++cnt;
+}}
+if (num > 1) {
+++cnt;
+}
+return cnt === 2;
+}
+for (i = 1; i <= n; i++) {
+p = [];
+if (s0.includes(i)) {p.push("Prime");}
+if (s1.includes(i)) {p.push("Triangular");}
+if (s2.includes(i)) {p.push("Square");}
+if (s3.includes(i)) {p.push("Pentagonal");}
+if (s4.includes(i)) {p.push("Hexagonal");}
+if (s5.includes(i)) {p.push("Centered Triangular");}
+if (s6.includes(i)) {p.push("Centered Square");}
+if (s7.includes(i)) {p.push("Centered Pentagonal");}
+if (s8.includes(i)) {p.push("Hex");}
+if (s9.includes(i)) {p.push("Cube");}
+if (s10.includes(i)) {p.push("5th Power");}
+if (s11.includes(i)) {p.push("Power of 2");}
+if (s12.includes(i)) {p.push("Power of 3");}
+if (s13.includes(i)) {p.push("Power of 5");}
+if (s14.includes(i)) {p.push("Exact Hour");}
+if (s15.includes(i)) {p.push("Exact Day");}
+if (s16.includes(i)) {p.push("Exact Week");}
+if (s17.includes(i)) {p.push("Fibonacci");}
+if (s18.includes(i)) {p.push("Lucas");}
+if (s19.includes(i)) {p.push("Pell");}
+if (s20.includes(i)) {p.push("Tribonacci");}
+if (s21.includes(i)) {p.push("Star");}
+if (s22.includes(i)) {p.push("Tetrahedral");}
+if (s23.includes(i)) {p.push("Pyramid");}
+if (s24.includes(i)) {p.push("Factorial");}
+if (checkSemiprime(i)) {p.push("Semiprime");}
+if (isAbundantNumber(i)) {p.push("Abundant");}
+if (hasSixFactors(i)) {p.push("6 Factors");}
+if (String(i) == String(i).split("").reverse().join("")) {p.push("Palindrome");}
+if (i == 1) {p = ["Almost Everything"];}
+ar.push(i + "\u0009" + p.sort().join(", "));
+}
+console.log(ar.join("\n"));
+}
+function primes(oo) {
+arar = [2];
+for (o = 2; o <= oo; o++) {
+pp = true;
+for (f = 2; f <= Math.ceil(Math.sqrt(o)); f++) {
+pp = pp && (o % f != 0);
+}
+if (pp) {arar.push(o);}}
+return arar;
+}
+function isAbundantNumber(numq) {
+if (numq < 1) return false;
+let sum = 0;
+for (let iq = 1; iq <= Math.floor(numq / 2); iq++) {
+if (numq % iq === 0) {
+sum += iq;
+}}
+return sum > numq;
+}
+function hasSixFactors(numt) {
+let factorCount = 0;
+for (let ir = 1; ir <= Math.sqrt(numt); ir++) {
+if (numt % ir === 0) {
+factorCount += (ir === numt / ir) ? 1 : 2;
+}
+if (factorCount > 6) return false;
+}
+return factorCount === 6;
+}</textarea><br>
+<p>The function lists positive integers & notes many properties they have, like being prime, square, Fibonacci, centered square, Tribonacci (sum of 3 last terms), etc.</p>
+</div>
+<div>
+<h1>2 Team Combinations Generator</h1>
+<textarea readonly=true>console.clear(); twoteams(4);
+function twoteams(n) {
+ar = [];
+for (i = 0; i < 4**n/2; i++) {
+b = i.toString(2);
+b = "0".repeat(2 * n - String(b).length) + String(b);
+t1 = []; t2 = [];
+for (j = 1; j <= 2 * n; j++) {
+if (b.charAt(j - 1) == 1) {
+t2.push(j);
+} else {
+t1.push(j);
+}}
+if (t1.length == t2.length) {
+ar.push(t1.join(", ") + " vs " + t2.join(", "));
+}}
+console.log(ar.length);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function finds all possible ways to split 2n people into 2 teams with n people each. The order doesn't matter for the teams or numbers.</p>
+</div>
+<div>
+<h1>Expression Generator v2</h1>
+<textarea readonly=true>console.clear(); expressions(60);
+function expressions(n) {
+ar = [];
+for (k = 1; k <= n; k++) {
+for (i = 2; i <= n; i++) {
+for (j = 2; j <= i; j++) {
+if (((i * j) + k) == n) {
+ar.push(i + " * " + j + " + " + k);
+}}}}
+for (k = 2; k <= n; k++) {
+for (i = 1; i <= n; i++) {
+for (j = 1; j <= i; j++) {
+if (((i + j) * k) == n) {
+ar.push("(" + i + " + " + j + ") * " + k);
+}}}}
+console.log(ar.length);
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function calculates all possible 3 way add/multiply expressions that equal the given input. Also supports the order of operations.</p>
+</div>
+<div>
+<h1>Quadratic Equation Generator</h1>
+<textarea readonly=true>console.clear(); quadratics(20);
+function quadratics(n) {
+ar = [];
+for (i = 1; i <= n; i++) {
+for (j = -n; j <= n; j++) {
+for (k = -n; k <= n; k++) {
+q = i + "x\u00b2 + " + j + "x + " + k;
+q = q.replace(/\+ -/g, "- ");
+q = q.replace(/ \+ 0x/g, "").replace(/ \+ 0/g, "");
+q = q.replace(/\+ 1x/g, "+ x").replace(/- 1x/g, "- x");
+if (i == 1) {q = q.replace(/1x\u00b2/g, "x\u00b2");}
+r1 = (-j - Math.sqrt(j**2 - 4 * i * k))/(2 * i);
+r2 = (-j + Math.sqrt(j**2 - 4 * i * k))/(2 * i);
+if (r1 == Math.round(r1) && r2 == Math.round(r2)) {
+ar.push(q + " = 0" + " ".repeat(25 - q.length) + "x = " + r1 + " or " + r2);
+}}}}
+console.log(ar.join("\n"));
+}</textarea><br>
+<p>The function uses all possible quadratic equations with integer roots, then uses the quadratic formula to calculate those roots.</p>
+</div>
+<div>
+<h1>Automatic Competition Decider</h1>
+<textarea readonly=true>console.clear(); decidecomp(40);
+function decidecomp(n) {
+m = Math.round(n/3); l = Math.round(n/20);
+c = n; e = 1;
+if (m < 1) {m = 1;} if (l < 1) {l = 1;}
+while (n > m) {
+n -= l; e += 1;
+}
+if (n < m) {n += l; e -= 1;}
+e += n - 1; t = 0; n = 0;
+for (i = Math.floor(Math.sqrt(c)); i >= 1; i--) {
+if (t == 0 && c % i == 0) {t = i;}
+}
+dia = [];
+for (i = 0; i < t; i++) {dia.push("\u2022 ".repeat(c/t).trim());}
+console.log("Cast size: " + c + ", Merge: " + m + "\nEliminations: " + l + ", Episode count: " + e + "\nTeams: " + t + " team(s) of " + c/t + "\n\n" + dia.join("\n"));
+}</textarea><br>
+<p>The function is inspired by competition/object shows. It factors the number & finds the best team count for the cast size. Prime numbers mean individual competition.</p>
+</div>
+</div>
+</body></html>

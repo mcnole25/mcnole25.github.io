@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html><head>
+<title>Math Table Viewer</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+select {
+width: 250px;
+overflow: hidden;
+}
+body {
+display: grid;
+grid-template-columns: 275px 1fr;
+}
+#mathtable {
+text-align: center;
+}
+td {
+display: inline-block;
+width: 55px;
+height: 25px;
+}
+</style>
+</head><body>
+<div>
+<span>Select a Table</span><br><br>
+<select id="type" size=12>
+<option value=0>Addition Table</option>
+<option value=1>Subtraction Table</option>
+<option value=2 selected=true>Multiplication Table</option>
+<option value=3>Division Table</option>
+<option value=4>Exponent Table</option>
+<option value=5>Nth Root Table</option>
+<option value=6>Distance Table</option>
+<option value=7>LCM Table</option>
+<option value=8>GCF Table</option>
+<option value=9>Permutation Table</option>
+<option value=10>Combination Table</option>
+<option value=11>Remainder Table</option>
+</select>
+</div><div>
+<table id="mathtable"></table>
+</div>
+<script>
+tableSize = 25;
+icons = ["+", "\u2212", "*", "/", "^", "\u221a", "dist", "lcm", "gcf", "P", "C", "mod"];
+setInterval(function() {
+mathtable.innerHTML = "<tr>";
+e = document.createElement("td");
+e.innerText = icons[type.value];
+e.style.fontWeight = "bold";
+mathtable.appendChild(e);
+for (i = 1; i <= tableSize; i++) {
+e = document.createElement("td");
+e.innerText = i;
+e.style.fontWeight = "bold";
+e.style.margin = "0px 2px";
+mathtable.appendChild(e);
+}
+mathtable.innerHTML += "</tr>";
+for (j = 1; j <= tableSize; j++) {
+mathtable.innerHTML += "<tr>";
+e = document.createElement("td");
+e.innerText = j;
+e.style.fontWeight = "bold";
+mathtable.appendChild(e);
+for (i = 1; i <= tableSize; i++) {
+e = document.createElement("td");
+e.innerText = func(i, j);
+e.style.border = "1px #fff solid";
+e.style.margin = "0px 1px";
+e.style.textAlign = "left";
+mathtable.appendChild(e);
+}
+mathtable.innerHTML += "</tr>";
+}}, 400);
+function gcf(a, b) {
+if (b == 0) {
+return a;
+}
+return gcf(b, a % b);
+}
+function fact(n) {
+if (n < 0) return Infinity;
+if (n == 0 || n == 1) return 1;
+return n * fact(n - 1);
+}
+function func(x, y) {
+if (type.value == 0) {t = Number(x) + Number(y);}
+if (type.value == 1) {t = Number(x) - Number(y);}
+if (type.value == 2) {t = Number(x) * Number(y);}
+if (type.value == 3) {t = Number(x)/Number(y);}
+if (type.value == 4) {t = Number(x)**Number(y);}
+if (type.value == 5) {t = Number(x)**(1/Number(y));}
+if (type.value == 6) {t = Math.sqrt(Number(x)**2 + Number(y)**2);}
+if (type.value == 7) {t = (Number(x) * Number(y))/gcf(Number(x), Number(y));}
+if (type.value == 8) {t = gcf(Number(x), Number(y));}
+if (type.value == 9) {t = fact(Number(x))/fact(Number(x) - Number(y));}
+if (type.value == 10) {t = fact(Number(x))/(fact(Number(y)) * fact(Number(x) - Number(y)));}
+if (type.value == 11) {t = Number(x) % Number(y);}
+t = t.toFixed(3) * 1;
+if (Math.abs(t) > 10**5) {t = t.toExponential(1).replace(/\+/g, "");}
+return t;
+}
+</script>
+</body></html>

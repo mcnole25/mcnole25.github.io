@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>7 Segment Display</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+accent-color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+body {
+margin: 8px 8px;
+display: grid;
+grid-template-columns: 1584px auto;
+grid-template-rows: auto;
+}
+input[type=range] {
+background: #1a1a1a;
+width: 322px;
+position: relative;
+top: 7px;
+}
+button {
+background-color: #222;
+border-radius: 4px;
+width: 61px;
+height: 32px;
+position: relative;
+left: 1.5px;
+}
+select {
+background-color: #222;
+border-radius: 4px;
+width: 159.25px;
+height: 32px;
+position: relative;
+left: 1.5px;
+}
+input[type=number] {
+background-color: #222;
+border-radius: 4px;
+width: 118px;
+height: 26px;
+position: relative;
+left: 1.5px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+span {
+position: relative;
+left: 2px;
+}
+.specials {
+width: 159.25px;
+}
+</style>
+</head>
+<body>
+<div>
+<canvas id="display" width=1584 height=768></canvas>
+</div>
+<div>
+<select id="selectionS">
+<option value=0>Edit Digit 1</option>
+<option value=1>Edit Digit 2</option>
+<option value=2>Edit Digit 3</option>
+<option value=3>Edit Digit 4</option>
+<option value=-1>Edit All Digits</option>
+</select>
+<select id="colonS">
+<option value=true>Colon: On</option>
+<option value=false selected=true>Colon: Off</option>
+</select><br>
+<input type="number" id="applyInteger" min=-999 max=9999 placeholder="Enter Integer">
+<button onclick="applyint(0)" style="position: relative; left: 2px;">Apply</button>
+<button onclick="applyint(1)" style="width: 126px; position: relative; left: 2px;">PC Time</button>
+<br>
+<button onclick="symbolS.value = 119;">0</button>
+<button onclick="symbolS.value = 36;">1</button>
+<button onclick="symbolS.value = 93;">2</button>
+<button onclick="symbolS.value = 109;">3</button>
+<button onclick="symbolS.value = 46;">4</button><br>
+<button onclick="symbolS.value = 107;">5</button>
+<button onclick="symbolS.value = 123;">6</button>
+<button onclick="symbolS.value = 37;">7</button>
+<button onclick="symbolS.value = 127;">8</button>
+<button onclick="symbolS.value = 111;">9</button><br>
+<button onclick="symbolS.value = 63;">A</button>
+<button onclick="symbolS.value = 122;">B</button>
+<button onclick="symbolS.value = 83;">C</button>
+<button onclick="symbolS.value = 124;">D</button>
+<button onclick="symbolS.value = 91;">E</button><br>
+<button onclick="symbolS.value = 27;">F</button>
+<button onclick="symbolS.value = 115;">G</button>
+<button onclick="symbolS.value = 58;">H</button>
+<button onclick="symbolS.value = 18;">I</button>
+<button onclick="symbolS.value = 100;">J</button><br>
+<button onclick="symbolS.value = 59;">K</button>
+<button onclick="symbolS.value = 82;">L</button>
+<button onclick="symbolS.value = 55;">M</button>
+<button onclick="symbolS.value = 56;">N</button>
+<button onclick="symbolS.value = 120;">O</button><br>
+<button onclick="symbolS.value = 31;">P</button>
+<button onclick="symbolS.value = 47;">Q</button>
+<button onclick="symbolS.value = 24;">R</button>
+<button onclick="symbolS.value = 106;">S</button>
+<button onclick="symbolS.value = 90;">T</button><br>
+<button onclick="symbolS.value = 112;">U</button>
+<button onclick="symbolS.value = 118;">V</button>
+<button onclick="symbolS.value = 126;">W</button>
+<button onclick="symbolS.value = 62;">X</button>
+<button onclick="symbolS.value = 110;">Y</button><br>
+<button onclick="symbolS.value = 92;">Z</button>
+<button onclick="symbolS.value = 108;">&</button>
+<button onclick="symbolS.value = 8;">-</button>
+<button onclick="symbolS.value = 28;">/</button>
+<button onclick="symbolS.value = 0;">Blank</button><br>
+<input type="range" id="symbolS" min=0 value=0 max=127><br>
+<span id="symbolL"></span><br>
+<div style="height: 32px;"></div>
+<span style="font-weight: bold;">Global Parameters</span><br>
+<input type="range" id="redS" min=0 value=255 max=255><br>
+<span id="redL"></span><br>
+<input type="range" id="greenS" min=0 value=0 max=255><br>
+<span id="greenL"></span><br>
+<input type="range" id="blueS" min=0 value=0 max=255><br>
+<span id="blueL"></span><br>
+<input type="range" id="widthS" min=8 value=64 max=127><br>
+<span id="widthL"></span><br>
+<input type="range" id="gapS" min=0 value=8 max=31><br>
+<span id="gapL"></span><br>
+<input type="range" id="squareS" min=0 value=0 max=255><br>
+<span id="squareL"></span><br>
+<input type="range" id="opacityS" min=0 value=32 max=127><br>
+<span id="opacityL"></span><br>
+<input type="range" id="skewS" min=-32 value=0 max=31><br>
+<span id="skewL"></span><br>
+<input type="range" id="wireframeS" min=32 value=255 max=255><br>
+<span id="wireframeL"></span><br>
+<div style="height: 32px;"></div>
+<button class="specials" onclick="
+redS.value = 255;
+greenS.value = 0;
+blueS.value = 0;
+widthS.value = 64;
+gapS.value = 8;
+squareS.value = 0;
+opacityS.value = 32;
+skewS.value = 0;
+wireframeS.value = 255;
+">Reset Parameters</button>
+<button class="specials" onclick="
+redS.value = Number(Math.floor(Math.random() * (Number(redS.max) - Number(redS.min) + 1))) + Number(redS.min);
+greenS.value = Number(Math.floor(Math.random() * (Number(greenS.max) - Number(greenS.min) + 1))) + Number(greenS.min);
+blueS.value = Number(Math.floor(Math.random() * (Number(blueS.max) - Number(blueS.min) + 1))) + Number(blueS.min);
+widthS.value = Number(Math.floor(Math.random() * (Number(widthS.max) - Number(widthS.min) + 1))) + Number(widthS.min);
+gapS.value = Number(Math.floor(Math.random() * (Number(gapS.max) - Number(gapS.min) + 1))) + Number(gapS.min);
+squareS.value = Number(Math.floor(Math.random() * (Number(squareS.max) - Number(squareS.min) + 1))) + Number(squareS.min);
+">Randomize</button>
+</div>
+<script>
+var ctx = display.getContext("2d");
+var digits = [0, 0, 0, 0];
+setInterval(function() {
+var colon = (colonS.value == "true");
+var sel = Number(selectionS.value);
+var symbol = 0;
+digits[sel] = Number(symbolS.value);
+var red = Number(redS.value); var green = Number(greenS.value); var blue = Number(blueS.value);
+var width = Number(widthS.value);
+var wireframe = Number(wireframeS.value);
+var gap = Number(gapS.value);
+var square = Number(squareS.value);
+var opacity = Number(opacityS.value);
+var skew = Number(skewS.value);
+display.width = 1592 + (+ colon) * width;
+display.style.position = "relative";
+display.style.width = 1586 - Math.abs(skew * 11) + "px";
+display.style.left = (Math.abs(skew * 5.5) - width * skew/128) + "px";
+display.style.transform = "skew(" + -skew + "deg)";
+function modpower2(n) {return Math.floor(symbol/2**n) % 2;}
+ctx.clearRect(0, 0, display.width, display.height);
+if (sel == -1) {digits[0] = Number(symbolS.value);}
+var symbol = digits[0];
+digit(0);
+if (sel == -1) {digits[1] = Number(symbolS.value);}
+var symbol = digits[1];
+digit(400);
+if (sel == -1) {digits[2] = Number(symbolS.value);}
+var symbol = digits[2];
+digit(800 + (+ colon) * width);
+if (sel == -1) {digits[3] = Number(symbolS.value);}
+var symbol = digits[3];
+digit(1200 + (+ colon) * width);
+var symbol = digits[sel];
+function digit(x) {
+segment(192 + x, width/2, false, modpower2(0), 1, 0);
+segment(width/2 + x, 192, true, modpower2(1), 1, 1);
+segment(384 - width/2 + x, 192, true, modpower2(2), -1, 1);
+segment(192 + x, 384 - width/2, false, modpower2(3), 0, 0);
+segment(width/2 + x, 576 - width, true, modpower2(4), 1, -1);
+segment(384 - width/2 + x, 576 - width, true, modpower2(5), -1, -1);
+segment(192 + x, 768 - width * 1.5, false, modpower2(6), -1, 0);
+}
+function segment(x, y, vertical, on, sq, sq2) {
+ctx.fillStyle = "rgba(" + red + ", " + green + ", " + blue + ", " + (on == 1 ? 100 : opacity/2.55) + "%)";
+ctx.strokeStyle = "rgba(" + red + ", " + green + ", " + blue + ", " + (on == 1 ? 100 : opacity/2.55) + "%)";
+ctx.lineWidth = width * wireframe/510;
+ctx.beginPath();
+if (vertical) {
+ctx.moveTo(x - width/2, y - 192 + width + gap);
+ctx.lineTo(x - width/2, y + 192 - width - gap);
+ctx.lineTo(x - square/510 * width * sq, y + 192 - width/2 - gap + (sq2 == -1 ? square/510 * width : 0));
+ctx.lineTo(x + width/2, y + 192 - width - gap);
+ctx.lineTo(x + width/2, y - 192 + width + gap);
+ctx.lineTo(x - square/510 * width * sq, y - 192 + width/2 + gap - (sq2 == 1 ? square/510 * width : 0));
+ctx.lineTo(x - width/2, y - 192 + width + gap);
+} else {
+ctx.moveTo(x - 192 + width + gap, y - width/2);
+ctx.lineTo(x + 192 - width - gap, y - width/2);
+ctx.lineTo(x + 192 - width/2 - gap + square/510 * width, y - square/510 * width * sq);
+ctx.lineTo(x + 192 - width - gap, y + width/2);
+ctx.lineTo(x - 192 + width + gap, y + width/2);
+ctx.lineTo(x - 192 + width/2 + gap - square/510 * width, y - square/510 * width * sq);
+ctx.lineTo(x - 192 + width + gap, y - width/2);
+}
+if (wireframe == 255) {
+ctx.fill();
+} else {
+ctx.stroke();
+}}
+if (colon) {
+ctx.fillStyle = "rgba(" + red + ", " + green + ", " + blue + ", " + ((performance.now() % 1000 >= 500) ? 100 : opacity/2.55) + "%)";
+ctx.beginPath();
+ctx.arc(792 + width/2, 192, width * 0.3, 0, 2 * Math.PI);
+ctx.arc(792 + width/2, 576 - width, width * 0.3, 0, 2 * Math.PI);
+ctx.fill();
+}
+symbolL.innerHTML = "Symbol: " + Number(symbolS.value);
+redL.innerHTML = "Segment Red: " + red;
+greenL.innerHTML = "Segment Green: " + green;
+blueL.innerHTML = "Segment Blue: " + blue;
+widthL.innerHTML = "Segment Width: " + width;
+gapL.innerHTML = "Segment Gap: " + gap;
+squareL.innerHTML = "Segment Shape: " + square;
+opacityL.innerHTML = "Opacity: " + opacity;
+skewL.innerHTML = "Skew: " + skew;
+wireframeL.innerHTML = "Wireframe: " + wireframe;
+});
+function applyint(mode) {
+if (Number(selectionS.value) == -1) {selectionS.value = 3;}
+colonS.value = (mode == 1).toString();
+if (mode == 1) {
+d = new Date();
+string = (Number(d.getHours()) < 10 ? "0" : "") + String(d.getHours()) + (Number(d.getMinutes()) < 10 ? "0" : "") + String(d.getMinutes());
+} else {
+string = String(applyInteger.value);
+}
+string = " ".repeat(4 - String(string).length) + string;
+string = string.replaceAll("0", ")").replaceAll("1", "!").replaceAll("2", "@").replaceAll("3", "#").replaceAll("4", "$").replaceAll("5", "%").replaceAll("6", "^").replaceAll("7", "&").replaceAll("8", "*").replaceAll("9", "(").replaceAll("-", "_");
+string = string.split("").join(",");
+string = string.replaceAll(")", "119").replaceAll("!", "36").replaceAll("@", "93").replaceAll("#", "109").replaceAll("$", "46").replaceAll("%", "107").replaceAll("^", "123").replaceAll("&", "37").replaceAll("*", "127").replaceAll("(", "111").replaceAll("_", "8").replaceAll(" ", "0");
+string = string.split(",");
+digits = string;
+symbolS.value = digits[Number(selectionS.value)];
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<title>Reciprocal Period Length</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input {
+width: 100px;
+}
+select {
+width: 150px;
+}
+textarea {
+width: calc(100% - 8px);
+height: 80vh;
+resize: none;
+font-family: consolas;
+tab-size: 10em;
+font-size: 15px;
+}
+</style>
+</head><body>
+<span>Limit</span>
+<input type="number" id="lim" value=25000 min=1>
+<span>Period length</span>
+<input type="number" id="period" value=3 min=1 max=50>
+<button onclick="search();">Search</button>
+<br><textarea id="output" readonly=true></textarea>
+<script>
+function search() {
+output.value = ""; out = [];
+for (i = 2; i <= lim.value; i++) {
+d = 10n**200n/BigInt(i);
+d = "0".repeat(200 - String(d).length) + String(d);
+pass = true; p = period.value;
+for (k = 0; k < 100/p; k++) {
+pass = pass && (d.slice(d.length - p, d.length) == d.slice(d.length - p * (k + 1), d.length - p * k));
+for (j = 1; j < p; j++) {
+pass = pass && (d.slice(d.length - p, d.length) != d.slice(d.length - j - p, d.length - j));
+}}
+if (pass && String(d).slice(150, 200) != "0".repeat(50)) {
+out.push("1/" + i + "\u00090." + d);
+}}
+output.value = out.join("\n");
+}
+setInterval(function() {
+lim.value = String(lim.value).replace(/[A-Z][a-z]-./g, "");
+period.value = String(period.value).replace(/[A-Z][a-z]-./g, "");
+if (lim.value < 1) {lim.value = 1;}
+if (period.value < 1) {period.value = 1;}
+if (period.value > 50) {period.value = 50;}
+});
+</script>
+</body></html>

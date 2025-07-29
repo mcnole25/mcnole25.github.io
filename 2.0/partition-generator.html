@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html><head>
+<title>Partition Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+}
+#output {
+width: calc(100% - 8px);
+height: 80vh;
+resize: none;
+border-radius: 0px;
+}
+button {
+border-radius: 0px;
+}
+input {
+width: 100px;
+border-radius: 0px;
+}
+</style>
+</head><body>
+<span>Partition</span>
+<input type="number" id="input1" value=60 min=0>
+<span>into</span>
+<input type="number" id="input2" value=4 min=0>
+<span>parts</span>
+<button onclick="generate();">Generate</button>
+<br><br><textarea readonly=true id="output"></textarea>
+<span>Entries generated: </span><span id="entlength">0</span>
+<script>
+function generate() {
+output.value = "";
+p = generatePartitions(Number(input1.value), Number(input2.value));
+output.value = p.join("\n").replace(/,/g, " + ");
+entlength.innerText = p.length;
+}
+function generatePartitions(n, k) {
+let result = [];
+function helper(remaining, parts, currentPartition) {
+if (parts === 0) {
+if (remaining === 0) result.push([...currentPartition]);
+return;
+}
+let max = currentPartition.length > 0 ? currentPartition[currentPartition.length - 1] : n;
+for (let i = Math.min(max, remaining); i >= 1; i--) {
+currentPartition.push(i);
+helper(remaining - i, parts - 1, currentPartition);
+currentPartition.pop();
+}}
+helper(n, k, []);
+return result;
+}
+setInterval(function() {
+input1.value = String(input1.value).replace(/[A-Z][a-z]-./g, "");
+input2.value = String(input2.value).replace(/[A-Z][a-z]-./g, "");
+});
+</script>
+</body></html>

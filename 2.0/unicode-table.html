@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<title>Mini Unicode Table (5300)</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 32px;
+font-family: "times new roman", "serif";
+text-align: center;
+}
+body {
+display: grid;
+grid-template-columns: repeat(25, 1fr);
+}
+</style>
+</head><body>
+<script>
+for (i = 32; i <= 126; i++) {appendUnicode(i);}
+for (i = 160; i <= 767; i++) {appendUnicode(i);}
+for (i = 913; i <= 929; i++) {appendUnicode(i);}
+for (i = 931; i <= 937; i++) {appendUnicode(i);}
+for (i = 945; i <= 969; i++) {appendUnicode(i);}
+for (i = 1421; i <= 1422; i++) {appendUnicode(i);}
+for (i = 1758; i <= 1758; i++) {appendUnicode(i);}
+for (i = 2039; i <= 2039; i++) {appendUnicode(i);}
+for (i = 5120; i <= 5759; i++) {appendUnicode(i);}
+for (i = 7424; i <= 7615; i++) {appendUnicode(i);}
+for (i = 7680; i <= 7935; i++) {appendUnicode(i);}
+for (i = 8208; i <= 8231; i++) {appendUnicode(i);}
+for (i = 8240; i <= 8286; i++) {appendUnicode(i);}
+for (i = 8304; i <= 8305; i++) {appendUnicode(i);}
+for (i = 8308; i <= 8334; i++) {appendUnicode(i);}
+for (i = 8336; i <= 8348; i++) {appendUnicode(i);}
+for (i = 8352; i <= 8383; i++) {appendUnicode(i);}
+for (i = 8448; i <= 8587; i++) {appendUnicode(i);}
+for (i = 8592; i <= 9215; i++) {appendUnicode(i);}
+for (i = 9312; i <= 11123; i++) {appendUnicode(i);}
+for (i = 11126; i <= 11157; i++) {appendUnicode(i);}
+for (i = 11159; i <= 11263; i++) {appendUnicode(i);}
+for (i = 11360; i <= 11391; i++) {appendUnicode(i);}
+for (i = 12288; i <= 12319; i++) {appendUnicode(i);}
+for (i = 12872; i <= 12895; i++) {appendUnicode(i);}
+for (i = 12977; i <= 13007; i++) {appendUnicode(i);}
+for (i = 13144; i <= 13311; i++) {appendUnicode(i);}
+for (i = 42752; i <= 42954; i++) {appendUnicode(i);}
+for (i = 64256; i <= 64262; i++) {appendUnicode(i);}
+for (i = 65281; i <= 65374; i++) {appendUnicode(i);}
+for (i = 65504; i <= 65510; i++) {appendUnicode(i);}
+function appendUnicode(n) {
+d = document.createElement("div");
+d.style.height = "50px";
+d.innerText = String.fromCharCode(n) + "\ufe0e";
+d.style.margin = "10px 10px";
+s = document.createElement("div");
+s.innerText = "0".repeat(4 - n.toString(16).length) + n.toString(16).toUpperCase();
+s.style.fontSize = "12px";
+s.style.border = "1px solid #fff";
+d.appendChild(s);
+document.body.appendChild(d);
+}
+</script>
+</body></html>

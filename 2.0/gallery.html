@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gallery of 72</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+}
+img {
+width: 32vw;
+}
+</style>
+</head>
+<body>
+<script>
+for (i = 1; i <= 72; i++) {
+im = document.createElement("img");
+im.src = "https://raw.githubusercontent.com/mcnole25/personal-gallery/refs/heads/master/images/img" + i + ".png";
+document.body.appendChild(im);
+}
+</script>
+</body>
+</html>

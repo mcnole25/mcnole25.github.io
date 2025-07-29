@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html><head>
+<title>Set of Rational Numbers</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+}
+#output {
+width: calc(100% - 2em - 4px);
+height: 80vh;
+resize: none;
+tab-size: 40;
+line-height: 3em;
+overflow-wrap: normal;
+padding: 0px 1em;
+border-radius: 0px;
+}
+button {
+border-radius: 0px;
+}
+#pagenum {
+display: inline-block;
+margin: 0px 5px;
+}
+</style>
+</head><body>
+<button onclick="update(-1);">&lt;&minus;&minus;</button>
+<span id="pagenum">Page NaN</span>
+<button onclick="update(1);">&minus;&minus;&gt;</button>
+<br><br><textarea readonly=true id="output"></textarea>
+<script>
+page = 1; update(0);
+function update(p) {
+page += p;
+if (page < 1) {page = 1;}
+out = (page == 1) ? ["0"] : [];
+for (j = 100 * (page - 1) + 1; j <= 100 * page; j++) {
+for (i = 1; i < j; i++) {
+if (coprime((j - i), i)) {
+if (terminating(i)) {
+out.push((j - i)/i);
+} else if ((j - i) > i) {
+out.push(Math.floor((j - i)/i) + "\u202f" + (j - i) % i + "\u2044" + i);
+} else {
+out.push((j - i) + "\u2044" + i);
+}
+out.push("-" + out[out.length - 1]);
+}}}
+output.value = out.join("\u0009");
+pagenum.innerText = "Page " + page;
+}
+function coprime(a, b) {
+while (b != 0) {
+temp = b;
+b = a % b;
+a = temp;
+}
+return a == 1;
+}
+function terminating(n) {
+while (n % 2 == 0) {n /= 2;}
+while (n % 5 == 0) {n /= 5;}
+return n == 1;
+}
+</script>
+</body></html>

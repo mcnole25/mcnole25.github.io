@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head>
+<title>My 2048 Tile Designs</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+canvas {
+display: inline-block;
+margin: 12px 12px;
+}
+</style>
+</head><body>
+<script>
+for (i = 1; i <= 60; i++) {
+c = document.createElement("canvas");
+c.width = 100; c.height = 100;
+c.id = "c" + i;
+document.body.appendChild(c);
+lastc = document.getElementById("c" + i);
+ctx = lastc.getContext("2d");
+ctx.fillStyle = "hsl(" + ((Math.floor((i - 1)/6) % 10) * 36) + ", 100%, " + (75 - ((i - 1) % 6) * 5) + "%)";
+ctx.fillRect(0, 0, 100, 100);
+ctx.fillStyle = "#000";
+txt = 2n**BigInt(i);
+ctx.font = 200/(String(txt).length + 4) + "px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText(txt, 50, 50);
+}
+for (i = 61; i <= 10800; i++) {
+c = document.createElement("canvas");
+c.width = 100; c.height = 100;
+c.id = "c" + i;
+document.body.appendChild(c);
+lastc = document.getElementById("c" + i);
+ctx = lastc.getContext("2d");
+ctx.fillStyle = "hsl(" + ((Math.floor((i - 1)/6) % 10) * 36) + ", 100%, " + (75 - ((i - 1) % 6) * 5) + "%)";
+ctx.fillRect(0, 0, 100, 100);
+ctx.fillStyle = "hsl(" + ((Math.floor((i - 1 + Math.floor(i/60))/6) % 10) * 36) + ", 100%, " + (75 - ((i - 1 + Math.floor(i/60)) % 6) * 5) + "%)";
+ctx.fillRect(0, 0, 50, 50);
+ctx.fillRect(50, 50, 50, 50);
+if (i > 3600) {
+ctx.fillStyle = (i > 7200 ? "#aaa" : "#555");
+ctx.fillRect(0, 0, 100, 5);
+ctx.fillRect(0, 95, 100, 5);
+ctx.fillRect(0, 0, 5, 100);
+ctx.fillRect(95, 0, 5, 100);
+}
+ctx.fillStyle = "#000";
+txt = Math.floor(10**(Math.log10(2) * i % 1) * 10**5)/10**5 + "E" + Math.floor(Math.log10(2) * i);
+ctx.font = 200/(String(txt).length + 4) + "px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText(txt, 50, 50);
+ctx.textBaseline = "bottom";
+ctx.fillText("(2^" + i + ")", 50, 95);
+}
+</script>
+</body></html>

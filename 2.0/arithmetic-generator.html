@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html><head>
+<title>Rational Number Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input {
+width: 100px;
+}
+select {
+width: 150px;
+}
+textarea {
+width: calc(100% - 8px);
+height: 80vh;
+resize: none;
+}
+</style>
+</head><body>
+<span>Calculation limit:</span>
+<input type="number" id="limit" value=10>
+<span>Filter:</span>
+<select id="filter">
+<option value=0>None</option>
+<option value=1>Finite decimals</option>
+<option value=2>Integers</option>
+</select>
+<span>Allow negatives:</span>
+<select id="negative">
+<option value=0>Yes</option>
+<option value=1>No</option>
+<option value=2>Positives only</option>
+</select>
+<span>Operation:</span>
+<select id="generation">
+<option value="print">Print numbers</option>
+<option value="add">Addition</option>
+<option value="sub">Subtraction</option>
+<option value="mul">Multiplication</option>
+<option value="div">Division</option>
+<option value="squ">Squares</option>
+<option value="cub">Cubes</option>
+<option value="mid">Midpoint</option>
+</select>
+<button onclick="generate();">Generate</button>
+<br><textarea id="output" readonly=true></textarea>
+<span id="outlength">This is a rational number generator. It can generate any arithmetic equation in &#8474;.</span>
+<script>
+function generate() {
+output.value = "";
+q = ["0/1"];
+if (negative.value == 2) {q = [];}
+for (i = 1; i <= limit.value; i++) {
+for (j = 1; j < i; j++) {
+if (gcf((i - j), j) == 1) {
+if (filter.value == 0 || (filter.value == 1 && terminating(j)) || (filter.value == 2 && j == 1)) {
+q.push((i - j) + "/" + j);
+if (negative.value == 0) {q.push("-" + q[q.length - 1]);}
+}}}}
+out = [];
+if (generation.value == "print") {
+for (i = 0; i < q.length; i++) {
+out.push(convert(q[i]));
+}}
+if (generation.value == "squ") {
+for (i = 0; i < q.length; i++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+out.push("(" + convert(q[i]) + ")\u00b2 = " + convert((qA**2) + "/" + (qB**2)));
+}}
+if (generation.value == "cub") {
+for (i = 0; i < q.length; i++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+out.push("(" + convert(q[i]) + ")\u00b3 = " + convert((qA**3) + "/" + (qB**3)));
+}}
+if (generation.value == "add") {
+for (i = 0; i < q.length; i++) {
+for (j = 0; j <= i; j++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+qC = Number(q[j].split("/")[0]);
+qD = Number(q[j].split("/")[1]);
+out.push(convert(q[i]) + " + " + convert(q[j]) + " = " + convert((qA * qD + qB * qC) + "/" + (qB * qD)));
+}}}
+if (generation.value == "sub") {
+for (i = 0; i < q.length; i++) {
+for (j = 0; j < q.length; j++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+qC = Number(q[j].split("/")[0]);
+qD = Number(q[j].split("/")[1]);
+out.push(convert(q[i]) + " \u2212 " + convert(q[j]) + " = " + convert((qA * qD - qB * qC) + "/" + (qB * qD)));
+}}}
+if (generation.value == "mul") {
+for (i = 0; i < q.length; i++) {
+for (j = 0; j <= i; j++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+qC = Number(q[j].split("/")[0]);
+qD = Number(q[j].split("/")[1]);
+out.push(convert(q[i]) + " * " + convert(q[j]) + " = " + convert((qA * qC) + "/" + (qB * qD)));
+}}}
+if (generation.value == "div") {
+for (i = 0; i < q.length; i++) {
+for (j = 0; j < q.length; j++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+qC = Number(q[j].split("/")[0]);
+qD = Number(q[j].split("/")[1]);
+out.push(convert(q[i]) + " / " + convert(q[j]) + " = " + convert((qA * qD) + "/" + (qB * qC)));
+}}}
+if (generation.value == "mid") {
+for (i = 0; i < q.length; i++) {
+for (j = 0; j <= i; j++) {
+qA = Number(q[i].split("/")[0]);
+qB = Number(q[i].split("/")[1]);
+qC = Number(q[j].split("/")[0]);
+qD = Number(q[j].split("/")[1]);
+out.push("Midpoint of " + convert(q[i]) + " & " + convert(q[j]) + " = " + convert((qA * qD + qB * qC) + "/" + (2 * qB * qD)));
+}}}
+out = out.filter(z => !String(z).includes("undefined"));
+if (filter.value > 0) {out = out.filter(z => !String(z).includes("\u2044"));}
+if (filter.value > 1) {out = out.filter(z => !String(z).includes("."));}
+if (negative.value > 0) {out = out.filter(z => !String(z).includes("-"));}
+if (negative.value > 1) {out = out.filter(z => String(z).slice(String(z).length - 3, String(z).length) != "= 0");}
+output.value = out.join("\n");
+outlength.innerText = "Generated " + out.length + " term(s)";
+}
+function gcf(a, b) {
+return b == 0 ? a : gcf(b, a % b);
+}
+function convert(fr) {
+frnum = Number(fr.split("/")[0]);
+frden = Number(fr.split("/")[1]);
+frneg = (frnum < 0) != (frden < 0);
+frnum = Math.abs(frnum);
+frden = Math.abs(frden);
+fr = fr.replace(/-/g, "");
+if (frden == 0) {return undefined;}
+if (frnum == 0) {return 0;}
+frgcf = gcf(frnum, frden);
+frnum /= frgcf; frden /= frgcf;
+if (terminating(frden)) {
+fr = frnum/frden;
+} else if (frnum > frden) {
+fr = Math.floor(frnum/frden) + " " + (frnum % frden) + "/" + frden;
+} else {
+fr = frnum + "/" + frden;
+}
+return ((frneg && fr != 0) ? "-" : "") + String(fr).replace(/\//g, "\u2044");
+}
+function terminating(n) {
+while (n % 2 == 0) {n /= 2;}
+while (n % 5 == 0) {n /= 5;}
+return n == 1;
+}
+</script>
+</body></html>

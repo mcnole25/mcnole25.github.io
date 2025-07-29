@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html><head>
+<title>BFB/TPOT Cast Randomizer</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+border-radius: 0px;
+}
+#choose {
+width: 100px;
+}
+#images {
+width: 1500px;
+}
+img {
+margin: 5px 15px;
+}
+</style>
+</head><body>
+<span>Randomly choose</span>
+<input type="number" id="choose" min=1 max=67 value=20>
+<span>contestant(s)</span>
+<br><span>Sort people alphabetically</span>
+<input type="checkbox" checked=true id="wantSort">
+<button onclick="submit();">Submit</button>
+<br><br>
+<span>YOUR CHOSEN CAST:</span>
+<br><div id="images"></div>
+<p>BFDI is owned by @jacknjellify. This is a fanmade tool created by mcnole25 on Github. 67 contestants have competed in the show so far.</p>
+<script>
+bfdi = ["8-ball","balloony","barf-bag","basketball","bell","black-hole","blocky","bomby","book","bottle","bracelety","bubble","cake","clock","cloudy","coiny","david","donut","dora","eggy","eraser","fanny","firey","firey-jr","flower","foldy","fries","gaty","gelatin","golf-ball","grassy","ice-cube","leafy","lightning","liy","lollipop","loser","marker","match","naily","needle","nickel","pen","pencil","pie","pillow","pin","price-tag","profily","puffball","remote","robot-flower","roboty","rocky","ruby","saw","snowball","spongy","stapy","taco","teardrop","tennis-ball","tree","tv","winner","woody","yellow-face"];
+function submit() {
+images.innerHTML = "";
+cast = bfdi;
+fisherYatesShuffle(cast);
+cast = cast.slice(0, choose.value);
+if (wantSort.checked) {
+cast = cast.sort();
+}
+for (i = 0; i < cast.length; i++) {
+d = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://raw.githubusercontent.com/mcnole25/fun-with-html-2/refs/heads/master/voting-icons/" + cast[i] + ".png";
+n = document.createElement("div");
+n.innerText = cast[i].replace("-", " ").toUpperCase();
+if (!wantSort.checked) {
+n.innerText += " (" + (i + 1) + ")";
+}
+n.style.display = "block";
+n.style.width = "125px";
+n.style.fontSize = "12px";
+n.style.fontFamily = "georgia";
+n.style.textAlign = "center";
+d.appendChild(im);
+d.appendChild(n);
+d.style.display = "inline-block";
+images.appendChild(d);
+}}
+setInterval(function() {
+if (choose.value < 1) {choose.value = 1;}
+if (choose.value > 67) {choose.value = 67;}
+});
+function fisherYatesShuffle(array) {
+for (let i = array.length - 1; i > 0; i--) {
+let randomIndex = Math.floor(Math.random() * (i + 1));
+[array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+}
+return array;
+}
+</script>
+</body></html>

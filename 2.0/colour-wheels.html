@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+<title>Colour Wheels</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 24px;
+font-family: arial;
+text-align: center;
+}
+body {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-gap: 25px 25px;
+}
+</style>
+</head><body>
+<div>
+<canvas id="wheel1" width=400 height=400></canvas>
+<br><span>Bright Hue-Light Wheel</span>
+</div>
+<div>
+<canvas id="wheel2" width=400 height=400></canvas>
+<br><span>Dark Hue-Light Wheel</span>
+</div>
+<div>
+<canvas id="wheel3" width=400 height=400></canvas>
+<br><span>Hue-Saturation Wheel</span>
+</div>
+<div>
+<canvas id="wheel4" width=400 height=400></canvas>
+<br><span>Hue-Saturation-Light Wheel</span>
+</div>
+<div>
+<canvas id="wheel5" width=400 height=400></canvas>
+<br><span>Saturation-Light Wheel</span>
+</div>
+<div>
+<canvas id="wheel6" width=400 height=400></canvas>
+<br><span>Red-Green Wheel</span>
+</div>
+<div>
+<canvas id="wheel7" width=400 height=400></canvas>
+<br><span>Red-Blue Wheel</span>
+</div>
+<div>
+<canvas id="wheel8" width=400 height=400></canvas>
+<br><span>Green-Blue Wheel</span>
+</div>
+<script>
+ctx = wheel1.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+h = Math.atan2(x, -y) * 180/Math.PI;
+s = 100;
+l = 100 - Math.sqrt(x**2 + y**2)/4;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "hsl(" + h + ", " + s + "%, " + l + "%)";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel2.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+h = Math.atan2(x, -y) * 180/Math.PI;
+s = 100;
+l = Math.sqrt(x**2 + y**2)/4;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "hsl(" + h + ", " + s + "%, " + l + "%)";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel3.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+h = Math.atan2(x, -y) * 180/Math.PI;
+s = Math.sqrt(x**2 + y**2)/2;
+l = 50;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "hsl(" + h + ", " + s + "%, " + l + "%)";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel4.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+h = Math.atan2(x, -y) * 180/Math.PI;
+s = Math.abs(Math.sqrt(x**2 + y**2) * 2) % 100;
+if (Math.sqrt(x**2 + y**2) < 50 || Math.sqrt(x**2 + y**2) > 150) {s = 100 - s;}
+l = 100 - Math.abs(Math.sqrt(x**2 + y**2) - 100);
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "hsl(" + h + ", " + s + "%, " + l + "%)";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel5.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+h = 0
+s = Math.sqrt(x**2 + y**2)/2;
+l = (Math.atan2(-x, y) + 2 * Math.PI) * 50/Math.PI - 50;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "hsl(" + h + ", " + s + "%, " + l + "%)";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel6.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+r = (Math.atan2(-x, y) + 2 * Math.PI) * 255/Math.PI - 255;
+g = 255 - Math.sqrt(x**2 + y**2) * 255/200;
+b = 0;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel7.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+r = 255 - Math.sqrt(x**2 + y**2) * 255/200;
+g = 0
+b = (Math.atan2(-x, y) + 2 * Math.PI) * 255/Math.PI - 255;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+ctx = wheel8.getContext("2d");
+for (y = -200; y < 200; y++) {
+for (x = -200; x < 200; x++) {
+r = 0;
+g = (Math.atan2(-x, y) + 2 * Math.PI) * 255/Math.PI - 255;
+b = 255 - Math.sqrt(x**2 + y**2) * 255/200;
+if (Math.sqrt(x**2 + y**2) <= 200) {
+ctx.fillStyle = "rgb(" + r + ", " + g + ", " + b + ")";
+ctx.fillRect(x + 200, y + 200, 1, 1);
+}}}
+</script>
+</body></html>
