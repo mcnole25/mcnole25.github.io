@@ -21,7 +21,7 @@ margin: 2px 2px;
 }
 #links {
 display: grid;
-grid-template-columns: repeat(6, 1fr);
+grid-template-columns: repeat(5, 1fr);
 margin: 100px 100px;
 }
 </style>
@@ -31,7 +31,8 @@ margin: 100px 100px;
 <div>Due to Github Pages limitations, it is not possible to create a second website, so I decided to use a "/2.0" link at the end.</div>
 <div>The old homepage, along with all the old projects are now deprecated. They will only stay up for archive reasons.</div>
 <br><br>
-<div>So far, <span id="amount"></span> tools have been created, & I am still developing more. Thank you for visiting this little tool based website.</div>
+<div>So far, <span id="amount"></span> tools have been created. New tools will be created from time to time. Thank you for visiting this little tool based website.</div>
+<div>(website last updated on <span id="unix"></span>)</div>
 <div id="links">
 <a href="https://mcnole25.github.io/2.0/2048-tiles.html">My 2048 Tiles</a>
 <a href="https://mcnole25.github.io/2.0/52-factorial.html">52 Factorial Generator</a>
@@ -55,6 +56,8 @@ margin: 100px 100px;
 <a href="https://mcnole25.github.io/2.0/uuid-generator.html">UUID Generator</a>
 </div>
 <script>
+updateUnix = 1753824253000;
 amount.innerText = document.querySelectorAll("a").length;
+unix.innerText = new Date(updateUnix);
 </script>
 </body></html>
