@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<title>Rubik's Sequence Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+img {
+display: inline-block;
+}
+#visualseq {
+line-height: 0px;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://raw.githack.com/ldez/cubejs/master/lib/async.js"></script>
+<script src="https://raw.githack.com/ldez/cubejs/master/lib/cube.js"></script>
+</head>
+<body>
+<span>Sequence:</span>
+<input id="sequence" value="R U'">
+<button onclick="calculate()">Calculate</button>
+<div>Clockwise face turn: U,D,F,B,L,R. Add a ' for an anticlockwise turn or a 2 for a 180 degree turn.</div>
+<br><strong id="output"></strong>
+<div id="visualseq"></div>
+<br><span>Powered by cube.js & jQuery for the code & VisualCube for the images.</span>
+<script>
+let cube = new Cube();
+cube.identity();
+function calculate() {
+x = repeatSeq(sequence.value);
+output.innerHTML = x + " repeats (" + (x * sequence.value.split(" ").length) + " moves) to loop back to where you started";
+}
+function solvedCube() {
+visualcube = document.createElement("img");
+visualcube.src = "https://cube.rider.biz/visualcube.php?fmt=svg&size=50&alg=";
+visualseq.appendChild(visualcube);
+}
+function repeatSeq(seq) {
+$("img").remove();
+solvedCube();
+cube.move(seq);
+let moves = 1;
+while (!(cube.isSolved())) {
+cube.move(seq);
+visualcube = document.createElement("img");
+visualcube.src = "https://cube.rider.biz/visualcube.php?fmt=svg&size=50&alg=" + String(sequence.value).repeat(moves);
+visualseq.appendChild(visualcube);
+moves++;
+}
+solvedCube();
+return moves;
+}
+</script>
+</body></html>
