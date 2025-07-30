@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html><head>
+<title>Work Schedule Maker</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+input[type=number] {
+width: 75px;
+}
+td {
+border: 2px solid #fff;
+margin: 2px 2px;
+padding: 2px 2px;
+text-align: center;
+}
+#schedule {
+display: block;
+width: 400px;
+margin: 0px auto;
+}
+</style>
+</head><body>
+<span>Start of work:</span>
+<input type="number" value=480 id="workinput">
+<span>minutes (time is </span><span id="worktime"></span><span>)</span>
+<br><br><span>Shift length:</span>
+<input type="number" value=8 id="shiftinput" step=0.01>
+<span>hours, Lunch break length:</span>
+<input type="number" value=30 id="lunchinput">
+<span>minutes</span>
+<br><span>Wake up:</span>
+<input type="number" value=2 id="wakeinput" step=0.01>
+<span>hours before work, with</span>
+<input type="number" value=8 id="sleepinput" step=0.01>
+<span>hours of sleep</span>
+<br><span>Traffic:</span>
+<input type="number" value=45 id="arriveinput">
+<span>minutes to arrive,</span>
+<input type="number" value=30 id="leaveinput">
+<span>minutes to leave</span>
+<br><span>Breakfast:</span>
+<input type="number" value=30 id="breakfastinput">
+<span>minutes after waking, Dinner:</span>
+<input type="number" value=3 id="dinnerinput" step=0.01>
+<span>hours before bed</span>
+<br><br>
+<table id="schedule"></table>
+<script>
+setInterval(function() {
+wake = Number(wakeinput.value) * 60;
+sleep = Number(sleepinput.value) * 60;
+breakfast = Number(breakfastinput.value);
+dinner = Number(dinnerinput.value) * 60;
+work = Number(workinput.value);
+shift = Number(shiftinput.value) * 60;
+lunch = Number(lunchinput.value);
+arrive = Number(arriveinput.value);
+leave = Number(leaveinput.value);
+worktime.innerText = convertTime(work);
+schedule.innerHTML = "";
+newRow("CURRENT TASK", "TIME", true);
+newRow("Wake Up Time", work - wake);
+newRow("Breakfast", work - wake + breakfast);
+newRow("Leave House", work - arrive);
+newRow("Start of Work", work);
+newRow("Start of Lunch Break", work + shift/2);
+newRow("End of Lunch Break", work + shift/2 + lunch);
+newRow("End of Work", work + shift + lunch);
+newRow("Arrive Home", work + shift + lunch + leave);
+newRow("Dinner", work - wake - sleep - dinner);
+newRow("Sleep Time", work - wake - sleep);
+newRow("TOTAL FREE TIME", convertTime(-wake - sleep - shift - lunch - leave).replace(/:/g, "h") + "m", true);
+newRow("RESPONSIBILITY TIME", convertTime(wake + shift + lunch + leave).replace(/:/g, "h") + "m", true);
+});
+function convertTime(m) {
+hr = (Math.floor(m/60) % 24 + 24) % 24;
+min = (Math.floor(m) % 60 + 60) % 60;
+return "0".repeat(2 - String(hr).length) + String(hr) + ":" + "0".repeat(2 - String(min).length) + String(min);
+}
+function newRow(label, time, header) {
+tr = document.createElement("tr");
+lab = document.createElement("td");
+tim = document.createElement("td");
+lab.innerText = label;
+tim.innerText = header ? time : convertTime(time);
+lab.style.width = "300px";
+lab.style.fontSize = "24px";
+tim.style.width = "100px";
+tim.style.fontSize = "24px";
+if (header) {
+lab.style.fontWeight = "bold";
+tim.style.fontWeight = "bold";
+}
+tr.appendChild(lab);
+tr.appendChild(tim);
+schedule.appendChild(tr);
+}
+</script>
+</body></html>
