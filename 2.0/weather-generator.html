@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html><head>
+<title>Weather Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input[type=number] {
+width: 100px;
+}
+td {
+border: 1px solid #fff;
+margin: 2px 2px;
+}
+#weather {
+text-align: center;
+}
+</style>
+</head><body>
+<span>Mean high temperature:</span>
+<input type="number" id="tem" value=0>
+<span>&deg;C</span>
+<span style="display: inline-block; margin: 0px 10px"><b>OR</b></span>
+<span>Select a preset:</span>
+<select id="presets">
+<option value=-40>ANTARCTICA</option>
+<option value=-25>Frigid Weather</option>
+<option value=-10>Freezing Weather</option>
+<option value=2.5>Cold Weather</option>
+<option value=10>Chilly Weather</option>
+<option value=17.5>Cool Weather</option>
+<option value=25 selected=true>Warm Weather</option>
+<option value=32.5>Hot Weather</option>
+<option value=40>Boiling Weather</option>
+<option value=50>DEATH VALLEY</option>
+</select>
+<br><span>Rain chance:</span>
+<input type="number" id="rains" value=0>
+<span>%, Mean difference:</span>
+<input type="number" id="diff" value=0>
+<span>&deg;C</span>
+<span style="display: inline-block; margin: 0px 10px"><b>OR</b></span>
+<span>Select a preset:</span>
+<select id="rainpresets">
+<option value=0>Desert</option>
+<option value=0.025>Dry Climate</option>
+<option value=0.1 selected=true>Normal Rain</option>
+<option value=0.3>Tropical Climate</option>
+<option value=0.7>Wet Climate</option>
+<option value=1>Daily Rain</option>
+</select>
+<br><button onclick="generate();">Submit</button>
+<br><br><table id="weather"></table>
+<script>
+updatepreset();
+updaterainpreset();
+function updatepreset() {
+tem.value = presets.value;
+}
+function updaterainpreset() {
+rains.value = rainpresets.value * 100;
+diff.value = Math.round((1.2 - Math.sqrt(Math.sqrt(rainpresets.value))) * 20);
+}
+presets.addEventListener("change", (event) => {updatepreset();});
+rainpresets.addEventListener("change", (event) => {updaterainpreset();});
+function generate() {
+weather.innerHTML = "";
+for (i = 1; i <= 30; i++) {
+tr = document.createElement("tr");
+hi = Number(tem.value);
+hi += Math.tan((Math.random() - 0.5) * 2.5) * Math.sqrt(Number(diff.value))/2;
+lo = hi - Number(diff.value);
+lo += Math.tan((Math.random() - 0.5) * 2.5) * Math.sqrt(Number(diff.value))/4;
+hi = Math.round(hi); lo = Math.round(lo);
+r = Math.random(); ra = Number(rains.value)/100;
+if (r < ra**2) {
+rain = "Thunder";
+ri = 2;
+} else if (r < ra) {
+rain = "Moderate";
+ri = 1;
+} else {
+rain = "None";
+ri = 0;
+}
+icons = ["\u2600\ufe0e", "\u26c6\ufe0e", "\u26c8\ufe0e"];
+txt = [(icons[ri] + " Day: " + i), ("High: " + hi + "\u00b0C"), ("Low: " + lo + "\u00b0C"), ("Rain: " + rain)];
+for (j = 0; j < txt.length; j++) {
+td = document.createElement("td");
+td.style.width = "150px";
+td.style.height = "20px";
+td.innerText = txt[j];
+tr.appendChild(td);
+}
+weather.appendChild(tr);
+}}
+</script>
+</body></html>
