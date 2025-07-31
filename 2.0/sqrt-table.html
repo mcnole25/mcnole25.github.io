@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<title>Common Square Root Table</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+td {
+border: 1px solid #fff;
+margin: 2px 2px;
+width: 200px;
+text-align: center;
+}
+</style>
+</head><body>
+<table id="sqrts"></table>
+<script>
+tr = document.createElement("tr");
+th1 = document.createElement("th");
+th2 = document.createElement("th");
+th1.innerText = "Expression";
+th2.innerText = "Value";
+tr.appendChild(th1);
+tr.appendChild(th2);
+sqrts.appendChild(tr);
+for (k = 1; k <= 4; k++) {
+for (j = 0; j <= 6; j++) {
+for (i = 2; i <= 8; i++) {
+if (i == 4 || i == 7) {i++;}
+if (!(String(sqrts.innerText).includes(String(Math.round(((j + Math.sqrt(i))/k) * 10**8)/10**8)))) {
+appendSqrt("(" + j + " + \u221a" + i + ")/" + k, (j + Math.sqrt(i))/k);
+}
+if ((j - Math.sqrt(i))/k > 0) {
+if (!(String(sqrts.innerText).includes(String(Math.round(((j - Math.sqrt(i))/k) * 10**8)/10**8)))) {
+appendSqrt("(" + j + " - \u221a" + i + ")/" + k, (j - Math.sqrt(i))/k);
+}}}}}
+sqrts.innerHTML = sqrts.innerHTML.replace(/\u221a8/g, "2\u221a2");
+function appendSqrt(expr, val) {
+if (expr != "(4 - √8)/4" && expr != "(4 - √8)/2" && expr != "(6 - √8)/2" && expr != "(6 - √8)/4") {
+tr = document.createElement("tr");
+td1 = document.createElement("td");
+td2 = document.createElement("td");
+td1.innerText = expr;
+td2.innerText = val;
+tr.appendChild(td1);
+tr.appendChild(td2);
+sqrts.appendChild(tr);
+}}
+</script>
+</body></html>
