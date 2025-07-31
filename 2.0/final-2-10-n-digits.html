@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head>
+<title>Final Digits of 2^10^n</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+textarea {
+width: calc(100% - 8px);
+height: 90vh;
+font-size: 16px;
+font-family: consolas;
+text-align: left;
+resize: none;
+}
+input {
+width: 100px;
+}
+</style>
+</head><body>
+<span>Calculate final</span>
+<input id="input" type="number" min=1 value=100>
+<span>digits</span>
+<div style="display: inline-block; width: 50px;"></div>
+<button onclick="calculate();">Calculate</button>
+<textarea id="result" readonly=true></textarea>
+<script>
+function calculate() {
+s = 6n;
+for (j = 1; j < input.value; j++) {
+for (i = 0; i <= 9; i++) {
+n = String(i) + String(s);
+sq = String(BigInt(n)**2n);
+if (BigInt(sq.slice(sq.length - n.length, sq.length) == n)) {sv = n;}
+}
+s = sv;
+}
+if (input.value < 1) {s = "";}
+result.innerText = String(s);
+}
+</script>
+</body></html>
