@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head>
+<title>Different Unicode Digits</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input[type=number] {
+width: 100px;
+}
+#list {
+display: grid;
+grid-template-columns: repeat(25, 1fr);
+}
+</style>
+</head><body>
+<span>Limit:</span>
+<input type="number" id="limit" value=300>
+<span>Set of digits to use:</span>
+<select id="digits">
+<option value="0123456789">Normal Digits</option>
+<option value="oɩƻʒʯƼƅʔƟq">IPA Digits</option>
+<option value="оіԅзчҫьгвԛ">Cyrillic</option>
+<option value="૦૧૨૩૫ઽઠનઉવ">Round Digits?</option>
+<option value="ᗝᖳᒿᗱᖿᔑᑲᒣᘀᕤ">UCAS Digits</option>
+<option value="⊙∣⊇∋∜∫∂↰∅⊿">Symbol Digits</option>
+<option value="⓪①②③④⑤⑥⑦⑧⑨">Circled Digits</option>
+<option value="口亅乙子丩互石乁日巳">CJK Digits</option>
+<option value="０１２３４５６７８９">Fullwidth Digits</option>
+<option value="⁰¹²³⁴⁵⁶⁷⁸⁹">Superscript Digits</option>
+<option value="₀₁₂₃₄₅₆₇₈₉">Subscript Digits</option>
+<option value="ՕլշՅվՏԺւՑզ">Armenian Digits</option>
+</select>
+<br><br>
+<div id="list"></div>
+<script>
+setInterval(function() {
+list.innerHTML = "";
+for (i = 1; i <= Number(limit.value); i++) {
+n = document.createElement("div");
+n.innerText = replaceDigits(i);
+n.style.fontSize = "20px";
+n.style.margin = "20px 5px";
+list.appendChild(n);
+}
+});
+function replaceDigits(x) {
+for (j = 0; j <= 9; j++) {
+x = String(x).replaceAll(j, String(digits.value).charAt(j));
+}
+return x;
+}
+</script>
+</body></html>
