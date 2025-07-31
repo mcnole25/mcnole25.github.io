@@ -23,7 +23,7 @@ margin: 2px 2px;
 #links {
 display: grid;
 grid-template-columns: repeat(5, 1fr);
-margin: 100px 100px;
+margin: 50px 50px;
 }
 </style>
 </head><body>
@@ -31,8 +31,7 @@ margin: 100px 100px;
 <div>Welcome to the revamped version of the mcnole25.github.io site, originally created in early 2024.</div>
 <div>Due to Github Pages limitations, it is not possible to create a second website, so I decided to use a "/2.0/" link at the end.</div>
 <div>The old homepage, along with all the old projects are now deprecated. They will only stay up for archive reasons.</div>
-<br><br>
-<div>So far, <span id="amount"></span> tools have been created. New tools will be created from time to time. Thank you for visiting this little tool based website.</div>
+<div>So far, <span id="amount"></span> tools have been created. Tools may sometimes be created or updated. Thank you for visiting this little tool based website.</div>
 <div>(website last updated on <span id="unix"></span>)</div>
 <div id="links">
 <a href="https://mcnole25.github.io/2.0/2048-tiles.html">My 2048 Tiles</a>
@@ -52,7 +51,7 @@ margin: 100px 100px;
 <a href="https://mcnole25.github.io/2.0/sun-animation.html">Sun Animation</a>
 <a href="https://mcnole25.github.io/2.0/table-viewer.html">Math Table Viewer</a>
 <a href="https://mcnole25.github.io/2.0/time-converter.html">Time Conversions</a>
-<a href="https://mcnole25.github.io/2.0/unicode-table.html">5300 Unicode Table</a>
+<a href="https://mcnole25.github.io/2.0/unicode-table.html">6000 Unicode Table</a>
 <a href="https://mcnole25.github.io/2.0/unit-conversion.html">Unit Conversions</a>
 <a href="https://mcnole25.github.io/2.0/uuid-generator.html">UUID Generator</a>
 <a href="https://mcnole25.github.io/2.0/work-maker.html">Work Schedule Maker</a>
@@ -60,9 +59,10 @@ margin: 100px 100px;
 <a href="https://mcnole25.github.io/2.0/weather-generator.html">Weather Generator</a>
 <a href="https://mcnole25.github.io/2.0/english-quantifiers.html">English Quantifiers</a>
 <a href="https://mcnole25.github.io/2.0/math-concepts.html">Random Math Concept</a>
+<a href="https://mcnole25.github.io/2.0/cat-colours.html">Cat Colour Maker</a>
 </div>
 <script>
-updateUnix = 1753855091000;
+updateUnix = Infinity;
 amount.innerText = document.querySelectorAll("a").length;
 unix.innerText = new Date(updateUnix);
 </script>
