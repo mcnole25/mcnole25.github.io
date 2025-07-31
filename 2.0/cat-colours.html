@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html><head>
+<title>Cat Colour Maker</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input[type=range] {
+background: #1a1a1a;
+width: 600px;
+position: relative;
+top: 6px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+body {
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+</style>
+</head><body>
+<div>
+<input type="range" id="valA" min=0 max=1 step=1e-10>
+<span id="disA"></span><br>
+<input type="range" id="valB" min=0 max=1 step=1e-10>
+<span id="disB"></span><br>
+<input type="range" id="valC" min=0 max=1 step=1e-10>
+<span id="disC"></span><br><br>
+<canvas id="panel" width=600 height=600></canvas>
+</div><div>
+<canvas id="cat" width=600 height=600></canvas>
+</div>
+<script>
+a = 0;
+b = 0;
+c = 0;
+setInterval(function() {
+valA.value = a;
+valB.value = b;
+valC.value = c;
+disA.innerText = "Black: " + Math.round(a * 100) + "%";
+disB.innerText = "Brown: " + Math.round(b * 100) + "%";
+disC.innerText = "White: " + Math.round(c * 100) + "%";
+ctx = panel.getContext("2d");
+ctx.fillStyle = "#066";
+ctx.fillRect(0, 0, 600, 600);
+ctx.fillStyle = "#033";
+ctx.font = "32px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("hover your cursor over this panel", 300, 284);
+ctx.fillText("to control the sliders above", 300, 316);
+ctx = cat.getContext("2d");
+ctx.clearRect(0, 0, 600, 600);
+for (i = 0; i < 10; i++) {
+neg = (i % 2 == 0);
+if (neg) {
+ctx.fillStyle = "#fff";
+ctx.fillRect(150 + i * 10, 150 + i * 10, (300 - i * 20), c * (300 - i * 20));
+ctx.fillStyle = "#963";
+ctx.fillRect(150 + i * 10, 150 + i * 10 + c * (300 - i * 20), (300 - i * 20), b * (300 - i * 20));
+ctx.fillStyle = "#000";
+ctx.fillRect(150 + i * 10, 150 + i * 10 + (c + b) * (300 - i * 20), (300 - i * 20), a * (300 - i * 20));
+} else {
+ctx.fillStyle = "#000";
+ctx.fillRect(150 + i * 10, 150 + i * 10, (300 - i * 20), a * (300 - i * 20));
+ctx.fillStyle = "#963";
+ctx.fillRect(150 + i * 10, 150 + i * 10 + a * (300 - i * 20), (300 - i * 20), b * (300 - i * 20));
+ctx.fillStyle = "#fff";
+ctx.fillRect(150 + i * 10, 150 + i * 10 + (a + b) * (300 - i * 20), (300 - i * 20), c * (300 - i * 20));
+}}
+ctx.fillStyle = "#fff";
+ctx.fillRect(200, 240, 50, 50);
+ctx.fillRect(350, 240, 50, 50);
+ctx.fillStyle = "#000";
+ctx.fillRect(210, 250, 30, 30);
+ctx.fillRect(360, 250, 30, 30);
+ctx.fillStyle = c > 0.5 ? "#f9f" : "#210";
+ctx.fillRect(290, 300, 20, 20);
+ctx.fillStyle = "#222";
+ctx.font = "60px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("\uff57", 300, 334);
+});
+panel.addEventListener("mousemove", event => {
+bound = panel.getBoundingClientRect();
+x = event.clientX - bound.left - panel.clientLeft;
+y = event.clientY - bound.top - panel.clientTop;
+c = (1 - y/600);
+b = x/600 * (1 - c);
+a = (1 - x/600) * (1 - c);
+a = Math.round(a * 100)/100;
+b = Math.round(b * 100)/100;
+c = Math.round(c * 100)/100;
+c -= (a + b + c - 1);
+});
+</script>
+</body></html>
