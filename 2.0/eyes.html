@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+<title>I'm watching you!</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+overflow: hidden;
+margin: 0px 0px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.9/lib/p5.min.js"></script>
+</head><body>
+<script>
+function setup() {
+createCanvas(1920, 1080);
+colorMode(HSB);
+angleMode(DEGREES);
+}
+function draw() {
+background(0);
+let leftX = width * 0.4;
+let leftY = height/2;
+let leftAngle = atan2(mouseY - leftY, mouseX - leftX);
+push();
+translate(leftX, leftY);
+fill(255);
+ellipse(0, 0, 200, 200);
+rotate(leftAngle);
+fill(0);
+ellipse(50, 0, 100, 100);
+pop();
+let rightX = width * 0.6;
+let rightY = height/2;
+let rightAngle = atan2(mouseY - rightY, mouseX - rightX);
+push();
+translate(rightX, rightY);
+fill(255);
+ellipse(0, 0, 200, 200);
+rotate(rightAngle);
+fill(0);
+ellipse(50, 0, 100, 100);
+pop();
+}
+</script>
+</body></html>
