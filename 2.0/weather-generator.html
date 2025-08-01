@@ -32,8 +32,8 @@ text-align: center;
 <option value=2.5>Cold Weather</option>
 <option value=10>Chilly Weather</option>
 <option value=17.5>Cool Weather</option>
-<option value=25 selected=true>Warm Weather</option>
-<option value=32.5>Hot Weather</option>
+<option value=25>Warm Weather</option>
+<option value=32.5 selected=true>Hot Weather</option>
 <option value=40>Boiling Weather</option>
 <option value=50>DEATH VALLEY</option>
 </select>
@@ -47,8 +47,8 @@ text-align: center;
 <select id="rainpresets">
 <option value=0>Desert</option>
 <option value=0.025>Dry Climate</option>
-<option value=0.1 selected=true>Normal Rain</option>
-<option value=0.3>Tropical Climate</option>
+<option value=0.1>Normal Rain</option>
+<option value=0.3 selected=true>Tropical Climate</option>
 <option value=0.7>Wet Climate</option>
 <option value=1>Daily Rain</option>
 </select>
@@ -56,6 +56,7 @@ text-align: center;
 <input type="number" id="limit" value=30>
 <span>day(s)</span>
 <button onclick="generate();">Submit</button>
+<span style="display: inline-block; margin: 0px 10px; font-weight: bold;" id="fullrange"></span>
 <br><br><table id="weather"></table>
 <script>
 updatepreset();
@@ -100,6 +101,11 @@ td.innerText = txt[j];
 tr.appendChild(td);
 }
 weather.appendChild(tr);
-}}
+}
+highest = Number(tem.value) + Math.tan(1.25) * Math.sqrt(Number(diff.value))/2;
+lowest = Number(tem.value) - Number(diff.value) - Math.tan(1.25) * Math.sqrt(Number(diff.value))*0.75;
+highest = Math.round(highest); lowest = Math.round(lowest);
+fullrange.innerText = "Full temperature range: " + lowest + "\u00b0C to " + highest + "\u00b0C";
+}
 </script>
 </body></html>
