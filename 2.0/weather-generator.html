@@ -52,7 +52,10 @@ text-align: center;
 <option value=0.7>Wet Climate</option>
 <option value=1>Daily Rain</option>
 </select>
-<br><button onclick="generate();">Submit</button>
+<br><span>Generate</span>
+<input type="number" id="limit" value=30>
+<span>day(s)</span>
+<button onclick="generate();">Submit</button>
 <br><br><table id="weather"></table>
 <script>
 updatepreset();
@@ -67,8 +70,9 @@ diff.value = Math.round((1.2 - Math.sqrt(Math.sqrt(rainpresets.value))) * 20);
 presets.addEventListener("change", (event) => {updatepreset();});
 rainpresets.addEventListener("change", (event) => {updaterainpreset();});
 function generate() {
+daylimit = limit.value;
 weather.innerHTML = "";
-for (i = 1; i <= 30; i++) {
+for (i = 1; i <= daylimit; i++) {
 tr = document.createElement("tr");
 hi = Number(tem.value);
 hi += Math.tan((Math.random() - 0.5) * 2.5) * Math.sqrt(Number(diff.value))/2;
