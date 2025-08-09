@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head>
+<title>Sqrt 2 Digit Searcher</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+}
+input[type=number] {
+width: 150px;
+}
+input[type=text] {
+width: 200px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/decimal.js-light@2.5.1/decimal.min.js"></script>
+</head><body>
+<span>Search digit pattern:</span>
+<input type="text" id="query" value="2135">
+<span>inside decimal expansion of &radic;2</span>
+<br><span>Search through first</span>
+<input type="number" id="limit" value=10000>
+<span>significant digits</span>
+<button onclick="submit();">Submit</button>
+<br><br><br><span>Estimated calculation time: </span><span id="estimate"></span><span>s</span>
+<br><br><span id="output"></span>
+<script>
+diglim = 100;
+function submit() {
+output.innerHTML = "";
+Decimal.precision = Number(limit.value);
+sqrt2 = Decimal(2).sqrt().toString();
+q = String(query.value);
+s = sqrt2.indexOf(q);
+if (s >= 0) {
+out = sqrt2.slice(s, s + q.length);
+cap = s - diglim;
+if (cap < 0) {cap = 0;}
+outE = sqrt2.slice(cap, s);
+outL = sqrt2.slice(s + q.length, s + q.length + diglim);
+output.innerText = "Earliest instance found at digits " + (s) + " to " + (s + q.length - 1) + "\n\n..." + outE + "\n..." + out + "...\n" + outL + "...";
+} else {
+output.innerText = "Error: Couldn't find given digit pattern. Not enough digits to search.";
+}}
+setInterval(function() {
+estimate.innerText = Math.round((Number(limit.value)/10000)**2);
+if (Number(estimate.innerText) == 0) {
+estimate.innerText = "<1"
+} else {
+estimate.innerText = "about " + String(estimate.innerText);
+}
+});
+</script>
+</body></html>
