@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html><head>
+<title>Block Based Level Maker</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.8/lib/p5.js"></script>
+</head><body>
+<span>Block Types: {</span><span id="types"></span><span>}, Selected: </span><span id="selected"></span>
+<br><span>Level Weight: </span><span id="levelwt"></span><span> kg (</span><span id="wtx"></span><span>x)</span>
+<script>
+function setup() {
+createCanvas(1600, 800);
+colorMode(HSL);
+scene = "0".repeat(384) + "2".repeat(32) + "3".repeat(96);
+brush = 0;
+brushname = ["Air", "Water", "Grass", "Dirt", "Rock", "Bark", "Planks", "Leaves", "Sand", "Glass"];
+brushwts = [0, 1000, 1640, 1600, 2515, 240, 836, 940, 1922, 1615];
+types.innerText = brushname.join(", ");
+}
+function draw() {
+background(200, 40, 80);
+strokeWeight(0); wt = 0;
+for (y = 0; y < 16; y++) {
+for (x = 0; x < 32; x++) {
+idx = String(scene).charAt(x + y * 32);
+wt += Number(brushwts[idx]);
+if (idx == 1) {
+fill(220, 100, 50);
+square(x * 50, y * 50, 50);
+}
+if (idx == 2 || idx == 3) {
+fill(30, 40, 40);
+square(x * 50, y * 50, 50);
+if (idx == 2) {
+fill(120, 60, 60);
+rect(x * 50, y * 50, 50, 20);
+}
+}
+if (idx == 4) {
+fill(0, 0, 40);
+square(x * 50, y * 50, 50);
+fill(0, 0, 50);
+square(x * 50 + 10, y * 50 + 10, 30);
+}
+if (idx == 5) {
+fill(40, 100, 20);
+square(x * 50, y * 50, 50);
+fill(40, 100, 25);
+rect(x * 50 + 10, y * 50, 30, 50);
+}
+if (idx == 6) {
+fill(40, 60, 60);
+square(x * 50, y * 50, 50);
+fill(40, 50, 50);
+rect(x * 50, y * 50 + 10, 50, 30);
+}
+if (idx == 7) {
+fill(120, 60, 40);
+square(x * 50, y * 50, 50);
+fill(120, 60, 45);
+square(x * 50, y * 50, 25);
+square(x * 50 + 25, y * 50 + 25, 25);
+}
+if (idx == 8) {
+fill(60, 75, 75);
+square(x * 50, y * 50, 50);
+}
+if (idx == 9) {
+fill(220, 100, 75);
+square(x * 50, y * 50, 50);
+}
+}}
+if (key == 0) {brush = 0;}
+if (key == 1) {brush = 1;}
+if (key == 2) {brush = 2;}
+if (key == 3) {brush = 3;}
+if (key == 4) {brush = 4;}
+if (key == 5) {brush = 5;}
+if (key == 6) {brush = 6;}
+if (key == 7) {brush = 7;}
+if (key == 8) {brush = 8;}
+if (key == 9) {brush = 9;}
+selected.innerText = brushname[brush] + " (" + brush + ")";
+levelwt.innerText = wt;
+wtx.innerText = (wt/206080).toFixed(4);
+}
+function mouseDragged() {
+if (mouseX >= 0 && mouseX <= 1600) {
+scene = String(scene).split("");
+brushidx = (floor(mouseX/50) % 32) + floor(mouseY/50) * 32;
+scene[brushidx] = brush;
+scene = scene.join("");
+}}
+</script>
+</body></html>
