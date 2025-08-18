@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head>
+<title>Real Number Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+textarea {
+text-align: left;
+font-size: 24px;
+height: 85vh;
+resize: none;
+border-radius: 0px;
+}
+#code {
+width: calc(25% - 16px);
+}
+#output {
+width: calc(75% - 16px);
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/decimal.js@10.6.0/decimal.min.js"></script>
+</head><body>
+<textarea id="code">precision 1000
+add 1.25
+sqrt
+add 0.5</textarea>
+<textarea readonly=true id="output"></textarea>
+<p>Type in a formula to calculate a specific constant, like Phi as an example. This tool is powered by jsDelivr's decimal.js library, so it may not work without sufficient Wifi connection. To avoid excessive lag, answer updates every 2 seconds.</p>
+<p>Accepted number formats include: positive & negative numbers, scientific E notation, integers & terminating decimals. Reference: add ___, sub ___, mul ___, div ___, pow ___, log ___, sqrt, cbrt, exp, ln, sin, cos, tan, asin, acos, atan, precision ___</p>
+<p>Maximum precision for logarithms & trigonometric functions is roughly 1000 significant figures.</p>
+<script>
+Decimal.rounding = Decimal.ROUND_DOWN;
+Decimal.toExpNeg = -9e15;
+Decimal.toExpPos = 9e15;
+setInterval(function() {
+output.value = "syntax error";
+constant = new Decimal("0");
+inputcode = String(code.value).split("\n");
+for (i = 0; i < inputcode.length; i++) {
+if (String(inputcode[i]).split(" ")[0] == "precision") {Decimal.precision = Number(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "add") {constant = constant.add(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "sub") {constant = constant.sub(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "mul") {constant = constant.mul(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "div") {constant = constant.div(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "pow") {constant = constant.pow(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "log") {constant = constant.log(String(inputcode[i]).split(" ")[1]);}
+if (String(inputcode[i]).split(" ")[0] == "sqrt") {constant = constant.sqrt();}
+if (String(inputcode[i]).split(" ")[0] == "cbrt") {constant = constant.cbrt();}
+if (String(inputcode[i]).split(" ")[0] == "exp") {constant = constant.exp();}
+if (String(inputcode[i]).split(" ")[0] == "ln") {constant = constant.ln();}
+if (String(inputcode[i]).split(" ")[0] == "sin") {constant = constant.sin();}
+if (String(inputcode[i]).split(" ")[0] == "cos") {constant = constant.cos();}
+if (String(inputcode[i]).split(" ")[0] == "tan") {constant = constant.tan();}
+if (String(inputcode[i]).split(" ")[0] == "asin") {constant = constant.asin();}
+if (String(inputcode[i]).split(" ")[0] == "acos") {constant = constant.acos();}
+if (String(inputcode[i]).split(" ")[0] == "atan") {constant = constant.atan();}
+}
+output.value = String(constant);
+}, 2000);
+</script>
+</body></html>

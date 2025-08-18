@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head>
+<title>Infinitely Precise Timer?!</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: consolas;
+word-wrap: break-word;
+overflow: hidden;
+}
+</style>
+</head><body>
+<script>
+setInterval(function() {
+timer = String((performance.now()/1000).toFixed(3));
+for (i = 0; i < 20000; i++) {
+rand = Math.floor(Math.random() * 1e10);
+timer = String(timer) + String(rand);
+}
+document.body.innerText = timer;
+});
+</script>
+</body></html>

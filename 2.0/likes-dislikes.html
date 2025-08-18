@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<title>Likes & Dislikes Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 32px;
+font-family: arial;
+}
+.widthfix {
+display: inline-block;
+width: 300px;
+}
+.small {
+font-size: 24px;
+}
+</style>
+</head><body>
+<span class="widthfix">&#128077;&#65038; Like Count:</span>
+<input id="likes" value=9 type="number" min=0>
+<br><span class="widthfix">&#128078;&#65038; Dislike Count:</span>
+<input id="dislikes" value=1 type="number" min=0>
+<br><br>
+<span>Adjusted Score:</span>
+<b><span id="adjpercent"></span></b>
+<br><span class="small">To reach a score of 80%, at least</span>
+<b><span class="small" id="eightyper"></span></b>
+<span class="small">likes are needed.</span>
+<br><span class="small">To reach a score of 90%, at least</span>
+<b><span class="small" id="ninetyper"></span></b>
+<span class="small">likes are needed.</span>
+<br><br>
+<span>Other statistics:</span>
+<br><span class="small">Raw, unadjusted score:</span>
+<span class="small" id="rawpercent"></span>
+<br><span class="small">Star rating:</span>
+<span class="small" id="stars"></span>
+<span class="small">&starf;</span>
+<br><span class="small">Service grade:</span>
+<span class="small" id="grade"></span>
+<script>
+setInterval(function() {
+lik = Number(likes.value);
+dis = Number(dislikes.value);
+perc = (lik + 1)/(lik + dis + 2) * 100;
+adjpercent.innerText = String(perc.toFixed(4)) + "%";
+rawperc = (lik)/(lik + dis) * 100;
+rawpercent.innerText = String(rawperc.toFixed(4)) + "%";
+eightyper.innerText = (4 * dis + 3);
+ninetyper.innerText = (9 * dis + 8);
+stars.innerText = Number((lik)/(lik + dis) * 4 + 1).toFixed(4);
+if (perc < 80) {grade.innerText = "Poor (below 80%)";}
+if (perc >= 80 && perc < 90) {grade.innerText = "Good (80 to 90%)";}
+if (perc >= 90) {grade.innerText = "Great (90% or more)";}
+});
+</script>
+</body></html>

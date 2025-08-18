@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html><head>
+<title>Live Comments Simulator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input[type=number] {
+width: 100px;
+}
+#commentSection {
+border: 1px solid #fff;
+padding: 20px 20px;
+}
+#commentCount {
+font-weight: bold;
+font-size: 20px;
+}
+</style>
+</head><body>
+<span>Post</span>
+<input type="number" min=0 value=5 id="commentsperSecond">
+<span>comments per second on average, with random delays</span>
+<button onclick="startComments();">Start</button>
+<br><br>
+<div style="comments">
+<div id="commentCount">0 comment(s) posted</div>
+<br><div id="commentSection"></div>
+</div>
+<br><div>NOTE: This comment database is based on Glomble's comment section, on the video "[REUPLOAD] How to COMPRESS videos for GLOMBLE" (Glomble is a new Youtube alternative founded in 2024.)</div>
+<script>
+commentData = ["\"Score: 1000000000000.0\" HOW??",
+"Am I the only one who thinks Glomble is getting faster & faster every day? It seems the devs are up to something",
+"As I mentioned before the video got deleted, hyped for the optimized version of this!",
+"best part about glomble is the dislike button. oh i so dearly missed it on all the socials",
+"Bro, what is this WITCHCRAFT??",
+"btw check the previous video, thats the second part of it. in that video i improved this script and made it easier to use!",
+"But if someone isn't afraid to risk or something...",
+"Damm, my computer is about to explode, im rendering my blender and typing ****, it's polygon heavy my boy,",
+"Dang this is helpful",
+"deja vu",
+"Either I'm incredibly stupid or it's not working",
+"fellow brave user",
+"For those who are having trouble watching the video:",
+"Get this back to the top of the recommended tab NOW!!",
+"Get this to the top of the reccomended page so all creators have an easier time uploading here 📎",
+"Hey guys its @BioLogic here",
+"How i can make it work on win 10? it doesn't have open in windows terminal",
+"I don't understand how to use Python. I feel like there could have been more explaining on how to make the \"Compress.Py\" file, as I cannot figure out how to use Python for the life of me. Also I can't download the script, as I can only copy it",
+"I just use Handbrake and change the resolution to 480p30.",
+"I'd love it if Glomble implemented this as an option when uploading a video.",
+"I'd reccomend making it a program and putting it on git-hub",
+"I'm gonna Glomble it so hard",
+"IDK how the **** this video got deleted! i was deleting the pinned comment and damn the video got deleted all of a sudden T_T my views and likes and comments omg!",
+"It will be easy for Glomble and other websites where the bandwidth is not much",
+"keep getting an error saying \"sys\" not defined",
+"Looking by it's score I can assume this video would be presented to the aliens or smth",
+"No extra work or files needed, just upload, click on compress video and done! Fast loading video with same quality without risking a virus.",
+"Pastebin seems to be really scummy. it's giving me all of these pop up ads and crap. is there anywhere else i can get the code (like GitHub)?",
+"RIP computer",
+"So that viewers can enjoy your video without buffering.",
+"thanks :D",
+"thanks this worked! my 1gb video became 100mb and it uploaded way easier",
+"There are also some online websites for compressing videos, but... noone knows what *some random website* is doing with your video you sent there.",
+"This platform is starting of really good, the notepad to communicate to the audience, the music in the background, it feels very nice",
+"This video gives me such 2015 vibes im gonna cry of nostalgia (╥﹏╥)",
+"This will be so helpful! Thank you very much",
+"Today I am going to show how you can compress your videos without losing any quality",
+"we gonna glomblers instread of youtubers, the world i healing",
+"well that's pretty much the worst way I could find out about a bug, I'm really sorry! I can't really bring back the likes and views because I'd have to know which profiles liked and viewed it. I'll make the score 1 trillion temporarily to make up for this",
+"What a loss.",
+"what the HELL is that score",
+"Wish I found this BEFORE uploading😭😭😭",
+"{Continued in replies}"];
+function startComments() {
+cps = Number(commentsperSecond.value);
+c = 0;
+setInterval(function() {
+for (i = 0; i < Math.floor(Math.random() + cps/60); i++) {
+newComment2 = document.createElement("div");
+newComment = document.createElement("div");
+newComment.innerText = "User" + (c + 1) + " wrote:";
+newComment.style.fontWeight = "bold";
+newComment2.appendChild(newComment);
+newComment = document.createElement("div");
+newComment.innerText = commentData[Math.floor(Math.random() * commentData.length)];
+newComment.style.border = "1px solid #fff";
+newComment.style.padding = "20px 20px";
+newComment2.appendChild(newComment);
+newComment2.style.padding = "20px 20px";
+commentSection.appendChild(newComment2); c++;
+}
+commentCount.innerText = c + " comment(s) posted";
+});}
+</script>
+</body></html>
