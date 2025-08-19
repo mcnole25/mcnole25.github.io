@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head>
+<title>My 42 Colour System</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+text-align: center;
+}
+#colours {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+}
+</style>
+</head><body>
+<div id="colours"></div>
+<p>This is my official list of distinguishing colours, created in 2025. My colour system is designed to disambiguate shades of green, blue, etc. Colours assigned will (likely) not change. There are 42 colours listed.</p>
+<script>
+function createColour(name, hex) {
+dv = document.createElement("div");
+tx = document.createElement("div");
+tx.innerText = name;
+tx.style.margin = "20px 0px";
+tx.style.position = "relative";
+tx.style.bottom = "10px";
+c = document.createElement("canvas");
+c.width = 200; c.height = 75;
+ctx = c.getContext("2d");
+ctx.fillStyle = hex;
+ctx.fillRect(0, 0, c.width, c.height);
+dv.appendChild(c);
+dv.appendChild(tx);
+colours.appendChild(dv);
+}
+createColour("Red", "#f00");
+createColour("Vermillion", "#f40");
+createColour("Orange", "#f80");
+createColour("Amber", "#fc0");
+createColour("Yellow", "#ff0");
+createColour("Chartreuse", "#8f0");
+createColour("Green", "#0f0");
+createColour("Spring Green", "#0f5");
+createColour("Aqua", "#0fa");
+createColour("Cyan", "#0ff");
+createColour("Light Blue", "#0af");
+createColour("Azure", "#05f");
+createColour("Blue", "#00f");
+createColour("Blurple", "#40f");
+createColour("Purple", "#80f");
+createColour("Magenta", "#f0f");
+createColour("Deep Pink", "#f08");
+createColour("Maroon", "#800");
+createColour("Olive", "#880");
+createColour("Olive Green", "#480");
+createColour("Dark Green", "#080");
+createColour("Teal", "#088");
+createColour("Navy", "#008");
+createColour("Indigo", "#408");
+createColour("Plum", "#808");
+createColour("Salmon", "#f88");
+createColour("Ivory", "#ff8");
+createColour("Lime", "#cf8");
+createColour("Mint", "#8fc");
+createColour("Light Cyan", "#8ff");
+createColour("Periwinkle", "#88f");
+createColour("Lavender", "#c8f");
+createColour("Pink", "#f8f");
+createColour("Black", "#000");
+createColour("Charcoal", "#444");
+createColour("Grey", "#888");
+createColour("Silver", "#ccc");
+createColour("White", "#fff");
+createColour("Dark Brown", "#630");
+createColour("Brown", "#963");
+createColour("Tan", "#c96");
+createColour("Beige", "#fc9");
+</script>
+</body></html>
