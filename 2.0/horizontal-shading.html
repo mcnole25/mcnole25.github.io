@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<title>My OC (horizontal_shading)</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+margin: 0px 16px;
+overflow: hidden;
+}
+canvas {
+position: relative;
+bottom: 100px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@2.0.4/lib/p5.min.js"></script>
+</head><body>
+<h1>horizontal_shading</h1>
+<p>That's my OC's name, all lowercase with the underscore. He is a representation of my online personality.</p>
+<p>He is an orange sphere with a white "H" in the middle, with a face & a set of limbs.</p>
+<p>Personality: Mildly high intelligence, hates conflict, likes to study math, has high-functioning autism.</p>
+<script>
+function setup() {
+createCanvas(800, 800);
+strokeWeight(15);
+line(175, 500, 100, 650);
+line(625, 500, 700, 650);
+line(325, 500, 325, 800);
+line(475, 500, 475, 800);
+strokeWeight(0);
+fill(255, 128, 0);
+circle(400, 400, 500);
+textFont("Arial");
+textStyle(BOLD);
+textSize(250);
+textAlign(CENTER, CENTER);
+fill(255);
+text("H", 400, 420);
+fill(0);
+stroke(0);
+circle(100, 650, 40);
+circle(700, 650, 40);
+rect(265, 770, 60, 30);
+rect(475, 770, 60, 30);
+ellipse(325, 350, 30, 60);
+ellipse(475, 350, 30, 60);
+strokeWeight(15);
+line(300, 475, 500, 475);
+}
+</script>
+</body></html>
