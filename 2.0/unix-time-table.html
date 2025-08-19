@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head>
+<title>Unix Time Table</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+tab-size: 40;
+line-height: 2em;
+}
+</style>
+</head><body>
+<pre id="table">
+<p><b>Unix Time&#9;Formatted Number&#9;Local Time (in detected time zone)</b></p>
+</pre>
+<script>
+for (i = 0; i <= 10000; i++) {
+p = document.createElement("div");
+if (i >= 100) {form = (i/100) + " T"} else if (i > 0) {form = (10 * i) + " B"} else {form = 0}
+p.innerText = (i * 1e10) + "\u0009" + form + "\u0009" + String(new Date(i * 1e10));
+table.appendChild(p);
+}
+</script>
+</body></html>
