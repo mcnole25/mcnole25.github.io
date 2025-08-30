@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head>
+<title>BFB Popularity Poll Viewer</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+</style>
+</head><body>
+<span>Select a popularity poll:</span>
+<select id="pollSelect">
+<option value=0 selected=true>Averaged Poll (horizontal_shading)</option>
+<option value=1>Canon Elimination (TPOT 19, jacknjellify)</option>
+<option value=2>Official Poll (BFB 13, jacknjellify)</option>
+<option value=3>No Split Remastered Poll (YT, Super Fun Time)</option>
+<option value=4>Most Votes Ranking (YT, Funtelligent)</option>
+<option value=5>BFB But 4 Teams Lose (YT, Revolve)</option>
+</select>
+<button onclick="loadPoll();">Load Ranking</button>
+<br><span>Fanmade popularity poll made by @horizontal_shading. Voting icons made by @jacknjellify.</span>
+<br><span>There are 64 contestants ranked based on multiple elimination orders. Feel free to choose one.</span>
+<br><br><table id="poll"></table>
+<script>
+alpha = ["8 Ball","Balloony","Barf Bag","Basketball","Bell","Black Hole","Blocky","Bomby","Book","Bottle","Bracelety","Bubble","Cake","Clock","Cloudy","Coiny","David","Donut","Dora","Eggy","Eraser","Fanny","Firey Jr","Firey","Flower","Foldy","Fries","Gaty","Gelatin","Golf Ball","Grassy","Ice Cube","Leafy","Lightning","Liy","Lollipop","Loser","Marker","Match","Naily","Needle","Nickel","Pen","Pencil","Pie","Pillow","Pin","Puffball","Remote","Robot Flower","Roboty","Rocky","Ruby","Saw","Snowball","Spongy","Stapy","Taco","Teardrop","Tennis Ball","Tree","TV","Woody","Yellow Face"];
+poll1 = ["Black Hole","Book","Bottle","Donut","Fanny","Golf Ball","Grassy","Liy","Marker","Pen","Pencil","Tennis Ball","Tree","Snowball","TV","Pillow","Yellow Face","Ice Cube","Pin","Robot Flower","Basketball","Gaty","Eraser","Needle","Barf Bag","Bell","Bomby","Nickel","Teardrop","Coiny","Puffball","Rocky","Cake","Lightning","Clock","Fries","Eggy","Remote","Naily","Cloudy","Saw","Foldy","Pie","Flower","Gelatin","Leafy","Lollipop","Woody","Firey","Blocky","Bubble","Taco","Loser","Ruby","Spongy","Balloony","Dora","Firey Jr","Match","David","Stapy","8 Ball","Roboty","Bracelety"];
+poll2 = ["Black Hole","Leafy","Bubble","Taco","Firey","Pen","Woody","Rocky","Loser","Tennis Ball","Teardrop","Spongy","Ice Cube","Golf Ball","Pencil","Flower","Ruby","Match","Pin","Tree","Remote","Lollipop","Yellow Face","Puffball","Coiny","David","Barf Bag","Book","Gelatin","Dora","Bracelety","Fanny","Saw","Cake","Grassy","Cloudy","Blocky","Bottle","Liy","Donut","Gaty","Balloony","TV","Marker","Needle","Lightning","Firey Jr","Nickel","Bomby","Pie","Snowball","Eraser","Stapy","8 Ball","Fries","Bell","Clock","Roboty","Foldy","Pillow","Naily","Robot Flower","Basketball","Eggy"];
+poll3 = ["Coiny","Pen","Teardrop","Black Hole","Pin","Bubble","Barf Bag","Lollipop","Ruby","Blocky","Needle","Cloudy","Saw","Marker","Match","Eraser","Taco","Flower","Tennis Ball","Leafy","Liy","Lightning","Remote","Clock","Nickel","Tree","Fanny","Bell","Woody","Ice Cube","Bomby","Grassy","Donut","Loser","Firey","Bottle","Fries","Gaty","Golf Ball","Naily","Yellow Face","Robot Flower","Pencil","Balloony","Pillow","Cake","Puffball","Basketball","Gelatin","Rocky","Book","Eggy","Snowball","TV","Pie","Foldy","Spongy","Dora","Firey Jr","David","Stapy","8 Ball","Roboty","Bracelety"];
+poll4 = ["Gelatin","Golf Ball","Black Hole","Flower","Leafy","Pencil","Grassy","Pillow","Book","Teardrop","Fanny","Marker","Woody","Snowball","Donut","Tree","Tennis Ball","Firey","Yellow Face","Pin","Pen","Liy","Lollipop","TV","Basketball","Ice Cube","Bottle","Robot Flower","Bomby","Blocky","Taco","Bubble","Eraser","Nickel","Needle","Bracelety","Barf Bag","Gaty","Remote","Lightning","Bell","Rocky","Loser","Ruby","Puffball","Dora","Stapy","Firey Jr","David","Coiny","Eggy","Clock","Cake","Foldy","Roboty","Match","Fries","8 Ball","Pie","Saw","Balloony","Spongy","Cloudy","Naily"];
+poll5 = ["Barf Bag","Cloudy","Naily","Ice Cube","Bomby","Pen","Lightning","Remote","Coiny","Eraser","Marker","Bubble","Woody","Ruby","Loser","Spongy","Foldy","Flower","Tree","Bell","Pin","Leafy","Pencil","Taco","Black Hole","Fanny","Firey Jr","Balloony","Teardrop","Nickel","Donut","Tennis Ball","Cake","Saw","Bottle","Rocky","Firey","Snowball","Fries","Pillow","David","Blocky","Gaty","Book","TV","Puffball","Needle","Gelatin","Basketball","Stapy","Roboty","Match","Grassy","Clock","Pie","Yellow Face","8 Ball","Dora","Bracelety","Liy","Golf Ball","Eggy","Robot Flower","Lollipop"];
+poll0 = [];
+for (k = 0; k < 64; k++) {
+queue = alpha[k];
+numsort = (poll1.indexOf(queue) + poll2.indexOf(queue) + poll3.indexOf(queue) + poll4.indexOf(queue) + poll5.indexOf(queue));
+poll0.push(numsort + "\\" + queue);
+}
+poll0.sort((a, b) => Number(a.split("\\")[0]) - Number(b.split("\\")[0]));
+for (k = 0; k < 64; k++) {
+poll0[k] = String(poll0[k]).split("\\")[1];
+}
+function loadPoll() {
+poll.innerHTML = "";
+for (i = 0; i < 64; i++) {
+if (pollSelect.value == 0) {contestant = String(poll0[i]);}
+if (pollSelect.value == 1) {contestant = String(poll1[i]);}
+if (pollSelect.value == 2) {contestant = String(poll2[i]);}
+if (pollSelect.value == 3) {contestant = String(poll3[i]);}
+if (pollSelect.value == 4) {contestant = String(poll4[i]);}
+if (pollSelect.value == 5) {contestant = String(poll5[i]);}
+row = document.createElement("tr");
+t = document.createElement("td");
+t.style.width = "60px";
+thSuffix = "th"; j = (i + 1);
+if (j % 10 == 1) {thSuffix = "st";}
+if (j % 10 == 2) {thSuffix = "nd";}
+if (j % 10 == 3) {thSuffix = "rd";}
+if (j % 100 >= 10 && j % 100 <= 19) {thSuffix = "th";}
+t.innerText = j + thSuffix;
+row.appendChild(t);
+t = document.createElement("td");
+icon = document.createElement("img");
+icon.src = "https://raw.githubusercontent.com/mcnole25/fun-with-html-2/refs/heads/master/voting-icons/" + String(contestant).replace(/ /g, "-").toLowerCase() + ".png";
+icon.style.width = "40px";
+icon.style.height = "40px";
+t.appendChild(icon);
+row.appendChild(t);
+t = document.createElement("td");
+t.style.width = "120px";
+t.style.position = "relative";
+t.style.left = "20px";
+t.innerText = contestant;
+row.style.height = "45px";
+row.appendChild(t);
+poll.appendChild(row);
+}
+}
+</script>
+</body></html>
