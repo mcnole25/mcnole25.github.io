@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html><head>
+<title>Order of Operations Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input {
+width: 100px;
+}
+select {
+width: 150px;
+}
+textarea {
+width: calc(100% - 8px);
+height: 80vh;
+resize: none;
+}
+</style>
+</head><body>
+<span>Maximum integer:</span>
+<input type="number" id="limit" value=100 min=1>
+<span>Term count:</span>
+<input type="number" id="oper" value=10 min=2>
+<button onclick="generate();">Generate</button>
+<br><textarea id="output" readonly=true></textarea>
+<script>
+function generateEquation(len, max) {
+eq = ""; symbols = "+-*/=_";
+for (i = 1; i < len; i++) {eq += symbols.charAt(Math.floor(Math.random() * 6));}
+eq = eq.split("").join(" x "); eq = "x " + eq + " x";
+for (i = len; i > 0; i--) {
+parenin = "x = ".repeat(i) + "x"; parenout = "(" + "x + ".repeat(i) + "x)";
+eq = eq.replaceAll(parenin, parenout);
+parenin = "x _ ".repeat(i) + "x"; parenout = "(" + "x - ".repeat(i) + "x)";
+eq = eq.replaceAll(parenin, parenout);
+}
+if (eq.includes("=") || eq.includes("_")) {generateEquation(len, max)} else {
+eq = eq.split("x"); expression = "";
+for (i = 0; i < eq.length; i++) {
+expression += (i > 0 ? String(Math.floor(Math.random() * max) + 1) : "") + eq[i];
+}
+return expression;}}
+function generate() {
+output.innerText = "";
+value = undefined;
+while (value == undefined) {value = generateEquation(Number(oper.value), Number(limit.value));}
+output.innerText = value;
+}
+setInterval(function() {
+if (limit.value < 1) {limit.value = 1;}
+if (oper.value < 2) {oper.value = 2;}
+});
+</script>
+</body></html>
