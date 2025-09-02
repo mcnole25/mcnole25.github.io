@@ -59,7 +59,7 @@ display.innerHTML = "Angle: " + (45 - ang) + "&deg;";
 ctx.fillStyle = "#222";
 ctx.strokeStyle = "#999";
 ctx.lineWidth = 2;
-ctx.fillRect(0, 0, w, h);
+ctx.clearRect(0, 0, w, h);
 ctx.fillStyle = "rgba(255, 255, 255, 20%)";
 ctx.beginPath();
 ctx.moveTo(w * 0.5 + Math.sin(rad) * w * 0.5, h * 0.25 + Math.cos(rad) * h * 0.25);
