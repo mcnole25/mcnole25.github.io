@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html><head>
+<title>BFB/TPOT - 128 Main Characters</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 24px;
+font-family: arial;
+border-radius: 0px;
+text-align: center;
+}
+#tpotimages, #bfbimages, #debutersimages, #rcimages {
+width: 1700px;
+margin: 0 auto;
+}
+img {
+margin: 5px 15px;
+max-width: 100px;
+max-height: 100px;
+}
+.small {
+font-size: 16px;
+font-style: italic;
+}
+</style>
+</head><body>
+<h1>-- BFDI:TPOT Cast (45) --</h1>
+<div id="tpotimages"></div>
+<br><br>
+<h1>-- BFB Cast (22) --</h1>
+<div id="bfbimages"></div>
+<br><br>
+<h1>-- Failed Debuters (24) --</h1>
+<div id="debutersimages"></div>
+<br><br>
+<h1>-- Recommended Characters (37) --</h1>
+<div id="rcimages"></div>
+<br><br>
+<p class="small">BFDI franchise, poses & characters owned by @jacknjellify.</p>
+<script>
+tpot = ["barf-bag","basketball","bell","black-hole","bomby","book","bottle","cake","clock","cloudy","coiny","donut","eggy","eraser","fanny","foldy","fries","gaty","golf-ball","grassy","ice-cube","lightning","liy","marker","naily","needle","nickel","pen","pencil","pie","pillow","pin","price-tag","puffball","remote","robot-flower","rocky","saw","snowball","teardrop","tennis-ball","tree","tv","winner","yellow-face"];
+bfb = ["8-ball","balloony","blocky","bracelety","bubble","david","dora","firey-jr","firey","flower","gelatin","leafy","lollipop","loser","match","profily","roboty","ruby","spongy","stapy","taco","woody"];
+debuters = ["9-ball","anchor","avocado","battery","blender","boom-mic","camera","clapboard","conch-shell","discy","income-tax-return-document","kitchen-sink","leek","nonexisty","onigiri","pda","rubber-spatula","salt-lamp","scissors","shampoo","shopping-cart","snare-drum","tape","vhsy"];
+rc = ["birthday-cake","bowling-ball","box","bricky","burrito","cake-pop","clip","crate","crt","diamond","dime","evil-leafy","glue","gramophone","grape","hashy","irony","latte","lightning-cherry","meatball","mouse-trap","pan-flute","pineapple","pinecone","portable-music-player","purple-face","puzzley","ramen-noodles","rusty-coin","sam","slingshot","steamy","touch-tone","tune","vr-headset","waffle","water-bottle"];
+for (i = 0; i < tpot.length; i++) {
+d = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://mcnole25.github.io/tpot/" + tpot[i] + ".png";
+n = document.createElement("div");
+n.innerText = tpot[i].replaceAll("-", " ").toUpperCase();
+n.style.display = "block";
+n.style.width = "125px";
+n.style.fontSize = "12px";
+n.style.fontFamily = "georgia";
+n.style.textAlign = "center";
+d.appendChild(im);
+d.appendChild(n);
+d.style.display = "inline-block";
+tpotimages.appendChild(d);
+}
+for (i = 0; i < bfb.length; i++) {
+d = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://mcnole25.github.io/bfb/" + bfb[i] + ".png";
+n = document.createElement("div");
+n.innerText = bfb[i].replaceAll("-", " ").toUpperCase();
+n.style.display = "block";
+n.style.width = "125px";
+n.style.fontSize = "12px";
+n.style.fontFamily = "georgia";
+n.style.textAlign = "center";
+d.appendChild(im);
+d.appendChild(n);
+d.style.display = "inline-block";
+bfbimages.appendChild(d);
+}
+for (i = 0; i < debuters.length; i++) {
+d = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://mcnole25.github.io/debuters/" + debuters[i] + ".png";
+n = document.createElement("div");
+n.innerText = debuters[i].replaceAll("-", " ").toUpperCase();
+n.style.display = "block";
+n.style.width = "125px";
+n.style.fontSize = "12px";
+n.style.fontFamily = "georgia";
+n.style.textAlign = "center";
+d.appendChild(im);
+d.appendChild(n);
+d.style.display = "inline-block";
+debutersimages.appendChild(d);
+}
+for (i = 0; i < rc.length; i++) {
+d = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://mcnole25.github.io/rc/" + rc[i] + ".png";
+n = document.createElement("div");
+n.innerText = rc[i].replaceAll("-", " ").toUpperCase();
+n.style.display = "block";
+n.style.width = "125px";
+n.style.fontSize = "12px";
+n.style.fontFamily = "georgia";
+n.style.textAlign = "center";
+d.appendChild(im);
+d.appendChild(n);
+d.style.display = "inline-block";
+rcimages.appendChild(d);
+}
+</script>
+</body></html>
