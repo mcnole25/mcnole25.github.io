@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html><head>
+<title>3D Spinning Text Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+position: relative;
+z-index: 100;
+}
+input {
+width: 120px;
+}
+#inputtext {
+width: 475px;
+}
+#inputfont {
+width: 200px;
+}
+canvas {
+position: relative;
+z-index: 0;
+}
+</style>
+</head><body>
+<span>Text Input (\n for newline): </span><input id="inputtext" value="hold on, let me\noverthink this">
+<br><span>Font: </span><input id="inputfont" value="Verdana">
+<span>Speed: </span><input id="inputs" value="4">
+<span>Colour (HSL): </span><input id="inputc" value="120,100,50">
+<br><br><canvas id="text" width=800 height=600></canvas>
+<script>
+ctx = text.getContext("2d");
+setInterval(function() {
+ctx.clearRect(0, 0, 800, 600);
+ctx.font = "60px " + inputfont.value;
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+tt = String(inputtext.value).split("\\n");
+for (i = 0; i < tt.length; i++) {
+yy = 360 + 60 * (i - tt.length/2);
+ctx.fillStyle = "hsl(" + String(inputc.value).split(",")[0] + ", " + String(inputc.value).split(",")[1] + "%, " + String(inputc.value).split(",")[2]/2 + "%)";
+ctx.fillText(tt[i], 400, yy + 8);
+ctx.fillText(tt[i], 400, yy + 4);
+ctx.fillStyle = "hsl(" + String(inputc.value).split(",")[0] + ", " + String(inputc.value).split(",")[1] + "%, " + String(inputc.value).split(",")[2] + "%)";
+ctx.fillText(tt[i], 400, yy);
+}
+rr = ((((180/inputs.value * performance.now()/1000) + 90) % 180) - 90);
+rr2 = Math.sin(rr * Math.PI/180) * 10;
+document.getElementById("text").style.transform = "rotateY(" + rr + "deg) rotateZ(" + rr2 + "deg)";
+});
+</script>
+</body></html>
