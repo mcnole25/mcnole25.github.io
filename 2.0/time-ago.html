@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head>
+<title>Amount of Time Ago</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 24px;
+font-family: arial;
+}
+</style>
+</head><body>
+<div id="timeago"></div>
+<script>
+t = ["now"];
+for (i = 1; i < 60; i++) {t.push(i + "s ago")}
+for (j = 1; j < 60; j++) {
+t.push(j + "m ago");
+for (i = 1; i < 60; i++) {t.push(j + "m, " + i + "s ago")}}
+for (j = 1; j < 24; j++) {
+t.push(j + "h ago");
+for (i = 1; i < 60; i++) {t.push(j + "h, " + i + "m ago")}}
+for (j = 1; j < 7; j++) {
+t.push(j + "d ago");
+for (i = 1; i < 24; i++) {t.push(j + "d, " + i + "h ago")}}
+for (j = 1; j < 5; j++) {
+t.push(j + "w ago");
+for (i = 1; i < 7; i++) {t.push(j + "w, " + i + "d ago")}}
+t = t.slice(0, t.length - 4);
+for (j = 1; j < 12; j++) {
+t.push(j + "mo ago");
+for (i = 1; i < 5; i++) {t.push(j + "mo, " + i + "w ago")}}
+for (j = 1; j < 1000; j++) {
+t.push(j + "y ago");
+for (i = 1; i < 12; i++) {t.push(j + "y, " + i + "mo ago")}}
+timeago.innerText = t.join("\n");
+</script>
+</body></html>
