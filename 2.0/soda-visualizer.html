@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html><head>
+<title>Soda Visualizer</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+.trig {
+display: inline-block;
+margin: 0px 25px;
+}
+#display {
+font-size: 24px;
+display: inline-block;
+width: 200px;
+text-align: right;
+}
+input[type=range] {
+background: #1a1a1a;
+width: 1800px;
+position: relative;
+top: 4px;
+}
+input[type=range]::-moz-range-track {
+background: #111;
+}
+input[type=range]::-moz-range-thumb {
+background: #ddd;
+}
+.hex {
+width: 100px;
+}
+.big {
+font-weight: bold;
+font-size: 24px;
+}
+</style>
+</head><body>
+<input type="range" id="ml" min=0 max=500 step=0.05 value=400>
+<canvas id="soda" height=600 width=300></canvas>
+<div id="stats" class="big"></div>
+<span>Fluid Colour: </span><input class="hex" id="hex1" value="#06f" maxlength=4>
+<span>Label Colour: </span><input class="hex" id="hex2" value="#fff" maxlength=4>
+<br><br><div class="big">Presets (31 common soda brands)</div>
+<span>Dark Sodas:</span>
+<button onclick="loadSoda('#000', '#900');">Dr Pepper</button>
+<button onclick="loadSoda('#000', '#fff');">Diet Dr Pepper</button>
+<button onclick="loadSoda('#000', '#300');">Dr Pepper Zero</button>
+<button onclick="loadSoda('#000', '#f00');">Coca-Cola</button>
+<button onclick="loadSoda('#000', '#ccc');">Diet Coca-Cola</button>
+<button onclick="loadSoda('#000', '#111');">Coca-Cola Zero</button>
+<button onclick="loadSoda('#000', '#00f');">Pepsi</button>
+<button onclick="loadSoda('#000', '#99c');">Diet Pepsi</button>
+<button onclick="loadSoda('#000', '#003');">Pepsi Zero</button>
+<button onclick="loadSoda('#210', '#c96');">Root Beer</button>
+<button onclick="loadSoda('#000', '#f66');">Mr Pibb</button>
+<br>
+<span>Light Sodas:</span>
+<button onclick="loadSoda('#ccc', '#3f6');">Sprite</button>
+<button onclick="loadSoda('#ccc', '#0c3');">Sprite Zero</button>
+<button onclick="loadSoda('#ccc', '#9f0');">Starry</button>
+<button onclick="loadSoda('#ccc', '#9c0');">Starry Zero</button>
+<button onclick="loadSoda('#9c9', '#0f0');">Mtn Dew</button>
+<button onclick="loadSoda('#9c9', '#090');">Mtn Dew Zero</button>
+<button onclick="loadSoda('#9c9', '#0c0');">7 Up</button>
+<button onclick="loadSoda('#9c9', '#030');">7 Up Zero</button>
+<button onclick="loadSoda('#cfc', '#ff0');">Twist Up</button>
+<button onclick="loadSoda('#cfc', '#060');">Twist Up Zero</button>
+<button onclick="loadSoda('#9c9', '#ff0');">Squirt</button>
+<button onclick="loadSoda('#9c9', '#fff');">Squirt Zero</button>
+<br>
+<span>Cherry Sodas:</span>
+<button onclick="loadSoda('#100', '#c36');">Cherry Coca-Cola</button>
+<button onclick="loadSoda('#100', '#369');">Cherry Dr Pepper</button>
+<span>Orange Sodas:</span>
+<button onclick="loadSoda('#f90', '#f60');">Fanta</button>
+<button onclick="loadSoda('#f90', '#ccc');">Fanta Zero</button>
+<button onclick="loadSoda('#f60', '#f90');">Sunkist</button>
+<button onclick="loadSoda('#f60', '#fff');">Sunkist Zero</button>
+<span>Other Sodas:</span>
+<button onclick="loadSoda('#000', '#fc9');">Dr Pepper Vanilla</button>
+<button onclick="loadSoda('#3fc', '#0c9');">Mtn Dew Baja Blast</button>
+<script>
+ctx = soda.getContext("2d");
+setInterval(function() {
+mL = Number(ml.value);
+stats.innerText = mL + " mL, or " + mL * 20 + " drops";
+ctx.clearRect(0, 0, 300, 600);
+ctx.strokeStyle = "#fff";
+ctx.lineWidth = 4;
+ctx.strokeRect(50, 120, 200, 460);
+ctx.strokeRect(100, 40, 100, 80);
+ctx.clearRect(102, 42, 96, 100);
+ctx.fillStyle = hex1.value;
+if (mL < 460) {
+ctx.fillRect(50, 580 - mL, 200, mL);
+} else {
+ctx.fillRect(50, 120, 200, 460);
+ctx.fillRect(100, 120 - 2 * (mL - 460), 100, (mL - 460) * 2);
+}
+ctx.fillStyle = hex2.value;
+ctx.fillRect(100, 20, 100, 20);
+ctx.fillRect(50, 200, 200, 100);
+});
+function loadSoda(hex_1, hex_2) {
+hex1.value = hex_1;
+hex2.value = hex_2;
+}
+</script>
+</body></html>
