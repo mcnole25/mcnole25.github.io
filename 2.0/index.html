@@ -18,7 +18,7 @@ a {
 font-size: 24px;
 padding: 20px 40px;
 margin: 2px 2px;
-height: 24px;
+height: 7px;
 }
 #links {
 display: grid;
@@ -34,12 +34,12 @@ height: 16px;
 }
 </style>
 </head><body>
-<h1>mcnole25.github.io v2.0</h1>
+<h1>- mcnole25.github.io v2.0 -</h1>
 <div>Welcome to the revamped version of the mcnole25.github.io site, originally created in early 2024.</div>
 <div>Due to Github Pages limitations, it is not possible to create a second website, so I decided to use a "/2.0/" link at the end.</div>
 <div>The old homepage, along with all the old projects are now deprecated. They are no longer supported & have been deleted.</div>
-<div>There are 45 (update) pages on this site. All pages are subject to change. Thank you for visiting this little tool-based website.</div>
-<div>(website last updated on <span id="unix"></span>)</div>
+<div>There are 46 pages on this site. We're rushing to reach 60 pages. Thank you for visiting this little tool-based website.</div>
+<div>(website last updated on <span id="unix"></span>, or <span id="daysago"></span> day(s) ago)</div>
 <div id="links">
 <a href="https://mcnole25.github.io/2.0/2048-tiles.html">My 2048 Tiles</a>
 <a href="https://mcnole25.github.io/2.0/52-factorial.html">52 Factorial Generator</a>
@@ -86,6 +86,21 @@ height: 16px;
 <a href="https://mcnole25.github.io/2.0/holiday-pfps.html">My Holiday PFP's</a>
 <a href="https://mcnole25.github.io/2.0/bfb-contestants.html">BFB/TPOT Character List</a>
 <a href="https://mcnole25.github.io/2.0/order-of-operations.html">Order of Operations</a>
+<a href="https://mcnole25.github.io/2.0/five-dice-roll.html">5 Dice Roll Simulator</a>
+<a href="">47</a>
+<a href="">48</a>
+<a href="">49</a>
+<a href="">50</a>
+<a href="">51</a>
+<a href="">52</a>
+<a href="">53</a>
+<a href="">54</a>
+<a href="">55</a>
+<a href="">56</a>
+<a href="">57</a>
+<a href="">58</a>
+<a href="">59</a>
+<a href="">60 (search)</a>
 </div>
 <span>Since BFDIA 5b (HTML5b) is my favorite game, here are some of my favorite levelpacks:</span><br>
 <a href="https://coppersalts.github.io/HTML5b/?levelpack=xtvzzkr8cf4id8v" class="smalllink">"Ice Cube's Lore"</a>
@@ -106,7 +121,8 @@ height: 16px;
 <span>Also see my</span>
 <a href="https://5beam.zelo.dev/user/rtary4rfvwuojf7" class="smalllink">user profile</a><span>.</span>
 <script>
-updateUnix = Infinity;
+updateUnix = 1756975428000;
 unix.innerText = new Date(updateUnix);
+daysago.innerText = Math.floor((Date.now() - updateUnix)/86400000);
 </script>
 </body></html>
