@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head>
+<title>Episode Release Date Predictor</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+input {
+width: 100px;
+}
+#episodes {
+line-height: 2em;
+font-weight: bold;
+font-size: 20px;
+}
+</style>
+</head><body>
+<span>Predict: If episode</span>
+<input type="number" value=3 id="epstart">
+<span>came out on</span>
+<input value="28 Jan 2023" id="epdate">
+<span>& a new episode normally comes out every</span>
+<input type="number" value=57 id="epfreq">
+<span>days</span><br>
+<br><div id="episodes"></div>
+<script>
+setInterval(function() {
+text = []; c = 0;
+for (i = Number(epstart.value) + 1; i <= 1000; i++) {
+d = new Date(String(epdate.value)); c++;
+rd = new Date(d.valueOf() + Number(epfreq.value) * 86400000 * c).toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"});
+text.push("Episode " + i + " estimated release date: " + rd);
+}
+episodes.innerText = text.join("\n");
+});
+</script>
+</body></html>
