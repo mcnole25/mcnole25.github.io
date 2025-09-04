@@ -27,8 +27,21 @@ font-size: 32px;
 }
 .container {
 display: grid;
-grid-template-columns: repeat(5, 1fr);
+grid-template-columns: repeat(6, 1fr);
 font-size: 16px;
+}
+#flaticon {
+width: 40px;
+height: 40px;
+padding: 0px 150px;
+}
+#note {
+font-style: italic;
+font-size: 12px;
+}
+.shiftup {
+position: relative;
+bottom: 20px;
 }
 </style>
 </head><body><b>
@@ -46,11 +59,13 @@ font-size: 16px;
 <span>Solar Noon</span>
 <span>Sunset</span>
 <span>Dusk</span>
+<span class="shiftup">Typical Routine<br><span id="note">images sourced by flaticon.com</span></span>
 <span id="dawn"></span>
 <span id="sunrise"></span>
 <span id="solarNoon"></span>
 <span id="sunset"></span>
 <span id="dusk"></span>
+<img id="flaticon" class="shiftup">
 </div>
 <script>
 const ctx = frame.getContext("2d");
@@ -63,6 +78,11 @@ m = Math.floor(t * 1440/10000) % 60;
 s = Math.floor(t * 86400/10000) % 60;
 return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
 }
+function updateSrc() {
+h = Math.floor(t * 24/10000);
+m = Math.floor((Math.floor(t * 1440/10000) % 60)/30) * 30;
+if (h == 24) {return 2330;} else {
+return (h < 10 ? "0" : "") + h + (m < 10 ? "0" : "") + m;}}
 t = sun[0];
 dawn.innerText = updateTime();
 t = sun[1];
@@ -76,6 +96,7 @@ dusk.innerText = updateTime();
 t = timeSlider.value;
 n = Math.atan(Math.cos((t - 200)/10000 * Math.PI * 2) * 20 - 1)/3.042 + 0.5;
 time.innerText = updateTime();
+flaticon.src = "https://mcnole25.github.io/flaticon.com/flaticon-" + updateSrc() + ".png";
 tmp = Math.round(2600 + Math.cos((t - 1000)/10000 * Math.PI * 2) * -150 * Math.PI)/100;
 temp.innerText = tmp;
 c1 = "hsl(" + (200 - n * 330) + ", " + (70 + n * 20) + "%, " + (70 - n * 60) + "%)";
