@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html><head>
+<title>Sun Animation</title>
+<style>
+body {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+.header {
+font-size: 24px;
+}
+#diceRoll {
+font-size: 80px;
+}
+button {
+font-size: 20px;
+}
+table {
+font-size: 24px;
+margin: 0 auto;
+}
+th, td {
+border: 1px solid #fff;
+line-height: 24px;
+padding: 10px 10px;
+}
+.container {
+display: grid;
+grid-template-columns: repeat(8, 1fr);
+}
+#sumss {
+grid-template-columns: repeat(13, 1fr);
+}
+#statss {
+border: 1px solid #fff;
+font-size: 20px;
+}
+</style>
+</head><body>
+<div class="header">Chances of Rolling 5 Dice - Table</div>
+<table>
+<tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Odds</th>
+<th>Definition</th>
+</tr>
+<tr>
+<td>&square; &square;</td>
+<td>Pair</td>
+<td>1 in 1.44</td>
+<td>most frequent value count = 2</td>
+</tr>
+<tr>
+<td>{&square; &square;,<br>&square; &square;}</td>
+<td>Two Pair</td>
+<td>1 in 4.32</td>
+<td>exactly 2 unique pairs</td>
+</tr>
+<tr>
+<td>&square; &square; &square;</td>
+<td>Triplet</td>
+<td>1 in 5.184</td>
+<td>most frequent value count = 3</td>
+</tr>
+<tr>
+<td>{...}</td>
+<td>Straight</td>
+<td>1 in 10.8</td>
+<td>all dice are unique values</td>
+</tr>
+<tr>
+<td>{&square;, &square;}</td>
+<td>Full House</td>
+<td>1 in 17.32</td>
+<td>only 2 unique types of dice</td>
+</tr>
+<tr>
+<td>&square; &square;<br>&square; &square;</td>
+<td>Four</td>
+<td>1 in 51.84</td>
+<td>most frequent value count = 4</td>
+</tr>
+<tr>
+<td>12345</td>
+<td>1,2,3,4,5</td>
+<td>1 in 64.8</td>
+<td>dice roll is 1,2,3,4,5 (unordered)</td>
+</tr>
+<tr>
+<td>&square; &square;<br>&square; &square; &square;</td>
+<td>Five</td>
+<td>1 in 1296</td>
+<td>most frequent value count = 5</td>
+</tr>
+</table>
+<br><span class="header">Simulate 5 way dice roll:</span>
+<br><span id="diceRoll"></span>
+<br><button onclick="rollDice();">Roll Dice!</button>
+<button onclick="rollDice100();">Roll Dice x100</button>
+<button onclick="rollDice10k();">Roll Dice x10K!!</button>
+<br><br><div class="header">Stats</div><br>
+<div class="container" id="statss">
+<div>Pairs<br><span id="stats0">0</span></div>
+<div>Two Pairs<br><span id="stats1">0</span></div>
+<div>Triplets<br><span id="stats2">0</span></div>
+<div>Straights<br><span id="stats3">0</span></div>
+<div>Full Houses<br><span id="stats4">0</span></div>
+<div>Fours<br><span id="stats5">0</span></div>
+<div>1,2,3,4,5's<br><span id="stats6">0</span></div>
+<div>Fives<br><span id="stats7">0</span></div>
+</div>
+<div class="container" id="sumss">
+<div>Sum 5<br><span id="sum5">0</span></div>
+<div>Sum 6<br><span id="sum6">0</span></div>
+<div>Sum 7<br><span id="sum7">0</span></div>
+<div>Sum 8<br><span id="sum8">0</span></div>
+<div>Sum 9<br><span id="sum9">0</span></div>
+<div>Sum 10<br><span id="sum10">0</span></div>
+<div>Sum 11<br><span id="sum11">0</span></div>
+<div>Sum 12<br><span id="sum12">0</span></div>
+<div>Sum 13<br><span id="sum13">0</span></div>
+<div>Sum 14<br><span id="sum14">0</span></div>
+<div>Sum 15<br><span id="sum15">0</span></div>
+<div>Sum 16<br><span id="sum16">0</span></div>
+<div>Sum 17<br><span id="sum17">0</span></div>
+<div>Sum 18<br><span id="sum18">0</span></div>
+<div>Sum 19<br><span id="sum19">0</span></div>
+<div>Sum 20<br><span id="sum20">0</span></div>
+<div>Sum 21<br><span id="sum21">0</span></div>
+<div>Sum 22<br><span id="sum22">0</span></div>
+<div>Sum 23<br><span id="sum23">0</span></div>
+<div>Sum 24<br><span id="sum24">0</span></div>
+<div>Sum 25<br><span id="sum25">0</span></div>
+<div>Sum 26<br><span id="sum26">0</span></div>
+<div>Sum 27<br><span id="sum27">0</span></div>
+<div>Sum 28<br><span id="sum28">0</span></div>
+<div>Sum 29<br><span id="sum29">0</span></div>
+<div>Sum 30<br><span id="sum30">0</span></div>
+</div>
+<script>
+stats = [0, 0, 0, 0, 0, 0, 0, 0];
+sums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+function rollDice() {
+dice = [Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1), Math.floor(Math.random() * 6 + 1)];
+diceRoll.innerText = dice.toString().replace(/1/g, "\u2680").replace(/2/g, "\u2681").replace(/3/g, "\u2682").replace(/4/g, "\u2683").replace(/5/g, "\u2684").replace(/6/g, "\u2685").replace(/\,/g, " ");
+c = [0, 0, 0, 0, 0, 0];
+for (i = 1; i <= 6; i++) {
+for (j = 0; j < 5; j++) {
+if (dice[j] == i) {c[i - 1]++;}
+}}
+c.sort((a, b) => b - a);
+if (c[0] == 1) {stats[3]++;}
+if (c[0] == 1 && !dice.includes(6)) {stats[6]++;}
+if (c[0] == 2) {stats[0]++;}
+if (c[0] == 2 && c[1] == 2) {stats[1]++;}
+if (c[0] == 3) {stats[2]++;}
+if (c[0] == 4) {stats[5]++;}
+if (c[0] == 5) {stats[7]++;}
+if (c[0] != 5 && [c[2], c[3], c[4], c[5]].toString() == [0, 0, 0, 0].toString()) {stats[4]++;}
+currentSum = Number(dice[0]) + Number(dice[1]) + Number(dice[2]) + Number(dice[3]) + Number(dice[4]);
+sums[currentSum - 5]++;
+}
+setInterval(function() {
+stats0.innerText = stats[0];
+stats1.innerText = stats[1];
+stats2.innerText = stats[2];
+stats3.innerText = stats[3];
+stats4.innerText = stats[4];
+stats5.innerText = stats[5];
+stats6.innerText = stats[6];
+stats7.innerText = stats[7];
+for (z = 5; z <= 30; z++) {
+document.getElementById("sum" + z).innerText = sums[z - 5];
+}
+});
+function rollDice100() {
+for (l = 0; l < 100; l++) {rollDice();}}
+function rollDice10k() {
+for (l = 0; l < 10000; l++) {rollDice();}}
+</script>
+</body></html>
