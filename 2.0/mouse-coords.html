@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head>
+<title>Mouse Coordinates</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 32px;
+font-family: arial;
+margin: 0px 0px;
+padding: 0px 0px;
+}
+</style>
+</head><body>
+<span>Current mouse coordinates: </span><span id="mousex">NaN</span><span>,</span><span id="mousey">NaN</span>
+<br>
+<span>Window size: </span><span id="windoww"></span><span>x</span><span id="windowh"></span>
+<br>
+<span>Monitor size: </span><span id="monitorw"></span><span>x</span><span id="monitorh"></span>
+<br>
+<span>Current URL: </span><span id="url"></span>
+<br>
+<span>Distance to center: </span><span id="dist">NaN</span>
+<br>
+<span>Window area: </span><span id="perc"></span><span>%</span>
+<br>
+<span>Unix time: </span><span id="unix"></span>
+<script>
+document.addEventListener("mousemove", event => {
+mousex.innerText = event.clientX;
+mousey.innerText = event.clientY;
+dist.innerText = Math.sqrt((event.clientX - window.innerWidth/2)**2 + (event.clientY - window.innerHeight/2)**2);
+});
+setInterval(function() {
+windoww.innerText = window.innerWidth;
+windowh.innerText = window.innerHeight;
+monitorw.innerText = screen.width;
+monitorh.innerText = screen.height;
+url.innerText = window.location;
+unix.innerText = Date.now();
+perc.innerText = (window.innerWidth * window.innerHeight)/(screen.width * screen.height) * 100;
+});
+</script>
+</body></html>
