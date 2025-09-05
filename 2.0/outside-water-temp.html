@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html><head>
+<title>Outside vs Water Temperature</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+.height1 {height: 20px; line-height: 20px;}
+.height2 {height: 40px; line-height: 40px;}
+.height3 {height: 60px; line-height: 60px;}
+.height4 {height: 80px; line-height: 80px;}
+.height5 {height: 100px; line-height: 100px;}
+.height6 {height: 120px; line-height: 120px;}
+.height7 {height: 140px; line-height: 140px;}
+.height8 {height: 160px; line-height: 160px;}
+.height9 {height: 180px; line-height: 180px;}
+.height10 {height: 200px; line-height: 200px;}
+.height40 {height: 800px; line-height: 800px;}
+.height46 {height: 920px; line-height: 920px;}
+.height {
+border: 1px solid #fff;
+}
+.container {
+display: grid;
+grid-template-columns: 1fr 3fr 1fr 3fr 1fr;
+width: 1000px;
+margin: 0 auto;
+}
+#celsius, #kelvins {
+line-height: 20.2px;
+position: relative;
+bottom: 6px;
+}
+</style>
+</head><body>
+<div class="container">
+<h1>Celsius</h1>
+<h1>Outdoor Status</h1>
+<h1></h1>
+<h1>Water Status</h1>
+<h1>Kelvins</h1>
+</div>
+<div class="container">
+<div id="celsius"></div>
+<div id="outside">
+<div class="height height46">Uninhabitable</div>
+<div class="height height4">Dangerously Hot</div>
+<div class="height height10">Severely Hot</div>
+<div class="height height5">Very Hot</div>
+<div class="height height3">Somewhat Hot</div>
+<div class="height height2">Very Warm</div>
+<div class="height height3">Somewhat Warm</div>
+<div class="height height2">Mildly Warm</div>
+<div class="height height5">Comfortable</div>
+<div class="height height2">Mildly Cool</div>
+<div class="height height3">Somewhat Cool</div>
+<div class="height height5">Very Cool</div>
+<div class="height height6">Chilly</div>
+<div class="height height4">Somewhat Cold</div>
+</div>
+<div></div>
+<div id="water">
+<div class="height height40">Untouchable</div>
+<div class="height height10">Dangerously Hot</div>
+<div class="height height5">Very Hot</div>
+<div class="height height5">Somewhat Hot</div>
+<div class="height height3">Very Warm</div>
+<div class="height height5">Somewhat Warm</div>
+<div class="height height5">Comfortable</div>
+<div class="height height2">Mildly Cool</div>
+<div class="height height3">Somewhat Cool</div>
+<div class="height height2">Chilly</div>
+<div class="height height5">Somewhat Cold</div>
+<div class="height height5">Very Cold</div>
+<div class="height height5">Severely Cold</div>
+<div class="height height5">Dangerously Cold</div>
+</div>
+<div id="kelvins"></div>
+</div>
+<script>
+for (i = 100; i >= 0; i--) {
+t = document.createElement("div");
+t.innerText = i + "\u00b0C";
+celsius.appendChild(t);
+t = document.createElement("div");
+t.innerText = (i + 273.15) + "K";
+kelvins.appendChild(t);
+}
+</script>
+</body></html>
