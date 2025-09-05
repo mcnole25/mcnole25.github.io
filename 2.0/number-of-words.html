@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html><head>
+<title>Number of Words Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 20px;
+font-family: arial;
+}
+.small {
+font-size: 16px;
+font-style: italic;
+}
+</style>
+</head><body>
+<span>How many words is</span>
+<input type="number" value=100 id="words">
+<span>words?</span><br><br>
+<b><div id="stats"></div></b>
+<br>
+<div class="small">*Statistics are based on online estimations. They may vary based on material, location & person.</div>
+<script>
+setInterval(function() {
+ss = []; ww = Number(words.value);
+ss.push("It would take " + Math.round(ww/5) + " seconds to read that much");
+ss.push("It would take " + Math.round(ww/3) + " seconds to speak that much");
+ss.push("It would take " + Math.round(ww/15000) + " days to communicate normally");
+ss.push("It would take " + Math.round(ww/250000000) + " human lifetimes to communicate");
+ss.push("");
+ss.push(ww + " words is about " + ww * 6 + " text characters");
+ss.push(ww + " words is about " + ww * 5 + " strict letters");
+ss.push(ww + " words is about " + Math.round(ww/17.5) + " sentences (may vary)");
+ss.push(ww + " words is about " + Math.round(ww/250) + " pages");
+ss.push(ww + " words is about " + Math.round(ww/1000) + " internet articles");
+ss.push(ww + " words is about " + Math.round(ww/62500) + " books");
+ss.push(ww + " words is about " + Math.round(ww/1250000) + " single bookshelves");
+ss.push(ww + " words is about " + Math.round(ww/900000000) + " libraries");
+ss.push(ww + " words is about " + Math.round(ww/10**15) + " entire internets");
+stats.innerText = ss.join("\n");
+});
+</script>
+</body></html>
