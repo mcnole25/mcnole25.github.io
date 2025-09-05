@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html><head>
+<title>Random Character Ranking</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+.container {
+display: grid;
+grid-template-columns: repeat(10, 1fr);
+}
+.bold {
+margin-bottom: 20px;
+font-weight: bold;
+}
+table {
+margin: 0 auto;
+}
+th, td {
+border: 3px double #fff;
+width: 300px;
+}
+.title {
+width: 100px;
+}
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10 {
+font-weight: bold;
+}
+</style>
+</head><body>
+<div class="container">
+<div>
+<canvas id="char1" width=120 height=120></canvas>
+<div class="bold">Character #1</div>
+<div id="stats1"></div>
+<div id="p1"></div>
+</div>
+<div>
+<canvas id="char2" width=120 height=120></canvas>
+<div class="bold">Character #2</div>
+<div id="stats2"></div>
+<div id="p2"></div>
+</div>
+<div>
+<canvas id="char3" width=120 height=120></canvas>
+<div class="bold">Character #3</div>
+<div id="stats3"></div>
+<div id="p3"></div>
+</div>
+<div>
+<canvas id="char4" width=120 height=120></canvas>
+<div class="bold">Character #4</div>
+<div id="stats4"></div>
+<div id="p4"></div>
+</div>
+<div>
+<canvas id="char5" width=120 height=120></canvas>
+<div class="bold">Character #5</div>
+<div id="stats5"></div>
+<div id="p5"></div>
+</div>
+<div>
+<canvas id="char6" width=120 height=120></canvas>
+<div class="bold">Character #6</div>
+<div id="stats6"></div>
+<div id="p6"></div>
+</div>
+<div>
+<canvas id="char7" width=120 height=120></canvas>
+<div class="bold">Character #7</div>
+<div id="stats7"></div>
+<div id="p7"></div>
+</div>
+<div>
+<canvas id="char8" width=120 height=120></canvas>
+<div class="bold">Character #8</div>
+<div id="stats8"></div>
+<div id="p8"></div>
+</div>
+<div>
+<canvas id="char9" width=120 height=120></canvas>
+<div class="bold">Character #9</div>
+<div id="stats9"></div>
+<div id="p9"></div>
+</div>
+<div>
+<canvas id="char10" width=120 height=120></canvas>
+<div class="bold">Character #10</div>
+<div id="stats10"></div>
+<div id="p10"></div>
+</div>
+</div>
+<br><br>
+<div>To get a different batch of 10 characters, reload the page.</div>
+<br>
+<div><b>Explanation of how the character traits work</b></div>
+<table>
+<tr>
+<th class="title">Trait</th>
+<th>0</th>
+<th>0.5</th>
+<th>1</th>
+</tr>
+<tr>
+<td class="title">Niceness</td>
+<td>Has an inflated self-worth,<br>likes to tear people down.</td>
+<td>Balanced & passive, only<br>mean when provoked.</td>
+<td>Very kind, but can easily<br>be taken advantage of.</td>
+</tr>
+<tr>
+<td class="title">Honesty</td>
+<td>Lies & misleads frequently,<br>cannot be trusted for anything.</td>
+<td>Doesn't lie often, usually<br>honest but sometimes not.</td>
+<td>Too honest, overshares details<br>& dismisses feelings.</td>
+</tr>
+<tr>
+<td class="title">Intelligence</td>
+<td>Can easily be deceived, has<br>very limited logic & smarts.</td>
+<td>Average smarts, can learn,<br>easily, but also comes short.</td>
+<td>Very logical, intelligent,<br>& can explain the difficult.</td>
+</tr>
+<tr>
+<td class="title">Humor</td>
+<td>Broken sense of humor, hates<br>jokes & can't understand them.</td>
+<td>Average humor, neither funny<br>nor not funny.</td>
+<td>Very good at creating plot<br>twists & has creativity.</td>
+</tr>
+<tr>
+<td class="title">Optimism</td>
+<td>Very pessimistic, sees<br>only the negative side of things.</td>
+<td>Thinks logically about the<br>current state of their life.</td>
+<td>Thinks everything is perfect,<br>ignores flaws & responsibilities.</td>
+</tr>
+</table>
+<script>
+niceness = [];
+honesty = [];
+intelligence = [];
+humor = [];
+optimism = [];
+rank = [];
+for (i = 0; i < 10; i++) {
+niceness.push(Math.random());
+honesty.push(Math.random());
+intelligence.push(Math.random());
+humor.push(Math.random());
+optimism.push(Math.random());
+popularity = 0;
+popularity += 0.2 * Math.sin(Math.PI * niceness[i]);
+popularity += 0.2 * Math.sin(Math.PI * honesty[i] - Math.sin(Math.PI * honesty[i]));
+popularity += 0.2 * Math.sin(Math.PI * intelligence[i] - Math.sin(Math.PI * intelligence[i]));
+popularity += 0.1 * Math.sin(Math.PI * humor[i]) + 0.1;
+popularity += 0.2 * Math.sin(Math.PI * optimism[i] + Math.sin(Math.PI * optimism[i]));
+rank.push(popularity);
+document.getElementById("stats" + (i + 1)).innerText = "Niceness: " + niceness[i].toFixed(3) + "\nHonesty: " + honesty[i].toFixed(3) + "\nIntelligence: " + intelligence[i].toFixed(3) + "\nHumor: " + humor[i].toFixed(3) + "\nOptimism: " + optimism[i].toFixed(3);
+document.getElementById("p" + (i + 1)).innerText = "Popularity: " + popularity.toFixed(3);
+ctx = document.getElementById("char" + (i + 1)).getContext("2d");
+ctx.fillStyle = "rgb(" + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ", " + Math.floor(Math.random() * 256) + ")";
+ctx.fillRect(0, 0, 120, 120);
+ctx.fillStyle = "#fff";
+ctx.fillRect(12.5, 50 - niceness[i] * 10, 40, 30 + niceness[i] * 10);
+ctx.fillRect(67.5, 50 - niceness[i] * 10, 40, 30 + niceness[i] * 10);
+ctx.fillStyle = "#000";
+ctx.fillRect(22.5, 50, 20, 20);
+ctx.fillRect(77.5, 50, 20, 20);
+}
+for (i = 0; i < 10; i++) {
+r = rank.indexOf(Math.max(...rank));
+document.getElementById("p" + (r + 1)).innerText += "\nRank #" + (i + 1) + " of 10";
+rank[r] = -1;
+}
+</script>
+</body></html>
