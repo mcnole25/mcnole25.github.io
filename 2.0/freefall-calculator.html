@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head>
+<title>Freefall Calculator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 24px;
+font-family: arial;
+}
+input {
+width: 200px;
+}
+#stats {
+font-weight: bold;
+}
+</style>
+</head><body>
+<span>Launch projectile</span>
+<input value="100" id="mm" type=number>
+<span>meters in the air</span>
+<br><span>Gravity:</span>
+<input value="0" id="gg" type=number>
+<span>m/s&sup2;</span>
+<button onclick="gravity(9.80665);">Earth</button>
+<button onclick="gravity(3.71);">Mars</button>
+<button onclick="gravity(1.625);">Moon</button>
+<br><br><div id="stats"></div>
+<br><div><i>*Air resistance not taken into account.</i></div>
+<script>
+function gravity(n) {
+gg.value = n;
+}
+gravity(9.80665);
+setInterval(function() {
+ss = []; m = Number(mm.value); g = Number(gg.value);
+ss.push("Maximum height: " + m + " meters");
+ss.push("Time to reach MH/fall: " + Math.sqrt(m/g * 2) + " seconds");
+ss.push("Full journey length: " + 2 * Math.sqrt(m/g * 2) + " seconds");
+ss.push("Initial velocity: " + Math.sqrt(m * g * 2) + " m/s");
+stats.innerText = ss.join("\n");
+});
+</script>
+</body></html>
