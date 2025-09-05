@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<title>My Number & Month Colours</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+overflow: hidden;
+}
+</style>
+</head><body>
+<div>Here's how I think of the numbers 0-15 & the 12 months having assigned colours.</div>
+<canvas id="numbers" width=1600 height=900></canvas>
+<script>
+ctx = numbers.getContext("2d");
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+function getnumber(n, c, x, y, na, cn) {
+ctx.font = "100px Consolas";
+ctx.fillStyle = c;
+ctx.fillText(n, x, y);
+ctx.font = "25px Consolas";
+ctx.fillText(na, x, y + 60);
+ctx.fillText(cn, x, y + 90);
+}
+getnumber(0, "#ccc", 100, 100, "Zero", "Silver");
+getnumber(1, "#00f", 300, 100, "One", "Blue");
+getnumber(2, "#0f0", 500, 100, "Two", "Green");
+getnumber(3, "#f00", 700, 100, "Three", "Red");
+getnumber(4, "#05f", 900, 100, "Four", "Azure");
+getnumber(5, "#c8f", 1100, 100, "Five", "Lavender");
+getnumber(6, "#0af", 1300, 100, "Six", "Light Blue");
+getnumber(7, "#000", 1500, 100, "Seven", "Black");
+getnumber(8, "#888", 100, 300, "Eight", "Grey");
+getnumber(9, "#fff", 300, 300, "Nine", "White");
+getnumber(10, "#f80", 500, 300, "Ten", "Orange");
+getnumber(11, "#008", 700, 300, "Eleven", "Navy");
+getnumber(12, "#fc0", 900, 300, "Twelve", "Amber");
+getnumber(13, "#ff0", 1100, 300, "Thirteen", "Yellow");
+getnumber(14, "#080", 1300, 300, "Fourteen", "Dark Green");
+getnumber(15, "#800", 1500, 300, "Fifteen", "Maroon");
+ctx.strokeStyle = "#fff";
+ctx.lineWidth = 4;
+ctx.moveTo(0, 450);
+ctx.lineTo(1600, 450);
+ctx.stroke();
+getnumber("Jan", "#8ff", 175, 550, "January", "Light Cyan");
+getnumber("Feb", "#f8f", 425, 550, "February", "Pink");
+getnumber("Mar", "#0f0", 675, 550, "March", "Green");
+getnumber("Apr", "#8f0", 925, 550, "April", "Chartreuse");
+getnumber("May", "#ff8", 1175, 550, "May", "Ivory");
+getnumber("Jun", "#ff0", 1425, 550, "June", "Yellow");
+getnumber("Jul", "#f00", 175, 750, "July", "Red");
+getnumber("Aug", "#f40", 425, 750, "August", "Vermillion");
+getnumber("Sep", "#fc0", 675, 750, "September", "Amber");
+getnumber("Oct", "#f80", 925, 750, "October", "Orange");
+getnumber("Nov", "#963", 1175, 750, "November", "Brown");
+getnumber("Dec", "#fff", 1425, 750, "December", "White");
+</script>
+</body></html>
