@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html><head>
+<title>Random Meal Generator</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+}
+img {
+max-width: 60px;
+max-height: 60px;
+}
+#list, #meallist {
+display: grid;
+grid-template-columns: repeat(14, 1fr);
+}
+#calcount {
+font-weight: bold;
+}
+</style>
+</head><body>
+<div>List of foods to generate (use as a reference). Food calorie amounts may vary in real life.</div>
+<br><div id="list"></div>
+<br><br><span>Generate</span>
+<select id="foodcount">
+<option value=1>1 food type</option>
+<option value=2 selected=true>2 food types</option>
+<option value=3>3 food types</option>
+<option value=4>4 food types</option>
+<option value=5>5 food types</option>
+<option value=6>6 food types</option>
+</select>
+<span>as a meal</span>
+<button onclick="generatemeal()">Generate!</button>
+<br><br>
+<span>Your generated meal contains</span>
+<span id="calcount">--</span>
+<span>calories</span>
+<br><div id="meallist"></div>
+<script>
+foods = ["apple_95.png","avocado_160.png","bacon_136.png","bagel_288.png","banana_105.png","bread_66.png","broccoli_51.png","burrito_242.png","cake_316.png","carrot_25.png","cheeseburger_567.png","chestnut_11.png","chicken-tender_125.png","chocolate-bar_200.png","cookie_160.png","corn_88.png","croissant_231.png","cucumber_45.png","donut_452.png","egg_63.png","fries_470.png","hot-dog_150.png","ice-cream_137.png","lemon_21.png","lime_20.png","orange_73.png","pear_100.png","pizza_250.png","popcorn_370.png","potato_130.png","pretzel_483.png","salad_300.png","sandwich_300.png","taco_253.png","tomato_67.png","waffle_300.png","watermelon_86.png"];
+for (i = 0; i < foods.length; i++) {
+addFood(foods[i], list);
+}
+function addFood(id, l) {
+d = document.createElement("div");
+t = document.createElement("img");
+t.src = "https://mcnole25.github.io/google-food-emojis/" + id;
+d.appendChild(t);
+t = document.createElement("div");
+t.style.fontWeight = "bold";
+t.innerText = toTitleCase(id.split("_")[0].replace("-", " "));
+d.appendChild(t);
+t = document.createElement("div");
+t.innerText = id.split("_")[1].split(".")[0] + " cal";
+d.appendChild(t);
+l.appendChild(d);
+}
+function toTitleCase(str) {
+return str.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase());
+}
+function generatemeal() {
+meallist.innerHTML = ""; cc = 0;
+for (i = 0; i < Number(foodcount.value); i++) {
+rr = Math.floor(Math.random() * foods.length);
+addFood(foods[rr], meallist);
+cc += Number(foods[rr].split("_")[1].split(".")[0]);
+}
+calcount.innerText = cc;
+}
+</script>
+</body></html>
