@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html><head>
+<title>Probability Stars</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+input {
+width: 150px;
+}
+</style>
+</head><body>
+<canvas width=1800 height=900 id="odds"></canvas>
+<br><span>1 in </span>
+<input type="number" value=10 id="pp">
+<span>odds</span>
+<script>
+ctx = odds.getContext("2d");
+setInterval(function() {
+for (i = 0; i < 450; i++) {
+for (j = 0; j < 225; j++) {
+if (Math.random() < 1/Number(pp.value)) {ctx.fillStyle = "#fff";} else {ctx.fillStyle = "#000";}
+ctx.fillRect(i * 4, j * 4, 4, 4);
+}}}, 1000);
+</script>
+</body></html>
