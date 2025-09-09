@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Gallery of 72</title>
+<html><head>
+<title>Gallery of Top 80</title>
 <style>
-body {
+* {
 background-color: #222;
 color: #fff;
+font-size: 24px;
+font-family: arial;
+text-align: center;
+margin: 0px 0px;
+}
+#container {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-}
-img {
-width: 32vw;
+margin: 0px auto;
 }
 </style>
-</head>
-<body>
+</head><body>
+<div id="container">
+<div>This is a personal collection of my liked images on the internet. No copyright is intended - this is merely a showcase. There are 80 images listed here.</div>
+</div>
 <script>
-for (i = 1; i <= 72; i++) {
+for (i = 1; i <= 80; i++) {
+dd = document.createElement("div");
 im = document.createElement("img");
-im.src = "https://raw.githubusercontent.com/mcnole25/personal-gallery/refs/heads/master/images/img" + i + ".png";
-document.body.appendChild(im);
+im.src = "https://mcnole25.github.io/gallery/img" + i + ".png";
+im.style.maxWidth = "30vw";
+im.style.maxHeight = "30vw";
+dd.appendChild(im);
+dd.style.width = "30vw";
+dd.style.height = "30vw";
+container.appendChild(dd);
 }
 </script>
-</body>
-</html>
+</body></html>
