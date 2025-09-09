@@ -42,9 +42,9 @@ bottom: 3px;
 <span>Colour (HSL): </span><input id="inputc" value="120,100,50">
 <br><br><canvas id="text" width=800 height=600></canvas>
 <br><textarea readonly=true id="URLsave"></textarea>
-<button onclick="copyLink();">Copy URL<br>Parameters</button>
+<button onclick="copyText();">Copy URL<br>Parameters</button>
 <script>
-currentURL = window.location;
+currentURL = String(window.location);
 inputtext.value = currentURL.split("?")[1].split("&")[0].split("=")[1];
 inputfont.value = currentURL.split("?")[1].split("&")[1].split("=")[1];
 inputs.value = currentURL.split("?")[1].split("&")[2].split("=")[1];
@@ -70,5 +70,11 @@ document.getElementById("text").style.transform = "rotateY(" + rr + "deg) rotate
 saveURL = "https://mcnole25.github.io/2.0/spinning-text.html?text=" + String(inputtext.value) + "&font=" + String(inputfont.value) + "&speed=" + String(inputs.value) + "&colour=" + String(inputc.value);
 URLsave.value = saveURL;
 });
+function copyText() {
+inputt = document.getElementById("URLsave");
+inputt.select();
+inputt.setSelectionRange(0, 99999);
+document.execCommand("copy");
+}
 </script>
 </body></html>
