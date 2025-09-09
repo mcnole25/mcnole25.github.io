@@ -24,6 +24,16 @@ canvas {
 position: relative;
 z-index: 0;
 }
+#URLsave {
+resize: none;
+overflow: hidden;
+width: 600px;
+height: 2em;
+}
+button {
+position: relative;
+bottom: 3px;
+}
 </style>
 </head><body>
 <span>Text Input (\n for newline): </span><input id="inputtext" value="hold on, let me\noverthink this">
@@ -31,7 +41,14 @@ z-index: 0;
 <span>Speed: </span><input id="inputs" value="4">
 <span>Colour (HSL): </span><input id="inputc" value="120,100,50">
 <br><br><canvas id="text" width=800 height=600></canvas>
+<br><textarea readonly=true id="URLsave"></textarea>
+<button onclick="copyLink();">Copy URL<br>Parameters</button>
 <script>
+currentURL = window.location;
+inputtext.value = currentURL.split("?")[1].split("&")[0].split("=")[1];
+inputfont.value = currentURL.split("?")[1].split("&")[1].split("=")[1];
+inputs.value = currentURL.split("?")[1].split("&")[2].split("=")[1];
+inputc.value = currentURL.split("?")[1].split("&")[3].split("=")[1];
 ctx = text.getContext("2d");
 setInterval(function() {
 ctx.clearRect(0, 0, 800, 600);
@@ -50,6 +67,8 @@ ctx.fillText(tt[i], 400, yy);
 rr = ((((180/inputs.value * performance.now()/1000) + 90) % 180) - 90);
 rr2 = Math.sin(rr * Math.PI/180) * 10;
 document.getElementById("text").style.transform = "rotateY(" + rr + "deg) rotateZ(" + rr2 + "deg)";
+saveURL = "https://mcnole25.github.io/2.0/spinning-text.html?text=" + String(inputtext.value) + "&font=" + String(inputfont.value) + "&speed=" + String(inputs.value) + "&colour=" + String(inputc.value);
+URLsave.value = saveURL;
 });
 </script>
 </body></html>
