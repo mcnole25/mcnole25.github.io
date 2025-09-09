@@ -44,7 +44,7 @@ bottom: 3px;
 <br><textarea readonly=true id="URLsave"></textarea>
 <button onclick="copyText();">Copy URL<br>Parameters</button>
 <script>
-currentURL = String(window.location).replaceAll("%20", " ");
+currentURL = String(window.location).replaceAll("%20", " ").replaceAll("%27", "'");
 inputtext.value = currentURL.split("?")[1].split("&")[0].split("=")[1];
 inputfont.value = currentURL.split("?")[1].split("&")[1].split("=")[1];
 inputs.value = currentURL.split("?")[1].split("&")[2].split("=")[1];
