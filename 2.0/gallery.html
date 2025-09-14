@@ -15,12 +15,25 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 margin: 0px auto;
 }
+#molecules {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+margin: 0px auto;
+}
+#spacing {
+margin: 50px 0px;
+}
 </style>
 </head><body>
 <div id="container">
-<div>This is a personal collection of my liked images on the internet. No copyright is intended - this is merely a showcase. There are 80 images listed here.</div>
+<div>This is a personal collection of my liked images on the internet. No copyright is intended - this is merely a showcase. There are 80 images listed here. Molecule gallery excluded.</div>
+</div>
+<hr id="spacing">
+<div id="molecules">
+<div>This is a list of commonly known molecules. The images are generated using MolView & there are 39 models here. With molecules included, there are 119 images.</div>
 </div>
 <script>
+moleculelist = ["acetic-acid","acetone","alcohol","ammonia","aspirin","benzene","benzoic-acid","butane","caffeine","camphor","capsaicin","carbon-dioxide","carbon-monoxide","carbonate","carbonic-acid","cholesterol","citric-acid","estrogen","formic-acid","fructose","glucose","hydrogen-peroxide","ibuprofen","lactose","menthol","methane","naproxen","nitric-acid","nitrogen","nitrous-acid","nitrous-oxide","octane","oxygen","ozone","sugar","testosterone","theobromine","vinegar","water"];
 for (i = 1; i <= 80; i++) {
 dd = document.createElement("div");
 im = document.createElement("img");
@@ -31,6 +44,20 @@ dd.appendChild(im);
 dd.style.width = "30vw";
 dd.style.height = "30vw";
 container.appendChild(dd);
+}
+for (i = 1; i <= 39; i++) {
+dd = document.createElement("div");
+im = document.createElement("img");
+im.src = "https://mcnole25.github.io/molecules/" + moleculelist[i - 1] + ".png";
+im.style.maxWidth = "15vw";
+im.style.maxHeight = "15vw";
+dd.appendChild(im);
+dd.style.width = "15vw";
+dd.style.height = "20vw";
+nn = document.createElement("div");
+nn.innerText = String(String(moleculelist[i - 1]).charAt(0).toUpperCase() + String(moleculelist[i - 1]).slice(1, 1000)).replace(/\-/g, " ");
+dd.appendChild(nn);
+molecules.appendChild(dd);
 }
 </script>
 </body></html>
