@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html><head>
+<title>Simple Lava - by @mcnole25</title>
+<style>
+* {
+background-color: #222;
+color: #fff;
+font-size: 16px;
+font-family: arial;
+text-align: center;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/p5@2.0.5/lib/p5.js"></script>
+</head><body>
+<div id="statslabel"></div>
+<div id="playerlabel"></div>
+<main></main>
+<div>To jump, move left, phase through horizontal bar or move right, this game supports 3 control sets:</div>
+<div>Up/Left/Down/Right arrow keys, W/A/S/D, Space/Comma/Slash/Period.</div>
+<div><b><i>Simple Lava</i></b> - a game made by @mcnole25, a.k.a. @horizontal_shading on 16 Sep 2025.</div>
+<div>Game will not work without internet connection - it is powered by jsDelivr & p5.js v2.0.5.</div>
+<script>
+function setup() {
+createCanvas(800, 800);
+frameRate(60);
+angleMode(DEGREES);
+noStroke(); level = "";
+for (i = 0; i < 8000; i++) {
+rr = random();
+if (rr < 0.05) {
+level += "#";
+} else if (rr < 0.1) {
+level += "-";
+} else if (rr < 0.15) {
+level += "|";
+} else {
+level += " ";
+}}
+for (i = 160; i < 8000; i++) {
+if (level.charAt(i - 16) == "#" && random() < 0.1) {
+level = replaceAt(level, i, "_");}}
+camy = 0; lvh = -500;
+px = 400; py = 800;
+dx = 0; dy = 0;
+power = 0.5;
+jumpPower = 34;
+gravity = 1;
+resist = 0.95;
+fall = 0;
+playerAlive = true;
+}
+function draw() {
+camy = 300 - py;
+skyNight = 1 - (835 - py)/25000;
+if (playerAlive) {tick();}
+tickStats();
+background(skyNight * 153, skyNight * 255, 102 + skyNight * 153);
+squareTexture("#333", 0, 850, 800, 800);
+for (i = 0; i < 8000; i++) {
+xx = (i % 16) * 50;
+yy = 800 - floor(i/16) * 50;
+if (level.charAt(i) == "#") {
+squareTexture("#666", xx, yy, 50, 50);
+}
+if (level.charAt(i) == "-") {
+squareTexture("#666", xx, yy + 15, 50, 20);
+}
+if (level.charAt(i) == "|") {
+squareTexture("#666", xx + 15, yy, 20, 50);
+}
+if (level.charAt(i) == "_") {
+squareTexture("#f60", xx, yy + 40, 50, 10);
+}}
+squareTexture("#f60", 0, 850 - lvh, 800, lvh + 2000);
+squareTexture("#90f", px - 15, py - 15, 30, 30);
+}
+function squareTexture(c, x, y, w, h) {
+if ((y + camy) > -200 && (y + camy) < 1000) {
+fill(sqrt(1 - skyNight) * 255);
+rect(x + 3, y + camy + 3, w, h);
+fill(c);
+rect(x, y + camy, w, h);
+}}
+function tick() {
+dy += gravity;
+dx *= resist; dy *= resist;
+fall++;
+lvh = performance.now()/20 - 500;
+moveSteps(abs(dx) + abs(dy) + 2);
+tickControls();
+if (collision()) {
+lastpx = px; lastpy = py;
+for (dis = 10; dis <= 200; dis += 10) {
+for (dir = 0; dir < 360; dir += 45) {
+px = lastpx + dis * sin(dir);
+py = lastpy + dis * cos(dir);
+if (!collision()) {break;}
+}}}
+if (py > 850 - lvh) {playerAlive = false;}
+if (py < -24165) {playerAlive = false;}
+}
+function collision() {
+collide = false;
+if (px < 15 || px > 785) {collide = true;}
+if (py > 835) {collide = true;}
+function tileupdate(offx, offy) {
+tile = floor((px + offx)/50) + floor((800 - py + offy)/50) * 16;
+}
+tileupdate(-15, 35);
+if (level.charAt(tile) == "#") {collide = true;}
+tileupdate(15, 35);
+if (level.charAt(tile) == "#") {collide = true;}
+tileupdate(-15, 65);
+if (level.charAt(tile) == "#") {collide = true;}
+tileupdate(15, 65);
+if (level.charAt(tile) == "#") {collide = true;}
+if (!(keyIsDown("ArrowDown") || keyIsDown("s") || keyIsDown("/"))) {
+tileupdate(-15, 50);
+if (level.charAt(tile) == "-") {collide = true;}
+tileupdate(15, 50);
+if (level.charAt(tile) == "-") {collide = true;}}
+tileupdate(0, 35);
+if (level.charAt(tile) == "|") {collide = true;}
+tileupdate(0, 65);
+if (level.charAt(tile) == "|") {collide = true;}
+if (collide) {fall = 0;}
+tileupdate(-15, 65);
+if (level.charAt(tile) == "_") {playerAlive = false;}
+tileupdate(15, 65);
+if (level.charAt(tile) == "_") {playerAlive = false;}
+return collide;
+}
+function tickControls() {
+if (keyIsDown("ArrowLeft") || keyIsDown("a") || keyIsDown(",")) {dx -= power;}
+if (keyIsDown("ArrowRight") || keyIsDown("d") || keyIsDown(".")) {dx += power;}
+}
+function keyPressed() {
+if (key == "ArrowUp" || key == "w" || key == " ") {
+if (fall < 2) {dy = -jumpPower;}}
+}
+function moveSteps(steps) {
+for (j = 0; j < steps; j++) {
+lastX = px;
+px += dx/steps;
+if (collision()) {px = lastX; dx = 0;}
+lastY = py;
+py += dy/steps;
+if (collision()) {py = lastY; dy = 0;}
+}}
+function tickStats() {
+if (playerAlive) {
+stats = ["Height: " + round((835 - py)/5)/10 + "m", "Time: " + round(performance.now()/100)/10 + "s", "Lava Height: " + round(lvh/5)/10 + "m"];
+statslabel.innerText = stats.join(", ");
+playerlabel.innerText = "Get to 500 meters & don't touch the lava to win!"
+} else if (py <= -24165) {
+playerlabel.innerText = "Congrats! You beat the level! Reload the page to restart."
+} else {
+playerlabel.innerText = "Your player touched lava! Reload the page to restart."
+}}
+function replaceAt(str, index, replacement) {
+return str.slice(0, index) + replacement + str.slice(index + 1);
+}
+</script>
+</body></html>
