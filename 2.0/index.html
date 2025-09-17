@@ -16,7 +16,7 @@ font-size: 32px;
 }
 a {
 font-size: 22px;
-padding: 30px 30px;
+padding: 20px 20px;
 margin: 2px 2px;
 height: 18px;
 position: relative;
@@ -27,8 +27,6 @@ display: grid;
 grid-template-columns: repeat(6, 1fr);
 margin: 20px 20px;
 border: 1px solid #fff;
-position: relative;
-top: 5px;
 }
 .smalllink {
 border: none;
@@ -36,6 +34,8 @@ font-size: 16px;
 padding: 0px 0px;
 margin: 0px 0px;
 height: 16px;
+position: relative;
+top: 0px;
 }
 </style>
 </head><body>
@@ -96,7 +96,7 @@ height: 16px;
 <a href="https://mcnole25.github.io/2.0/episode-date.html">Episode Release Dates</a>
 <a href="https://mcnole25.github.io/2.0/common-punctuations.html">Common Punctuations</a>
 <a href="https://mcnole25.github.io/2.0/soda-visualizer.html">Soda Visualizer</a>
-<a href="https://mcnole25.github.io/2.0/spinning-text.html?text=now with URL\nparameters\ncertain symbols may break&font=Arial&speed=3.5&colour=200,80,60">3D Spinning Text</a>
+<a href="https://mcnole25.github.io/2.0/spinning-text.html?text=now with URL\nparameters\ncertain symbols may break&amp;font=Arial&amp;speed=3.5&amp;colour=200,80,60">3D Spinning Text</a>
 <a href="https://mcnole25.github.io/2.0/time-ago.html">Amount of Time Ago</a>
 <a href="https://mcnole25.github.io/2.0/random-characters.html">Random Character Rank</a>
 <a href="https://mcnole25.github.io/2.0/outside-water-temp.html">Outdoor vs Water Temp</a>
@@ -129,7 +129,7 @@ height: 16px;
 <br><span>You can also check out my</span>
 <a class="smalllink" href="https://editor.p5js.org/horizontal_shading/sketches">p5.js profile</a><span>, where I will be posting bonus creativity & info. New sketches release whenever.</span>
 <script>
-updateUnix = 1758069116000;
+updateUnix = 1758069351000;
 unix.innerText = new Date(updateUnix).toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"});
 daysago.innerText = Math.floor((Date.now() - updateUnix)/86400000);
 </script>
