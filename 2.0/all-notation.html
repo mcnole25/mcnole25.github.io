@@ -54,6 +54,10 @@ bottom: 25px;
 </style>
 </head>
 <body>
+<span>Filter Function List:</span>
+<input type="checkbox" id="filter">
+<span id="filterdesc"></span>
+<br><br><br><br>
 <h1 class="title">NUMERICAL SYMBOLS</h1>
 <div class="container">
 <div>
@@ -807,6 +811,7 @@ bottom: 25px;
 <p>Exclusive-Exclusive Interval</p>
 </div>
 </div>
+<div id="extra">
 <h1 class="title">EXTENSION: SUPPLEMENTARY MATH</h1>
 <div class="container">
 <div>
@@ -2112,9 +2117,124 @@ bottom: 25px;
 <h1 class="title">ICONS</h1>
 <div class="container">
 <div><h1>●&#65038;</h1><p>Circle*</p></div><div><h1>■&#65038;</h1><p>Square*</p></div><div><h1>▲&#65038;</h1><p>Upward Triangle*</p></div><div><h1>▶&#65038;</h1><p>Rightward Triangle*</p></div><div><h1>▼&#65038;</h1><p>Downward Triangle*</p></div><div><h1>◀&#65038;</h1><p>Leftward Triangle*</p></div><div><h1>▬&#65038;</h1><p>Horizontal Rectangle*</p></div><div><h1>▮&#65038;</h1><p>Vertical Rectangle*</p></div><div><h1>♥&#65038;</h1><p>Heart*</p></div><div><h1>★&#65038;</h1><p>Star*</p></div><div><h1>▤&#65038;</h1><p>Grid Rows*</p></div><div><h1>▥&#65038;</h1><p>Grid Columns*</p></div><div><h1>▦&#65038;</h1><p>Grid*</p></div><div><h1>🔥&#65038;</h1><p>Hot Temperature*</p></div><div><h1>❄&#65038;</h1><p>Cold Temperature*</p></div><div><h1>🖩&#65038;</h1><p>Calculator*</p></div><div><h1>⏰&#65038;</h1><p>Clock*</p></div><div><h1>&#9728;&#65038;</h1><p>Sun*</p></div><div><h1>🌅&#65038;</h1><p>Sunrise*</p></div><div><h1>🌇&#65038;</h1><p>Sunset*</p></div>
+<div>
+<h1>☁&#65038;</h1>
+<p>Cloud*</p>
 </div>
-<div>This is a comprehensive list of all my mathematical knowledge in a table, organized from most to least useful. There are <span id="count"></span> functions. An asterisk * indicates that the function is not compatible with the Desmos Graphing Calculator.</div>
+<div>
+<h1>○&#65038;</h1>
+<p>Empty Circle*</p>
+</div>
+<div>
+<h1>◒&#65038;</h1>
+<p>Half Filled Circle*</p>
+</div>
+<div>
+<h1>□&#65038;</h1>
+<p>Empty Square*</p>
+</div>
+<div>
+<h1>◢&#65038;</h1>
+<p>Right Triangle LR*</p>
+</div>
+<div>
+<h1>◣&#65038;</h1>
+<p>Right Triangle LL*</p>
+</div>
+<div>
+<h1>◤&#65038;</h1>
+<p>Right Triangle UL*</p>
+</div>
+<div>
+<h1>◥&#65038;</h1>
+<p>Right Triangle UR*</p>
+</div>
+<div>
+<h1>✔&#65038;</h1>
+<p>Correct Answer*</p>
+</div>
+<div>
+<h1>✖&#65038;</h1>
+<p>Incorrect Answer*</p>
+</div>
+<div>
+<h1>◆&#65038;</h1>
+<p>Rhombus*</p>
+</div>
+<div>
+<h1>⬟&#65038;</h1>
+<p>Pentagon*</p>
+</div>
+<div>
+<h1>⬢&#65038;</h1>
+<p>Hexagon*</p>
+</div>
+<div>
+<h1>◎&#65038;</h1>
+<p>Bullseye*</p>
+</div>
+</div>
+<h1 class="title">OBSCURE NOTATION D</h1>
+<div class="container">
+<div><h1>⬠</h1><p>Pentagon Operation*</p></div>
+<div><h1>⬡</h1><p>Hexagon Operation*</p></div>
+<div><h1>◌</h1><p>n-gon Operation*</p></div>
+<div><h1>𝔻<sub>p</sub></h1><p>Set of Rationals such that mod(denominator, p) ≠ 0*</p></div>
+<div><h1>{a, b [c] d}</h1><p>Bird's Array Notation*</p></div>
+<div><h1>x ⧺ y</h1><p>Multiadd</p><p class="formula">Formula: xy + x + y</p></div>
+<div><h1>x ⧻ y</h1><p>Multimultiadd</p><p class="formula">Formula: xy(x + y)</p></div>
+<div><h1>polyomino(n)</h1><p>Number of Polyominoes with N cells*</p></div>
+<div><h1>rubiks(x, y, z)</h1><p>Number of Permutations of Rubik's Cube*</p></div>
+<div><h1>fib(t, f, a, o)</h1><p>Custom Fibonacci (console tools)*</p></div>
+<div><h1>⬚</h1><p>Any Polyomino*</p></div>
+<div><h1>↗</h1><p>Arrow (any direction)*</p></div>
+<div><h1>hollowcube(x, y)</h1><p>Number of Blocks in a Cube with Y-thick Walls</p><p class="formula">Formula: x<sup>3</sup> - (x - 2y)<sup>3</sup></p></div>
+<div><h1>(f ◦ g)(x)</h1><p>Alternate Function Composition</p><p class="formula">Formula: f(g(x))</p></div>
+<div><h1>e ↓ x</h1><p>Inverse Arrow Notation*</p></div>
+<div><h1>𝔽𝕀𝔾</h1><p>Set of All Possible Figurate Sequences*</p></div>
+<div><h1>𝔽</h1><p>Set of All Functions*</p></div>
+<div><h1>ℂ𝔽</h1><p>Set of All Continuous Functions*</p></div>
+<div><h1>𝕄</h1><p>Multiversal Set (set of all sets)*</p></div>
+<div><h1>isPractical(n)</h1><p>Is Practical Number*</p></div>
+<div><h1>isPerfectPower(n)</h1><p>Is Perfect Power*</p></div>
+<div><h1>x<sub>y</sub></h1><p>Custom Number Base*</p></div>
+<div><h1>x ‰ₒₒ of y</h1><p>Per Dekamyriad</p></div>
+<div><h1>x ‰ₒₒ</h1><p>Isolated Per Dekamyriad</p></div>
+<div><h1>x ppm of y</h1><p>Parts Per Million</p></div>
+<div><h1>x ppm</h1><p>Isolated Parts Per Million</p></div>
+<div><h1>x ppb of y</h1><p>Parts Per Billion</p></div>
+<div><h1>x ppb</h1><p>Isolated Parts Per Billion</p></div>
+<div><h1>x ppt of y</h1><p>Parts Per Trillion</p></div>
+<div><h1>x ppt</h1><p>Isolated Parts Per Trillion</p></div>
+<div><h1>factors(n)</h1><p>All Factors of N*</p></div>
+<div><h1>primeFactors(n)</h1><p>All Prime Factors of N*</p></div>
+<div><h1>Si(x)</h1><p>Wolfram Sine Integral*</p></div>
+<div><h1>Ci(x)</h1><p>Wolfram Cosine Integral*</p></div>
+<div><h1>P<sub>n</sub>(x)</h1><p>Legendre Polynomial*</p></div>
+<div><h1>erf(x)</h1><p>Error Function*</p></div>
+<div><h1>bmi(k, m)</h1><p>Body Mass Index</p><p class="formula">Formula: <sup>k</sup>&#8260;<sub>m<sup>2</sup></sub></p></div>
+<div><h1>mersenne(p)</h1><p>Mersenne Number</p><p class="formula">Formula: 2<sup>p</sup> - 1</p></div>
+<div><h1>wage(y, h)</h1><p>Wage</p><p class="formula">Formula: <sup>y</sup>&#8260;<sub>52.1775h</sub></p></div>
+<div><h1>dexp(x)</h1><p>Double Exponent</p><p class="formula">Formula: e<sup>e<sup>x</sup></sup></p></div>
+<div><h1>expexp(x)</h1><p>Double Exponent 2, (x^x)^(x^x)</p><p class="formula">Formula: x<sup>x<sup>x + 1</sup></sup></p></div>
+<div><h1>frac(x)</h1><p>Fractional Part of X</p><p class="formula">Formula: mod(|x|, 1)</p></div>
+<div><h1>jsmod(x, y)</h1><p>JavaScript Mod of X</p><p class="formula">Formula: mod(|x|, y)sign(x)</p></div>
+<div><h1>MSI</h1><p>Maximum Safe Float Integer</p><p class="formula">Formula: 2<sup>53</sup> - 1</p></div>
+<div><h1>MI</h1><p>Maximum 64-bit Signed Integer</p><p class="formula">Formula: 2<sup>63</sup> - 1</p></div>
+<div><h1>squish(x)</h1><p>Squish 0-1 to 0-∞</p><p class="formula">Formula: <sup>1</sup>&#8260;<sub>1 - x</sub> - 1</p></div>
+</div></div>
+<div>This is an extensive list of my officially accepted mathematical notation, sorted from most to least useful. There are <span id="count">560</span> functions in total, from this standard. If a function name contains an asterisk *, it indicates that it's not compatible with the Desmos Graphing Calculator. Established as of September 2025. If you want to see a simplified version of this table, use the "Filter" tool at the top of this page.</div>
 <script>
 count.innerText = document.querySelectorAll("h1").length - document.querySelectorAll("h1.title").length;
+setInterval(function() {
+if (filter.checked) {
+extra.style.visibility = "hidden";
+extra.style.display = "none";
+filterdesc.innerText = "The list of common functions, used in many applications. Keep this option on if you don't want to see all the extensions.";
+} else {
+extra.style.visibility = "visible";
+extra.style.display = "block";
+filterdesc.innerText = "Every accepted function in my math standard. Functions that are uncommon may be ambiguous & should rarely be used.";
+}});
 </script>
 </body></html>
