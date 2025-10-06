@@ -1,0 +1,8 @@
+function setup() {
+  data = ["1855 ing","726 ion","558 ted","468 ers","356 ons","317 ent","284 ies","240 ate","233 ble","223 red","214 ity","207 lly","202 ive","199 nts","192 ter","186 nce","172 ess","171 ned","160 led","147 ded","142 ous","138 sed","134 ses","129 les","127 tes","121 tic","120 cal","118 ant","118 ors","113 est","111 ely","108 ine","107 nal","106 ces","106 der","105 hed","105 res","104 ist","102 ary","99 tor","98 age","97 sts","97 ure","95 als","95 ngs","93 ves","88 ked","87 ial","85 tly","78 ged","77 ard","77 ied","76 hes","75 nes","74 nds","71 med","70 ped","69 ets","69 ins","67 ght","64 ced","64 her","64 ics","64 ner","64 zed","63 ful","63 ges","61 ker","61 per","61 ral","59 ver","58 cks","58 its","58 tal","56 ide","54 man","53 ery","52 ans","52 ger","52 ory","52 ved","51 cts","51 ise","51 ler","51 one","50 des","50 ite","49 ism","48 ain","48 and","48 lls","47 ish","46 rds","45 ack","45 ect","44 lar","43 ars","43 ncy","43 rts","42 dly","42 ice","42 out","42 sly","41 hip","41 ile","40 ats","40 ays","40 ire","40 ore","39 ade","39 ogy","38 tch","37 all","37 are","37 ian","37 ier","37 use","36 end","36 mes","36 own","36 ual","35 els","35 nic","34 ake","34 bly","34 ens","34 int","34 mer","34 wer","33 ace","33 ill","33 kes","33 ows","33 way","32 ast","32 ize","32 ose","32 rly","32 und","32 ute","31 ils","31 ues","30 ail","30 ime","30 ium","30 ood","30 our","30 wed"];
+  for (i = 0; i < data.length; i++) {
+  t = document.createElement("div");
+  t.innerText = "#" + (i + 1) + " ---------- " + data[i].replace(/ /g, " ".repeat(10) + "-");
+  document.body.appendChild(t);
+  }
+}
