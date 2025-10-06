@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+table, tr, th, td {
+  text-align: left;
+}
+
+td, th {
+  padding: 4px 10px;
+}
