@@ -8,14 +8,14 @@ body {
 background-color: #000;
 color: #fff; margin: 0 0;
 text-align: center;}
-* {font-size: 8px;}
+div, span, button {font-size: 50% !important;}
 canvas {
 width: 100vw;
 }
 </style>
 </head><body>
 <canvas id="game" onmousedown="" width=600 height=600></canvas>
-<br><div>Minimum Levels is a platformer with 10 levels, with enemies being double English contractions. Defeat the Numeric Boss at level 10 to win. There are 8 block types: 0 air, 1 grass, 2 bouncepad, 3 door/cave, 4 water, 5 light, 6 snow, 7 (rare) teleporter<br><br>To play: Click screen, left/right side to move, middle side to jump</div>
+<div><div>Minimum Levels is a platformer with 10 levels, with enemies being double English contractions. Defeat the Numeric Boss at level 10 to win. There are 8 block types: 0 air, 1 grass, 2 bouncepad, 3 door/cave, 4 water, 5 light, 6 snow, 7 (rare) teleporter<br><br>To play: Click screen, left/right side to move, middle side to jump</div>
 <div id="stt">Loading...</div>
 <span>Skin:</span>
 <button onclick="skin(0)">Default</button>
@@ -25,7 +25,7 @@ width: 100vw;
 <button onclick="skin(4)">Remote</button>
 <button onclick="skin(5)">Sidewalky</button>
 <button onclick="skin(6)">Woody</button>
-<script>
+</div><script>
 contr = "COULDN'T'VE,HADN'T'VE,HASN'T'VE,HE'D'VE,HE'DN'T,HE'LL'VE,HE'LLN'T,HE'SN'T,HOW'D'VE,HOW'LL'VE,I'D'VE,I'DN'T,I'LL'VE,I'LLN'T,I'MN'T,I'VEN'T,IT'D'VE,IT'DN'T,IT'LL'VE,IT'LLN'T,IT'SN'T,MIGHTN'T'VE,MUSTN'T'VE,SHE'D'VE,SHE'DN'T,SHE'LL'VE,SHE'LLN'T,SHE'SN'T,SHOULDN'T'VE,THAT'D'VE,THAT'DN'T,THAT'LL'VE,THAT'LLN'T,THAT'SN'T,THERE'D'VE,THERE'DN'T,THERE'LL'VE,THERE'LLN'T,THERE'REN'T,THERE'SN'T,THESE'D'VE,THESE'DN'T,THESE'LL'VE,THESE'LLN'T,THESE'REN'T,THEY'D'VE,THEY'DN'T,THEY'LL'VE,THEY'LLN'T,THEY'VEN'T,THIS'D'VE,THIS'DN'T,THIS'LL'VE,THIS'LLN'T,THIS'SN'T,THOSE'D'VE,THOSE'DN'T,THOSE'LL'VE,THOSE'LLN'T,THOSE'REN'T,WE'D'VE,WE'DN'T,WE'LL'VE,WE'LLN'T,WE'REN'T,WE'VEN'T,WHAT'D'VE,WHAT'LL'VE,WHEN'D'VE,WHEN'LL'VE,WHERE'D'VE,WHERE'LL'VE,WHICH'D'VE,WHICH'LL'VE,WHO'D'VE,WHO'LL'VE,WHY'D'VE,WHY'LL'VE,WON'T'VE,WOULDN'T'VE,Y'ALL'D,Y'ALL'LL,Y'ALL'RE,Y'ALL'S,YOU'D'VE,YOU'DN'T,YOU'LL'VE,YOU'LLN'T,YOU'REN'T,YOU'VEN'T".split(",");
 spawns = ["260,1640","320,3060","320,2100","640,2160","300,2700","500,2100","300,1760","160,5840","200,240","200,2200"];
 ctx = game.getContext("2d"); boss = false;
@@ -154,8 +154,7 @@ sk = ["#90f","#f33","#0c0","#6ff","#333","#999","#c96"];
 pc = "#90f"; pci = 0; skin(0);
 function skin(n) {
 pci = n;
-pc = sk[n];
-}
+pc = sk[n];}
 setInterval(function() {
 tick(); camx = 300 - px - xs; camy = 300 - py + ys;
 if (touchbnc()) {ys = -jp*1.618;}
