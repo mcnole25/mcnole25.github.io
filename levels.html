@@ -1,6 +1,6 @@
 <!DOCTYPE html><html>
 <head>
-<meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 <title>Minimum Levels</title>
 <style>
 body {
@@ -137,7 +137,7 @@ et++;
 }
 xx = 0;
 function printMousePos(event) {
-xx = Number(event.clientX);
+xx = Number(event.clientX) * (600/window.screen.width);
 }
 document.addEventListener("mousedown", printMousePos);
 game.addEventListener("mouseup", function() {
