@@ -8,7 +8,7 @@ body {
 background-color: #000;
 color: #fff; margin: 0 0;
 text-align: center;}
-div, span, button {font-size: 70% !important;}
+div, span, button, input {font-size: 80% !important;}
 canvas {
 width: 100vw;
 }
@@ -25,6 +25,10 @@ width: 100vw;
 <button onclick="skin(4)">Remote</button>
 <button onclick="skin(5)">Sidewalky</button>
 <button onclick="skin(6)">Woody</button>
+<br>
+<button onclick="prevlv();">&lt;&lt; Prev Level</button>
+<input type="range" id="threed" min=0 max=6 value=2 style="width:20vw;">
+<button onclick="nextlv();">Next Level &gt;&gt;</button>
 </div><script>
 contr = "COULDN'T'VE,HADN'T'VE,HASN'T'VE,HE'D'VE,HE'DN'T,HE'LL'VE,HE'LLN'T,HE'SN'T,HOW'D'VE,HOW'LL'VE,I'D'VE,I'DN'T,I'LL'VE,I'LLN'T,I'MN'T,I'VEN'T,IT'D'VE,IT'DN'T,IT'LL'VE,IT'LLN'T,IT'SN'T,MIGHTN'T'VE,MUSTN'T'VE,SHE'D'VE,SHE'DN'T,SHE'LL'VE,SHE'LLN'T,SHE'SN'T,SHOULDN'T'VE,THAT'D'VE,THAT'DN'T,THAT'LL'VE,THAT'LLN'T,THAT'SN'T,THERE'D'VE,THERE'DN'T,THERE'LL'VE,THERE'LLN'T,THERE'REN'T,THERE'SN'T,THESE'D'VE,THESE'DN'T,THESE'LL'VE,THESE'LLN'T,THESE'REN'T,THEY'D'VE,THEY'DN'T,THEY'LL'VE,THEY'LLN'T,THEY'VEN'T,THIS'D'VE,THIS'DN'T,THIS'LL'VE,THIS'LLN'T,THIS'SN'T,THOSE'D'VE,THOSE'DN'T,THOSE'LL'VE,THOSE'LLN'T,THOSE'REN'T,WE'D'VE,WE'DN'T,WE'LL'VE,WE'LLN'T,WE'REN'T,WE'VEN'T,WHAT'D'VE,WHAT'LL'VE,WHEN'D'VE,WHEN'LL'VE,WHERE'D'VE,WHERE'LL'VE,WHICH'D'VE,WHICH'LL'VE,WHO'D'VE,WHO'LL'VE,WHY'D'VE,WHY'LL'VE,WON'T'VE,WOULDN'T'VE,Y'ALL'D,Y'ALL'LL,Y'ALL'RE,Y'ALL'S,YOU'D'VE,YOU'DN'T,YOU'LL'VE,YOU'LLN'T,YOU'REN'T,YOU'VEN'T".split(",");
 spawns = ["260,1640","320,3060","320,2100","640,2160","300,2700","500,2100","300,1760","160,5840","200,240","200,2200"];
@@ -95,6 +99,8 @@ return lv[iy].split("")[ix] == "5" && ys >= 0 && fl > 0;
 function TT() {
 return touchtlp()||touchli()||touching(0,0)||touching(-20,0)||touching(20,0)||touching(0,-20)||touching(-20,-20)||touching(20,-20)||touching(0,20)||touching(-20,20)||touching(20,20);
 }
+function prevlv() {if (lvn > 1) {lvn--; loadspawn();}}
+function nextlv() {if (lvn < 10) {lvn++; loadspawn();}}
 gr = 1; acc = 0.9; sp = 2; jp = 16;
 xs = 0; ys = 0; fl = 0; et = 0; ec = 0;
 function movesteps(st) {
@@ -114,7 +120,9 @@ function newenem(x, y, ix) {
 rdd = Math.floor(Math.random()*2)*2-1;
 enem.push([x, y, 2 * rdd, 0, ix, Math.floor(Math.random()*90), false, 5]);
 }
+dd = 0;
 function tick() {
+dd = Number(threed.value);
 tx = Math.floor(px/60);
 ty = Math.floor((py-15)/60);
 tpt = (lv[ty].split("")[tx] == "7");
@@ -161,14 +169,14 @@ if (touchbnc()) {ys = -jp*1.618;}
 hlv = lv.length*20;
 ctx.fillStyle = ((py<hlv)?("hsl("+Math.round(180+(hlv-py)/(hlv/80))+",100%,"+Math.round(80-(hlv-py)/(hlv/80))+"%)"):"#9ff");
 ctx.fillRect(0, 0, 600, 600);
-for (dp = -2; dp <= 4; dp++) {
+for (dp = -dd; dp <= dd*2; dp++) {
 for (i = 0; i < ht; i++) {
 for (j = 0; j < wd; j++) {
 uuu = clr[Number(lv[i].split("")[j])];
 hx = "0123456789abcdef".split("");
 ctx.fillStyle = uuu;
-if (dp >= 0 && dp < 4) {ctx.fillStyle = "rgba("+255*(dp%2)+","+255*(dp%2)+","+255*(dp%2)+",10%)";}
-if (dp == 4) {ctx.fillStyle = "rgba("+(hx.indexOf(uuu.charAt(1))*17+50)+","+(hx.indexOf(uuu.charAt(2))*17+50)+","+(hx.indexOf(uuu.charAt(3))*17+50)+",50%)";}
+if (dp >= 0 && dp < dd*2) {ctx.fillStyle = "rgba("+255*(dp%2)+","+255*(dp%2)+","+255*(dp%2)+",10%)";}
+if (dp == dd*2) {ctx.fillStyle = "rgba("+(hx.indexOf(uuu.charAt(1))*17+50)+","+(hx.indexOf(uuu.charAt(2))*17+50)+","+(hx.indexOf(uuu.charAt(3))*17+50)+",50%)";}
 if (lv[i].split("")[j] == "5") {ctx.fillStyle = clr[5];}
 nu = Number(lv[i].split("")[j]);
 if (lv[i].split("")[j] != "0" && nu > 0 && nu <= 7) {
@@ -277,7 +285,6 @@ ctx.fillText(Math.round(bossdist),bossx-50+camx,bossy+50+camy);
 ctx.fillText(bossc,bossx+50+camx,bossy+50+camy);
 }
 ctx.font = "24px Arial";
-if (win) {enem = []; ctx.fillStyle = "#000"; ctx.fillText("Numeric Boss defeated! You win Minimum Levels!",300,40);}
-}, 20);
+if (win) {enem = []; ctx.fillStyle = "#000"; ctx.fillText("Numeric Boss defeated! You win Minimum Levels!",300,40);}}, 25);
 </script>
 </body></html>
