@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head>
+<style>
+* {background-color: #000; color: #fff; font-size: 15px;}
+input {width: 38vw;}
+div {font-size: 20px; word-wrap: break-word;}
+</style>
+</head><body>
+<span><input value=1 id="numr"> / </span>
+<input id="dv">
+<button onclick="mul();">* 2</button>
+<button onclick="sqr();">^ 2</button><br>
+<span id="mgn"></span>
+<span id="ill"></span>
+<span>~ precision is 2500</span>
+<br><span>only for numbers 0 &le; x &lt; 1</span>
+<button onclick="thr()">Round&darr; 1/3</button>
+<button onclick="svn()">Round&darr; 1/7</button>
+<button onclick="fbn()">Fibonacci</button>
+<br><br>
+<div id="cc"></div>
+<script>
+function sqr() {dv.value = String(BigInt(String(dv.value))**2n);}
+function mul() {dv.value = String(BigInt(String(dv.value))*2n);}
+lm = 10n**2500n;
+setInterval(function() {
+nm = BigInt(String(numr.value));
+nn = BigInt(String(dv.value));
+ill.innerText = "";
+mgn.innerText = "";
+th = ["ljoen-ths","ljard-ths"];
+mm = ["mi","bi","tri","quadri","quinti","sexti","septi","octi","noni","deci","undeci","duodeci","tredeci","quattuordeci","quindeci","sexdeci","septendeci","octodeci","novemdeci","viginti"];
+if (nn > 0n && nm < nn && nm >= 0n) {
+if (!nm) {nm = 0n;}
+oo = ((BigInt(lm)*BigInt(nm))/BigInt(nn));
+if (BigInt(oo) == BigInt(lm)) {oo = "1"+String(oo).split("1").join(".");} else {rr = String(oo).length; oo = "0." + "0".repeat(String(lm).length-rr-1) + String(oo);}
+rx = Math.floor((String(lm).length-rr-1)/3);
+ill.innerText = ((rx >= 40 ? "below 10^-120" : (((rx == 0) ? (nn==1?"one":"thousandths") : (mm[Math.round(rx/2-1)]+th[(rx+1)%2])))));
+cc.innerText = oo; mgn.innerText = Number(String(oo.split(".")[1].replace(/^0+/g, "")).slice(0,5))/10000 + " * 10^-" + (2501-String(oo.split(".")[1].replace(/^0+/g, "")).length) + " ~ ";
+} else {cc.innerText = "?"; ill.innerText = "undefined!";}});
+function thr() {
+numr.value = BigInt(String(dv.value))/3n;
+}
+function svn() {
+numr.value = BigInt(String(dv.value))/7n;
+}
+function fbn() {
+sm = BigInt(numr.value)+BigInt(dv.value);
+numr.value = BigInt(dv.value);
+dv.value = BigInt(sm);
+}
+</script>
+</body></html>
