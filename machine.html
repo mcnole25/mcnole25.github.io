@@ -1,0 +1,79 @@
+<!DOCTYPE html><html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<title>Number Slider Machine</title>
+<style>
+html, body {margin: 0; height: 100%; overflow: hidden;}
+body {
+background-color: #000;
+color: #fff; margin: 0 0;
+text-align: center;}
+input[type=range] {
+width: 98vw;
+}
+</style></head><body>
+<div style="font-size: 32px;" id="num"></div>
+<div style="font-size: 24px;" id="reim"></div>
+<hr><input type="range" id="numa" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="numb" min=0.5 max=1.57 value=0.5 step=0.0011>
+<br><input type="range" id="numc" min=0.5 max=1.57 value=0.5 step=0.0011>
+<br><input type="range" id="numd" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="nume" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="numf" min=0.5 max=1.57 value=0.5 step=0.0011>
+<hr><input type="range" id="numg" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="numh" min=0.5 max=1.57 value=0.5 step=0.0011>
+<br><input type="range" id="numi" min=0.5 max=1.57 value=0.5 step=0.0011>
+<br><input type="range" id="numj" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="numk" min=0.22 max=2.5 value=0.22 step=0.0011>
+<br><input type="range" id="numl" min=0.5 max=1.57 value=0.5 step=0.0011>
+<hr><div id="absv"></div>
+<br><div>{UA&#8345} Upgraded Algebraic Numbers Set - to create this: [For each real part & imaginary part: (create a rational times e^int times a sqrt surd, plus a rational.)]<br><br>This is my new superset of numbers, less than 4KB, using 12 different integers!</div>
+<script>
+var gcd = function(a, b) {
+if (!b) {return a;}
+return gcd(b, a % b);
+}
+var isSquare = function(n) {
+return n > 1 && Math.sqrt(n) % 1 === 0;};
+var fwd = function(kn) {
+return Math.round(Math.tan(Number(kn))*2);};
+setInterval(function() {
+aa = fwd(numa.value);
+bb = fwd(numb.value);
+cc = fwd(numc.value);
+dd = fwd(numd.value);
+ee = fwd(nume.value);
+ff = fwd(numf.value);
+gc = gcd(aa, bb);
+gcc = gcd(ee, ff);
+if (aa == -1) {gc = 1;}
+if (ee == -1) {gcc = 1;}
+if (cc == 1 && dd == 0) {ee = 0; ff = 1;}
+if (isSquare(cc)||isSquare(cc/2)||isSquare(cc/3)||isSquare(cc/5)||isSquare(cc/6)||isSquare(cc/7)||isSquare(cc/10)||isSquare(cc/11)||isSquare(cc/13)||isSquare(cc/15)||isSquare(cc/17)||isSquare(cc/19)) {numc.value -= 0.001;}
+numb.value = Math.atan(bb/gc/2);
+numf.value = Math.atan(ff/gcc/2);
+gg = fwd(numg.value);
+hh = fwd(numh.value);
+ii = fwd(numi.value);
+jj = fwd(numj.value);
+kk = fwd(numk.value);
+ll = fwd(numl.value);
+gi = gcd(gg, hh);
+gic = gcd(kk, ll);
+if (gg == -1) {gi = 1;}
+if (kk == -1) {gic = 1;}
+if (ii == 1 && jj == 0) {kk = 0; ll = 1;}
+if (isSquare(ii)||isSquare(ii/2)||isSquare(ii/3)||isSquare(ii/5)||isSquare(ii/6)||isSquare(ii/7)||isSquare(ii/10)||isSquare(ii/11)||isSquare(ii/13)||isSquare(ii/15)||isSquare(ii/17)||isSquare(ii/19)) {numi.value -= 0.001;}
+numh.value = Math.atan(hh/gi/2);
+numl.value = Math.atan(ll/gic/2);
+num.innerText = gg + (hh > 1 ? ("\u2044" + hh) : "") + (jj != 0 ? (" e^" + jj) : "") + (ii > 1 ? (" " + "\u221a" + ii) : "") + (kk != 0 ? (" + " + kk + (ll > 1 ? ("\u2044" + ll) : "")) : "");
+impt = gg/hh * Math.sqrt(ii) * Math.E**jj + kk/ll;
+num.innerText = ("(" + aa + (bb > 1 ? ("\u2044" + bb) : "") + (dd != 0 ? (" e^" + dd) : "") + (cc > 1 ? (" " + "\u221a" + cc) : "") + (ee != 0 ? (" + " + ee + (ff > 1 ? ("\u2044" + ff) : "")) : "") + ") + (" + gg + (hh > 1 ? ("\u2044" + hh) : "") + (jj != 0 ? (" e^" + jj) : "") + (ii > 1 ? (" " + "\u221a" + ii) : "") + (kk != 0 ? (" + " + kk + (ll > 1 ? ("\u2044" + ll) : "")) : "") + ")√-1").replaceAll("+ -", "- ").replaceAll(" + (0)√-1", "");
+impt = gg/hh * Math.sqrt(ii) * Math.E**jj + kk/ll;
+rept = aa/bb * Math.sqrt(cc) * Math.E**dd + ee/ff;
+dis = Math.sqrt(rept**2+impt**2);
+reim.innerText = rept.toPrecision(12)*1 + " + " + impt.toPrecision(12)*1 + "i";
+absv.innerText = "Absolute value: " + dis;
+});
+</script>
+</body></html>
