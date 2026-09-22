@@ -1,0 +1,229 @@
+This is my updated remake of "All Math Notation", focusing more on numbers, sets & answering all possible questions in math. Ideas can be combined. All math expressions are assumed to follow the BODMAS operations convention & are written in base-10 decimal. Every operation can be assumed to work with the set of complex numbers unless we say it doesn't make sense otherwise.
+
+Symbols can be used in multiple ways. You use context in math. There are 200 notations here with 12 categories.
+
+---------------------------------------------------------
+
+[(18) Category: Number Sets]
+{B₁₀} ~ The set of decimal digits (0,1,2,3,4,5,6,7,8,9)
+{P} ~ The set of prime numbers (2, 3, 5, 7, 11, 13, etc.)
+{N+} ~ The set of positive integers (1, 2, 3, 4, 5, etc.)
+{N} ~ The set of nonnegative integers (0 ∪ {N+})
+{Z} ~ The set of integers (...-3, -2, -1, 0, 1, 2, 3...)
+{Td₁₀} ~ Set of terminating decimals (like 0.372, etc.)
+{Td₂} ~ Set of binary fractions (like -2.3125 or 0.875)
+{Q} ~ The set of rational numbers (integer/non-0 integer)
+{Qx²} ~ The set of quadratic solutions (rational + surd)
+{Ar} ~ Set of real algebraic numbers only
+{R} ~ The set of real numbers (a continuous list)
+{I} ~ The set of imaginary/lateral numbers (√(-1) * real)
+{A} ~ Set of ALL the algebraic numbers
+{C} ~ The set of complex numbers (±real ± lateral)
+{HR} ~ The set of hyperreal numbers (new powers of ε & ω)
+{HC} ~ The set of hypercomplex numbers (self expl.)
+{UAₙ} ~ Upgraded numbers, mcnole25.github.io/machine.html
+{Ex} ~ Set of all possible (relevant) math expressions
+
+[(14) Category: Basic Operations]
++ ~ Addition (the core increasing operation, 3 + 2 = 5)
+− ~ Subtraction (the reverse of addition)
+* ~ Multiplication (area or higher level addition)
+/ ~ Division (can also represent fractions)
+xⁿ ~ Exponents (higher level multiplication, 6^2 = 36)
+ⁿ√ ~ Nth Root (square root doesn't need a "2")
+exp() ~ e (euler's number) to the power of X
+ln() ~ Natural Logarithm (base e, euler's number)
+logₙ() ~ Logarithm Base = ln(x)/ln(n)
+|x| ~ Absolute Value (distance from zero, |3 + 4i| = 5)
+mod(x, y) ~ Modulo operation, remainder of division
+x! ~ Factorial operation, x! = 1 * 2 * 3 ... (x - 1) * x
+. ~ Decimal point, to separate the ones & tenths place
+, ~ Comma, usually used for lists of numbers & objects
+
+[(20) Category: Calculus & Trig]
+... ~ 3 dots, indicates unknown or continuing forever
+f'(x) ~ The derivative of a function f(x), rate of change
+f"(x) ~ The SECOND, or double derivative, acceleration
+∂ ~ Partial Differential/Derivative symbol
+∫ ~ Integral, the inverse of derivative, continuous sum
+∬ ~ Double integral, used for area
+∭ ~ Triple integral, used for volume
+∑ ~ Summation, start n = ... & go to top n of expression
+∏ ~ Product, do it like the sum but use multiplying
+∝ ~ Proportional To, scaling, 9x + 3 ∝ 3x + 1
+sin() ~ Sine, the core operation for circles & triangles
+cos() ~ Cosine, sine starting at 1, so it's +0.25τ
+tan() ~ Tangent, the value of sine divided by cosine
+csc(), sec(), cot() ~ 1 divided by sine, cosine, tangent
+asin(), acos(), atan() ~ Inverses of trig functions
+sinh(), cosh(), tanh() ~ Hyperbolic versions of trigs
+dist(z, c) ~ Distance of two different complex numbers
+∠A ~ The angle, A, in a specific geometric figure
+lim ~ Limit, shows the value reached when approaching
+W(x) ~ Lambert-W function, inverse of x * e^x
+
+[(20) Category: Comparisons]
+= ~ Equal To, shows when two values are the same
+≈ ~ Roughly, two values are approximate but non exact
+≠ ~ Not Equal To, two values are NOT THE SAME thing
+≝ ~ Written differently from, but equal by definition
+> ~ Greater Than, real number has more value than another
+< ~ Less Than, opposite of greater than
+≥ ~ At Least, greater than or equal to
+≤ ~ At Most, less than or equal to
+≪ ~ MUCH, MUCH less than
+≫ ~ MUCH, MUCH greater than
+≡ ~ Identical To, modular congruence (27 ≡ 7 (mod 10))
+≙ ~ Equivalent to Binary Bits, can be any level of prec.
+≟ ~ Sometimes Equal To, context determines the meaning
+|=| ~ Equidistant, 2 complex numbers have same abs val.
+|>| ~ More Distance, complex number is further out
+|<| ~ Less Distance, closer to zero on the line/plane
+(x, y) ~ Open interval, must be less or greater
+[x, y) ~ Close-open interval, start at x but less than y
+(x, y] ~ Open-close interval, greater than x, up to y
+[x, y] ~ Closed interval, in between but can be equal to
+
+[(14) Category: Constants]
+e ~ Euler's number, 2.7182818...etc, exp(1), ln(e) = 1
+π ~ Pi, 3.1415926...etc, measuring of a perfect circle
+τ ~ Tau, 2 * Pi, how many radians in a full rotation
+φ ~ Phi, golden ratio, = 0.5(√(5) + 1) = 1.61803...
+ρ ~ Rho, plastic ratio of x³, ρ = 1.3247... (weirder)
+γ ~ Euler-Mascheroni Constant, roughly 0.577
+C₁₀ ~ Champernowne Constant, concat 0.123456789101112...
+i ~ Imaginary Unit, √(-1) perpendicular axis for numbers
+Ƀ ~ Binary Fraction Piece, precision of exactly 2^-256
+ό ~ INT LIMIT, 2 ↑↑ 5, or 2^2^2^2^2, or 2^65536 (2E19728)
+Ě ~ Max 64 Bit Float, 2^1024, more than 1.79E308
+MSI ~ Maximum Float Safe Integer, 2^53 - 1 > 9E15
+c ~ The speed of light, 299792458 m/s, usu. in context
+μ ~ Mu, micro = 0.000001, or used as the mean variable
+
+[(24) Category: Derived Inventions]
+-x ~ Minus Value, negative, -1 * x or 0 − x
+x-y ~ Sometimes (informal) for an integer value range
+x% ~ Percentage, where x% is just 0.01x or x/100
+% of ~ Percent Of, more useful multiplying of a percent
+: ~ Ratio, represents the mixtures of 2 different amounts
+∅ ~ Nothing, Empty set, closer to the word "nothing"
+° ~ Degrees, 1° is the same as τ/360 or π/180
+HH:mm:ss ~ Time of day, 24 hour time, (24*60*60)
+UTC±x ~ UTC hour indicating timezone or daylight saving
+mean() ~ Average, the sum of a list divided by the count
+median() ~ The middle value inside a sorted number list
+mode() ~ The most amount of values to appear in a list
+real() ~ the real part of a number, real(1.1 - 3i) = 1.1
+imag() ~ the imaginary/lateral part of a number
+arg() ~ Argument, how much rotation in a number
+conj() ~ Conjugate, a + bi goes to a - bi, flip vertical
+#n ~ Numeric Rank, start with #1 as an ordinal number
+E ~ E-notation, scient. describes factors of powers of 10
+¯ ~ (Combining) Macron, repeating decimals, 0.(9¯) = 1
+±x ~ Plusminus, unsigned value or just both signs
+x ± y ~ Range of values, x has y amount of either error
+↦ ~ Maplet, maps to, unnamed function transforming
+normaldist() ~ Normal distribution curve, from Desmos
+σ(x) ~ Sigmoid function, 0 to 1, from 1/(1 + e^-x)
+
+[(12) Category: Piecewise & Rounding]
+℮ ~ Symbol that indicates that value has been estimated.
+floor() ~ Floor, round down towards -infinity
+round() ~ Round, round to nearest integer, ≤4 down, ≥5 up
+round(x, y) ~ Round the number x to y decimal places
+ceil() ~ Ceiling, round up towards +infinity
+sign() ~ Get the sign/angle of a number where |x| = 1
+lattice() ~ round both real & complex parts separately
+ɃR() ~ Binary Bits Rounding, function to convert number
+float32() ~ Round a number as a 32-bit float, 2^24
+float64() ~ Round a number as a 64-bit float, 2^53
+fix() ~ Ignore all the decimals & only do integer part
+decimal() ~ Decimal part of number, sign doesn't matter
+
+[(8) Category: Infinities]
+∞ ~ Positive Infinity ("+" is implied here)
+-∞ ~ Negative Infinity (-1 * ∞ = -∞)
+±∞ ~ General Infinity (the "result" of x/0, Riemann sph.)
+ε ~ Epsilon (the infinitesimal unit, hyperreal)
+ω ~ Omega (1 divided by Epsilon, infinite variable)
+⊥ ~ Nullity, permanent overrider for indeterminate values
+ℵ₀ ~ Aleph Null, smallest infinity, ℵ₀ = #{N+}
+ℵ₁ ~ Aleph One, uncountable infinity, ℵ₁ = #{R}
+
+[(18) Category: Set Notation]
+[...], {...} ~ Brackets to write down a list/set of nums.
+∪ ~ Union, two sets' elements are all there now
+∩ ~ Intersection, only all the elements in common
+∆ ~ Symmetric Difference, only in EITHER, not both sets
+∖ ~ Difference, one set minus another set's things
+∈ ~ Element Of, when something exists in a set
+∉ ~ Not an Element Of, self explanatory (7.3 ∉ {Z})
+⊆ ~ Subset Of, or equal to, another set ({N} ⊆ {Q})
+⊊ ~ Strict Subset Of, cannot be equal to another set
+⊈ ~ Not a Subset Of, nor equal to another set
+⊇ ~ Superset Of, like "subset of" but flipped around
+Ps() ~ Power Set, 2^(#A), all possible subsets in A
+#A ~ Cardinality of a set, amount, #∅ = 0
+⇒ ~ Implies That, If 1st is true, then 2nd is def true
+⇔ ~ Iff, If & Only If, working both ways unlike implying
+∀ ~ For All, universal quantifier, all of them
+∃ ~ There Exists, existential quantifier, at least 1
+∃! ~ There ONLY Exists, uniqueness quantifier
+
+[(12) Category: Probability & Counting]
+P(A) ~ Probability, 0 = usu. not possible, 1 = certain
+P(A') ~ Complement, probability of opposite, 1 - P(A)
+nPr() ~ Permutations, ordered counting of combos for set
+nCr(), ( ʬ ) ~ Combinations, unordered choosing in a set
+nPrRp() ~ Rep Permute, repeats allowed almost like x^n
+nCrRp() ~ Rep Combos, a choose b with repeat elements
+σ₀(n) ~ Number of total factors of a pos. integer n
+isPrime() ~ Check if a number's prime, 1 if yes, 0 if no
+PrimePi() ~ How many primes less than or equal to n
+∣ ~ Divides, for example, 4 ∣ 60 means "4 divides 60"
+∤ ~ Does Not Divide, number isn't a factor of another
+Ř ~ "Random" function, unpredic. variable of 0 ≤ x < 1
+
+[(16) Category: Googology]
+n# ~ Primorial, multiply prime numbers up to n
+!x ~ Derangements, ways to have non-matching idx permut.
+x!! ~ Double Factorial (x(x - 2)(x - 4)(x - 6)... * ≥1)
+x!(n) ~ n-tuple Factorial (x * (x - n)... * ≥1)
+Fₙ ~ nth Fibonacci number, both 1's are 1st & 2nd
+Gₙ ~ Graham's number function, n ≟ 64 when written
+Pₙ ~ nth prime number starting from 2 being the 1st
+{ό} ~ Set of integers, 0 to ό - 1 with 2^2^2^2^2 cardin.
+{Bn2^(m)} ~ set of m-digit binary numbers 0 to 2^m - 1
+TREE() ~ TREE number function, TREE(3) is very large!
+BB() ~ Busy Beaver number function
+Rayo() ~ Rayo's number function
+△ ~ Triangle operation, equal to x^x
+□ ~ Square operation, x inside x triangles
+⬠ ~ Pentagon operation, x inside x squares
+(^!) ~ Expo-factorial function, 4(^!) = 4^3^2^1
+
+[(24) Category: Other]
+ᵦ101 ~ Binary base indicator, beta bc of unicode limitat.
+O(f(x)) ~ Big-O notation, used for function growth rate
+tri(x) ~ the xth triangular number, seq. 1,3,6,10,15...
+△√(x) ~ Triangular root of x, inverse of 0.5x(x + 1)
+[x...y] ~ List notation for list integers in Desmos
+partition(n, m) ~ Number of ways to add m integers = n
+[1,2,5,0,1,2,0,1,1,0,0,1] ~ Upgraded 12-integer machine
+↑↑ ~ Tetration (higher level exponents)
+↑↑↑ ~ Pentation (higher level tetration)
+↑ⁿ ~ nth level hyperoperation, very powerful
+{a, n, b...} ~ BEAF, Bowers' exploding array function
+l₁ ☆ l₂ ~ Convolution of 2 lists, different symbol used
+v • w ~ Dotproduct of 2 vectors, becomes a scalar
+⋆ ~ Star Operator, commutative, x ⋆ y = e^(ln(x) * ln(y))
+∘ ~ Function Composition, (f ∘ g)(x) = f(g(x))
+⊚ ~ Base-10 digit concatenation, 7 ⊚ 4.1 = 74.1
+⊕ ~ Mediant of fractions, adding them the "wrong" way
+⊖ ~ Mediant subtraction, inverse of mediant add
+x & y ~ Bitwise "and" operator
+x | y ~ Bitwise "or" operator
+x ^ y ~ Bitwise "xor" operator (not an exponent here)
+ϡx ~ Sampi sign, subtracting further from infinity
+ϟx ~ Koppa sign, adding from negative infinity
+号 ~ Hào, ^↘ "number", unknown operator placeholder
