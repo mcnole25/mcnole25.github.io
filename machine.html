@@ -27,7 +27,7 @@ width: 98vw;
 <br><input type="range" id="numk" min=0.22 max=2.5 value=0.22 step=0.0011>
 <br><input type="range" id="numl" min=0.5 max=1.57 value=0.5 step=0.0011>
 <hr><div id="absv"></div>
-<br><div>{UA&#8345} Upgraded Algebraic Numbers Set - to create this: [For each real part & imaginary part: (create a rational times e^int times a sqrt surd, plus a rational.)]<br><br>This is my new superset of numbers, less than 4KB, using 12 different integers!</div>
+<br><div>{UA&#8345;} Upgraded Algebraic Numbers Set - to create this: [For each real part & imaginary part: (create a rational times e^int times a sqrt surd, plus a rational.)]<br><br>This is my new superset of numbers using 12 different integers!<br><br>12-Integer List form: [<span id="lstf"></span>]</div>
 <script>
 var gcd = function(a, b) {
 if (!b) {return a;}
@@ -74,6 +74,7 @@ rept = aa/bb * Math.sqrt(cc) * Math.E**dd + ee/ff;
 dis = Math.sqrt(rept**2+impt**2);
 reim.innerText = rept.toPrecision(12)*1 + " + " + impt.toPrecision(12)*1 + "i";
 absv.innerText = "Absolute value: " + dis;
-});
+lst = [aa, bb, cc, dd, ee, ff, gg, hh, ii, jj, kk, ll];
+lstf.innerText = lst.join(",");});
 </script>
 </body></html>
