@@ -31,6 +31,8 @@ width: 100px;
 <script>
 function calculate() {
 lim = 10000; lim2 = 500; num = [1n]; factorial = input.value;
+if (factorial < 0) {result.value = "Please input a nonnegative integer.";}
+else {
 function multiply(f) {
 num.unshift(0n);
 l = num.length;
@@ -64,6 +66,6 @@ out += "0".repeat(lim - String(num[j]).length) + String(num[j]);
 out = out.replace(/^0+/g, "");
 result.value = out;
 resLength.innerText = "Length: " + out.length + " digit(s)";
-}
+}}
 </script>
 </body></html>
