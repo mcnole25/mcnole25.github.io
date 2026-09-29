@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<title>Dozen to Decimal Converter</title>
+<style>
+html, body {
+font-size: 20px;
+text-align: center;
+overflow: hidden;
+background-color: #000;
+color: #fff;
+}
+.di {
+background-color: #000;
+color: #fff;
+font-size: 20px;
+width: 12vw;
+}
+#realcl, #imagcl {
+font-size: 20px;
+resize: none;
+width: 96vw;
+height: 28vh;
+}
+button {font-size: 18px;}
+</style>
+</head><body>
+<span>[</span>
+<input id="rva" class="di" type="number" step=1 value=1><span>,</span>
+<input id="rvb" min=1 class="di" type="number" step=1 value=2><span>,</span>
+<input id="rvc" min=1 class="di" type="number" step=1 value=5><span>,</span>
+<input id="rvd" class="di" type="number" step=1 value=0><span>,</span>
+<input id="rve" class="di" type="number" step=1 value=1><span>,</span>
+<input id="rvf" min=1 class="di" type="number" step=1 value=2><span>,</span>
+<br><input id="iva" class="di" type="number" step=1 value=0><span>,</span>
+<input id="ivb" min=1 class="di" type="number" step=1 value=1><span>,</span>
+<input id="ivc" min=1 class="di" type="number" step=1 value=1><span>,</span>
+<input id="ivd" class="di" type="number" step=1 value=0><span>,</span>
+<input id="ive" class="di" type="number" step=1 value=0><span>,</span>
+<input id="ivf" min=1 class="di" type="number" step=1 value=1>
+<span>]</span><br><br>
+<div id="frm"></div>
+<div id="aprx"></div>
+<div>Simplified value: <span id="smpl"></span></div>
+<br><button onclick="zro()">Zero (origin)</button>
+<button onclick="rndval()">Randomise (±20)</button>
+<button onclick="smpll()">Simplify Dozen</button>
+<button onclick="timesi()">Multiply by i</button>
+<br><br>
+<div>Real (Direct) Part, real(z), 400 digits:</div>
+<textarea readonly=true id="realcl"></textarea>
+<br><br><div>Imaginary (Lateral) Part, imag(z), 400 digits:</div>
+<textarea readonly=true id="imagcl"></textarea>
+<script src="https://cdn.jsdelivr.net/npm/decimal.js@10.6.0/decimal.min.js"></script>
+<script>
+lm = 10**15; Decimal.set({precision: 400, rounding: 1, toExpNeg: -50, toExpPos: 100});
+function expr(st) {
+return st[0]+"&#8260;"+st[1]+"*e^"+st[3]+"*√"+st[2]+" + "+st[4]+"&#8260;"+st[5];
+}
+prm = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541];
+function smp(lin) {
+ll = lin;
+if (ll[2]==1&&ll[3]==0) {
+fn = ll[4]; fd = ll[5];
+cd = ll[1]*fd;
+ll[4] = 0; ll[5] = 1;
+ll[0] = (ll[0]*fd+ll[1]*fn);
+ll[1] = cd;
+} else {
+if (ll[0]==0) {ll[1]=1; ll[2]=1; ll[3]=0; ll[0]=ll[4]; ll[1]=ll[5]; ll[4]=0; ll[5]=1;}
+for (pm=0;pm<100;pm++) {
+fac = prm[pm]**2;
+while (ll[2]%fac==0) {
+ll[2]/=fac;
+ll[0]*=prm[pm];
+}}}
+aa = gcdd(Math.abs(ll[0]),ll[1]);
+bb = gcdd(Math.abs(ll[4]),ll[5]);
+ll[0]/=aa; ll[1]/=aa; ll[4]/=bb; ll[5]/=bb;
+return ll;}
+function smpll() {
+rpt = smp(rpt);
+ipt = smp(ipt);
+rva.value = rpt[0]; iva.value = ipt[0];
+rvb.value = rpt[1]; ivb.value = ipt[1];
+rvc.value = rpt[2]; ivc.value = ipt[2];
+rvd.value = rpt[3]; ivd.value = ipt[3];
+rve.value = rpt[4]; ive.value = ipt[4];
+rvf.value = rpt[5]; ivf.value = ipt[5];
+}
+function timesi() {
+rva.value = -ipt[0]; iva.value = rpt[0];
+rvb.value = ipt[1]; ivb.value = rpt[1];
+rvc.value = ipt[2]; ivc.value = rpt[2];
+rvd.value = ipt[3]; ivd.value = rpt[3];
+rve.value = -ipt[4]; ive.value = rpt[4];
+rvf.value = ipt[5]; ivf.value = rpt[5];
+}
+function rdn(ng) {
+if (ng) {
+return Math.floor(Math.random()*41)-20;
+} else {
+return Math.floor(Math.random()*20)+1;
+}}
+function rndval() {
+rva.value = rdn(1); iva.value = rdn(1);
+rvb.value = rdn(0); ivb.value = rdn(0);
+rvc.value = rdn(0); ivc.value = rdn(0);
+rvd.value = rdn(1); ivd.value = rdn(1);
+rve.value = rdn(1); ive.value = rdn(1);
+rvf.value = rdn(0); ivf.value = rdn(0);
+}
+setInterval(function() {
+rva.value = Math.round(rva.value);
+iva.value = Math.round(iva.value);
+rvb.value = Math.round(rvb.value);
+ivb.value = Math.round(ivb.value);
+rvc.value = Math.round(rvc.value);
+ivc.value = Math.round(ivc.value);
+rvd.value = Math.round(rvd.value);
+ivd.value = Math.round(ivd.value);
+rve.value = Math.round(rve.value);
+ive.value = Math.round(ive.value);
+rvf.value = Math.round(rvf.value);
+ivf.value = Math.round(ivf.value);
+if (rvb.value < 1) {rvb.value = 1;}
+if (rvc.value < 1) {rvc.value = 1;}
+if (rvf.value < 1) {rvf.value = 1;}
+if (rva.value < -lm) {rva.value = -lm;}
+if (rvd.value < -lm) {rvd.value = -lm;}
+if (rve.value < -lm) {rve.value = -lm;}
+if (ivb.value < 1) {ivb.value = 1;}
+if (ivc.value < 1) {ivc.value = 1;}
+if (ivf.value < 1) {ivf.value = 1;}
+if (iva.value < -lm) {iva.value = -lm;}
+if (ivd.value < -lm) {ivd.value = -lm;}
+if (ive.value < -lm) {ive.value = -lm;}
+if (rva.value > lm) {rva.value = lm;}
+if (iva.value > lm) {iva.value = lm;}
+if (rvb.value > lm) {rvb.value = lm;}
+if (ivb.value > lm) {ivb.value = lm;}
+if (rvc.value > lm) {rvc.value = lm;}
+if (ivc.value > lm) {ivc.value = lm;}
+if (rvd.value > lm) {rvd.value = lm;}
+if (ivd.value > lm) {ivd.value = lm;}
+if (rve.value > lm) {rve.value = lm;}
+if (ive.value > lm) {ive.value = lm;}
+if (rvf.value > lm) {rvf.value = lm;}
+if (ivf.value > lm) {ivf.value = lm;}
+rpt = [Number(rva.value),Number(rvb.value),Number(rvc.value),Number(rvd.value),Number(rve.value),Number(rvf.value)];
+ipt = [Number(iva.value),Number(ivb.value),Number(ivc.value),Number(ivd.value),Number(ive.value),Number(ivf.value)];
+rv = rpt[0]/rpt[1] * Math.sqrt(rpt[2]) * Math.E**rpt[3] + rpt[4]/rpt[5];
+iv = ipt[0]/ipt[1] * Math.sqrt(ipt[2]) * Math.E**ipt[3] + ipt[4]/ipt[5];
+frm.innerHTML = "z = " + (expr(rpt) + " + " + expr(ipt).replace("√","√-") + "i").replaceAll("+ -", "&minus; ");
+aprx.innerHTML = "z ≈ " + (rv + " + " + iv + "i").replaceAll("+ -", "&minus; ");
+simpl = smp(rpt).concat(smp(ipt));
+smpl.innerText = "[" + simpl.join(",") + "]";
+calcans();
+});
+var gcdd = function(a, b) {
+if (!b) {return a;}
+return gcdd(b, a % b);
+}
+function zro() {
+rva.value = 0; iva.value = 0;
+rvb.value = 1; ivb.value = 1;
+rvc.value = 1; ivc.value = 1;
+rvd.value = 0; ivd.value = 0;
+rve.value = 0; ive.value = 0;
+rvf.value = 1; ivf.value = 1;
+}
+function calcans() {
+clcr = new Decimal(simpl[3]).exp().times(Decimal.sqrt(simpl[2])).times(Decimal(simpl[0]).div(simpl[1])).add(Decimal(simpl[4]).div(simpl[5]));
+clci = new Decimal(simpl[9]).exp().times(Decimal.sqrt(simpl[8])).times(Decimal(simpl[6]).div(simpl[7])).add(Decimal(simpl[10]).div(simpl[11]));
+realcl.value = clcr.toString();
+imagcl.value = clci.toString();
+}
+</script>
+</body></html>
