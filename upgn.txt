@@ -1,0 +1,132 @@
+This text file attempts to cover descriptive info & axioms about the new set of Upgraded Numbers, {UAₙ}.
+
+Writing tip: For simpler numbers (like integers, decimals & fractions) just write them normally, but for non-rational values, use dozen notation or math expressions using BODMAS: dozens = brackets first, operations later.
+Also in dozen notation, in-between spaces are optional.
+
+---------------------------------------------------------
+
+Fact #1:
+All Complex (planar) numbers {C} that lie in the subset plane {UAₙ} can be reversed & simplified into dozen notation: [a,b,n,r,c,d,p,q,m,s,x,y] = (a/b * eʳ * √n + c/d) + (p/q * eˢ * √m + x/y)i.
+
+Fact #2:
+All complex numbers can be broken down into their direct (real) & lateral (imaginary) parts: [a,b,n,r,c,d,p,q,m,s,x,y] = [a,b,n,r,c,d,0,1,1,0,0,1] + [0,1,1,0,0,1,p,q,m,s,x,y] * i.
+
+Fact #3:
+All Upgraded numbers follow a 4-term addition pattern: real product package, fractional adder, lateral product package, lateral fractional adder: [a,b,n,r,c,d,p,q,m,s,x,y] --> (a,b,n,r) + (c,d) + (p,q,m,s)i + (x,y)i.
+
+Fact #4:
+Zero (0) is [0,1,1,0,0,1,0,1,1,0,0,1] by default: Think "zero","oneone","zerozero","one" for each 6-number part.
+
+Fact #5:
+The set of Upgraded Numbers {UAₙ} is a superset of the rational numbers {Q} but still a subset of the Complex numbers {C}. [a,b,1,0,0,1,0,1,1,0,0,1] is always rational.
+
+Fact #6:
+Adding, subtracting, multiplying & dividing rationals works as you would expect, they're like fractions:
+[a,b,1,0,0,1,0,1,1,0,0,1] + [c,d,1,0,0,1,0,1,1,0,0,1] = [ad + bc,bd,1,0,0,1,0,1,1,0,0,1]
+[a,b,1,0,0,1,0,1,1,0,0,1] − [c,d,1,0,0,1,0,1,1,0,0,1] = [ad − bc,bd,1,0,0,1,0,1,1,0,0,1]
+[a,b,1,0,0,1,0,1,1,0,0,1] * [c,d,1,0,0,1,0,1,1,0,0,1] = [ac,bd,1,0,0,1,0,1,1,0,0,1]
+[a,b,1,0,0,1,0,1,1,0,0,1] / [c,d,1,0,0,1,0,1,1,0,0,1] = [ad,bc,1,0,0,1,0,1,1,0,0,1]
+
+Fact #7:
+All fraction expressions should be simplified: [ad + bc,bd,1,0,0,1,0,1,1,0,0,1] is more well-written than [a,b,1,0,c,d,0,1,1,0,0,1].
+
+Fact #8:
+We can add & subtract complex fractional numbers, right?
+[a,b,1,0,0,1,w,x,1,0,0,1] + [c,d,1,0,0,1,y,z,1,0,0,1] = [ad + bc,bd,1,0,0,1,wz + xy,xz,1,0,0,1]
+[a,b,1,0,0,1,w,x,1,0,0,1] − [c,d,1,0,0,1,y,z,1,0,0,1] = [ad − bc,bd,1,0,0,1,wz − xy,xz,1,0,0,1]
+
+Fact #9:
+Any real product-package multiplying or dividing works.
+[a,b,c,d,0,1,0,1,1,0,0,1] * [w,x,y,z,0,1,0,1,1,0,0,1] = [aw,bx,cy,d + z,0,1,0,1,1,0,0,1]
+[a,b,c,d,0,1,0,1,1,0,0,1] / [w,x,y,z,0,1,0,1,1,0,0,1] = [ax,bw,c/y,d − z,0,1,0,1,1,0,0,1]
+
+Fact #10:
+Derived from the rules of complex numbers, [0,1,1,0,0,1,1,1,1,0,0,1]^2 is just [-1,1,1,0,0,1,0,1,1,0,0,1].
+
+Fact #11:
+These are all some of the important constants:
+1 (One) = [1,1,1,0,0,1,0,1,1,0,0,1]
+0.5 = [1,2,1,0,0,1,0,1,1,0,0,1]
+-1 = [-1,1,1,0,0,1,0,1,1,0,0,1]
+i = [0,1,1,0,0,1,1,1,1,0,0,1]
+-i = [0,1,1,0,0,1,-1,1,1,0,0,1]
+e = [1,1,1,1,0,1,0,1,1,0,0,1]
+1/e = [1,1,1,-1,0,1,0,1,1,0,0,1]
+1 − (1/e) = [-1,1,1,-1,1,1,0,1,1,0,0,1]
+e + 1 = [1,1,1,1,1,1,0,1,1,0,0,1]
+(e+1) + (e+1)i = [1,1,1,1,1,1,1,1,1,1,1,1]
+√2 = [1,1,2,0,0,1,0,1,1,0,0,1]
+√3 = [1,1,3,0,0,1,0,1,1,0,0,1]
+(√2)/2 = [1,2,2,0,0,1,0,1,1,0,0,1]
+√i = [1,2,2,0,0,1,1,2,2,0,0,1]
+(√3)/2 = [1,2,3,0,0,1,0,1,1,0,0,1]
+√5 = [1,1,5,0,0,1,0,1,1,0,0,1]
+Phi = [1,2,5,0,1,2,0,1,1,0,0,1]
+1/Phi = [1,2,5,0,-1,2,0,1,1,0,0,1]
+1 − Phi = [-1,2,5,0,1,2,0,1,1,0,0,1]
+1 + i = [1,1,1,0,0,1,1,1,1,0,0,1]
+
+Fact #12:
+ALL Upgraded numbers must be in their simplest, irreducible form in order to count as a valid number. If an expression cannot fit into a dozen, it is a downgraded number. [1,1,0.5,0,0,1,0,1,1,0,0,1] being 1/(√2) is a poorly written, incorrect form. √2 + √3 doesn't exist. (√2)/2 = [1,2,2,0,0,1,0,1,1,0,0,1] is properly written.
+
+Fact #13:
+Rational numbers must be interpreted as improper fractions (any a/b, not a mixed one such as n + a/b).
+
+Fact #14:
+Multiplying complex numbers uses the formula (a+bi)(c+di) = ac + adi + bci − bd, which may produce stricter, harder rules.
+
+Fact #15:
+Division using Upgraded Numbers is pretty unexplored & difficult to explain, since 1/(w/x √y e^z + 1) = x/(w √y e^z + x), which is likely downgraded due to spawning such a strange fraction expression. For now, only add, subtract & multiply.
+
+Fact #16:
+Addition, subtraction, multiplication, division & exponents are sadly ALL open operations that may cause problems, that's why we need to lay out certain rules for all Upgraded numbers.
+
+Fact #17:
+Any rational coordinate, complex value can be added or subtracted from an Upgraded number, & the result will remain Upgraded.
+[a,b,n,r,c,d,p,q,m,s,x,y] + A/B + (P/Q)i = [a,b,n,r,cB + dA,dB,p,q,m,s,xQ + yP,yQ]
+[a,b,n,r,c,d,p,q,m,s,x,y] − (A/B + (P/Q)i) = [a,b,n,r,cB − dA,dB,p,q,m,s,xQ − yP,yQ]
+Example: ((6⁄7 e^-7 √7 − 30⁄11) + (-14⁄29 e^23 √22 + 1⁄3)i) + 12/13+(1/2)i = (-258/143 + 6/(√7 e^7)) + (5/6 − (14 √22 e^23)/29)i
+
+Fact #18:
+For multiplying, things are different, but rational real values are always reliable to keep things Upgraded.
+[a,b,n,r,c,d,p,q,m,s,x,y] * A/B = [aA,bB,n,r,cA,dB,pA,qB,m,s,xA,yB]
+Example: ((2 e^4 √15 + 11⁄3) + (31⁄16 e^7 √10 − 7⁄8)i) * 10/7 = 110/21 + (20 √15 e^4)/7 + (155/28 √(5/2) e^7 − 5/4)i
+
+Fact #19:
+The 4 powers of i: {i, -1, -i, 1} all work for multiplication as well.
+[a,b,n,r,c,d,p,q,m,s,x,y] * i = [-p,q,m,s,-x,y,a,b,n,r,c,d]
+[a,b,n,r,c,d,p,q,m,s,x,y] * -1 = [-a,b,n,r,-c,d,-p,q,m,s,-x,y]
+[a,b,n,r,c,d,p,q,m,s,x,y] * -i = [p,q,m,s,x,y,-a,b,n,r,-c,d]
+[a,b,n,r,c,d,p,q,m,s,x,y] * 1 = [a,b,n,r,c,d,p,q,m,s,x,y]
+
+Fact #20:
+Any real number of the form: rational, or rational * √2, can always be rotated by 45 degrees.
+[a,b,1,0,0,1,0,1,1,0,0,1] * √i = [a,2b,2,0,0,1,a,2b,2,0,0,1]
+[a,b,2,0,0,1,0,1,1,0,0,1] * √i = [a,b,1,0,0,1,a,b,1,0,0,1]
+
+Fact #21:
+Adding an irrational value to another irrational is basically downgraded unless they're exact rational multiples.
+e² + √2 = BROKEN, WRONG. e² √2 = Multiplying, correct.
+√2 + √3 = NESTED SQUARE ROOT. BAD. √2 * √3 = √6
+√2 + 2√2 = 3√2 (perfectly valid number form)
+√2 + (√3)i is fine, because axes are perpendicular.
+
+Fact #22:
+Addition & subtraction can work, so long as (n,r) & (m,s) are the same in each dozen & it can be treated like regular algebra.
+[a,b,n,r,c,d,p,q,m,s,x,y] + [A,B,n,r,C,D,P,Q,m,s,X,Y]
+= [aB+bA,bB,n,r,cD+dC,dD,pQ+qP,qQ,m,s,xY+yX,yY]
+
+Fact #23:
+The laws of exponents can also work well as powers of e (Euler's number) since they're already embedded into Upgraded numbers.
+[1,1,1,a,0,1,0,1,1,0,0,1]^n = [1,1,1,an,0,1,0,1,1,0,0,1]
+
+Fact #24:
+If a number is downgraded, to upgrade it you have to approximate its value. The best example I could find for π, to about 13 digits, is [-27049,40,2,-22,355,113,0,1,1,0,0,1].
+
+Fact #25:
+Sometimes complex numbers can multiply together to become real numbers, or even integers. This is actually pretty normal.
+Examples: (2 + i) * (2 − i) = 5, or (5 − 2i)(5 + 2i) = 29
+
+---------------------------------------------------------
+
+So yeah, that's all of the 25 basic facts I could come up with for the set of Upgraded numbers. There's still many unexplored questions, due to how new this concept is (I first thought of it on 23 Sep 2026). But now we have 3 notations for all numbers: decimal expansion, math expression, & dozen notation. So... keep exploring!
