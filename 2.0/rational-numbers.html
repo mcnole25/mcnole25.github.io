@@ -43,7 +43,7 @@ if (coprime((j - i), i)) {
 if (terminating(i)) {
 out.push((j - i)/i);
 } else if ((j - i) > i) {
-out.push(Math.floor((j - i)/i) + "\u202f" + (j - i) % i + "\u2044" + i);
+out.push("(" + Math.floor((j - i)/i) + "\u207a" + (j - i) % i + "\u2044" + i + ")");
 } else {
 out.push((j - i) + "\u2044" + i);
 }
