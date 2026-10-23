@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<title>Semiupgraded Numbers</title>
+<style>
+html, body {
+font-size: 20px; text-align: center;
+overflow-x: hidden; margin: 4px 0;
+background-color: #000; color: #fff; width: 100vw;}
+input, button {font-size: 20px; width: 80px;
+background-color: #000; color: #fff; text-align: center;}
+.box {
+display: flex; align-items: center;
+flex-direction: column;}
+.row, .rowc {
+display: flex; align-items: center;
+flex-direction: row; text-align: center;}
+.row {gap: 8px;} .rowc {gap: 20px; justify-content: center;}
+#opr {font-size: 30px;}
+#exans {font-size: 26px; font-weight: bold;}
+button {width: 150px;} a {font-size: 14px;}
+</style>
+</head><body>
+<div class="rowc"><div class="row">
+<div class="box">
+<input type="number" id="va" step=1 value=0>
+<span>—————</span>
+<input type="number" id="vb" step=1 value=1>
+</div>
+<span style="font-size: 150%;">√5 +</span>
+<div class="box">
+<input type="number" id="vc" step=1 value=1>
+<span>—————</span>
+<input type="number" id="vd" step=1 value=1>
+</div></div>
+<select id="opr">
+<option value=0>+</option>
+<option value=1>−</option>
+<option value=2>*</option>
+<option value=3>/</option>
+</select>
+<div class="row">
+<div class="box">
+<input type="number" id="vp" step=1 value=0>
+<span>—————</span>
+<input type="number" id="vq" step=1 value=1>
+</div>
+<span style="font-size: 150%;">√5 +</span>
+<div class="box">
+<input type="number" id="vr" step=1 value=1>
+<span>—————</span>
+<input type="number" id="vs" step=1 value=1>
+</div></div></div><hr>
+<span id="expr1"></span>
+<span id="exoper"></span>
+<span id="expr2"></span>
+<br><span>=</span>
+<span id="exans"></span>
+<hr>
+<span id="upg1"></span>
+<span id="oper"></span>
+<span id="upg2"></span>
+<br><span>=</span>
+<span id="uans"></span>
+<hr><span id="dc1"></span>
+<span id="dco"></span>
+<span id="dc2"></span>
+<br><span>=</span>
+<span id="dans"></span>
+<hr><div style="font-size: 16px;">This calculator is based off rationals with √5, aka the Semiupgraded Numbers.</div>
+<button onclick="rndm();">Randomise</button>
+<button onclick="swp();">Swap Values</button>
+<button onclick="rst();">Reset All</button>
+<hr><div style="font-size: 14px;">ℤ | Set of Integers<br>The most basic foundation of numbers, with only whole natural numbers {1,2,3,4,5,6,7,8,9,10 etc.}, positive, negative, or zero. Also includes naturals, ℕ.<br><br>ℚ | Set of Rational Numbers<br>The set of numbers where any two integers can be divided (usually in their simplest form), a/b, where b is non-zero. It's the base for all upgraded numbers. <a href="https://mcnole25.github.io/2.0/rational-numbers.html">More info here.</a><br><br>ℚ(√5) | Set of Semiupgraded Numbers<br>A subset of the reals, ℝ, & a subset of the Upgraded numbers where all numbers are in the form: a/b * √5 + c/d = [a,b,5,0,c,d,0,1,1,0,0,1].<br><br>{UAₙ} | Set of Upgraded Numbers<br>Includes all possible relevant values according to the Dozen notation, where [a,b,n,r,c,d,p,q,m,s,x,y] = (a/b * eʳ * √n + c/d) + (p/q * eˢ * √m + x/y)i. <a href="https://mcnole25.github.io/dozen.html">More info here.</a><br><br>ℂ | Set of Complex Numbers<br>Includes ALL possible 2-dimensional values of numbers, x + yi, including downgraded values. A 1-dimensional version of this is the reals, ℝ.<br><br>[[ Properties of the set of Semiupgraded Numbers ]]<br><br>(√5)² = 5, √5 &gt; 0, φ = 0.5√5 + 0.5<br>v = (a/b)√5 + c/d, w = (p/q)√5 + r/s<br><br>v + w = ((aq+bp)/(bq))√5 + (cs+dr)/(ds)<br><br>v − w = ((aq−bp)/(bq))√5 + (cs−dr)/(ds)<br><br>vw = ((adqr+bcps)/(bdqs))√5 + (5adps+bcqr)/(bdqs)<br><br>v² = ((2ac)/(bd))√5 + (5a²d²+b²c²)/(b²d²)<br><br>1/v = ((-abd²)/(b²c²−5a²d²))√5 + (b²cd)/(b²c²−5a²d²)<br>b²c²−5a²d² = divisor. do v times 1/w for a full division.<br><br>An interesting sequence of numbers is one involving a recursive variant of the Fibonacci sequence where f(n) = 4*f(n-1) + f(n-2). You can also generate powers of (√5 - 2) using this method. The sequence converges to zero: √5-2, 9-4√5, 17√5-38, 161-72√5, 305√5-682, 2889-1292√5, 5473√5-12238, 51841-23184√5, 98209√5-219602... etc.</div>
+<script>
+imagupg = ",0,1,1,0,0,1]";
+function gcd(a, b) {
+if (!b) {return BigInt(a);}
+return gcd(BigInt(b), BigInt(a)%BigInt(b));}
+function conv(zn,zd) {
+ngt = ((BigInt(zn)*BigInt(zd)) < 0n);
+if (zn < 0n) {zn *= -1n;} if (zd < 0n) {zd *= -1n;}
+if (zd == 1n) {return (ngt?"-":"")+zn;} else if (String(Number(zn)/Number(zd)).length<=12&&!(String(Number(zn)/Number(zd)).includes("e"))) {return (ngt?-1:1)*(Number(zn)/Number(zd));}
+else if (BigInt(zn)>BigInt(zd)) {
+return (ngt?"-":"")+"("+(BigInt(zn)/BigInt(zd))+"\u207a"+(BigInt(zn)%BigInt(zd))+"\u2044"+zd+")";}
+else {return (ngt?"-":"")+zn+"\u2044"+zd;}}
+function convrt(zw,zx,zy,zz) {
+if (zw == 0n) {return conv(zy,zz);}
+else {
+if (zw > 0n && zy > 0n) {return conv(zw,zx)+"√5 + "+conv(zy,zz);}
+if (zw > 0n && zy < 0n) {return conv(zw,zx)+"√5 \u2212 "+conv(-zy,zz);}
+if (zw < 0n && zy > 0n) {return conv(zy,zz)+" \u2212 "+conv(-zw,zx)+"√5";}
+if (zw < 0n && zy < 0n) {return conv(zw,zx)+"√5 \u2212 "+conv(-zy,zz);}
+if (zy == 0n) {return conv(zw,zx)+"√5";}
+}}
+setInterval(function() {
+op = opr.value;
+wa = BigInt(va.value);
+wb = BigInt(vb.value);
+wc = BigInt(vc.value);
+wd = BigInt(vd.value);
+if (wb < 0n) {wa = -1n*BigInt(wa); wb = -1n*BigInt(wb);} else if (wb == 0n) {wb = 1n;}
+if (wd < 0n) {wc = -1n*BigInt(wc); wd = -1n*BigInt(wd);} else if (wd == 0n) {wd = 1n;}
+wga = gcd(wa, wb); wgc = gcd(wc, wd);
+if (wga < 0n) {wga *= -1n;}
+if (wgc < 0n) {wgc *= -1n;}
+wa /= BigInt(wga); wb /= BigInt(wga);
+wc /= BigInt(wgc); wd /= BigInt(wgc);
+if (wa == 0n) {
+upg1.innerText = "["+wc+","+wd+",1,0,0,1"+imagupg;}
+else {upg1.innerText = "["+wa+","+wb+",5,0,"+wc+","+wd+imagupg;}
+wp = BigInt(vp.value);
+wq = BigInt(vq.value);
+wr = BigInt(vr.value);
+ws = BigInt(vs.value);
+if (wq < 0n) {wp = -1n*BigInt(wp); wq = -1n*BigInt(wq);} else if (wq == 0n) {wq = 1n;}
+if (ws < 0n) {wr = -1n*BigInt(wr); ws = -1n*BigInt(ws);} else if (ws == 0n) {ws = 1n;}
+wgp = gcd(wp, wq); wgr = gcd(wr, ws);
+if (wgp < 0n) {wgp *= -1n;}
+if (wgr < 0n) {wgr *= -1n;}
+wp /= BigInt(wgp); wq /= BigInt(wgp);
+wr /= BigInt(wgr); ws /= BigInt(wgr);
+if (wp == 0n) {
+upg2.innerText = "["+wr+","+ws+",1,0,0,1"+imagupg;}
+else {upg2.innerText = "["+wp+","+wq+",5,0,"+wr+","+ws+imagupg;}
+exoper.innerText = ["+","−","*","/"][op];
+oper.innerText = ["+","−","*","/"][op];
+dco.innerText = ["+","−","*","/"][op];
+dec1 = (Number(wa)*Math.sqrt(5))/Number(wb)+Number(wc)/Number(wd);
+dec2 = (Number(wp)*Math.sqrt(5))/Number(wq)+Number(wr)/Number(ws);
+dcalc = NaN; exans.innerText = "???";
+if (op == 3 && wp == 0n && wr == 0n) {
+uans.innerText = "cannot divide by 0";
+dcalc = NaN; cclc = NaN; exans.innerText = "???";}
+else {
+cca = 0n; ccb = 1n; ccc = 0n; ccd = 1n;
+if (op == 0) {
+dcalc = Number(dec1)+Number(dec2);
+cca = BigInt(wa)*BigInt(wq)+BigInt(wb)*BigInt(wp);
+ccb = BigInt(wb)*BigInt(wq);
+ccc = BigInt(wc)*BigInt(ws)+BigInt(wd)*BigInt(wr);
+ccd = BigInt(wd)*BigInt(ws);
+}
+if (op == 1) {
+dcalc = Number(dec1)-Number(dec2);
+cca = BigInt(wa)*BigInt(wq)-BigInt(wb)*BigInt(wp);
+ccb = BigInt(wb)*BigInt(wq);
+ccc = BigInt(wc)*BigInt(ws)-BigInt(wd)*BigInt(wr);
+ccd = BigInt(wd)*BigInt(ws);
+}
+if (op == 2) {
+dcalc = Number(dec1)*Number(dec2);
+cca = BigInt(wa)*BigInt(wd)*BigInt(wq)*BigInt(wr)+BigInt(wb)*BigInt(wc)*BigInt(wp)*BigInt(ws);
+ccb = BigInt(wb)*BigInt(wd)*BigInt(wq)*BigInt(ws);
+ccc = 5n*BigInt(wa)*BigInt(wd)*BigInt(wp)*BigInt(ws)+BigInt(wb)*BigInt(wc)*BigInt(wq)*BigInt(wr);
+ccd = BigInt(wb)*BigInt(wd)*BigInt(wq)*BigInt(ws);
+}
+if (op == 3) {
+dcalc = Number(dec1)/Number(dec2);
+xp = -BigInt(wp)*BigInt(wq)*BigInt(ws)**2n;
+xq = BigInt(wq)**2n*BigInt(wr)**2n-5n*BigInt(wp)**2n*BigInt(ws)**2n;
+xr = BigInt(wq)**2n*BigInt(wr)*BigInt(ws);
+xs = BigInt(wq)**2n*BigInt(wr)**2n-5n*BigInt(wp)**2n*BigInt(ws)**2n;
+if (xq < 0n) {xp *= -1n; xq *= -1n;}
+if (xs < 0n) {xr *= -1n; xs *= -1n;}
+cca = BigInt(wa)*BigInt(wd)*BigInt(xq)*BigInt(xr)+BigInt(wb)*BigInt(wc)*BigInt(xp)*BigInt(xs);
+ccb = BigInt(wb)*BigInt(wd)*BigInt(xq)*BigInt(xs);
+ccc = 5n*BigInt(wa)*BigInt(wd)*BigInt(xp)*BigInt(xs)+BigInt(wb)*BigInt(wc)*BigInt(xq)*BigInt(xr);
+ccd = BigInt(wb)*BigInt(wd)*BigInt(xq)*BigInt(xs);
+}
+if (ccb < 0n) {cca *= -1n; ccb *= -1n;}
+if (ccd < 0n) {ccc *= -1n; ccd *= -1n;}
+cga = gcd(cca, ccb); cgc = gcd(ccc, ccd);
+if (cga < 0n) {cga *= -1n;}
+if (cgc < 0n) {cgc *= -1n;}
+cca /= BigInt(cga); ccb /= BigInt(cga);
+ccc /= BigInt(cgc); ccd /= BigInt(cgc);
+if (cca == 0n) {
+uans.innerText = "["+ccc+","+ccd+",1,0,0,1"+imagupg;}
+else {uans.innerText = "["+cca+","+ccb+",5,0,"+ccc+","+ccd+imagupg;}
+}
+cclc = (Number(cca)*Math.sqrt(5))/Number(ccb)+Number(ccc)/Number(ccd);
+dc1.innerText = (dec1).toPrecision(14)*1;
+dc2.innerText = (dec2).toPrecision(14)*1;
+dans.innerText = (dcalc).toPrecision(14)*1 + " (= " + (cclc).toPrecision(14)*1 + ")";
+expr1.innerText = "(" + convrt(wa,wb,wc,wd) + ")";
+expr2.innerText = "(" + convrt(wp,wq,wr,ws) + ")";
+exans.innerText = "(" + convrt(cca,ccb,ccc,ccd) + ")";
+if (op == 3 && wp == 0n && wr == 0n) {
+uans.innerText = "cannot divide by 0";
+dcalc = NaN; cclc = NaN; exans.innerText = "???";}
+});
+function rndm() {
+va.value = Math.floor(Math.random()*21)-10;
+vb.value = Math.floor(Math.random()*21)-10;
+vc.value = Math.floor(Math.random()*21)-10;
+vd.value = Math.floor(Math.random()*21)-10;
+vp.value = Math.floor(Math.random()*21)-10;
+vq.value = Math.floor(Math.random()*21)-10;
+vr.value = Math.floor(Math.random()*21)-10;
+vs.value = Math.floor(Math.random()*21)-10;
+opr.value = Math.floor(Math.random()*4);}
+function swp() {
+sa = va.value; sb = vb.value; sc = vc.value; sd = vd.value;
+va.value = vp.value; vb.value = vq.value; vc.value = vr.value; vd.value = vs.value;
+vp.value = sa; vq.value = sb; vr.value = sc; vs.value = sd;}
+function rst() {
+va.value = 0; vb.value = 1; vc.value = 1; vd.value = 1;
+vp.value = 0; vq.value = 1; vr.value = 1; vs.value = 1;
+opr.value = 0;}
+</script>
+</body></html>
